@@ -288,13 +288,14 @@ html.is-modal-open{ overflow:hidden; }
 
 /* =========================================================
    ふわふわ浮いている予約ボタン（画面の左下に固定）
-   円の中心が画面の下から22.5%のところに来るように置き、上下にゆっくり動かす
+   円の中心が画面の下から20%のところに来るように置き、上下にゆっくり動かす
+   （2026-10-05：最初の大きさの115%に拡大。数値はすべて最初の値×1.15）
    ========================================================= */
 .float-cta{
   position:fixed; z-index:90;
   left:calc(50% - min(50%, 384px) + 1.45rem);   /* LPの左端から1.45rem（768pxより広い画面ではLPの列に合わせる） */
-  bottom:calc(22.5% - 4.35rem);                  /* 4.35rem＝円の中心から画像の下端まで */
-  width:8.67rem;
+  bottom:calc(20% - 5rem);                       /* 5rem＝円の中心から画像の下端まで */
+  width:9.97rem;
   animation:floatCta 3s ease-in-out infinite;
   transition:opacity .3s ease, visibility .3s;
 }
@@ -310,8 +311,8 @@ html.is-modal-open{ overflow:hidden; }
 
 /* 画像の×の上に重ねる透明のボタン（指で押しやすいよう×より大きめ） */
 .float-cta__close{
-  position:absolute; top:-.975rem; left:5.85rem;
-  width:3.2rem; height:3.2rem;
+  position:absolute; top:-1.12rem; left:6.73rem;
+  width:3.68rem; height:3.68rem;
   padding:0; border:0; border-radius:50%;
   background:none;
   cursor:pointer;
@@ -377,6 +378,6 @@ html.is-modal-open{ overflow:hidden; }
   .data-table dd{ padding:1.6rem 2rem; font-size:1.5rem; line-height:2.6rem; }
 
   /* ふわふわ予約ボタン：画面の左下（PCは少し大きく） */
-  .float-cta{ left:2.4rem; width:12rem; bottom:calc(22.5% - 6.02rem); }
-  .float-cta__close{ top:-1.35rem; left:8.1rem; width:4.4rem; height:4.4rem; }
+  .float-cta{ left:2.4rem; width:13.8rem; bottom:calc(20% - 6.92rem); }
+  .float-cta__close{ top:-1.55rem; left:9.32rem; width:5.06rem; height:5.06rem; }
 }
