@@ -340,7 +340,7 @@
 .work-modal__tags li{
   height:1.85rem;
   padding:0 .55rem;
-  border:.05rem solid var(--c-black);
+  border:var(--line-thin) solid var(--c-black);
   font-size:1.15rem; line-height:1.75rem;
   white-space:nowrap;
 }

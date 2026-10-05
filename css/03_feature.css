@@ -92,7 +92,7 @@
 .spec + .spec{
   margin-left:1.33rem;
   padding-left:1.8rem;
-  border-left:.05rem solid var(--c-black);
+  border-left:var(--line-thin) solid var(--c-black);
 }
 .spec__label{
   grid-column:1;
@@ -206,7 +206,7 @@
   width:11.25rem; height:6.2rem;
   padding-top:.5rem;
 }
-.roof-spec__item + .roof-spec__item{ border-left:.05rem solid var(--c-black); }
+.roof-spec__item + .roof-spec__item{ border-left:var(--line-thin) solid var(--c-black); }
 .roof-spec dt{
   font-size:1.2rem; font-weight:500; line-height:1;
 }

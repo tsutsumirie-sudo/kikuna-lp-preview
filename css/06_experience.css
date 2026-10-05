@@ -34,7 +34,7 @@
   margin-top:1.95rem;
   padding-bottom:.8rem;
   font-size:1.9rem; font-weight:400; line-height:1;
-  border-bottom:.05rem solid var(--c-yellow);
+  border-bottom:var(--line-thin) solid var(--c-yellow);
 }
 .exp-head__title b{
   font-size:1.95rem; font-weight:700;

@@ -22,6 +22,10 @@
   --c-btn:    #0091ff;   /* お問合せ・資料請求ボタン */
   --c-orange: #ff9706;   /* 完成見学会を予約するボタン */
 
+  /* 細い線の太さ。カンプの1px（＝0.5px）だとiPhone（3倍の画面）では1ドットに丸められて見えなくなるので、
+     iPhoneで2ドットになる0.7pxにする（2倍の画面では今までと同じ1ドット） */
+  --line-thin: .7px;
+
   --f-base: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
 }
 

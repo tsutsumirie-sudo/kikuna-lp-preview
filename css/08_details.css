@@ -60,7 +60,7 @@
 .details__item::after{
   content:"";
   position:absolute; left:50%; bottom:0;
-  width:26.35rem; height:.05rem;
+  width:26.35rem; height:var(--line-thin);
   background:var(--c-white);
   transform:translateX(-50%);
 }
@@ -154,7 +154,7 @@
   display:flex; flex-direction:column; align-items:center;
   padding:.2rem 0 .3rem;
 }
-.details__point + .details__point{ border-left:.05rem solid rgba(255,255,255,.6); }
+.details__point + .details__point{ border-left:var(--line-thin) solid rgba(255,255,255,.6); }
 .details__point dt{
   font-size:1.25rem; font-weight:500;
 }
@@ -255,6 +255,6 @@
   .details__points{
     max-width:var(--pc-max);
     margin-top:4rem; padding-top:3.4rem;
-    border-top:.05rem solid var(--c-white);
+    border-top:var(--line-thin) solid var(--c-white);
   }
 }
