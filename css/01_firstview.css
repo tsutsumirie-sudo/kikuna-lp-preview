@@ -1,0 +1,196 @@
+@charset "UTF-8";
+
+/* =========================================================
+   0. ヘッダー ／ 1. ファーストビュー
+   ========================================================= */
+
+:root{
+  --header-h: 4.2rem;   /* 電話番号と受付時間の上下に余白ができる高さ */
+  --marquee-duration: 60s;   /* 自動スクロール1周の時間（大きいほどゆっくり） */
+}
+
+
+/* =========================================================
+   0. ヘッダー
+   ========================================================= */
+.header{
+  position:sticky; top:0; z-index:100;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  height:var(--header-h);
+}
+
+.header__logo{
+  display:flex; align-items:center;
+  padding-left:1.05rem;
+  background:var(--c-black);
+}
+.header__logo img{ width:16.6rem; }
+
+.header__tel{
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  padding-bottom:.25rem;   /* 番号の上と受付時間の下の余白がそろうよう、少し上に寄せる */
+  background:var(--c-white);
+  color:var(--c-black);
+  line-height:1;
+}
+.header__tel-num{
+  display:flex; align-items:center; gap:.3rem;
+  font-size:1.92rem; font-weight:700; letter-spacing:.02em;
+}
+.header__tel-num img{ width:auto; height:1.38rem; }
+.header__tel-time{
+  margin-top:.4rem;
+  font-size:1rem; font-weight:400; letter-spacing:.05em;
+  font-feature-settings:"palt";
+  color:#222;
+}
+
+
+/* =========================================================
+   1. ファーストビュー
+   ========================================================= */
+.fv{ position:relative; }
+
+/* --- メイン写真 --- */
+.fv__hero{
+  position:relative;
+  aspect-ratio:750 / 1014;
+  overflow:hidden;
+}
+.fv__hero picture{ display:block; height:100%; }
+.fv__main{
+  width:100%; height:100%;
+  object-fit:cover;
+}
+
+/* --- キャッチコピー（空の上に重ねる） --- */
+.fv__copy{
+  position:absolute;
+  top:1.95rem; left:3.45rem;
+  width:29.9rem;
+}
+
+/* --- 所在地・見学会ラベル --- */
+.fv__place{
+  position:absolute;
+  right:0; bottom:2.15rem;
+  display:flex; flex-direction:column; align-items:flex-end;
+}
+.fv__area{
+  display:flex; align-items:center; gap:.3rem;
+  margin-right:1.48rem;
+  font-size:1.6rem; font-weight:700; line-height:1; letter-spacing:.03em;
+  color:var(--c-white);
+  text-shadow:0 0 .6rem rgba(0,0,0,.35);
+}
+.fv__pin{
+  width:1.5rem; height:auto;
+  filter:drop-shadow(0 0 .4rem rgba(0,0,0,.3));
+}
+.fv__label{
+  margin-top:.45rem;
+  padding:0 1.48rem 0 2.3rem;
+  font-size:1.42rem; font-weight:700; line-height:2.1rem; letter-spacing:.04em;
+  color:#3a3a3a;
+  background:var(--c-white);
+  clip-path:polygon(1.15rem 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* --- 下部（石目テクスチャ） --- */
+.fv__lower{
+  padding:2.95rem 0 4.6rem;
+  background:var(--c-bg) url("../img/bg_texture.jpg") center top / cover no-repeat;
+}
+
+.fv__scroll{
+  display:flex; align-items:center; justify-content:center; gap:.7rem;
+  font-size:1.36rem; font-weight:700; line-height:1; letter-spacing:.17em;
+  color:var(--c-ink);
+  /* letter-spacing の右余白ぶん中心がずれるのを補正 */
+  padding-left:.17em;
+}
+.fv__scroll::before{
+  content:"";
+  width:.9rem; height:.8rem;
+  background:#111;
+  clip-path:polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* --- 自動スクロール画像 --- */
+.fv__slider{
+  margin-top:1.8rem;
+  overflow:hidden;
+}
+.fv__track{
+  display:flex;
+  width:max-content;
+  animation:fvMarquee var(--marquee-duration) linear infinite;
+}
+.fv__track li{
+  flex:none;
+  width:16.9rem; height:11.9rem;
+  margin-right:1rem;
+}
+.fv__track img{
+  width:100%; height:100%;
+  object-fit:cover;
+  border-radius:.6rem;
+}
+/* 2周分並べているので、ちょうど半分動いたら先頭に戻すと切れ目なくつながる */
+@keyframes fvMarquee{
+  from{ transform:translateX(0); }
+  to  { transform:translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce){
+  .fv__track{ animation:none; }
+}
+
+/* --- リード文 --- */
+.fv__lead{
+  margin-top:3.7rem;
+  font-size:1.6rem; font-weight:500; line-height:2.98rem; letter-spacing:.02em;
+  text-align:center;
+  color:var(--c-ink);
+}
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   ファーストビューは PCカンプ（菊名.pdf 1ページ目）の配置：
+   横長に切り抜いた写真の上に、キャッチコピーを中央に大きく置く
+   ========================================================= */
+@media (min-width:768px){
+  :root{ --header-h:8rem; }
+
+  /* ヘッダー：左半分が黒（ロゴ）、右半分が白（電話） */
+  .header__logo{ padding-left:var(--pc-pad); }
+  .header__logo img{ width:min(30rem, 85%); }
+  .header__tel-num{ gap:.6rem; font-size:3.2rem; }
+  .header__tel-num img{ height:2.3rem; }
+  .header__tel-time{ margin-top:.6rem; font-size:1.3rem; }
+
+  /* メイン写真：PCカンプと同じ比率（1440pxより広い画面では高さを止めて左右に広げる） */
+  .fv__hero{ aspect-ratio:auto; height:min(88.8vw, 1280px); }
+  .fv__copy{
+    top:min(4.55vw, 65.5px); left:50%;
+    width:min(69.77vw, 1005px);
+    transform:translateX(-50%);
+  }
+  .fv__place{ bottom:4rem; }
+  .fv__area{ gap:.5rem; margin-right:2.4rem; font-size:2rem; }
+  .fv__pin{ width:1.9rem; }
+  .fv__label{
+    margin-top:.7rem;
+    padding:0 2.4rem 0 3.2rem;
+    font-size:1.8rem; line-height:2.9rem;
+    clip-path:polygon(1.6rem 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* 下部：自動スクロール画像を大きく、リード文も大きく */
+  .fv__lower{ padding:4.6rem 0 7.4rem; }
+  .fv__scroll{ font-size:1.5rem; }
+  .fv__slider{ margin-top:2.8rem; }
+  .fv__track li{ width:36rem; height:25.2rem; margin-right:1.8rem; }
+  .fv__lead{ margin-top:5.6rem; font-size:2rem; line-height:3.8rem; }
+}

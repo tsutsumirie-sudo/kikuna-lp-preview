@@ -1,0 +1,529 @@
+@charset "UTF-8";
+
+/* =========================================================
+   3. 物件の特徴（① 3つのバルコニー）
+   ========================================================= */
+
+:root{
+  --c-feature-bg:#e5e9ec;
+}
+
+.feature{
+  color:var(--c-black);
+  text-align:center;
+}
+
+
+/* =========================================================
+   物件概要（白背景）
+   ========================================================= */
+.feature__intro{
+  padding:2.55rem 0 3.8rem;
+  background:var(--c-white);
+}
+
+/* --- 見出し「物件の特徴」（右下にずらした線の影つき） --- */
+.feature__title{ display:flex; justify-content:center; }
+.feature__title span{
+  position:relative;
+  width:16.4rem; height:2.9rem;
+  margin-right:.27rem;            /* 影のぶんを含めて中央に見せる */
+  padding-left:.2em;              /* letter-spacing の右余白ぶんを補正 */
+  font-size:1.7rem; font-weight:700; line-height:2.9rem; letter-spacing:.2em;
+  color:var(--c-white);
+  background:#2d2020;
+}
+.feature__title span::after{
+  content:"";
+  position:absolute;
+  top:.28rem; left:.25rem; right:-.27rem; bottom:-.38rem;
+  border-right:.12rem solid #3a3a3a;
+  border-bottom:.12rem solid #3a3a3a;
+  pointer-events:none;
+}
+
+/* --- 間取り図（左から1F・2F・PH。タップで拡大） --- */
+.plan-list{
+  display:flex; align-items:flex-start; gap:1.8rem;
+  margin:4.55rem 0 0 2.2rem;
+}
+.plan--1f{ width:11.95rem; margin-top:.35rem; }
+.plan--2f{ width:10.75rem; }
+.plan--ph{ width:7.35rem; }
+.plan__btn{
+  position:relative;
+  display:block;
+  cursor:zoom-in;
+  -webkit-tap-highlight-color:transparent;
+}
+.plan__btn img{ width:100%; }
+/* 階数 */
+.plan__floor{
+  position:absolute; left:0; right:0; bottom:calc(100% + .45rem);
+  font-size:1.1rem; font-weight:700; line-height:1; letter-spacing:.08em;
+  color:#2d2020;
+}
+/* 虫眼鏡マーク */
+.plan__zoom{
+  position:absolute; right:-.35rem; bottom:-.35rem;
+  display:grid; place-items:center;
+  width:2.1rem; height:2.1rem;
+  border-radius:50%;
+  color:var(--c-white);
+  background:var(--c-blue);
+  box-shadow:0 .1rem .4rem rgba(0,0,0,.22);
+  transition:transform .3s ease;
+}
+.plan__zoom svg{ width:1.3rem; height:1.3rem; }
+.plan__btn:hover .plan__zoom,
+.plan__btn:focus-visible .plan__zoom{ transform:scale(1.12); }
+
+/* --- 面積 --- */
+.feature__spec{
+  display:flex; justify-content:center;
+  margin-top:2.45rem;
+}
+.spec{
+  display:grid;
+  grid-template-columns:auto auto;
+  align-content:start;
+  padding:.75rem 0 .7rem;
+}
+.spec + .spec{
+  margin-left:1.33rem;
+  padding-left:1.8rem;
+  border-left:.05rem solid var(--c-black);
+}
+.spec__label{
+  grid-column:1;
+  font-size:1rem; font-weight:500; line-height:1;
+}
+.spec__value{ display:contents; }
+.spec__value img{
+  grid-column:1;
+  width:auto; height:1.9rem;
+  margin-top:1.08rem;
+}
+/* ㎡：カンプの縦長の書体に合わせて、横幅を詰めて表示 */
+.spec__unit{
+  grid-column:2;
+  align-self:end;
+  width:1.65rem;
+  margin-left:.5rem;
+  font-size:2.2rem; font-weight:500; line-height:.74;
+  white-space:nowrap;
+  transform:scaleX(.7);
+  transform-origin:left bottom;
+}
+.spec:nth-child(2) .spec__unit{ margin-left:.2rem; }
+.spec__unit sup{
+  position:relative; top:-.12em;
+  margin-left:-.06em;
+  font-size:.58em; font-weight:700; line-height:0;
+  vertical-align:top;
+}
+
+/* --- リード文 --- */
+.feature__lead{
+  margin-top:3.1rem;
+  font-size:1.45rem; font-weight:500; line-height:2.75rem; letter-spacing:.02em;
+}
+
+
+/* =========================================================
+   FEATURE 01（グレー背景）
+   ========================================================= */
+.feature__body{
+  padding:2.55rem 0 4.05rem;
+  background:var(--c-feature-bg);
+}
+
+/* =========================================================
+   各バルコニー共通
+   ========================================================= */
+
+/* --- 本文 --- */
+.balcony__text{
+  padding:0 1.25rem 0 1.5rem;
+  font-size:1.44rem; font-weight:500; line-height:2.25rem;
+  text-align:left;
+}
+
+/* --- 写真（大＋小） --- */
+.balcony__large{ object-fit:cover; }
+.balcony__small{ position:relative; z-index:1; }
+
+/* 小さい写真の上に重ねる説明文 */
+.pop__caption{
+  position:absolute; top:0; left:0; right:0;
+  font-weight:700;
+  text-align:left;
+  color:var(--c-white);
+}
+.pop__caption--inner{
+  padding:.63rem .4rem 0 1.7rem;
+  font-size:1.2rem; line-height:1.8rem; letter-spacing:.02em;
+  text-shadow:0 0 .5rem rgba(0,0,0,.55), 0 0 .15rem rgba(0,0,0,.45);
+}
+.pop__caption--multi{
+  padding:.58rem .4rem 0 .5rem;
+  font-size:.97rem; line-height:1.4rem;
+  /* 黒い縁取り */
+  text-shadow:
+     1px  1px 0 #222, -1px  1px 0 #222,  1px -1px 0 #222, -1px -1px 0 #222,
+     0    1px 0 #222,  0   -1px 0 #222,  1px  0   0 #222, -1px  0   0 #222,
+     0 0 .3rem rgba(0,0,0,.4);
+}
+
+/* =========================================================
+   ① ルーフバルコニー
+   ========================================================= */
+.balcony--roof .b-head{
+  align-items:center;
+  margin:3rem 0 0 8rem;
+  padding-top:1.25rem;
+}
+.balcony--roof .b-head__num{ left:-5.75rem; }
+.balcony--roof .b-head__title{ margin-top:.8rem; }
+
+.balcony__wide{
+  width:100%;
+  aspect-ratio:750 / 431;
+  margin-top:1.95rem;
+  object-fit:cover;
+}
+.balcony--roof .balcony__text{
+  margin-top:1rem;
+  line-height:2.55rem;
+}
+
+/* --- 面積・駐車スペース換算 --- */
+.roof-spec{
+  display:flex; justify-content:center;
+  margin-top:1.1rem;
+}
+.roof-spec__item{
+  width:11.25rem; height:6.2rem;
+  padding-top:.5rem;
+}
+.roof-spec__item + .roof-spec__item{ border-left:.05rem solid var(--c-black); }
+.roof-spec dt{
+  font-size:1.2rem; font-weight:500; line-height:1;
+}
+.roof-spec dd{
+  font-size:1.2rem; font-weight:500; line-height:1;
+}
+.roof-spec__big{
+  font-size:2.8rem; font-weight:700; letter-spacing:.02em;
+  color:var(--c-blue);
+}
+.roof-spec__big--s{
+  margin:0 .25rem 0 .3rem;
+  font-size:2.2rem;
+}
+.roof-spec small{
+  display:block;
+  margin-top:.35rem;
+  font-size:.88rem; letter-spacing:.02em;
+}
+.roof-spec__item--area dt{ transform:translateX(-.55rem); }
+.roof-spec__item--area dd{ margin-top:.25rem; transform:translateX(.15rem); }
+.roof-spec__item--car  dt{ transform:translateX(-.65rem); }
+.roof-spec__item--car  dd{ margin-top:.5rem; transform:translateX(-.22rem); }
+
+/* --- 手動スライダー --- */
+.slider{
+  position:relative;
+  width:32.7rem;
+  aspect-ratio:654 / 481;
+  margin:3.4rem 0 0 2.55rem;
+}
+.slider__track{
+  display:flex;
+  height:100%;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+}
+.slider__track::-webkit-scrollbar{ display:none; }
+.slider__item{
+  position:relative;
+  flex:0 0 100%;
+  margin:0;
+  scroll-snap-align:start;
+}
+.slider__item img{
+  width:100%; height:100%;
+  object-fit:cover;
+}
+.slider__item figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:2.4rem 1.75rem .48rem 2.6rem;
+  font-size:1rem; font-weight:700; line-height:1.55rem; letter-spacing:.03em;
+  text-align:left;
+  color:var(--c-white);
+  /* 明るい写真でも文字が読めるよう、下側だけうっすら暗くする */
+  background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.32));
+  text-shadow:0 0 .4rem rgba(0,0,0,.35);
+}
+
+.slider__btn{
+  position:absolute; top:50%; z-index:2;
+  width:1.95rem; height:1.95rem;
+  margin-top:-.975rem; padding:0;
+  border:0; border-radius:50%;
+  background:var(--c-black);
+  cursor:pointer;
+}
+.slider__btn::before{
+  content:"";
+  position:absolute; inset:0; margin:auto;
+  width:.92rem; height:.92rem;
+  border-left:.19rem solid var(--c-white);
+  border-bottom:.19rem solid var(--c-white);
+}
+.slider__btn--prev{ left:-1.1rem; }   /* 写真の端にまたがる位置 */
+.slider__btn--prev::before{ transform:translateX(.2rem) rotate(45deg); }
+.slider__btn--next{ right:-.8rem; }
+.slider__btn--next::before{ transform:translateX(-.2rem) rotate(-135deg); }
+
+
+/* =========================================================
+   ② インナーバルコニー
+   ========================================================= */
+.balcony--inner .b-head{
+  margin:3.95rem 0 0 7.8rem;
+  padding-top:.65rem;
+}
+.balcony--inner .b-head__num{ top:0; left:-5.2rem; }
+.balcony--inner .b-head__title{ line-height:2.82rem; }
+.balcony--inner .b-head__title b{ line-height:1; }   /* 2行の行間が広がらないように */
+.balcony--inner .balcony__text{ margin-top:1rem; }
+
+.balcony--inner .balcony__photos{ margin-top:1.85rem; }
+.balcony--inner .balcony__large{
+  width:34.8rem;
+  aspect-ratio:696 / 464;
+  margin-left:1.4rem;
+}
+.balcony--inner .balcony__small{
+  width:19.85rem;
+  margin:-3.3rem 0 0 16.25rem;
+}
+.balcony--inner .pop{ aspect-ratio:397 / 289; }
+
+
+/* =========================================================
+   ③ 多目的バルコニー
+   ========================================================= */
+.balcony--multi .b-head{
+  align-items:center;
+  margin:4.2rem 0 0 11.35rem;
+  padding-top:.9rem;
+}
+.balcony--multi .b-head__num{ left:-5.5rem; }
+.balcony--multi .b-head__title{ margin-top:.8rem; }
+.balcony--multi .balcony__text{ margin-top:1.88rem; padding-right:2.6rem; }
+
+.balcony--multi .balcony__photos{
+  display:flex; align-items:flex-start;
+  margin-top:2.2rem;
+}
+.balcony--multi .balcony__large{
+  width:18.8rem;
+  aspect-ratio:376 / 480;
+}
+.balcony--multi .balcony__small{
+  width:19.3rem;
+  margin:3.45rem 0 0 -2rem;   /* 大きい写真に少し重ねる */
+}
+.pop--pair{
+  display:flex;
+  aspect-ratio:386 / 300;
+}
+.pop--pair img{ width:50%; }
+
+
+/* =========================================================
+   間取り図の拡大表示（モーダル）
+   ========================================================= */
+.plan-modal{
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  max-width:none; max-height:none;
+  margin:0; padding:0;
+  border:0;
+  background:transparent;
+  overflow:hidden;
+}
+.plan-modal::backdrop{ background:rgba(0,0,0,.78); }
+.plan-modal[open]{ animation:planFade .25s ease; }
+@keyframes planFade{ from{ opacity:0; } to{ opacity:1; } }
+
+.plan-modal__inner{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  height:100%;
+  padding:5.5rem 1.5rem 3rem;
+}
+.plan-modal__floor{
+  margin-bottom:1rem;
+  font-size:1.8rem; font-weight:700; line-height:1; letter-spacing:.1em;
+  color:var(--c-white);
+}
+.plan-modal__img{
+  width:auto; max-width:100%;
+  height:auto; max-height:calc(100% - 2.8rem);   /* 階数表示のぶんを引く */
+  padding:1.2rem;
+  background:var(--c-white);
+  object-fit:contain;
+}
+.plan-modal__close{
+  position:absolute; top:1.5rem; right:1.5rem;
+  width:3.6rem; height:3.6rem;
+  padding:0; border:0; border-radius:50%;
+  background:var(--c-white);
+  cursor:pointer;
+}
+.plan-modal__close::before,
+.plan-modal__close::after{
+  content:"";
+  position:absolute; top:50%; left:50%;
+  width:1.7rem; height:.2rem;
+  margin:-.1rem 0 0 -.85rem;
+  background:#2d2020;
+  transform:rotate(45deg);
+}
+.plan-modal__close::after{ transform:rotate(-45deg); }
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   ① ルーフバルコニーの写真は、スマホと同じく画面の端から端まで広げる（PCは横長に切り抜き）
+   タブレット：スマホと同じ縦の並び。写真は幅836px、文章は704pxの中央の列
+   PC（1200px以上）：② ③ は写真と文章を左右に並べる（写真を広めに。左右は交互）
+   写真の重なり方はスマホの配置を割合（％）に置き換えて、列の幅に合わせて拡大する
+   ========================================================= */
+@media (min-width:768px){
+  /* --- 物件概要 --- */
+  .feature__intro{ padding:5.4rem var(--pc-pad) 6.4rem; }
+  .feature__title span{ width:20rem; height:3.6rem; font-size:2.1rem; line-height:3.6rem; }
+  .plan-list{ justify-content:center; gap:4.8rem; margin:6.4rem 0 0; }
+  .plan--1f{ width:22.8rem; margin-top:.65rem; }
+  .plan--2f{ width:20.5rem; }
+  .plan--ph{ width:14rem; }
+  .plan__floor{ bottom:calc(100% + .7rem); font-size:1.5rem; }
+  .plan__zoom{ right:-.6rem; bottom:-.6rem; width:3.2rem; height:3.2rem; }
+  .plan__zoom svg{ width:1.9rem; height:1.9rem; }
+  .feature__spec{ margin-top:2.2rem; zoom:1.5; }   /* 面積の数字は細かく調整してあるので、まとめて1.5倍 */
+  .feature__lead{ margin-top:4.4rem; font-size:1.7rem; line-height:3.3rem; }
+
+  /* --- FEATURE 01 --- */
+  .feature__body{ padding:6rem 0 9rem; }
+  .balcony{
+    max-width:calc(76rem + var(--pc-pad) * 2);
+    margin-left:auto; margin-right:auto;
+    padding-left:var(--pc-pad); padding-right:var(--pc-pad);
+  }
+
+  /* 番号つき見出し：番号の丸と見出しを横に並べる */
+  .feature .b-head{
+    display:grid;
+    grid-template-columns:auto auto;
+    justify-content:center; align-items:center;
+    column-gap:1.4rem;
+    width:auto;
+    margin:7rem 0 0;
+    padding-top:0;
+    text-align:left;
+  }
+  .feature .b-head__num{
+    position:relative;   /* 吹き出しのしっぽの基準 */
+    top:0; left:0;       /* スマホ用の位置ずらしを戻す */
+    grid-row:1 / span 2;
+    width:5.6rem; height:5.6rem;
+    font-size:1.7rem;
+  }
+  .feature .b-head__label{ grid-column:2; font-size:1.5rem; }
+  .feature .b-head__title{ grid-column:2; margin-top:.6rem; font-size:1.9rem; line-height:1.5; }
+  .feature .b-head__title b{ font-size:2.7rem; line-height:1.2; }
+  .feature .b-head__title:only-of-type{ margin-top:0; }
+
+  .feature .balcony__text{
+    max-width:64rem;
+    margin:2.4rem auto 0;
+    padding:0;
+    font-size:1.6rem; line-height:2.9rem;
+  }
+
+  /* ① ルーフバルコニー：写真は画面の端から端まで */
+  .balcony__wide{
+    width:100vw; max-width:none;
+    margin:3rem calc(50% - 50vw) 0;
+    aspect-ratio:2.1 / 1;
+  }
+  .roof-spec{ margin-top:1.6rem; zoom:1.35; }
+  .slider{ width:100%; margin:4.4rem 0 0; }
+  .slider__item figcaption{ padding:5rem 3rem 1.4rem 3.2rem; font-size:1.4rem; line-height:2.3rem; }
+  .slider__btn{ width:3.6rem; height:3.6rem; margin-top:-1.8rem; }
+  .slider__btn::before{ width:1.3rem; height:1.3rem; border-width:0 0 .25rem .25rem; }
+  .slider__btn--prev{ left:-1.8rem; }
+  .slider__btn--next{ right:-1.8rem; }
+
+  /* ② インナーバルコニー（スマホの配置を％に置き換え） */
+  .balcony--inner .balcony__photos{ margin-top:3rem; }
+  .balcony--inner .balcony__large{ width:92.8%; margin-left:3.73%; }
+  .balcony--inner .balcony__small{ width:52.93%; margin:-8.8% 0 0 43.33%; }
+  .pop__caption--inner{ padding:1.2rem .6rem 0 2.6rem; font-size:1.6rem; line-height:2.5rem; }
+
+  /* ③ 多目的バルコニー */
+  .balcony--multi .balcony__text{ padding-right:0; }
+  .balcony--multi .balcony__photos{ margin-top:3rem; }
+  .balcony--multi .balcony__large{ width:50.13%; }
+  .balcony--multi .balcony__small{ width:51.47%; margin:9.2% 0 0 -5.33%; }
+  .pop__caption--multi{ padding:.9rem .4rem 0 .8rem; font-size:1.35rem; line-height:2rem; white-space:nowrap; }
+}
+
+@media (min-width:1200px){
+  /* ① ルーフバルコニー：縦の並びのまま、スライダーを大きく（幅946px） */
+  .balcony--roof{ max-width:calc(86rem + var(--pc-pad) * 2); }
+  .slider{ margin-top:6rem; }
+
+  /* ② ③：写真と文章を左右に（写真の列を広めに）。写真の高さの中で文章を上下中央に */
+  .balcony--inner,
+  .balcony--multi{
+    display:grid;
+    column-gap:6rem;
+    max-width:calc(var(--pc-max) + var(--pc-pad) * 2);
+    margin-top:10rem;
+  }
+  .balcony--inner{
+    grid-template-columns:1fr 1.2fr;
+    grid-template-areas:
+      ". photos"
+      "head photos"
+      "text photos"
+      ". photos";
+    grid-template-rows:1fr auto auto 1fr;
+  }
+  .balcony--multi{
+    grid-template-columns:1.2fr 1fr;
+    grid-template-areas:
+      "photos ."
+      "photos head"
+      "photos text"
+      "photos .";
+    grid-template-rows:1fr auto auto 1fr;
+  }
+  .balcony--inner .b-head,
+  .balcony--multi .b-head{ grid-area:head; justify-content:start; margin:0; }
+  .balcony--inner .balcony__text,
+  .balcony--multi .balcony__text{ grid-area:text; max-width:none; margin:2.4rem 0 0; }
+  .balcony--inner .balcony__photos,
+  .balcony--multi .balcony__photos{ grid-area:photos; margin-top:0; }
+}
+@media (min-width:1440px){
+  /* 画面が広いときは写真の列をさらに広く */
+  .balcony--inner{ grid-template-columns:1fr 1.35fr; }
+  .balcony--multi{ grid-template-columns:1.35fr 1fr; }
+}

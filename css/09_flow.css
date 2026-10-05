@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+/* =========================================================
+   9. 予約から見学までの流れ
+   ========================================================= */
+
+.flow{
+  padding:4.2rem 0 5.7rem;
+  color:var(--c-black);
+  background:var(--c-bg);
+}
+
+/* --- 3ステップ --- */
+.flow__steps{
+  margin:3.2rem 0 0;
+  padding:0;
+  list-style:none;
+}
+.flow-step{
+  position:relative;
+  width:34.5rem;
+  margin:0 auto;
+  padding:2.2rem 1.5rem 2.4rem;
+  background:var(--c-white);
+}
+/* ステップの間の下向き三角 */
+.flow-step + .flow-step{ margin-top:4.6rem; }
+.flow-step + .flow-step::before{
+  content:"";
+  position:absolute; left:50%; bottom:calc(100% + 1.4rem);
+  width:3.2rem; height:1.8rem;
+  margin-left:-1.6rem;
+  background:var(--c-dark);
+  clip-path:polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* 見出し（番号の丸＋タイトル） */
+.flow-step__head{
+  display:flex; align-items:center; gap:1.2rem;
+}
+.flow-step__num{
+  position:relative;
+  flex:0 0 auto;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  width:5.4rem; height:5.4rem;
+  border-radius:50%;
+  font-size:2rem; font-weight:700; line-height:1;
+  color:var(--c-yellow);
+  background:var(--c-dark);
+}
+.flow-step__num span{
+  margin-bottom:.25rem;
+  font-size:1rem; letter-spacing:.08em;
+  color:var(--c-white);
+}
+/* 吹き出しのしっぽ（右下）… 番号つき見出し（.b-head）と同じ形 */
+.flow-step__num::after{
+  content:"";
+  position:absolute; right:.15rem; bottom:.05rem;
+  width:1.15rem; height:.9rem;
+  background:inherit;
+  clip-path:polygon(0 15%, 100% 100%, 45% 0);
+}
+.flow-step__title{
+  font-size:1.9rem; font-weight:700; line-height:1.3;
+}
+
+.flow-step__time{
+  display:table;
+  margin:-.6rem 0 0 6.6rem;   /* タイトルの下にそろえる */
+  padding:0 1.2rem;
+  font-size:1.35rem; font-weight:700; line-height:2.5rem;
+  background:var(--c-yellow);
+}
+
+.flow-step__photo{
+  width:100%;
+  aspect-ratio:3 / 2;
+  margin-top:1.6rem;
+  object-fit:cover;
+}
+.flow-step__text{
+  margin-top:1.5rem;
+  font-size:1.4rem; font-weight:500; line-height:2.3rem; letter-spacing:.03em;
+  text-spacing-trim:space-all;
+}
+.flow-step__note{
+  margin-top:.6rem;
+  font-size:1.2rem; font-weight:400; line-height:1.8rem;
+}
+
+/* --- 予約ボタン --- */
+.flow .reserve-cta{ margin-top:4.8rem; }
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   タブレット：3ステップを縦に並べる（中央の列 704px）
+   PC（1200px以上）：3ステップを横に並べ、間の三角は右向きにする
+   ========================================================= */
+@media (min-width:768px){
+  .flow{ padding:6.4rem var(--pc-pad) 8rem; }
+  .flow__steps{ margin-top:4.4rem; }
+  .flow-step{ width:100%; max-width:76rem; padding:3rem 3rem 3.2rem; }
+  .flow-step + .flow-step{ margin-top:5.6rem; }
+  .flow-step__head{ gap:1.4rem; }
+  .flow-step__num{ width:6.4rem; height:6.4rem; font-size:2.4rem; }
+  .flow-step__num span{ font-size:1.15rem; }
+  .flow-step__title{ font-size:2.2rem; }
+  .flow-step__time{ margin:-.4rem 0 0 7.8rem; padding:0 1.4rem; font-size:1.5rem; line-height:2.8rem; }
+  .flow-step__photo{ margin-top:2rem; }
+  .flow-step__text{ margin-top:1.8rem; font-size:1.6rem; line-height:2.8rem; }
+  .flow-step__note{ margin-top:.8rem; font-size:1.4rem; line-height:2.2rem; }
+  .flow .reserve-cta{ margin-top:6.4rem; }
+}
+
+@media (min-width:1200px){
+  .flow__steps{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    column-gap:4.4rem;
+    max-width:var(--pc-max);
+    margin:5rem auto 0;
+  }
+  .flow-step{ max-width:none; margin:0; padding:2.6rem 2.2rem 2.8rem; }
+  .flow-step + .flow-step{ margin-top:0; }
+  .flow-step + .flow-step::before{
+    top:50%; right:calc(100% + 1.3rem); bottom:auto; left:auto;
+    width:1.8rem; height:3.2rem;
+    margin:-1.6rem 0 0;
+    clip-path:polygon(0 0, 100% 50%, 0 100%);
+  }
+  .flow-step__title{ font-size:1.9rem; }
+  .flow-step:nth-child(2) .flow-step__title{ max-width:8.2em; }   /* 「スタッフより確認／のご連絡」で改行 */
+  .flow-step__time{ margin:1.4rem 0 0; font-size:1.4rem; white-space:nowrap; }   /* 見出しの下に1行で */
+  .flow-step__text{ font-size:1.5rem; line-height:2.7rem; }
+}
