@@ -43,7 +43,7 @@
 .exp-head__title b.is-big{ font-size:2.26rem; }
 .exp-head__lead{
   margin-top:1.8rem;
-  font-size:1.4rem; font-weight:500; line-height:1.95rem;
+  font-size:1.4rem; font-weight:500; line-height:2.5rem;   /* 行間ひろめ（2026-10-08） */
 }
 
 /* --- 番号つき見出し（共通部品を黄色で使う） --- */

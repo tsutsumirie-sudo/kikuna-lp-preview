@@ -30,7 +30,7 @@
 }
 .company__lead{
   margin-top:1.45rem;
-  font-size:1.4rem; font-weight:400; line-height:1.7rem;
+  font-size:1.4rem; font-weight:400; line-height:2.5rem;   /* 行間ひろめ（2026-10-08） */
 }
 .company__photo{
   width:34.5rem;
@@ -40,17 +40,17 @@
 }
 .company__award-title{
   margin-top:2.6rem;
-  padding-left:4rem;
+  padding:0 2rem;
   font-size:2.1rem; font-weight:700; line-height:2.55rem;
-  text-align:left;
+  text-align:center;   /* 下の文章に合わせて中央揃え（2026-10-08） */
   color:var(--c-blue);
 }
 .company__award-text{
   margin-top:1.45rem;
   padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
   text-wrap:pretty;   /* 最後の行が1〜2文字だけにならないように */
-  font-size:1.4rem; font-weight:400; line-height:1.9rem;
-  text-align:left;
+  font-size:1.4rem; font-weight:400; line-height:2.5rem;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
 }
 
 /* --- 受賞ロゴ --- */
@@ -69,8 +69,8 @@
   margin-top:3.15rem;
   padding:0 2rem;
   text-wrap:pretty;
-  font-size:1.15rem; font-weight:400; line-height:1.3rem;
-  text-align:left;
+  font-size:1.15rem; font-weight:400; line-height:1.95rem;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
 }
 
 
@@ -110,8 +110,8 @@
   margin-top:1.9rem;
   padding:0 2rem;
   text-wrap:pretty;
-  font-size:1.4rem; font-weight:400; line-height:1.85rem; letter-spacing:.03em;
-  text-align:left;
+  font-size:1.4rem; font-weight:400; line-height:2.5rem; letter-spacing:.03em;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
 }
 
 /* --- 「ルーフバルコニーのある住まいを…」（左右に斜線） --- */
@@ -187,8 +187,8 @@
   margin-top:2.08rem;
   padding:0 2rem;
   text-wrap:pretty;
-  font-size:1.38rem; font-weight:400; line-height:2.1rem;
-  text-align:left;
+  font-size:1.38rem; font-weight:400; line-height:2.5rem;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
 }
 
 /* --- お問い合わせ --- */
@@ -365,7 +365,7 @@
   .company__title{ margin-top:2.2rem; font-size:3.2rem; line-height:4.4rem; }
   .company__lead{ margin-top:2rem; font-size:1.7rem; line-height:3rem; }
   .company__photo{ width:100%; max-width:76rem; margin:3.6rem auto 0; }
-  .company__award-title{ margin-top:4.6rem; padding-left:0; font-size:2.7rem; line-height:3.9rem; text-align:center; }
+  .company__award-title{ margin-top:4.6rem; padding:0; font-size:2.7rem; line-height:3.9rem; text-align:center; }
   .company__award-text{ margin-top:2rem; padding:0; font-size:1.7rem; line-height:3rem; text-align:center; }
   .awards{ justify-content:center; gap:3rem; margin-top:4rem; }
   .awards__item--german{ width:4.8rem;  margin-left:0; }
@@ -385,6 +385,7 @@
     margin:2.8rem auto 0;
     padding:0 var(--pc-pad);
     font-size:1.7rem; line-height:3rem;
+    text-align:left;
   }
 
   /* --- 施工事例 --- */
@@ -403,6 +404,7 @@
     margin:3.4rem auto 0;
     padding:0 var(--pc-pad);
     font-size:1.7rem; line-height:3rem;
+    text-align:left;
   }
 
   /* --- お問い合わせ --- */

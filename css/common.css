@@ -105,7 +105,7 @@ html.is-modal-open{ overflow:hidden; }
 }
 .f-head__lead{
   margin-top:1.95rem;
-  font-size:1.47rem; font-weight:500; line-height:2.4rem;
+  font-size:1.47rem; font-weight:500; line-height:2.7rem;   /* 行間ひろめ（2026-10-08） */
   color:var(--c-black);
 }
 
@@ -130,13 +130,14 @@ html.is-modal-open{ overflow:hidden; }
   color:var(--c-white);
   background:var(--b-accent);
 }
-/* 吹き出しのしっぽ（右下） */
+/* 吹き出しのしっぽ（右下）
+   2026-10-08 先の角度を約21°→約53°（2.5倍）に広げた。先の位置と向き（右下45°）は前と同じ */
 .b-head__num::after{
   content:"";
   position:absolute; right:.15rem; bottom:.05rem;
-  width:1rem; height:.8rem;
+  width:1.25rem; height:1.25rem;
   background:inherit;
-  clip-path:polygon(0 15%, 100% 100%, 45% 0);
+  clip-path:polygon(0 67%, 100% 100%, 67% 0);
 }
 .b-head__label{
   font-size:1.2rem; line-height:1; letter-spacing:.03em;

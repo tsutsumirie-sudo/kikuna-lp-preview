@@ -147,8 +147,8 @@
 .balcony__text{
   padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
   text-wrap:pretty;   /* 最後の行が1〜2文字だけにならないように */
-  font-size:1.44rem; font-weight:500; line-height:2.25rem;
-  text-align:left;
+  font-size:1.44rem; font-weight:500; line-height:2.6rem;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
 }
 
 /* --- 写真（大＋小） --- */
@@ -196,7 +196,6 @@
 }
 .balcony--roof .balcony__text{
   margin-top:1rem;
-  line-height:2.55rem;
 }
 
 /* --- 面積・駐車スペース換算 --- */
@@ -456,6 +455,7 @@
     margin:2.4rem auto 0;
     padding:0;
     font-size:1.6rem; line-height:2.9rem;
+    text-align:left;
   }
 
   /* ① ルーフバルコニー：写真は画面の端から端まで */
