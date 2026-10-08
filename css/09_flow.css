@@ -44,8 +44,8 @@
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   width:5.4rem; height:5.4rem;
   border-radius:50%;
-  font-size:2rem; font-weight:700; line-height:1;
-  color:var(--c-yellow);
+  font-size:1.4rem; font-weight:700; line-height:1;   /* 数字は 3・5・6 の番号の丸（.b-head__num）と同じ大きさ・白（2026-10-08） */
+  color:var(--c-white);
   background:var(--c-dark);
 }
 .flow-step__num span{
@@ -104,7 +104,7 @@
   .flow-step{ width:100%; max-width:76rem; padding:3rem 3rem 3.2rem; }
   .flow-step + .flow-step{ margin-top:5.6rem; }
   .flow-step__head{ gap:1.4rem; }
-  .flow-step__num{ width:6.4rem; height:6.4rem; font-size:2.4rem; }
+  .flow-step__num{ width:6.4rem; height:6.4rem; font-size:1.7rem; }   /* PCの .b-head__num と同じ大きさ */
   .flow-step__num span{ font-size:1.15rem; }
   .flow-step__title{ font-size:2.2rem; }
   .flow-step__time{ margin:-.4rem 0 0 7.8rem; padding:0 1.4rem; font-size:1.5rem; line-height:2.8rem; }
