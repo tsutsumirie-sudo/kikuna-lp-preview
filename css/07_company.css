@@ -286,14 +286,15 @@
 .work-modal--taka   .work-modal__plan img{ left:1.05rem; top:.3rem;   width:31.9rem; }
 .work-modal--hase   .work-modal__plan img{ left:.6rem;   top:3.8rem;  width:32.75rem; }
 
-/* 写真（3枚を手動でスクロール） */
+/* 写真（3枚を手動でスクロール）
+   2026-10-08 写真を120%に（19.05×19.5rem → 22.86×23.4rem。中心の位置は前と同じ） */
 .work-modal__photos{
   position:relative;
-  height:19.5rem;
+  height:23.4rem;
 }
 .work-modal__track{
-  position:absolute; top:0; left:7.6rem;
-  width:19.05rem; height:100%;
+  position:absolute; top:0; left:5.7rem;
+  width:22.86rem; height:100%;
   display:flex;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
@@ -322,9 +323,9 @@
   border-left:.1rem solid #222;
   border-bottom:.1rem solid #222;
 }
-.work-modal__arrow--prev{ left:2.8rem; }
+.work-modal__arrow--prev{ left:.9rem; }   /* 写真とのあいだは前と同じ */
 .work-modal__arrow--prev::before{ transform:translateX(.25rem) rotate(45deg); }
-.work-modal__arrow--next{ right:2.85rem; }
+.work-modal__arrow--next{ right:.95rem; }
 .work-modal__arrow--next::before{ transform:translateX(-.25rem) rotate(-135deg); }
 
 /* タイトル：写真とタグ枠のあいだ（7.3rem）の上下中央に置く */
@@ -418,12 +419,14 @@
   .cta-btn--second{ margin-top:2rem; }
 
   /* --- 施工事例のポップアップ：スマホの配置のまま、まとめて大きく
-         （画面の高さに収まる大きさ。高さ1000px以上の画面ではさらに大きく） --- */
-  .work-modal__inner{ zoom:1.4; }
+         画面の高さに収まるいちばん大きい倍率にする（倍率 ≒ 画面の高さ ÷ 695。下の段階で切り替え） --- */
+  .work-modal__inner{ zoom:1.1; }
 }
-@media (min-width:768px) and (min-height:1000px){
-  .work-modal__inner{ zoom:1.55; }
-}
+@media (min-width:768px) and (min-height:830px){  .work-modal__inner{ zoom:1.19; } }
+@media (min-width:768px) and (min-height:900px){  .work-modal__inner{ zoom:1.29; } }
+@media (min-width:768px) and (min-height:960px){  .work-modal__inner{ zoom:1.38; } }
+@media (min-width:768px) and (min-height:1030px){ .work-modal__inner{ zoom:1.48; } }
+@media (min-width:768px) and (min-height:1080px){ .work-modal__inner{ zoom:1.55; } }
 
 @media (min-width:1024px){
   /* 施工事例：横に4つ */

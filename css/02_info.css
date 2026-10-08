@@ -23,17 +23,13 @@
   width:7.6rem;
 }
 
-/* --- 濃いグレーの紙（上下の縁はちぎれた紙の形） --- */
+/* --- 濃いグレーの帯（2026-10-08 上下の縁をちぎれた紙の形から直線に変更） --- */
 .info__paper{
-  --edge:.23rem;
   padding:4.3rem 0 2.7rem;
   color:var(--c-white);
   line-height:1;
   text-align:center;
-  background:
-    url("../img/info/edge_top.svg") center top / 100% var(--edge) no-repeat,
-    url("../img/info/edge_bottom.svg") center bottom / 100% var(--edge) no-repeat,
-    linear-gradient(var(--c-dark), var(--c-dark)) center / 100% calc(100% - var(--edge) * 2 + 2px) no-repeat;
+  background:var(--c-dark);
 }
 
 /* --- 区切り線 --- */
@@ -110,11 +106,11 @@
    ========================================================= */
 @media (min-width:768px){
   .info{ padding-top:1rem; }
-  .fv:has(+ .info) .fv__lower{ padding-bottom:calc(7.4rem + 1.4rem); }   /* 1rem＋ちぎれた縁 .4rem */
+  .fv:has(+ .info) .fv__lower{ padding-bottom:calc(7.4rem + 1.4rem); }   /* 重なるぶん（1.4rem）を足す */
   .fv + .info{ margin-top:-1.4rem; }
   .info__tag{ top:.2rem; left:calc(50% - 25.2rem); width:9.4rem; }   /* 右端を「現地完成見学会開催」の左端の上に */
 
-  .info__paper{ --edge:.4rem; padding:5.6rem 0 4.4rem; }
+  .info__paper{ padding:5.6rem 0 4.4rem; }
   .info__head{ padding-bottom:2.2rem; }
   .info__head::after{ width:min(64rem, 90%); }
   .info__sub{ padding-left:0; font-size:1.7rem; }

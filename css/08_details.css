@@ -14,16 +14,12 @@
   --c-details:#4b4b4b;   /* 8 の背景：2 の紙（#3e3e3e）よりワントーン明るいグレー */
 }
 
-/* 見出しの部分から紙の下までを1枚の明るめのグレーにし、上下の縁をちぎれた紙の形にする
-   （上の縁の後ろは 7 と同じ黒にして、7 の上に紙が重なって見えるようにする） */
+/* 見出しの部分から帯の下までを1枚の明るめのグレーにする
+   （2026-10-08 上下の縁をちぎれた紙の形から直線に変更） */
 .details > .s-head{
-  --edge:.23rem;
   padding:4.2rem 0 3.4rem;
   color:var(--c-white);
-  background:
-    url("../img/details/edge_top.svg") center top / 100% var(--edge) no-repeat,
-    linear-gradient(var(--c-night), var(--c-night)) center top / 100% var(--edge) no-repeat,
-    linear-gradient(var(--c-details), var(--c-details));
+  background:var(--c-details);
 }
 
 /* =========================================================
@@ -42,15 +38,11 @@
 }
 
 .details__paper{
-  --edge:.23rem;
   padding:4.3rem 0 3.2rem;
   color:var(--c-white);
   line-height:1;
   text-align:center;
-  /* 上は見出しの部分とつなげ、下の縁だけちぎれた紙の形 */
-  background:
-    url("../img/details/edge_bottom.svg") center bottom / 100% var(--edge) no-repeat,
-    linear-gradient(var(--c-details), var(--c-details)) center top / 100% calc(100% - var(--edge) + 1px) no-repeat;
+  background:var(--c-details);   /* 上は見出しの部分とつながる */
 }
 
 /* --- 区切り線 --- */
@@ -196,11 +188,11 @@
    ========================================================= */
 @media (min-width:768px){
   .details{ padding:0 0 8rem; }
-  .details > .s-head{ --edge:.4rem; padding:6.4rem var(--pc-pad) 4.4rem; }
+  .details > .s-head{ padding:6.4rem var(--pc-pad) 4.4rem; }
 
   .details__event{ padding-top:1rem; background-size:100% 1.6rem; }
   .details__tag{ top:.2rem; left:calc(50% - 25.2rem); width:9.4rem; }   /* 右端を「現地完成見学会開催」の左端の上に */
-  .details__paper{ --edge:.4rem; padding:5.6rem var(--pc-pad) 4.4rem; }
+  .details__paper{ padding:5.6rem var(--pc-pad) 4.4rem; }
   .details__head{ padding-bottom:2.2rem; }
   .details__sub{ padding-left:0; font-size:1.7rem; }
   .details__title{ margin-top:1.6rem; padding-left:0; font-size:3.6rem; }
