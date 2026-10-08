@@ -47,7 +47,8 @@
 }
 .company__award-text{
   margin-top:1.45rem;
-  padding-left:1.55rem;
+  padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
+  text-wrap:pretty;   /* 最後の行が1〜2文字だけにならないように */
   font-size:1.4rem; font-weight:400; line-height:1.9rem;
   text-align:left;
 }
@@ -66,7 +67,8 @@
 
 .company__award-note{
   margin-top:3.15rem;
-  padding-left:1.7rem;
+  padding:0 2rem;
+  text-wrap:pretty;
   font-size:1.15rem; font-weight:400; line-height:1.3rem;
   text-align:left;
 }
@@ -101,12 +103,13 @@
 }
 .concept-title{
   margin-top:1.58rem;
-  font-size:2rem; font-weight:700; line-height:1;
+  font-size:1.97rem;   /* 1行のまま左右に20px残る大きさ */ font-weight:700; line-height:1;
   color:var(--c-yellow);
 }
 .concept-text{
   margin-top:1.9rem;
-  padding-left:1.55rem;
+  padding:0 2rem;
+  text-wrap:pretty;
   font-size:1.4rem; font-weight:400; line-height:1.85rem; letter-spacing:.03em;
   text-align:left;
 }
@@ -182,7 +185,8 @@
 
 .works-text{
   margin-top:2.08rem;
-  padding-left:1.5rem;
+  padding:0 2rem;
+  text-wrap:pretty;
   font-size:1.38rem; font-weight:400; line-height:2.1rem;
   text-align:left;
 }
@@ -190,7 +194,7 @@
 /* --- お問い合わせ --- */
 .contact-head{
   margin-top:4.78rem;
-  font-size:1.6rem; font-weight:500; line-height:1;
+  font-size:1.52rem;   /* 1行のまま左右に20px残る大きさ */ font-weight:500; line-height:1;
   color:var(--c-sky);
 }
 /* 吹き出し型の下線（形は common.css） */
@@ -362,14 +366,14 @@
   .company__lead{ margin-top:2rem; font-size:1.7rem; line-height:3rem; }
   .company__photo{ width:100%; max-width:76rem; margin:3.6rem auto 0; }
   .company__award-title{ margin-top:4.6rem; padding-left:0; font-size:2.7rem; line-height:3.9rem; text-align:center; }
-  .company__award-text{ margin-top:2rem; padding-left:0; font-size:1.7rem; line-height:3rem; text-align:center; }
+  .company__award-text{ margin-top:2rem; padding:0; font-size:1.7rem; line-height:3rem; text-align:center; }
   .awards{ justify-content:center; gap:3rem; margin-top:4rem; }
   .awards__item--german{ width:4.8rem;  margin-left:0; }
   .awards__item--kids  { width:9.5rem;  margin-left:0; }
   .awards__item--good  { width:6.8rem;  margin-left:0; }
   .awards__item--licc  { width:10rem;   margin-left:0; margin-top:.5rem; }
   .awards__item--london{ width:7.8rem;  margin-left:0; margin-top:1.2rem; }
-  .company__award-note{ margin-top:3.6rem; padding-left:0; font-size:1.4rem; line-height:2.3rem; text-align:center; }
+  .company__award-note{ margin-top:3.6rem; padding:0; font-size:1.4rem; line-height:2.3rem; text-align:center; }
 
   /* --- 設計コンセプト --- */
   .company__concept{ padding:6.4rem 0 8.4rem; }

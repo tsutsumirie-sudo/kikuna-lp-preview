@@ -25,7 +25,9 @@
   padding-left:1.05rem;
   background:var(--c-black);
 }
-.header__logo img{ width:16.6rem; }
+/* ロゴをタップすると会社サイト（https://pr-h.net/）を別タブで開く */
+.header__logo a{ display:block; width:16.6rem; }
+.header__logo img{ width:100%; }
 
 .header__tel{
   display:flex; flex-direction:column; justify-content:center; align-items:center;
@@ -65,10 +67,11 @@
 }
 
 /* --- キャッチコピー（空の上に重ねる） --- */
+/* 2026-10-08 画像/copy_3.png に差し替え（「3」が大きくなった版）。文字の大きさ・位置は前の画像と同じになるように置く */
 .fv__copy{
   position:absolute;
-  top:1.95rem; left:3.45rem;
-  width:29.9rem;
+  top:.73rem; left:3rem;
+  width:30.36rem;
 }
 
 /* --- 所在地・見学会ラベル --- */
@@ -146,6 +149,80 @@
   .fv__track{ animation:none; }
 }
 
+/* JS で動かすとき：指（マウス）で左右に動かせて、タップで拡大（js/01_firstview.js） */
+.fv__slider{ touch-action:pan-y; }                 /* 縦のスクロールはそのまま、横の動きは写真を動かす */
+.fv__slider.is-js{
+  cursor:grab;
+  -webkit-user-select:none; user-select:none;
+}
+.fv__slider.is-js .fv__track{ animation:none; will-change:transform; }
+.fv__slider.is-dragging,
+.fv__slider.is-dragging .fv__thumb{ cursor:grabbing; }
+.fv__thumb{
+  display:block;
+  width:100%; height:100%;
+  padding:0; border:0;
+  background:none;
+  cursor:zoom-in;
+  -webkit-tap-highlight-color:transparent;
+}
+.fv__thumb img{
+  pointer-events:none;                             /* 画像の長押しメニュー・ドラッグを出さない */
+  -webkit-user-drag:none;
+  -webkit-touch-callout:none;
+}
+.fv__thumb:focus-visible{ outline:.2rem solid var(--c-blue); outline-offset:-.2rem; border-radius:.6rem; }
+
+/* --- 写真の拡大表示 --- */
+.photo-modal{
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  max-width:none; max-height:none;
+  margin:0; padding:0;
+  border:0;
+  background:transparent;
+  overflow:hidden;
+}
+.photo-modal::backdrop{ background:rgba(0,0,0,.9); }
+.photo-modal[open]{ animation:photoFade .25s ease; }
+@keyframes photoFade{ from{ opacity:0; } to{ opacity:1; } }
+
+.photo-modal__inner{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  height:100%;
+  margin:0;
+  padding:6rem 1.5rem 4rem;
+}
+.photo-modal__img{
+  max-width:none;                                  /* 大きさは JS で画面に合わせる */
+  border-radius:.4rem;
+  object-fit:cover;
+  background:#222;
+}
+.photo-modal__caption{
+  margin-top:1.2rem;
+  font-size:1.4rem; font-weight:500; line-height:2.2rem; letter-spacing:.04em;
+  text-align:center;
+  color:var(--c-white);
+}
+.photo-modal__close{
+  position:absolute; top:1.5rem; right:1.5rem;
+  width:3.6rem; height:3.6rem;
+  padding:0; border:0; border-radius:50%;
+  background:var(--c-white);
+  cursor:pointer;
+}
+.photo-modal__close::before,
+.photo-modal__close::after{
+  content:"";
+  position:absolute; top:50%; left:50%;
+  width:1.7rem; height:.2rem;
+  margin:-.1rem 0 0 -.85rem;
+  background:#2d2020;
+  transform:rotate(45deg);
+}
+.photo-modal__close::after{ transform:rotate(-45deg); }
+
 /* --- リード文 --- */
 .fv__lead{
   margin-top:3.7rem;
@@ -165,7 +242,7 @@
 
   /* ヘッダー：左半分が黒（ロゴ）、右半分が白（電話） */
   .header__logo{ padding-left:var(--pc-pad); }
-  .header__logo img{ width:min(30rem, 85%); }
+  .header__logo a{ width:min(30rem, 85%); }
   .header__tel-num{ gap:.6rem; font-size:3.2rem; }
   .header__tel-num img{ height:2.3rem; }
   .header__tel-time{ margin-top:.6rem; font-size:1.3rem; }
@@ -173,8 +250,8 @@
   /* メイン写真：PCカンプと同じ比率（1440pxより広い画面では高さを止めて左右に広げる） */
   .fv__hero{ aspect-ratio:auto; height:min(88.8vw, 1280px); }
   .fv__copy{
-    top:min(4.55vw, 65.5px); left:50%;
-    width:min(69.77vw, 1005px);
+    top:min(1.71vw, 24.6px); left:50%;
+    width:min(70.84vw, 1020px);
     transform:translateX(-50%);
   }
   .fv__place{ bottom:4rem; }

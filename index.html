@@ -25,19 +25,19 @@
       imagesrcset="img/fv/fv_pc_1280.jpg 1280w, img/fv/fv_pc_1706.jpg 1706w"
       imagesizes="100vw">
 
-<link rel="stylesheet" href="css/common.css?v=202610051719">
-<link rel="stylesheet" href="css/01_firstview.css?v=202610051719">
-<link rel="stylesheet" href="css/02_info.css?v=202610051719">
-<link rel="stylesheet" href="css/03_feature.css?v=202610051719">
-<link rel="stylesheet" href="css/04_stairs.css?v=202610051719">
-<link rel="stylesheet" href="css/05_storage.css?v=202610051719">
-<link rel="stylesheet" href="css/06_experience.css?v=202610051719">
-<link rel="stylesheet" href="css/07_company.css?v=202610051719">
-<link rel="stylesheet" href="css/08_details.css?v=202610051719">
-<link rel="stylesheet" href="css/09_flow.css?v=202610051719">
-<link rel="stylesheet" href="css/10_faq.css?v=202610051719">
-<link rel="stylesheet" href="css/11_about.css?v=202610051719">
-<link rel="stylesheet" href="css/form.css?v=202610051719">
+<link rel="stylesheet" href="css/common.css?v=202610081205">
+<link rel="stylesheet" href="css/01_firstview.css?v=202610081205">
+<link rel="stylesheet" href="css/02_info.css?v=202610081205">
+<link rel="stylesheet" href="css/03_feature.css?v=202610081205">
+<link rel="stylesheet" href="css/04_stairs.css?v=202610081205">
+<link rel="stylesheet" href="css/05_storage.css?v=202610081205">
+<link rel="stylesheet" href="css/06_experience.css?v=202610081205">
+<link rel="stylesheet" href="css/07_company.css?v=202610081205">
+<link rel="stylesheet" href="css/08_details.css?v=202610081205">
+<link rel="stylesheet" href="css/09_flow.css?v=202610081205">
+<link rel="stylesheet" href="css/10_faq.css?v=202610081205">
+<link rel="stylesheet" href="css/11_about.css?v=202610081205">
+<link rel="stylesheet" href="css/form.css?v=202610081205">
 </head>
 <body>
 <!--
@@ -53,13 +53,13 @@
        ========================================================= -->
   <header class="header">
     <p class="header__logo">
-      <img src="img/logo_white.png" alt="PRINCIPAL HOME（プリンシパルホーム）" width="720" height="68">
+      <a href="https://pr-h.net/" target="_blank" rel="noopener"><img src="img/logo_white.png" alt="PRINCIPAL HOME（プリンシパルホーム）" width="720" height="68"></a>
     </p>
     <a class="header__tel" href="tel:0120021541">
       <span class="header__tel-num">
         <img src="img/icon_freedial.png" alt="フリーダイヤル" width="256" height="168">0120-021-541
       </span>
-      <span class="header__tel-time">受付時間 9:30-18:00（火・水連休）</span>
+      <span class="header__tel-time">受付時間 9:30-18:00（火・水定休）</span>
     </a>
   </header>
 
@@ -86,7 +86,7 @@
         </picture>
 
         <h1 class="fv__copy">
-          <img src="img/fv/fv_copy.png" width="1510" height="616"
+          <img src="img/fv/fv_copy3.png" width="1227" height="542"
                alt="3つのバルコニーが暮らしをひろげる。都心で楽しむ わが家らしい過ごし方。">
         </h1>
 
@@ -101,32 +101,33 @@
       <div class="fv__lower">
         <p class="fv__scroll" aria-hidden="true">SCROLL</p>
 
-        <!-- 自動スクロール画像（同じ並びを2周分置いて、切れ目なくループさせる） -->
+        <!-- 自動スクロール画像（同じ並びを2周分置いて、切れ目なくループさせる）
+             指で左右に動かせて、タップすると拡大する（js/01_firstview.js） -->
         <div class="fv__slider">
           <ul class="fv__track">
-            <li><img src="img/fv/slide_01.jpg" width="720" height="960"  alt="外観" decoding="async"></li>
-            <li><img src="img/fv/slide_02.jpg" width="720" height="960"  alt="約22帖のルーフバルコニー" decoding="async"></li>
-            <li><img src="img/fv/slide_03.jpg" width="720" height="1080" alt="鉄骨階段" decoding="async"></li>
-            <li><img src="img/fv/slide_04.jpg" width="720" height="480"  alt="リビング前のインナーバルコニー" decoding="async"></li>
-            <li><img src="img/fv/slide_05.jpg" width="720" height="480"  alt="キッチンから見たリビングダイニング" decoding="async"></li>
-            <li><img src="img/fv/slide_06.jpg" width="720" height="1080" alt="大容量の可動棚収納" decoding="async"></li>
-            <li><img src="img/fv/slide_07.jpg" width="720" height="480"  alt="洗面室" decoding="async"></li>
-            <li><img src="img/fv/slide_08.jpg" width="720" height="1080" alt="吹き抜けの鉄骨階段" decoding="async"></li>
-            <li><img src="img/fv/slide_09.jpg" width="720" height="1049" alt="シューズインクローゼット" decoding="async"></li>
-            <li><img src="img/fv/slide_10.jpg" width="720" height="480"  alt="キッチン" decoding="async"></li>
-            <li><img src="img/fv/slide_11.jpg" width="720" height="513"  alt="洋室とウォークインクローゼット" decoding="async"></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_01.jpg" width="720" height="960"  alt="外観" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_02.jpg" width="720" height="960"  alt="約22帖のルーフバルコニー" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_03.jpg" width="720" height="1080" alt="鉄骨階段" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_04.jpg" width="720" height="480"  alt="リビング前のインナーバルコニー" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_05.jpg" width="720" height="480"  alt="キッチンから見たリビングダイニング" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_06.jpg" width="720" height="1080" alt="大容量の可動棚収納" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_07.jpg" width="720" height="480"  alt="洗面室" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_08.jpg" width="720" height="1080" alt="吹き抜けの鉄骨階段" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_09.jpg" width="720" height="1049" alt="シューズインクローゼット" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_10.jpg" width="720" height="480"  alt="キッチン" decoding="async"></button></li>
+            <li><button class="fv__thumb" type="button" aria-haspopup="dialog"><img src="img/fv/slide_11.jpg" width="720" height="513"  alt="洋室とウォークインクローゼット" decoding="async"></button></li>
             <!-- 2周目（ループ用の複製） -->
-            <li aria-hidden="true"><img src="img/fv/slide_01.jpg" width="720" height="960"  alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_02.jpg" width="720" height="960"  alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_03.jpg" width="720" height="1080" alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_04.jpg" width="720" height="480"  alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_05.jpg" width="720" height="480"  alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_06.jpg" width="720" height="1080" alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_07.jpg" width="720" height="480"  alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_08.jpg" width="720" height="1080" alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_09.jpg" width="720" height="1049" alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_10.jpg" width="720" height="480"  alt="" decoding="async"></li>
-            <li aria-hidden="true"><img src="img/fv/slide_11.jpg" width="720" height="513"  alt="" decoding="async"></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_01.jpg" width="720" height="960"  alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_02.jpg" width="720" height="960"  alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_03.jpg" width="720" height="1080" alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_04.jpg" width="720" height="480"  alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_05.jpg" width="720" height="480"  alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_06.jpg" width="720" height="1080" alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_07.jpg" width="720" height="480"  alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_08.jpg" width="720" height="1080" alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_09.jpg" width="720" height="1049" alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_10.jpg" width="720" height="480"  alt="" decoding="async"></button></li>
+            <li aria-hidden="true"><button class="fv__thumb" type="button" tabindex="-1"><img src="img/fv/slide_11.jpg" width="720" height="513"  alt="" decoding="async"></button></li>
           </ul>
         </div>
 
@@ -191,23 +192,23 @@
         <!-- 間取り図（タップで拡大） -->
         <ul class="plan-list">
           <li class="plan plan--1f">
-            <a class="plan__btn" href="img/feature/plan_1f_l.png" data-plan-label="1F">
+            <a class="plan__btn" href="img/feature/plan_1f_v2_l.png" data-plan-label="1F">
               <span class="plan__floor">1F</span>
-              <img src="img/feature/plan_1f_s.png" width="490" height="566" alt="1階の間取り図（寝室10.0帖・6.2帖・6.0帖、WIC3.4帖、SIC1.7帖）" loading="lazy">
+              <img src="img/feature/plan_1f_v2_s.png" width="505" height="569" alt="1階の間取り図（主寝室10.0帖、寝室6.2帖・6.0帖、WIC3.4帖、SIC1.7帖、吹抜け）" loading="lazy">
               <span class="plan__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.4 15.4 20.5 20.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><path d="M10.5 7.7v5.6M7.7 10.5h5.6" stroke="currentColor" stroke-width="2"/></svg></span>
             </a>
           </li>
           <li class="plan plan--2f">
-            <a class="plan__btn" href="img/feature/plan_2f_l.png" data-plan-label="2F">
+            <a class="plan__btn" href="img/feature/plan_2f_v2_l.png" data-plan-label="2F">
               <span class="plan__floor">2F</span>
-              <img src="img/feature/plan_2f_s.png" width="441" height="578" alt="2階の間取り図（LDK28.59帖、パントリー3.0帖、バルコニー2か所）" loading="lazy">
+              <img src="img/feature/plan_2f_v2_s.png" width="446" height="586" alt="2階の間取り図（リビングダイニング28.59帖、パントリー3.0帖、バルコニー2か所）" loading="lazy">
               <span class="plan__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.4 15.4 20.5 20.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><path d="M10.5 7.7v5.6M7.7 10.5h5.6" stroke="currentColor" stroke-width="2"/></svg></span>
             </a>
           </li>
           <li class="plan plan--ph">
-            <a class="plan__btn" href="img/feature/plan_ph_l.png" data-plan-label="PH">
+            <a class="plan__btn" href="img/feature/plan_ph_v2_l.png" data-plan-label="PH">
               <span class="plan__floor">PH</span>
-              <img src="img/feature/plan_ph_s.png" width="301" height="538" alt="PH階の間取り図（ルーフバルコニー）" loading="lazy">
+              <img src="img/feature/plan_ph_v2_s.png" width="305" height="542" alt="PH階の間取り図（ルーフバルコニー）" loading="lazy">
               <span class="plan__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.4 15.4 20.5 20.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><path d="M10.5 7.7v5.6M7.7 10.5h5.6" stroke="currentColor" stroke-width="2"/></svg></span>
             </a>
           </li>
@@ -392,7 +393,7 @@
           <span class="f-head__sub">全ての階をつなげる</span>
           <span class="f-head__main">家のシンボル、鉄骨階段</span>
         </h3>
-        <p class="f-head__lead">1階から最上階を貫く鉄骨階段。<br>吹き抜けの光が家中に広がり、開放的な一体感を生み出します。<br class="pc-br">床暖房も備え、デザイン性と機能性を兼ね備えた家のシンボルです。</p>
+        <p class="f-head__lead">1階から最上階を貫く鉄骨階段。<br>吹き抜けの光が家中に広がり、<br class="sp-br">開放的な一体感を生み出します。<br>床暖房も備え、デザイン性と機能性を<br class="sp-br">兼ね備えた家のシンボルです。</p>
       </div>
 
       <img class="stairs__main"
@@ -502,7 +503,7 @@
             <span class="b-head__title"><b>1500mm</b>の<b>広い洗面台</b></span>
           </h4>
 
-          <p class="storage__text">一般的な洗面台の2倍の広さの1500mm、3面鏡<br>＋ 1面鏡でホテルライクな大型仕様。朝の忙しい<br>時間帯でも、大人2人が余裕で並んで使えます。</p>
+          <p class="storage__text">一般的な洗面台の2倍の広さの1500mm、<br class="sp-br">3面鏡<br class="pc-br">＋ 1面鏡でホテルライクな大型仕様。<br class="sp-br">朝の忙しい<br class="pc-br">時間帯でも、大人2人が余裕で<br class="sp-br">並んで使えます。</p>
         </div>
 
         <div class="storage__photos">
@@ -587,7 +588,7 @@
       <div class="company__about">
         <p class="company__catch">＼この物件を手がけたプリンシパルホームとは？／</p>
         <h2 class="company__title" id="company-title">東京･神奈川エリアを中心に、<br>累計2,000棟を超える実績。</h2>
-        <p class="company__lead">町田で始まり、22年。地域に根ざした家づくりを続け、<br>数多くのご家族の夢を形にしてきました。</p>
+        <p class="company__lead">町田で始まり、22年。<br class="sp-br">地域に根ざした家づくりを続け、<br>数多くのご家族の夢を形にしてきました。</p>
         <img class="company__photo"
              src="img/company/family_1035.jpg"
              srcset="img/company/family_1035.jpg 1035w, img/company/family_1414.jpg 1414w"
@@ -595,7 +596,7 @@
              width="1035" height="683" alt="プリンシパルホームで家を建てたご家族" loading="lazy">
 
         <h3 class="company__award-title">暮らしやすさを軸とした住宅で、<br>世界的なデザイン賞を多数受賞</h3>
-        <p class="company__award-text">見た目の美しさだけでなく、生活動線や住み心地の良<br class="sp-br">さが、国内･海外の厳しい審査で認められています。</p>
+        <p class="company__award-text">見た目の美しさだけでなく、<br class="sp-br">生活動線や住み心地の良さが、<br class="sp-br">国内･海外の厳しい審査で認められています。</p>
 
         <ul class="awards">
           <li class="awards__item awards__item--german"><img src="img/company/award_german.png" width="184" height="477" alt="German Design Award Winner 2025" loading="lazy"></li>
@@ -605,14 +606,14 @@
           <li class="awards__item awards__item--london"><img src="img/company/award_london.jpg" width="300" height="390" alt="London Design Awards 2024 Gold Winner" loading="lazy"></li>
         </ul>
 
-        <p class="company__award-note">グッドデザイン賞（2024年）/キッズデザイン賞（2024年）/<br class="sp-br">ジャーマンデザインアワード（2025年）/など、国内外の権威ある<br class="sp-br">デザイン賞を多数受賞しています。</p>
+        <p class="company__award-note">グッドデザイン賞（2024年）/キッズデザイン賞（2024年）/<br class="sp-br">ジャーマンデザインアワード（2025年）/など、<br class="sp-br">国内外の権威あるデザイン賞を多数受賞しています。</p>
       </div>
 
       <!-- --- 設計コンセプト・施工事例・お問い合わせ（濃いグレー背景） --- -->
       <div class="company__concept">
         <p class="concept-label">この暮らしやすさが実現できる理由</p>
         <h3 class="concept-title">プリンシパルホームの設計コンセプト</h3>
-        <p class="concept-text">広さや便利さは、偶然生まれるものではありません。<br class="sp-br">日々の暮らしの中にある小さな不便に気づき、突き詰<br class="sp-br">めることで、暮らしに"心のゆとり"を生み出す。それ<br class="sp-br">が、プリンシパルホームの設計力です。</p>
+        <p class="concept-text">広さや便利さは、偶然生まれるものでは<br class="sp-br">ありません。日々の暮らしの中にある<br class="sp-br">小さな不便に気づき、突き詰めることで、<br class="sp-br">暮らしに"心のゆとり"を生み出す。<br class="sp-br">それが、プリンシパルホームの設計力です。</p>
 
         <h3 class="works-head">
           ルーフバルコニーのある住まいを、<br>他にも手がけてきました
@@ -663,7 +664,7 @@
           </li>
         </ul>
 
-        <p class="works-text">都心でも自由度の高いバルコニーと、暮らしやすさを追<br class="sp-br">求した設計力・技術力で、プリンシパルホームが安心の<br class="sp-br">家づくりを叶えます。モデルハウスの間取りや動線を参<br class="sp-br">考に、お客様に合わせた最適なプランもご提案します。</p>
+        <p class="works-text">都心でも自由度の高いバルコニーと、暮らしやすさを追求した設計力・技術力で、プリンシパルホームが安心の家づくりを叶えます。モデルハウスの間取りや動線を参考に、お客様に合わせた最適なプランもご提案します。</p>
 
         <!-- お問い合わせ -->
         <p class="contact-head">ご相談やご質問はお気軽にお問い合わせください</p>
@@ -1106,10 +1107,29 @@
     <button class="float-cta__close" type="button" data-float-cta-close aria-label="予約ボタンを閉じる"></button>
   </div>
 
+  <!-- =========================================================
+       画面下に追従する予約ボタン
+       ふわふわの予約ボタンを×で閉じたあと、1画面ぶんくらいスクロールすると下から出てくる（js/common.js）
+       ========================================================= -->
+  <a class="sticky-cta" href="#form" data-sticky-cta aria-hidden="true" tabindex="-1">【菊名】完成見学会予約</a>
+
+  <!-- TOPへ戻る（1画面ぶんスクロールすると右下に出る。LP量産キットと同じ形） -->
+  <button class="back-top" type="button" data-back-top aria-label="ページの先頭へ戻る"><span>TOP</span></button>
+
+  <!-- ファーストビューの自動スクロール写真の拡大表示（js/01_firstview.js） -->
+  <dialog class="photo-modal" id="fvPhotoModal" aria-label="写真の拡大表示">
+    <figure class="photo-modal__inner">
+      <img class="photo-modal__img" src="data:," alt="">
+      <figcaption class="photo-modal__caption"></figcaption>
+    </figure>
+    <button class="photo-modal__close" type="button" aria-label="閉じる"></button>
+  </dialog>
+
 </div>
-<script src="js/common.js?v=202610051719"></script>
-<script src="js/03_feature.js?v=202610051719"></script>
-<script src="js/07_company.js?v=202610051719"></script>
-<script src="js/form.js?v=202610051719"></script>
+<script src="js/common.js?v=202610081205"></script>
+<script src="js/01_firstview.js?v=202610081205"></script>
+<script src="js/03_feature.js?v=202610081205"></script>
+<script src="js/07_company.js?v=202610081205"></script>
+<script src="js/form.js?v=202610081205"></script>
 </body>
 </html>

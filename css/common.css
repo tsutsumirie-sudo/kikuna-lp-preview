@@ -336,6 +336,71 @@ html.is-modal-open{ overflow:hidden; }
 
 
 /* =========================================================
+   画面下に追従する予約ボタン（画像/追従CTA.png：オレンジの帯に白文字）
+   ふわふわの予約ボタンを×で閉じて、1画面ぶんくらいスクロールすると下から出る（js/common.js）
+   ========================================================= */
+.sticky-cta{
+  position:fixed; left:0; right:0; bottom:0; z-index:90;
+  display:flex; align-items:center; justify-content:center;
+  height:4.9rem;
+  padding-right:2.9rem;    /* カンプ（画像/追従CTA.png）と同じく、文字を中央より少し左に置く */
+  font-size:2rem; font-weight:500; line-height:1; letter-spacing:0;
+  color:var(--c-white);
+  background:var(--c-orange);
+  transform:translateY(100%);
+  visibility:hidden;
+  transition:transform .4s ease, visibility .4s;
+  -webkit-tap-highlight-color:transparent;
+}
+.sticky-cta.is-shown{ transform:none; visibility:visible; }
+body.has-sticky-cta{ padding-bottom:4.9rem; }
+
+@media (prefers-reduced-motion: reduce){
+  .sticky-cta{ transition:none; }
+}
+
+
+/* =========================================================
+   TOPへ戻る（画面の右下。LP量産キットと同じ形：縦の線＋片側の矢じり＋縦書きの「TOP」）
+   1画面ぶんスクロールすると出る（js/common.js）。スマホの数値はキットの375px幅のときの値
+   ========================================================= */
+.back-top{
+  position:fixed; right:.7rem; bottom:12%; z-index:95;
+  display:flex; flex-direction:column; align-items:center;
+  padding:0; border:0;
+  background:none;
+  color:rgba(120,120,120,.85);   /* キットは rgba(190,190,190,.8)。このLPは明るいグレーの背景が多く見えにくいので少し濃く */
+  cursor:pointer;
+  opacity:0; visibility:hidden;
+  transition:opacity .3s, visibility .3s;
+  -webkit-tap-highlight-color:transparent;
+}
+.back-top.is-visible{ opacity:1; visibility:visible; }
+.back-top span{
+  margin-top:7.5rem;
+  writing-mode:vertical-lr;
+  font-size:1.2rem; font-weight:400; letter-spacing:.2em;
+}
+/* 縦の線 */
+.back-top::after{
+  content:"";
+  position:absolute; left:50%; bottom:4rem;
+  width:1px; height:5.5rem;
+  background:currentColor;
+}
+/* 矢じり（線の上の端から左下へ） */
+.back-top::before{
+  content:"";
+  position:absolute; left:50%; top:calc(100% - 9.5rem);
+  width:1px; height:1.6rem;
+  margin-left:-.5px;
+  background:currentColor;
+  transform:translateX(-50%) rotate(30deg);
+  transform-origin:top;
+}
+
+
+/* =========================================================
    PC・タブレット（768px以上）
    スマホは画面幅に合わせて全体を拡大縮小する（1rem＝画面幅÷37.5）。
    768px以上は 1rem を11pxに固定して文字や部品の大きさを止め、
@@ -381,7 +446,21 @@ html.is-modal-open{ overflow:hidden; }
   .data-table dt{ padding:1.6rem 2rem; font-size:1.5rem; }
   .data-table dd{ padding:1.6rem 2rem; font-size:1.5rem; line-height:2.6rem; }
 
+  /* TOPへ戻る：キットの1024px以下の大きさ（px） */
+  .back-top{ right:7px; }
+  .back-top span{ margin-top:75px; font-size:12px; }
+  .back-top::after{ bottom:40px; height:55px; }
+  .back-top::before{ top:calc(100% - 95px); height:16px; }
+
   /* ふわふわ予約ボタン：画面の左下（PCは少し大きく） */
   .float-cta{ left:2.4rem; width:13.8rem; bottom:calc(20% - 6.92rem); }
   .float-cta__close{ top:-1.55rem; left:9.32rem; width:5.06rem; height:5.06rem; }
+}
+
+/* TOPへ戻る：1025px以上はキットのPCの大きさ（px） */
+@media (min-width:1025px){
+  .back-top{ right:19px; bottom:10%; }
+  .back-top span{ margin-top:110px; font-size:14px; }
+  .back-top::after{ bottom:50px; height:90px; }
+  .back-top::before{ top:calc(100% - 140px); height:24px; }
 }

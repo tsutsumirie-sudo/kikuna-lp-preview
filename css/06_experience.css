@@ -33,14 +33,14 @@
   display:inline-block;
   margin-top:1.95rem;
   padding-bottom:.8rem;
-  font-size:1.9rem; font-weight:400; line-height:1;
+  font-size:1.87rem; font-weight:400; line-height:1;   /* 1行のまま左右に20px残る大きさ（3つの文字サイズを同じ割合で少し小さく） */
   border-bottom:var(--line-thin) solid var(--c-yellow);
 }
 .exp-head__title b{
-  font-size:1.95rem; font-weight:700;
+  font-size:1.92rem; font-weight:700;
   color:var(--c-yellow);
 }
-.exp-head__title b.is-big{ font-size:2.3rem; }
+.exp-head__title b.is-big{ font-size:2.26rem; }
 .exp-head__lead{
   margin-top:1.8rem;
   font-size:1.4rem; font-weight:500; line-height:1.95rem;

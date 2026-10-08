@@ -20,7 +20,8 @@
 }
 .stairs .f-head__lead{
   margin-top:3.15rem;
-  padding:0 1.25rem 0 1.75rem;
+  padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
+  text-wrap:pretty;
   letter-spacing:.06em;
 }
 

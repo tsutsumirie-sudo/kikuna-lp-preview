@@ -93,7 +93,7 @@
 }
 .details__value--day{     margin-top:.83rem; font-size:2rem; }
 .details__value--time{    margin-top:.6rem;  font-size:2.27rem; }
-.details__value--address{ margin-top:.6rem;  font-size:1.9rem; }
+.details__value--address{ margin-top:.6rem;  font-size:1.88rem; }   /* 1行のまま左右に20px残る大きさ */
 .details__value--access{  margin-top:.65rem; font-size:2.27rem; }
 
 .details__line{

@@ -47,9 +47,10 @@
   display:flex; align-items:flex-start; gap:1.8rem;
   margin:4.55rem 0 0 2.2rem;
 }
-.plan--1f{ width:11.95rem; margin-top:.35rem; }
-.plan--2f{ width:10.75rem; }
-.plan--ph{ width:7.35rem; }
+/* 3枚とも同じ縮尺になる幅（2026-10-08 画像/新図面 に差し替え） */
+.plan--1f{ width:12.07rem; margin-top:.35rem; }
+.plan--2f{ width:10.67rem; }
+.plan--ph{ width:7.31rem; }
 .plan__btn{
   position:relative;
   display:block;
@@ -144,7 +145,8 @@
 
 /* --- 本文 --- */
 .balcony__text{
-  padding:0 1.25rem 0 1.5rem;
+  padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
+  text-wrap:pretty;   /* 最後の行が1〜2文字だけにならないように */
   font-size:1.44rem; font-weight:500; line-height:2.25rem;
   text-align:left;
 }
@@ -324,7 +326,7 @@
 }
 .balcony--multi .b-head__num{ left:-5.5rem; }
 .balcony--multi .b-head__title{ margin-top:.8rem; }
-.balcony--multi .balcony__text{ margin-top:1.88rem; padding-right:2.6rem; }
+.balcony--multi .balcony__text{ margin-top:1.88rem; }
 
 .balcony--multi .balcony__photos{
   display:flex; align-items:flex-start;
@@ -409,9 +411,9 @@
   .feature__intro{ padding:5.4rem var(--pc-pad) 6.4rem; }
   .feature__title span{ width:20rem; height:3.6rem; font-size:2.1rem; line-height:3.6rem; }
   .plan-list{ justify-content:center; gap:4.8rem; margin:6.4rem 0 0; }
-  .plan--1f{ width:22.8rem; margin-top:.65rem; }
-  .plan--2f{ width:20.5rem; }
-  .plan--ph{ width:14rem; }
+  .plan--1f{ width:23.03rem; margin-top:.65rem; }
+  .plan--2f{ width:20.36rem; }
+  .plan--ph{ width:13.95rem; }
   .plan__floor{ bottom:calc(100% + .7rem); font-size:1.5rem; }
   .plan__zoom{ right:-.6rem; bottom:-.6rem; width:3.2rem; height:3.2rem; }
   .plan__zoom svg{ width:1.9rem; height:1.9rem; }

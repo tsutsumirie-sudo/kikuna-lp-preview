@@ -45,8 +45,47 @@
      --------------------------------------------------------- */
   document.querySelectorAll('[data-float-cta]').forEach(function (box) {
     var close = box.querySelector('[data-float-cta-close]');
-    if (close) close.addEventListener('click', function () { box.classList.add('is-closed'); });
+    if (close) close.addEventListener('click', function () {
+      box.classList.add('is-closed');
+      armStickyCta();
+    });
   });
+
+  /* ---------------------------------------------------------
+     画面下に追従する予約ボタン：ふわふわボタンを×で閉じたあと、
+     そこから1画面ぶんくらいスクロールすると下から出てくる（出たあとはずっと表示）
+     --------------------------------------------------------- */
+  var stickyCta = document.querySelector('[data-sticky-cta]');
+
+  function armStickyCta() {
+    if (!stickyCta) return;
+    var startY = window.scrollY;
+    function check() {
+      if (Math.abs(window.scrollY - startY) < window.innerHeight) return;
+      stickyCta.classList.add('is-shown');
+      stickyCta.removeAttribute('aria-hidden');
+      stickyCta.removeAttribute('tabindex');
+      document.body.classList.add('has-sticky-cta');   // いちばん下のフッターが隠れないよう、ボタンの高さぶん余白を足す
+      window.removeEventListener('scroll', check);
+    }
+    window.addEventListener('scroll', check, { passive: true });
+  }
+
+  /* ---------------------------------------------------------
+     TOPへ戻る：1画面ぶんスクロールすると右下に出る（LP量産キットと同じ）
+     --------------------------------------------------------- */
+  var backTop = document.querySelector('[data-back-top]');
+  if (backTop) {
+    var toggleBackTop = function () {
+      backTop.classList.toggle('is-visible', window.scrollY > window.innerHeight);
+    };
+    window.addEventListener('scroll', toggleBackTop, { passive: true });
+    toggleBackTop();
+    backTop.addEventListener('click', function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
 
   /* ---------------------------------------------------------
      2. 小さい写真：本来の位置が画面の下から20%のところまで来たら登場

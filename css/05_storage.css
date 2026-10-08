@@ -29,7 +29,8 @@
 /* --- 本文 --- */
 .storage__text{
   margin-top:2.36rem;
-  padding:0 1.2rem 0 1.6rem;
+  padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
+  text-wrap:pretty;   /* 最後の行が1〜2文字だけにならないように */
   font-size:1.47rem; font-weight:500; line-height:2.4rem; letter-spacing:.05em;
   text-align:left;
   text-spacing-trim:space-all;   /* 「、「」などの約物を詰めない（カンプと同じ文字幅にする） */
