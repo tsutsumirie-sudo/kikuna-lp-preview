@@ -96,6 +96,7 @@
   margin-top:1.3rem;
 }
 .exp-storage__item{ position:relative; }
+.exp-storage__item picture{ display:block; }
 .exp-storage__item img{
   width:100%;
   aspect-ratio:250 / 300;
@@ -158,9 +159,10 @@
   .exp-photo img{ aspect-ratio:2.1 / 1; }
   .exp-photo__caption{ bottom:3rem; font-size:1.8rem; line-height:2.8rem; }
 
-  /* 02 3つの収納：画面の端から端まで3枚並べる */
+  /* 02 3つの収納：画面の端から端まで3枚並べる
+     写真の高さは 01 のバルコニーの写真と同じ（バルコニーは 幅:高さ＝2.1:1、収納は1枚が画面幅の1/3なので 2.1:3）（2026-10-09） */
   .exp-storage{ width:100vw; margin:2.4rem calc(50% - 50vw) 0; }
-  .exp-storage__item img{ aspect-ratio:1 / 1; }
+  .exp-storage__item img{ aspect-ratio:2.1 / 3; }
   .exp-storage__name{ bottom:1.6rem; font-size:1.6rem; }
   .exp-storage__lead{ margin-top:3rem; padding-left:0; font-size:1.7rem; }
 }
