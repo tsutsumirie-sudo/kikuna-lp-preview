@@ -199,8 +199,9 @@
   .header__tel-num img{ height:2.3rem; }
   .header__tel-time{ margin-top:.6rem; font-size:1.3rem; }
 
-  /* メイン写真：PCカンプと同じ比率（1440pxより広い画面では高さを止めて左右に広げる） */
-  .fv__hero{ aspect-ratio:auto; height:min(88.8vw, 1280px); }
+  /* メイン写真：上と左右はPCカンプと同じ範囲。下は玄関が見えるところまで伸ばす（2026-10-09）
+     写真の縦横比のまま表示して、どの画面幅でも上の空（キャッチコピー）から玄関まで切れないようにする */
+  .fv__hero{ aspect-ratio:1706 / 2105; }
   .fv__copy{
     top:min(1.71vw, 24.6px); left:50%;
     width:min(70.84vw, 1020px);
