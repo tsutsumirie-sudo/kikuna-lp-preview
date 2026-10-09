@@ -153,12 +153,23 @@ html.is-modal-open{ overflow:hidden; }
 
 
 /* =========================================================
-   小さい写真：画面の下から20%の位置まで来たら、やや下から回転しながら登場
+   小さい写真：画面の下から23%の位置まで来たら、やや下から回転しながら登場
+   （2026-10-09 20%→23%。少しだけスクロールを進めたところで出す）
    判定は回転させない外側（.js-pop）で行い、本来の位置を基準にする（js/common.js）
-   .pop__note … 写真が正しい位置に収まると同時に現れる説明文
+   .pop__note … 写真が正しい位置に収まると同時に現れる説明文（写真の外に置く）
+   .pop__btn  … タップで拡大表示（data-zoom に拡大用の画像。js/common.js の「写真の拡大表示」）
    ========================================================= */
 .pop{ position:relative; margin:0; }
 .pop img{ width:100%; height:100%; object-fit:cover; }
+.pop__btn{
+  display:block;
+  width:100%; height:100%;
+  padding:0; border:0;
+  background:none;
+  cursor:zoom-in;
+  -webkit-tap-highlight-color:transparent;
+}
+.pop__btn:focus-visible{ outline:.2rem solid var(--c-blue); outline-offset:-.2rem; }
 
 .js .js-pop .pop{
   opacity:0;
@@ -179,6 +190,61 @@ html.is-modal-open{ overflow:hidden; }
   .js .js-pop .pop{ transform:none; transition:opacity .4s ease; }
   .js .js-pop .pop__note{ transition-delay:0s; }
 }
+
+
+/* =========================================================
+   写真の拡大表示（1の自動スクロール写真・3と5の小さい写真で共通）
+   <dialog class="photo-modal" id="photoModal">。大きさは画面に合わせて js/common.js で決める
+   ========================================================= */
+.photo-modal{
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  max-width:none; max-height:none;
+  margin:0; padding:0;
+  border:0;
+  background:transparent;
+  overflow:hidden;
+}
+.photo-modal::backdrop{ background:rgba(0,0,0,.9); }
+.photo-modal[open]{ animation:photoFade .25s ease; }
+@keyframes photoFade{ from{ opacity:0; } to{ opacity:1; } }
+
+.photo-modal__inner{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  height:100%;
+  margin:0;
+  padding:6rem 1.5rem 4rem;
+}
+.photo-modal__img{
+  max-width:none;                                  /* 大きさは JS で画面に合わせる */
+  border-radius:.4rem;
+  object-fit:cover;
+  background:#222;
+}
+.photo-modal__caption{
+  margin-top:1.2rem;
+  font-size:1.4rem; font-weight:500; line-height:2.2rem; letter-spacing:.04em;
+  text-align:center;
+  color:var(--c-white);
+}
+.photo-modal__caption span{ display:inline-block; }   /* 3・5の説明文：写真の横の説明文の改行位置でだけ折り返す */
+.photo-modal__close{
+  position:absolute; top:1.5rem; right:1.5rem;
+  width:3.6rem; height:3.6rem;
+  padding:0; border:0; border-radius:50%;
+  background:var(--c-white);
+  cursor:pointer;
+}
+.photo-modal__close::before,
+.photo-modal__close::after{
+  content:"";
+  position:absolute; top:50%; left:50%;
+  width:1.7rem; height:.2rem;
+  margin:-.1rem 0 0 -.85rem;
+  background:#2d2020;
+  transform:rotate(45deg);
+}
+.photo-modal__close::after{ transform:rotate(-45deg); }
 
 
 /* =========================================================

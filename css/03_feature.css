@@ -153,28 +153,15 @@
 
 /* --- 写真（大＋小） --- */
 .balcony__large{ object-fit:cover; }
-.balcony__small{ position:relative; z-index:1; }
+.balcony__small{ position:relative; z-index:1; margin:0; }
 
-/* 小さい写真の上に重ねる説明文 */
-.pop__caption{
-  position:absolute; top:0; left:0; right:0;
-  font-weight:700;
+/* 小さい写真の説明文（2026-10-09 写真の上に重ねるのをやめ、5の収納と同じく写真の外に置く）
+   写真が収まると同時に表示（common.css の .pop__note）。改行は <br> で指定
+   ② は写真の左横、③ は写真の下 */
+.balcony__note{
+  font-size:1.42rem; font-weight:500; line-height:2.2rem; letter-spacing:.02em;
   text-align:left;
-  color:var(--c-white);
-}
-.pop__caption--inner{
-  padding:.63rem .4rem 0 1.7rem;
-  font-size:1.2rem; line-height:1.8rem; letter-spacing:.02em;
-  text-shadow:0 0 .5rem rgba(0,0,0,.55), 0 0 .15rem rgba(0,0,0,.45);
-}
-.pop__caption--multi{
-  padding:.58rem .4rem 0 .5rem;
-  font-size:.97rem; line-height:1.4rem;
-  /* 黒い縁取り */
-  text-shadow:
-     1px  1px 0 #222, -1px  1px 0 #222,  1px -1px 0 #222, -1px -1px 0 #222,
-     0    1px 0 #222,  0   -1px 0 #222,  1px  0   0 #222, -1px  0   0 #222,
-     0 0 .3rem rgba(0,0,0,.4);
+  white-space:nowrap;
 }
 
 /* =========================================================
@@ -313,6 +300,9 @@
   margin:-3.3rem 0 0 16.25rem;
 }
 .balcony--inner .pop{ aspect-ratio:397 / 289; }
+.balcony--inner .balcony__note{
+  position:absolute; right:calc(100% + 1rem); bottom:.1rem;
+}
 
 
 /* =========================================================
@@ -343,7 +333,12 @@
   display:flex;
   aspect-ratio:386 / 300;
 }
-.pop--pair img{ width:50%; }
+.pop--pair .pop__btn{ width:50%; }
+/* 説明文は写真の下。左側は大きい写真に重なっているので、その分（写真の幅の10.4%）を空けて始める */
+.balcony--multi .balcony__note{
+  margin-top:.9rem;
+  padding-left:calc(10.4% + .9rem);
+}
 
 
 /* =========================================================
@@ -476,14 +471,15 @@
   .balcony--inner .balcony__photos{ margin-top:3rem; }
   .balcony--inner .balcony__large{ width:92.8%; margin-left:3.73%; }
   .balcony--inner .balcony__small{ width:52.93%; margin:-8.8% 0 0 43.33%; }
-  .pop__caption--inner{ padding:1.2rem .6rem 0 2.6rem; font-size:1.6rem; line-height:2.5rem; }
+  .balcony__note{ font-size:1.6rem; line-height:2.7rem; }
+  .balcony--inner .balcony__note{ right:calc(100% + 1.4rem); }
 
   /* ③ 多目的バルコニー */
   .balcony--multi .balcony__text{ padding-right:0; }
   .balcony--multi .balcony__photos{ margin-top:3rem; }
   .balcony--multi .balcony__large{ width:50.13%; }
   .balcony--multi .balcony__small{ width:51.47%; margin:9.2% 0 0 -5.33%; }
-  .pop__caption--multi{ padding:.9rem .4rem 0 .8rem; font-size:1.35rem; line-height:2rem; white-space:nowrap; }
+  .balcony--multi .balcony__note{ margin-top:1.2rem; padding-left:calc(10.4% + 1.2rem); }
 }
 
 @media (min-width:1200px){

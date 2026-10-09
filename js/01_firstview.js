@@ -140,30 +140,12 @@
 
 
   /* ---------------------------------------------------------
-     タップした写真を拡大表示
+     タップした写真を拡大表示（#photoModal。開く・閉じる・大きさは js/common.js で共通）
      （拡大用の大きい画像は slide_XX_l.jpg。読み込むまでは小さい画像を表示）
      --------------------------------------------------------- */
-  var modal = document.getElementById('fvPhotoModal');
-  if (!modal || typeof modal.showModal !== 'function') return;
-  var inner = modal.querySelector('.photo-modal__inner');
-  var modalImg = modal.querySelector('.photo-modal__img');
-  var caption = modal.querySelector('.photo-modal__caption');
-  var root = document.documentElement;
-  var loading = null;
-  var natW = 0, natH = 0;   // 写真の縦横比（小さい画像から取る）
-
-  // 画面に収まるいちばん大きいサイズにする（小さい画像→大きい画像に替わっても大きさが変わらないよう、先に決める）
-  function fit() {
-    if (!modal.open || !natW) return;
-    var cs = getComputedStyle(inner);
-    var w = inner.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-    var h = inner.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
-          - caption.offsetHeight - parseFloat(getComputedStyle(caption).marginTop);
-    var scale = Math.min(w / natW, h / natH);
-    modalImg.style.width = Math.floor(natW * scale) + 'px';
-    modalImg.style.height = Math.floor(natH * scale) + 'px';
-  }
-  window.addEventListener('resize', fit);
+  var modal = document.getElementById('photoModal');
+  if (!modal || !modal.openPhoto) return;
+  var openedHere = false;   // この写真から開いたとき（閉じたら自動スクロールを再開）
 
   track.addEventListener('click', function (e) {
     if (suppressClick) { e.preventDefault(); e.stopPropagation(); return; }
@@ -173,31 +155,19 @@
     var index = Array.prototype.indexOf.call(items, li) % half;   // 2周目の写真も1周目と同じ説明文
     var img = btn.querySelector('img');
     var text = items[index].querySelector('img').alt;
-    var large = img.getAttribute('src').replace(/\.jpg$/, '_l.jpg');
-
-    modalImg.src = img.currentSrc || img.src;
-    modalImg.alt = text;
-    caption.textContent = text;
-    loading = new Image();
-    loading.onload = function () { if (this === loading && modal.open) modalImg.src = large; };
-    loading.src = large;
-
-    natW = img.naturalWidth || +img.getAttribute('width');
-    natH = img.naturalHeight || +img.getAttribute('height');
 
     holding = true;
-    modal.showModal();
-    root.classList.add('is-modal-open');
-    fit();
+    openedHere = true;
+    modal.openPhoto(img, {
+      large: img.getAttribute('src').replace(/\.jpg$/, '_l.jpg'),
+      alt: text,
+      caption: text
+    });
   });
 
-  // 写真以外（背景・×ボタン）をタップしたら閉じる。Escキーでも閉じる
-  modal.addEventListener('click', function (e) {
-    if (e.target !== modalImg) modal.close();
-  });
   modal.addEventListener('close', function () {
-    root.classList.remove('is-modal-open');
-    loading = null;
+    if (!openedHere) return;
+    openedHere = false;
     holding = false;
     resumeAt = performance.now() + 600;
   });

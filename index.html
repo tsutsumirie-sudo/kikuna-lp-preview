@@ -25,19 +25,19 @@
       imagesrcset="img/fv/fv_pc_1280.jpg 1280w, img/fv/fv_pc_1706.jpg 1706w"
       imagesizes="100vw">
 
-<link rel="stylesheet" href="css/common.css?v=202610081744">
-<link rel="stylesheet" href="css/01_firstview.css?v=202610081744">
-<link rel="stylesheet" href="css/02_info.css?v=202610081744">
-<link rel="stylesheet" href="css/03_feature.css?v=202610081744">
-<link rel="stylesheet" href="css/04_stairs.css?v=202610081744">
-<link rel="stylesheet" href="css/05_storage.css?v=202610081744">
-<link rel="stylesheet" href="css/06_experience.css?v=202610081744">
-<link rel="stylesheet" href="css/07_company.css?v=202610081744">
-<link rel="stylesheet" href="css/08_details.css?v=202610081744">
-<link rel="stylesheet" href="css/09_flow.css?v=202610081744">
-<link rel="stylesheet" href="css/10_faq.css?v=202610081744">
-<link rel="stylesheet" href="css/11_about.css?v=202610081744">
-<link rel="stylesheet" href="css/form.css?v=202610081744">
+<link rel="stylesheet" href="css/common.css?v=202610091256">
+<link rel="stylesheet" href="css/01_firstview.css?v=202610091256">
+<link rel="stylesheet" href="css/02_info.css?v=202610091256">
+<link rel="stylesheet" href="css/03_feature.css?v=202610091256">
+<link rel="stylesheet" href="css/04_stairs.css?v=202610091256">
+<link rel="stylesheet" href="css/05_storage.css?v=202610091256">
+<link rel="stylesheet" href="css/06_experience.css?v=202610091256">
+<link rel="stylesheet" href="css/07_company.css?v=202610091256">
+<link rel="stylesheet" href="css/08_details.css?v=202610091256">
+<link rel="stylesheet" href="css/09_flow.css?v=202610091256">
+<link rel="stylesheet" href="css/10_faq.css?v=202610091256">
+<link rel="stylesheet" href="css/11_about.css?v=202610091256">
+<link rel="stylesheet" href="css/form.css?v=202610091256">
 </head>
 <body>
 <!--
@@ -325,16 +325,19 @@
                  srcset="img/feature/inner_large_1044.jpg 1044w, img/feature/inner_large_1221.jpg 1221w"
                  sizes="(min-width: 768px) 780px, 93vw"
                  width="1044" height="696" alt="インナーバルコニーにつながるリビングの窓" loading="lazy">
-            <!-- 小さい写真：画面の下から20%の位置まで来たら、回転しながら登場 -->
-            <div class="balcony__small js-pop">
-              <figure class="pop">
-                <img src="img/feature/inner_small_596.jpg"
-                     srcset="img/feature/inner_small_596.jpg 596w, img/feature/inner_small_814.jpg 814w"
-                     sizes="(min-width: 768px) 445px, 53vw"
-                     width="596" height="434" alt="インナーバルコニーで家族そろってランチ" loading="lazy">
-                <figcaption class="pop__caption pop__caption--inner">休日の昼下がり、家族みんなで<br>バルコニーランチ。</figcaption>
-              </figure>
-            </div>
+            <!-- 小さい写真：画面の下から23%の位置まで来たら、回転しながら登場。タップで拡大
+                 説明文は写真の横（5の収納と同じく写真の外に置き、写真が収まると同時に表示） -->
+            <figure class="balcony__small js-pop">
+              <div class="pop">
+                <button class="pop__btn" type="button" aria-haspopup="dialog" data-zoom="img/feature/inner_small_zoom.jpg">
+                  <img src="img/feature/inner_small_596.jpg"
+                       srcset="img/feature/inner_small_596.jpg 596w, img/feature/inner_small_814.jpg 814w"
+                       sizes="(min-width: 768px) 445px, 53vw"
+                       width="596" height="434" alt="インナーバルコニーで家族そろってランチ" loading="lazy">
+                </button>
+              </div>
+              <figcaption class="balcony__note pop__note">休日の昼下がり、<br>家族みんなで<br>バルコニーランチ。</figcaption>
+            </figure>
           </div>
         </article>
 
@@ -354,20 +357,25 @@
                  srcset="img/feature/multi_large_564.jpg 564w, img/feature/multi_large_771.jpg 771w"
                  sizes="(min-width: 768px) 420px, 50vw"
                  width="564" height="719" alt="パントリーから出られる多目的バルコニー" loading="lazy">
-            <!-- 小さい写真：画面の下から20%の位置まで来たら、回転しながら登場 -->
-            <div class="balcony__small js-pop">
-              <figure class="pop pop--pair">
-                <img src="img/feature/multi_small_l_290.jpg"
-                     srcset="img/feature/multi_small_l_290.jpg 290w, img/feature/multi_small_l_396.jpg 396w"
-                     sizes="(min-width: 768px) 220px, 26vw"
-                     width="290" height="448" alt="バルコニーのゴミ箱にゴミを入れる女性" loading="lazy">
-                <img src="img/feature/multi_small_r_290.jpg"
-                     srcset="img/feature/multi_small_r_290.jpg 290w, img/feature/multi_small_r_396.jpg 396w"
-                     sizes="(min-width: 768px) 220px, 26vw"
-                     width="290" height="453" alt="家庭菜園のハーブに水やりをする女の子" loading="lazy">
-                <figcaption class="pop__caption pop__caption--multi">パントリー直結で、ゴミの仮置きやハーブ<br>の収穫にも便利です。</figcaption>
-              </figure>
-            </div>
+            <!-- 小さい写真：画面の下から23%の位置まで来たら、回転しながら登場。左右の写真それぞれタップで拡大
+                 説明文は写真の下（5の収納と同じく写真の外に置き、写真が収まると同時に表示） -->
+            <figure class="balcony__small js-pop">
+              <div class="pop pop--pair">
+                <button class="pop__btn" type="button" aria-haspopup="dialog" data-zoom="img/feature/multi_small_l_zoom.jpg">
+                  <img src="img/feature/multi_small_l_290.jpg"
+                       srcset="img/feature/multi_small_l_290.jpg 290w, img/feature/multi_small_l_396.jpg 396w"
+                       sizes="(min-width: 768px) 220px, 26vw"
+                       width="290" height="448" alt="バルコニーのゴミ箱にゴミを入れる女性" loading="lazy">
+                </button>
+                <button class="pop__btn" type="button" aria-haspopup="dialog" data-zoom="img/feature/multi_small_r_zoom.jpg">
+                  <img src="img/feature/multi_small_r_290.jpg"
+                       srcset="img/feature/multi_small_r_290.jpg 290w, img/feature/multi_small_r_396.jpg 396w"
+                       sizes="(min-width: 768px) 220px, 26vw"
+                       width="290" height="453" alt="家庭菜園のハーブに水やりをする女の子" loading="lazy">
+                </button>
+              </div>
+              <figcaption class="balcony__note pop__note">パントリー直結で、<br>ゴミの仮置きやハーブの<br>収穫にも便利です。</figcaption>
+            </figure>
           </div>
         </article>
 
@@ -448,10 +456,12 @@
                  width="774" height="1160" alt="壁一面に可動棚が並ぶ3帖のパントリー" loading="lazy">
             <figure class="photo-set__small js-pop">
               <div class="pop">
-                <img src="img/storage/pantry_small_519.jpg"
-                     srcset="img/storage/pantry_small_519.jpg 519w, img/storage/pantry_small_709.jpg 709w"
-                     sizes="(min-width: 768px) 354px, 46vw"
-                     width="519" height="538" alt="食材のストックがすっきり収まったパントリー" loading="lazy">
+                <button class="pop__btn" type="button" aria-haspopup="dialog" data-zoom="img/storage/pantry_small_zoom.jpg">
+                  <img src="img/storage/pantry_small_519.jpg"
+                       srcset="img/storage/pantry_small_519.jpg 519w, img/storage/pantry_small_709.jpg 709w"
+                       sizes="(min-width: 768px) 354px, 46vw"
+                       width="519" height="538" alt="食材のストックがすっきり収まったパントリー" loading="lazy">
+                </button>
               </div>
               <figcaption class="photo-set__note pop__note">3帖の大容量パントリー</figcaption>
             </figure>
@@ -466,10 +476,12 @@
                  width="1017" height="975" alt="主寝室とウォークインクローゼットの入口" loading="lazy">
             <figure class="photo-set__small js-pop">
               <div class="pop">
-                <img src="img/storage/wic_small_496.jpg"
-                     srcset="img/storage/wic_small_496.jpg 496w, img/storage/wic_small_679.jpg 679w"
-                     sizes="(min-width: 768px) 339px, 44vw"
-                     width="496" height="496" alt="洋服やバッグが並ぶウォークインクローゼット" loading="lazy">
+                <button class="pop__btn" type="button" aria-haspopup="dialog" data-zoom="img/storage/wic_small_zoom.jpg">
+                  <img src="img/storage/wic_small_496.jpg"
+                       srcset="img/storage/wic_small_496.jpg 496w, img/storage/wic_small_679.jpg 679w"
+                       sizes="(min-width: 768px) 339px, 44vw"
+                       width="496" height="496" alt="洋服やバッグが並ぶウォークインクローゼット" loading="lazy">
+                </button>
               </div>
               <figcaption class="photo-set__note pop__note">主寝室の<br>ウォークインクローゼット</figcaption>
             </figure>
@@ -484,10 +496,12 @@
                  width="838" height="1098" alt="棚が並ぶシューズインクローゼット" loading="lazy">
             <figure class="photo-set__small js-pop">
               <div class="pop">
-                <img src="img/storage/sic_small_570.jpg"
-                     srcset="img/storage/sic_small_570.jpg 570w, img/storage/sic_small_779.jpg 779w"
-                     sizes="(min-width: 768px) 389px, 51vw"
-                     width="570" height="665" alt="シューズインクローゼットから帰ってきた女の子" loading="lazy">
+                <button class="pop__btn" type="button" aria-haspopup="dialog" data-zoom="img/storage/sic_small_zoom.jpg">
+                  <img src="img/storage/sic_small_570.jpg"
+                       srcset="img/storage/sic_small_570.jpg 570w, img/storage/sic_small_779.jpg 779w"
+                       sizes="(min-width: 768px) 389px, 51vw"
+                       width="570" height="665" alt="シューズインクローゼットから帰ってきた女の子" loading="lazy">
+                </button>
               </div>
               <figcaption class="photo-set__note pop__note">家族専用玄関ホール<br>があるシューズイン<br>クローゼット</figcaption>
             </figure>
@@ -515,10 +529,12 @@
                  width="849" height="1168" alt="幅1500mmの洗面台と洗濯乾燥機" loading="lazy">
             <figure class="photo-set__small js-pop">
               <div class="pop">
-                <img src="img/storage/wash_small_454.jpg"
-                     srcset="img/storage/wash_small_454.jpg 454w, img/storage/wash_small_621.jpg 621w"
-                     sizes="(min-width: 768px) 310px, 41vw"
-                     width="454" height="681" alt="広い洗面台で並んで歯みがきをする父と娘" loading="lazy">
+                <button class="pop__btn" type="button" aria-haspopup="dialog" data-zoom="img/storage/wash_small_zoom.jpg">
+                  <img src="img/storage/wash_small_454.jpg"
+                       srcset="img/storage/wash_small_454.jpg 454w, img/storage/wash_small_621.jpg 621w"
+                       sizes="(min-width: 768px) 310px, 41vw"
+                       width="454" height="681" alt="広い洗面台で並んで歯みがきをする父と娘" loading="lazy">
+                </button>
               </div>
             </figure>
           </div>
@@ -1116,8 +1132,8 @@
   <!-- TOPへ戻る（1画面ぶんスクロールすると右下に出る。LP量産キットと同じ形） -->
   <button class="back-top" type="button" data-back-top aria-label="ページの先頭へ戻る"><span>TOP</span></button>
 
-  <!-- ファーストビューの自動スクロール写真の拡大表示（js/01_firstview.js） -->
-  <dialog class="photo-modal" id="fvPhotoModal" aria-label="写真の拡大表示">
+  <!-- 写真の拡大表示（1の自動スクロール写真・3と5の小さい写真で共通。js/common.js） -->
+  <dialog class="photo-modal" id="photoModal" aria-label="写真の拡大表示">
     <figure class="photo-modal__inner">
       <img class="photo-modal__img" src="data:," alt="">
       <figcaption class="photo-modal__caption"></figcaption>
@@ -1126,10 +1142,10 @@
   </dialog>
 
 </div>
-<script src="js/common.js?v=202610081744"></script>
-<script src="js/01_firstview.js?v=202610081744"></script>
-<script src="js/03_feature.js?v=202610081744"></script>
-<script src="js/07_company.js?v=202610081744"></script>
-<script src="js/form.js?v=202610081744"></script>
+<script src="js/common.js?v=202610091256"></script>
+<script src="js/01_firstview.js?v=202610091256"></script>
+<script src="js/03_feature.js?v=202610091256"></script>
+<script src="js/07_company.js?v=202610091256"></script>
+<script src="js/form.js?v=202610091256"></script>
 </body>
 </html>
