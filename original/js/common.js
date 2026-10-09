@@ -93,8 +93,6 @@
      photoModal.openPhoto(img, { large, alt, caption }) で開く。
      - img     … タップした写真（縦横比と、大きい画像を読み込むまでの仮の画像に使う）
      - large   … 拡大用の大きい画像（読み込めたら差し替える）
-     - width / height … 写真の縦横比（省略すると img の大きさ。srcset で選ばれた画像は大きさが丸められるので、
-                        正確な比率が必要なときは渡す）
      - caption … 写真の下に出す説明文（無ければ出さない）。
                  行の配列で渡すと、行の切れ目でだけ折り返す（1行に入る分はつなげて表示）
      写真以外（背景・×ボタン）をタップしたら閉じる。Escキーでも閉じる
@@ -144,8 +142,8 @@
         pmLoading.onload = function () { if (this === pmLoading && photoModal.open) pmImg.src = large; };
         pmLoading.src = large;
       }
-      pmW = opt.width || img.naturalWidth || +img.getAttribute('width');
-      pmH = opt.height || img.naturalHeight || +img.getAttribute('height');
+      pmW = img.naturalWidth || +img.getAttribute('width');
+      pmH = img.naturalHeight || +img.getAttribute('height');
 
       photoModal.showModal();
       document.documentElement.classList.add('is-modal-open');

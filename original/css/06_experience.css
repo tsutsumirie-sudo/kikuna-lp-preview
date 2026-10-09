@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+/* =========================================================
+   6. 現地での体験
+   ========================================================= */
+
+.experience{
+  padding:4.35rem 0 5.65rem;
+  color:var(--c-white);
+  background:#333333;
+  text-align:center;
+}
+
+/* --- 見出し --- */
+.exp-head__label{
+  position:relative;
+  display:inline-block;
+  width:22.55rem; height:2.575rem;
+  font-size:1.55rem; font-weight:700; line-height:2.575rem;
+  color:var(--c-black);
+  background:var(--c-yellow);
+}
+/* 吹き出しのしっぽ */
+.exp-head__label::after{
+  /* 三角を1px上に伸ばして四角に重ね、境目に線が出ないようにする（見える形は同じ） */
+  content:"";
+  position:absolute; top:calc(100% - 1px); left:13.6rem;
+  width:1.425rem; height:calc(1.05rem + 1px);
+  background:inherit;
+  clip-path:polygon(21% 0, 100% 0, 100% 1px, 0 100%, 21% 1px);
+}
+.exp-head__title{
+  display:inline-block;
+  margin-top:1.95rem;
+  padding-bottom:.8rem;
+  font-size:1.87rem; font-weight:400; line-height:1;   /* 1行のまま左右に20px残る大きさ（3つの文字サイズを同じ割合で少し小さく） */
+  border-bottom:var(--line-thin) solid var(--c-yellow);
+}
+.exp-head__title b{
+  font-size:1.92rem; font-weight:700;
+  color:var(--c-yellow);
+}
+.exp-head__title b.is-big{ font-size:2.26rem; }
+.exp-head__lead{
+  margin-top:1.8rem;
+  font-size:1.4rem; font-weight:500; line-height:2.5rem;   /* 行間ひろめ（2026-10-08） */
+}
+
+/* --- 番号つき見出し（共通部品を黄色で使う） --- */
+.experience .b-head{
+  --b-accent:var(--c-yellow);
+  margin:1.75rem 0 0 12.15rem;
+  padding-top:2.6rem;
+  text-align:left;
+}
+.experience .b-head__num{
+  left:-5.15rem;
+  width:4.4rem; height:4.4rem;
+  color:var(--c-black);
+}
+.experience .b-head__title{ color:var(--c-white); }
+.experience .b-head__title b{
+  font-size:2.06rem;
+  color:var(--c-white);
+}
+.exp-item--storage .b-head{ margin-top:2rem; }
+
+/* --- 写真の上に重ねる文字（黒い縁取り） --- */
+.exp-storage__name{
+  text-shadow:
+     1px  1px 0 #222, -1px  1px 0 #222,  1px -1px 0 #222, -1px -1px 0 #222,
+     0    1px 0 #222,  0   -1px 0 #222,  1px  0   0 #222, -1px  0   0 #222,
+     0 0 .3rem rgba(0,0,0,.4);
+}
+
+/* --- 01 バルコニー --- */
+.exp-photo{
+  position:relative;
+  margin:1.1rem 0 0;
+}
+.exp-photo img{
+  width:100%;
+  aspect-ratio:750 / 431;
+  object-fit:cover;
+}
+.exp-photo__caption{
+  position:absolute; left:0; right:0; bottom:1.3rem;
+  font-size:1.17rem; font-weight:500; line-height:1.6rem;
+  text-shadow:0 0 .4rem rgba(0,0,0,.55), 0 0 .15rem rgba(0,0,0,.35);
+}
+
+/* --- 02 3つの収納 --- */
+.exp-storage{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  margin-top:1.3rem;
+}
+.exp-storage__item{ position:relative; }
+.exp-storage__item picture{ display:block; }
+/* 写真の高さは 01 のバルコニーの写真と同じ（バルコニーは 幅:高さ＝750:431、収納は1枚が画面幅の1/3なので 250:431）（2026-10-09） */
+.exp-storage__item img{
+  width:100%;
+  aspect-ratio:250 / 431;
+  object-fit:cover;
+}
+.exp-storage__name{
+  position:absolute; left:0; right:0; bottom:.6rem;
+  font-size:.9rem; font-weight:700; line-height:1;
+  white-space:nowrap;
+}
+/* 明るい写真の上は黒文字（カンプどおり） */
+.exp-storage__item--dark .exp-storage__name{
+  color:var(--c-black);
+  text-shadow:none;
+}
+.exp-storage__lead{
+  margin-top:2.15rem;
+  padding-left:.9rem;
+  font-size:1.2rem; font-weight:500; line-height:1;
+}
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   01 のバルコニーの写真、02 の収納の写真3枚は、スマホと同じく画面の端から端まで広げる
+   （バルコニーは横長に切り抜き）。見出し・文章は中央の列
+   ========================================================= */
+@media (min-width:768px){
+  .experience{ padding:6.4rem var(--pc-pad) 8rem; }
+
+  .exp-head__label{ width:27rem; height:3.1rem; font-size:1.85rem; line-height:3.1rem; }
+  .exp-head__label::after{ left:16.3rem; width:1.7rem; height:calc(1.25rem + 1px); }
+  .exp-head__title{ display:table; margin:2.4rem auto 0; padding-bottom:1rem; font-size:2.5rem; }   /* ラベルの下の行に置く */
+  .exp-head__title b{ font-size:2.6rem; }
+  .exp-head__title b.is-big{ font-size:3.1rem; }
+  .exp-head__lead{ margin-top:2.2rem; font-size:1.7rem; line-height:2.8rem; }
+
+  /* 番号つき見出し：番号の丸と見出しを横に並べて中央に */
+  .experience .b-head{
+    display:grid;
+    grid-template-columns:auto auto;
+    justify-content:center; align-items:center;
+    column-gap:1.4rem;
+    width:auto;
+    margin:6rem 0 0;
+    padding-top:0;
+  }
+  .experience .b-head__num{
+    position:relative; top:0; left:0;
+    grid-row:1 / span 2;
+    width:5.6rem; height:5.6rem;
+    font-size:1.7rem;
+  }
+  .experience .b-head__title{ grid-column:2; font-size:2rem; }
+  .experience .b-head__title b{ font-size:2.7rem; }
+  .exp-item--storage .b-head{ margin-top:7rem; }
+
+  /* 01 バルコニー：画面の端から端まで */
+  .exp-photo{ width:100vw; margin:2.4rem calc(50% - 50vw) 0; }
+  .exp-photo img{ aspect-ratio:2.1 / 1; }
+  .exp-photo__caption{ bottom:3rem; font-size:1.8rem; line-height:2.8rem; }
+
+  /* 02 3つの収納：画面の端から端まで3枚並べる
+     写真の高さは 01 のバルコニーの写真と同じ（バルコニーは 幅:高さ＝2.1:1、収納は1枚が画面幅の1/3なので 2.1:3）（2026-10-09） */
+  .exp-storage{ width:100vw; margin:2.4rem calc(50% - 50vw) 0; }
+  .exp-storage__item img{ aspect-ratio:2.1 / 3; }
+  .exp-storage__name{ bottom:1.6rem; font-size:1.6rem; }
+  .exp-storage__lead{ margin-top:3rem; padding-left:0; font-size:1.7rem; }
+}

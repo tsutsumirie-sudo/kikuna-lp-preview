@@ -1,0 +1,468 @@
+@charset "UTF-8";
+
+/* =========================================================
+   7. プリンシパルホームについて
+   ========================================================= */
+
+:root{
+  --c-sky:    #53b4ff;   /* 「ご相談やご質問は…」の水色 */
+  --f-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+.company{ color:var(--c-black); }
+
+
+/* =========================================================
+   実績・受賞（白背景）
+   ========================================================= */
+.company__about{
+  padding:4.05rem 0 4.9rem;
+  text-align:center;
+  background:var(--c-white);
+}
+.company__catch{
+  font-size:1.4rem; font-weight:700; line-height:1;
+  color:var(--c-blue);
+}
+.company__title{
+  margin-top:1.9rem;
+  font-size:2.12rem; font-weight:700; line-height:2.45rem;
+}
+.company__lead{
+  margin-top:1.45rem;
+  font-size:1.4rem; font-weight:400; line-height:2.5rem;   /* 行間ひろめ（2026-10-08） */
+}
+.company__photo{
+  width:34.5rem;
+  aspect-ratio:690 / 456;
+  margin:1.5rem 0 0 1.5rem;
+  object-fit:cover;
+}
+.company__award-title{
+  margin-top:2.6rem;
+  padding:0 2rem;
+  font-size:2.1rem; font-weight:700; line-height:2.55rem;
+  text-align:center;   /* 下の文章に合わせて中央揃え（2026-10-08） */
+  color:var(--c-blue);
+}
+.company__award-text{
+  margin-top:1.45rem;
+  padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
+  text-wrap:pretty;   /* 最後の行が1〜2文字だけにならないように */
+  font-size:1.4rem; font-weight:400; line-height:2.5rem;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
+}
+
+/* --- 受賞ロゴ --- */
+.awards{
+  display:flex; align-items:flex-start;
+  margin-top:3.5rem;
+}
+.awards__item img{ width:100%; }
+.awards__item--german{ width:3.05rem;  margin-left:1.65rem; }
+.awards__item--kids  { width:6.1rem;   margin-left:2.75rem; }
+.awards__item--good  { width:4.4rem;   margin-left:3rem; }
+.awards__item--licc  { width:6.4rem;   margin-left:1.65rem; margin-top:.3rem; }
+.awards__item--london{ width:5rem;     margin-left:2rem;    margin-top:.75rem; }
+
+.company__award-note{
+  margin-top:3.15rem;
+  padding:0 2rem;
+  text-wrap:pretty;
+  font-size:1.15rem; font-weight:400; line-height:1.95rem;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
+}
+
+
+/* =========================================================
+   設計コンセプト・施工事例・お問い合わせ（濃いグレー背景）
+   ========================================================= */
+.company__concept{
+  padding:3.4rem 0 5.95rem;
+  color:var(--c-white);
+  text-align:center;
+  background:var(--c-night);   /* 黒（次の 8 の明るめのグレーとセクションを分けて見せる） */
+}
+
+/* --- 見出し（黄色の吹き出し） --- */
+.concept-label{
+  position:relative;
+  width:24.25rem; height:2.475rem;
+  margin-left:calc(50% - 12.875rem);
+  font-size:1.4rem; font-weight:700; line-height:2.475rem;
+  color:var(--c-black);
+  background:var(--c-yellow);
+}
+.concept-label::after{
+  /* 三角を1px上に伸ばして四角に重ね、境目に線が出ないようにする（見える形は同じ） */
+  content:"";
+  position:absolute; top:calc(100% - 1px); left:19rem;
+  width:1.125rem; height:calc(1.025rem + 1px);
+  background:inherit;
+  clip-path:polygon(22% 0, 100% 0, 100% 1px, 0 100%, 22% 1px);
+}
+.concept-title{
+  margin-top:1.58rem;
+  font-size:1.97rem;   /* 1行のまま左右に20px残る大きさ */ font-weight:700; line-height:1;
+  color:var(--c-yellow);
+}
+.concept-text{
+  margin-top:1.9rem;
+  padding:0 2rem;
+  text-wrap:pretty;
+  font-size:1.4rem; font-weight:400; line-height:2.5rem; letter-spacing:.03em;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
+}
+
+/* --- 「ルーフバルコニーのある住まいを…」（左右に斜線） --- */
+.works-head{
+  position:relative;
+  margin-top:4.9rem;
+  font-size:1.75rem; font-weight:700; line-height:2.4rem;
+  color:var(--c-yellow);
+}
+.works-head__slash{
+  position:absolute; left:0; top:0;
+  width:100%; height:5rem;
+  pointer-events:none;
+}
+
+/* --- 施工事例（2×2）：写真に色をかぶせ、PCではカーソルを乗せると元の色に --- */
+.works{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  margin-top:1.58rem;
+}
+.work__btn{
+  position:relative;
+  display:block;
+  width:100%; height:19.5rem;
+  padding:0; border:0;
+  color:var(--c-white);
+  background:none;
+  cursor:pointer;
+  font:inherit;
+  -webkit-tap-highlight-color:transparent;
+}
+.work__btn img{
+  width:100%; height:100%;
+  object-fit:cover;
+}
+/* 色かぶせ（カンプの色：上段30%・下段50%） */
+.work__btn::before{
+  content:"";
+  position:absolute; inset:0;
+  background:rgb(142,128,128);
+  opacity:.3;
+  transition:opacity .4s ease;
+}
+.work--lower .work__btn::before{ opacity:.5; }
+@media (hover:hover){
+  .work__btn:hover::before,
+  .work__btn:focus-visible::before{ opacity:0; }
+}
+
+.work__body{
+  position:absolute; left:0; right:0; bottom:2.15rem;
+  display:flex; flex-direction:column; align-items:center;
+}
+.work--left  .work__body{ transform:translateX(.78rem); }
+.work--right .work__body{ transform:translateX(-.38rem); }
+.work__name{
+  font-family:var(--f-serif);
+  font-size:1.4rem; font-weight:600; line-height:1; letter-spacing:.08em;
+  text-shadow:0 0 .4rem rgba(0,0,0,.25);
+}
+.work__name--en{ font-size:1.5rem; letter-spacing:.01em; }
+.work__more{
+  display:block;
+  width:13.6rem; height:3.2rem;
+  margin-top:.6rem;
+  border:.15rem solid var(--c-white);
+  border-radius:999px;
+  font-size:2rem; font-weight:500; line-height:2.9rem;
+}
+
+.works-text{
+  margin-top:2.08rem;
+  padding:0 2rem;
+  text-wrap:pretty;
+  font-size:1.38rem; font-weight:400; line-height:2.5rem;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
+}
+
+/* --- お問い合わせ --- */
+.contact-head{
+  margin-top:4.78rem;
+  font-size:1.52rem;   /* 1行のまま左右に20px残る大きさ */ font-weight:500; line-height:1;
+  color:var(--c-sky);
+}
+/* 吹き出し型の下線（形は common.css） */
+.company .talk-line{ color:var(--c-sky); }
+.company .talk-line--white{ color:var(--c-white); }
+
+.contact-tel{
+  display:inline-flex; flex-direction:column; align-items:center;
+  margin-top:.35rem;
+}
+.contact-tel__num{
+  display:flex; align-items:center; gap:1rem;
+  font-size:2.65rem; font-weight:700; line-height:1; letter-spacing:.05em;
+}
+.contact-tel__num img{ width:3.25rem; }
+.contact-tel__time{
+  margin-top:.65rem;
+  padding-left:.65rem;
+  font-size:1.22rem; font-weight:700; line-height:1;
+}
+
+/* 見出し・ボタンの形は common.css（CTA） */
+.cta-head--inquiry{ margin-top:4.45rem; }
+.cta-head--reserve{ margin-top:4.75rem; }
+.cta-btn--second{ margin-top:2.75rem; }
+
+
+/* =========================================================
+   施工事例のポップアップ
+   ========================================================= */
+.work-modal{
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  max-width:none; max-height:none;
+  margin:0; padding:0;
+  border:0;
+  background:transparent;
+}
+.work-modal[open]{
+  display:flex; align-items:center; justify-content:center;
+  animation:workFade .25s ease;
+}
+@keyframes workFade{ from{ opacity:0; } to{ opacity:1; } }
+.work-modal::backdrop{ background:rgba(0,0,0,.72); }
+
+.work-modal__inner{
+  position:relative;
+  width:34rem;
+  max-height:calc(100% - 7rem);
+  margin-top:3.6rem;   /* 閉じるボタンのぶん */
+  display:flex;
+}
+.work-modal__panel{
+  width:100%;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-bottom:3.9rem;
+  color:var(--c-black);
+  background:var(--c-white);
+  text-align:center;
+}
+/* 閉じるボタン（パネルの右上の外側） */
+.work-modal__close{
+  position:absolute; right:0; bottom:calc(100% + .6rem);
+  width:3rem; height:3rem;
+  padding:0; border:0;
+  background:none;
+  cursor:pointer;
+}
+.work-modal__close::before,
+.work-modal__close::after{
+  content:"";
+  position:absolute; top:50%; left:50%;
+  width:2.6rem; height:.2rem;
+  margin:-.1rem 0 0 -1.3rem;
+  background:var(--c-white);
+  transform:rotate(45deg);
+}
+.work-modal__close::after{ transform:rotate(-45deg); }
+
+/* 図面（カンプの配置どおりに置く） */
+.work-modal__plan{
+  position:relative;
+  height:19.7rem;
+}
+.work-modal__plan img{ position:absolute; }
+.work-modal--sky    .work-modal__plan img{ left:1.15rem; top:1.2rem;  width:31.75rem; }
+.work-modal--garage .work-modal__plan img{ left:.7rem;   top:3.45rem; width:32.8rem; }
+.work-modal--taka   .work-modal__plan img{ left:1.05rem; top:.3rem;   width:31.9rem; }
+.work-modal--hase   .work-modal__plan img{ left:.6rem;   top:3.8rem;  width:32.75rem; }
+
+/* 写真（3枚を手動でスクロール）
+   2026-10-08 写真を120%に（19.05×19.5rem → 22.86×23.4rem。中心の位置は前と同じ） */
+.work-modal__photos{
+  position:relative;
+  height:23.4rem;
+}
+.work-modal__track{
+  position:absolute; top:0; left:5.7rem;
+  width:22.86rem; height:100%;
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+}
+.work-modal__track::-webkit-scrollbar{ display:none; }
+.work-modal__track img{
+  flex:0 0 100%;
+  width:100%; height:100%;
+  object-fit:cover;
+  scroll-snap-align:start;
+}
+.work-modal__arrow{
+  position:absolute; top:50%;
+  width:2rem; height:3.2rem;
+  margin-top:-1.6rem; padding:0;
+  border:0; background:none;
+  cursor:pointer;
+}
+.work-modal__arrow::before{
+  content:"";
+  position:absolute; top:50%; left:50%;
+  width:1.15rem; height:1.15rem;
+  margin:-.575rem 0 0 -.575rem;
+  border-left:.1rem solid #222;
+  border-bottom:.1rem solid #222;
+}
+.work-modal__arrow--prev{ left:.9rem; }   /* 写真とのあいだは前と同じ */
+.work-modal__arrow--prev::before{ transform:translateX(.25rem) rotate(45deg); }
+.work-modal__arrow--next{ right:.95rem; }
+.work-modal__arrow--next::before{ transform:translateX(-.25rem) rotate(-135deg); }
+
+/* タイトル：写真とタグ枠のあいだ（7.3rem）の上下中央に置く */
+.work-modal__title{
+  display:flex; align-items:center; justify-content:center;
+  height:7.3rem;
+  font-size:1.4rem; font-weight:700; line-height:2.15rem;
+}
+.work-modal--taka .work-modal__title{
+  padding-bottom:.19rem;   /* 文字が大きいぶん下に寄って見えるので、上下の空きがそろうよう少し上げる */
+  font-size:1.68rem;       /* 「3.4m、高天井の家」は120% */
+}
+
+.work-modal__tags{
+  display:flex; justify-content:center; gap:.65rem;
+}
+.work-modal__tags li{
+  height:1.85rem;
+  padding:0 .55rem;
+  border:var(--line-thin) solid var(--c-black);
+  font-size:1.15rem; line-height:1.75rem;
+  white-space:nowrap;
+}
+.work-modal__tags--even li{ width:9.95rem; }
+.work-modal__tags li.is-wide{ width:12.3rem; }
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   タブレット：スマホと同じ縦の並びで、中央の列（704px）に収める
+   PC（1200px以上）：家族写真の右に受賞の説明を並べる／お問合せ・資料請求のボタンを横に2つ
+   施工事例は1024px以上で横に4つ
+   ========================================================= */
+@media (min-width:768px){
+  /* --- 実績・受賞 --- */
+  .company__about{ padding:6.4rem var(--pc-pad) 7.4rem; }
+  .company__catch{ font-size:1.7rem; }
+  .company__title{ margin-top:2.2rem; font-size:3.2rem; line-height:4.4rem; }
+  .company__lead{ margin-top:2rem; font-size:1.7rem; line-height:3rem; }
+  .company__photo{ width:100%; max-width:76rem; margin:3.6rem auto 0; }
+  .company__award-title{ margin-top:4.6rem; padding:0; font-size:2.7rem; line-height:3.9rem; text-align:center; }
+  .company__award-text{ margin-top:2rem; padding:0; font-size:1.7rem; line-height:3rem; text-align:center; }
+  .awards{ justify-content:center; gap:3rem; margin-top:4rem; }
+  .awards__item--german{ width:4.8rem;  margin-left:0; }
+  .awards__item--kids  { width:9.5rem;  margin-left:0; }
+  .awards__item--good  { width:6.8rem;  margin-left:0; }
+  .awards__item--licc  { width:10rem;   margin-left:0; margin-top:.5rem; }
+  .awards__item--london{ width:7.8rem;  margin-left:0; margin-top:1.2rem; }
+  .company__award-note{ margin-top:3.6rem; padding:0; font-size:1.4rem; line-height:2.3rem; text-align:center; }
+
+  /* --- 設計コンセプト --- */
+  .company__concept{ padding:6.4rem 0 8.4rem; }
+  .concept-label{ width:28rem; height:3rem; margin:0 auto; font-size:1.7rem; line-height:3rem; }
+  .concept-label::after{ left:22rem; width:1.3rem; height:calc(1.2rem + 1px); }
+  .concept-title{ margin-top:2.4rem; font-size:2.8rem; }
+  .concept-text{
+    max-width:calc(64rem + var(--pc-pad) * 2);
+    margin:2.8rem auto 0;
+    padding:0 var(--pc-pad);
+    font-size:1.7rem; line-height:3rem;
+    text-align:left;
+  }
+
+  /* --- 施工事例 --- */
+  .works-head{ display:table; margin:7rem auto 0; padding:0 8rem; font-size:2.6rem; line-height:3.8rem; }
+  .works-head__slash{ height:100%; }
+  .works{ margin-top:3.2rem; }
+  .work__btn{ height:auto; aspect-ratio:562 / 585; }
+  .work--left .work__body,
+  .work--right .work__body{ transform:none; }
+  .work__body{ bottom:3rem; }
+  .work__name{ font-size:1.9rem; }
+  .work__name--en{ font-size:2rem; }
+  .work__more{ width:17rem; height:4rem; margin-top:1rem; font-size:2.2rem; line-height:3.7rem; }
+  .works-text{
+    max-width:calc(64rem + var(--pc-pad) * 2);
+    margin:3.4rem auto 0;
+    padding:0 var(--pc-pad);
+    font-size:1.7rem; line-height:3rem;
+    text-align:left;
+  }
+
+  /* --- お問い合わせ --- */
+  .contact-head{ margin-top:7rem; font-size:1.82rem; }   /* 吹き出し型の下線と同じ割合で大きく */
+  .contact-tel{ margin-top:.8rem; }
+  .contact-tel__num{ gap:1.2rem; font-size:3.4rem; }
+  .contact-tel__num img{ width:4.2rem; }
+  .contact-tel__time{ margin-top:.9rem; font-size:1.4rem; }
+  .cta-head--inquiry{ margin-top:6rem; }
+  .cta-head--reserve{ margin-top:6rem; }
+  .cta-btn--second{ margin-top:2rem; }
+
+  /* --- 施工事例のポップアップ：スマホの配置のまま、まとめて大きく
+         画面の高さに収まるいちばん大きい倍率にする（倍率 ≒ 画面の高さ ÷ 695。下の段階で切り替え） --- */
+  .work-modal__inner{ zoom:1.1; }
+}
+@media (min-width:768px) and (min-height:830px){  .work-modal__inner{ zoom:1.19; } }
+@media (min-width:768px) and (min-height:900px){  .work-modal__inner{ zoom:1.29; } }
+@media (min-width:768px) and (min-height:960px){  .work-modal__inner{ zoom:1.38; } }
+@media (min-width:768px) and (min-height:1030px){ .work-modal__inner{ zoom:1.48; } }
+@media (min-width:768px) and (min-height:1080px){ .work-modal__inner{ zoom:1.55; } }
+
+@media (min-width:1024px){
+  /* 施工事例：横に4つ */
+  .works{ grid-template-columns:repeat(4, 1fr); }
+}
+
+@media (min-width:1200px){
+  /* 家族写真の右に、受賞の説明（写真の高さの中で上下中央） */
+  .company__about{
+    display:grid;
+    grid-template-columns:minmax(var(--pc-pad), 1fr) minmax(0, 58rem) minmax(0, 46rem) minmax(var(--pc-pad), 1fr);   /* 両端は最低でも余白ぶん空ける */
+    grid-template-rows:auto auto auto 1fr auto auto auto auto 1fr;
+    grid-template-areas:
+      ". catch catch ."
+      ". title title ."
+      ". lead  lead  ."
+      ". photo .     ."
+      ". photo atitle ."
+      ". photo atext ."
+      ". photo awards ."
+      ". photo note  ."
+      ". photo .     .";
+    column-gap:4.4rem;
+    padding-left:0; padding-right:0;
+  }
+  .company__catch{ grid-area:catch; }
+  .company__title{ grid-area:title; }
+  .company__lead{ grid-area:lead; }
+  .company__photo{ grid-area:photo; max-width:none; margin:4.4rem 0 0; }
+  .company__award-title{ grid-area:atitle; margin-top:4.4rem; text-align:left; }
+  .company__award-text{ grid-area:atext; text-align:left; }
+  .awards{ grid-area:awards; justify-content:flex-start; gap:1.6rem; }
+  .company__award-note{ grid-area:note; text-align:left; }
+
+
+  /* お問合せ・資料請求：横に2つ */
+  .cta-btn--blue{ display:inline-flex; margin:.6rem 1.2rem 0; }
+  .cta-btn--second{ margin-top:.6rem; }
+}

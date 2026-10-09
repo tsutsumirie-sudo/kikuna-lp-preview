@@ -1,0 +1,534 @@
+@charset "UTF-8";
+
+/* =========================================================
+   菊名 完成見学会 LP（スマホ・iPad）共通
+   デザインカンプ 750px幅 ＝ 画面幅375px を基準に作成。
+   1rem = 10px（375px時）で、画面幅に合わせて全体を等倍に拡大縮小する。
+   768px（iPad縦）より広い画面では768px幅で中央に固定。
+   ========================================================= */
+
+/* ---------- 変数 ---------- */
+:root{
+  --c-ink:    #333333;
+  --c-black:  #000000;
+  --c-white:  #ffffff;
+  --c-bg:     #edecea;   /* 石目テクスチャの下地色（平均色） */
+  --c-dark:   #3e3e3e;   /* 見学会案内などの濃いグレー */
+  --c-night:  #111111;   /* 7 の設計コンセプト〜お問い合わせの背景の黒 */
+  --c-yellow: #ffe433;   /* 強調の黄色 */
+  --c-blue:   #005595;   /* FEATURE 01 の色 */
+  --c-purple: #521569;   /* FEATURE 02 の色 */
+  --c-green:  #004e37;   /* FEATURE 03 の色 */
+  --c-btn:    #0091ff;   /* お問合せ・資料請求ボタン */
+  --c-orange: #ff9706;   /* 完成見学会を予約するボタン */
+
+  /* 細い線の太さ。カンプの1px（＝0.5px）だとiPhone（3倍の画面）では1ドットに丸められて見えなくなるので、
+     iPhoneで2ドットになる0.7pxにする（2倍の画面では今までと同じ1ドット） */
+  --line-thin: .7px;
+
+  --f-base: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+/* ---------- リセット ---------- */
+*,*::before,*::after{ box-sizing:border-box; }
+html{
+  font-size:calc(min(100vw, 768px) / 37.5);
+  -webkit-text-size-adjust:100%;
+}
+body{
+  margin:0;
+  font-family:var(--f-base);
+  font-size:1.5rem;
+  line-height:1.9;
+  color:var(--c-ink);
+  background:var(--c-bg);
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; height:auto; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul,dl,dd{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,p{ margin:0; }
+
+/* PCだけで改行する <br class="pc-br">（スマホでは改行しない）
+   スマホだけで改行する <br class="sp-br">（PCでは改行しない） */
+.pc-br{ display:none; }
+
+/* モーダル（ポップアップ）表示中は後ろのページをスクロールさせない */
+html.is-modal-open{ overflow:hidden; }
+
+.lp{
+  max-width:768px;
+  margin:0 auto;
+  background:var(--c-white);
+  overflow-x:clip;
+}
+
+
+/* =========================================================
+   FEATURE 見出し（FEATURE 01・02… で共通）
+   色は --f-accent で切り替える（初期値は青）
+   ========================================================= */
+.f-head{ --f-accent:var(--c-blue); text-align:center; }
+.f-head--purple{ --f-accent:var(--c-purple); }
+.f-head--green{ --f-accent:var(--c-green); }
+.f-head__label{
+  position:relative;
+  display:inline-block;
+  width:12.5rem; height:2.45rem;
+  font-size:1.6rem; font-weight:700; line-height:2.45rem; letter-spacing:.02em;
+  color:var(--c-white);
+  background:var(--f-accent);
+}
+/* 吹き出しのしっぽ */
+.f-head__label::after{
+  /* 三角を1px上に伸ばして四角に重ね、境目に線が出ないようにする（見える形は同じ） */
+  content:"";
+  position:absolute; top:calc(100% - 1px); left:8.35rem;
+  width:1.34rem; height:calc(1rem + 1px);
+  background:inherit;
+  clip-path:polygon(22.5% 0, 100% 0, 100% 1px, 0 100%, 22.5% 1px);
+}
+.f-head__title{
+  display:flex; flex-direction:column; align-items:center;
+  margin-top:1.65rem;
+  color:var(--f-accent);
+}
+.f-head__sub{
+  font-size:1.75rem; font-weight:500; line-height:1; letter-spacing:.03em;
+}
+.f-head__main{
+  position:relative; left:.35rem;
+  margin-top:.5rem;
+  padding:0 .2rem .45rem 0;
+  font-size:2.5rem; font-weight:700; line-height:1;
+  border-bottom:.1rem solid var(--f-accent);
+}
+.f-head__lead{
+  margin-top:1.95rem;
+  font-size:1.47rem; font-weight:500; line-height:2.7rem;   /* 行間ひろめ（2026-10-08） */
+  color:var(--c-black);
+}
+
+
+/* =========================================================
+   番号つき見出し（01・02… の丸い吹き出し＋見出し）
+   色は --b-accent で切り替える（初期値は青）
+   ========================================================= */
+.b-head{
+  --b-accent:var(--c-blue);
+  position:relative;
+  display:flex; flex-direction:column;
+  width:max-content;
+  font-weight:400;
+}
+.b-head__num{
+  position:absolute; top:0;
+  display:grid; place-items:center;
+  width:4.65rem; height:4.65rem;
+  border-radius:50%;
+  font-size:1.4rem; font-weight:700; line-height:1;
+  color:var(--c-white);
+  background:var(--b-accent);
+}
+/* 吹き出しのしっぽ（右下）
+   先の角度は約48°（2026-10-08 21°→53°→その90%）。先の位置と向き（右下45°）は最初と同じ。
+   9 の流れの丸（.flow-step__num::after）も同じ角度 */
+.b-head__num::after{
+  content:"";
+  position:absolute; right:.15rem; bottom:.05rem;
+  width:1.25rem; height:1.25rem;
+  background:inherit;
+  clip-path:polygon(3% 63%, 100% 100%, 63% 3%);
+}
+.b-head__label{
+  font-size:1.2rem; line-height:1; letter-spacing:.03em;
+}
+.b-head__title{
+  font-size:1.5rem; font-weight:500; line-height:1;
+}
+.b-head__title b{
+  font-size:2.08rem; font-weight:700;
+  color:var(--b-accent);
+}
+
+
+/* =========================================================
+   小さい写真：画面の下から23%の位置まで来たら、やや下から回転しながら登場
+   （2026-10-09 20%→23%。少しだけスクロールを進めたところで出す）
+   判定は回転させない外側（.js-pop）で行い、本来の位置を基準にする（js/common.js）
+   .pop__note … 写真が正しい位置に収まると同時に現れる説明文（写真の外に置く）
+   .pop__btn  … タップで拡大表示（data-zoom に拡大用の画像。js/common.js の「写真の拡大表示」）
+   ========================================================= */
+.pop{ position:relative; margin:0; }
+.pop img{ width:100%; height:100%; object-fit:cover; }
+.pop__btn{
+  display:block;
+  width:100%; height:100%;
+  padding:0; border:0;
+  background:none;
+  cursor:zoom-in;
+  -webkit-tap-highlight-color:transparent;
+}
+.pop__btn:focus-visible{ outline:.2rem solid var(--c-blue); outline-offset:-.2rem; }
+
+.js .js-pop .pop{
+  opacity:0;
+  transform:translateY(4rem) rotate(-40deg) scale(.8);
+  transition:opacity .7s ease, transform 1.1s cubic-bezier(.22,1,.36,1);
+}
+.js .js-pop.is-show .pop{
+  opacity:1;
+  transform:none;
+}
+.js .js-pop .pop__note{
+  opacity:0;
+  transition:opacity .4s ease .6s;   /* 写真が正しい位置に収まるタイミングで表示 */
+}
+.js .js-pop.is-show .pop__note{ opacity:1; }
+
+@media (prefers-reduced-motion: reduce){
+  .js .js-pop .pop{ transform:none; transition:opacity .4s ease; }
+  .js .js-pop .pop__note{ transition-delay:0s; }
+}
+
+
+/* =========================================================
+   写真の拡大表示（1の自動スクロール写真・3と5の小さい写真で共通）
+   <dialog class="photo-modal" id="photoModal">。大きさは画面に合わせて js/common.js で決める
+   ========================================================= */
+.photo-modal{
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  max-width:none; max-height:none;
+  margin:0; padding:0;
+  border:0;
+  background:transparent;
+  overflow:hidden;
+}
+.photo-modal::backdrop{ background:rgba(0,0,0,.9); }
+.photo-modal[open]{ animation:photoFade .25s ease; }
+@keyframes photoFade{ from{ opacity:0; } to{ opacity:1; } }
+
+.photo-modal__inner{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  height:100%;
+  margin:0;
+  padding:6rem 1.5rem 4rem;
+}
+.photo-modal__img{
+  max-width:none;                                  /* 大きさは JS で画面に合わせる */
+  border-radius:.4rem;
+  object-fit:cover;
+  background:#222;
+}
+.photo-modal__caption{
+  margin-top:1.2rem;
+  font-size:1.4rem; font-weight:500; line-height:2.2rem; letter-spacing:.04em;
+  text-align:center;
+  color:var(--c-white);
+}
+.photo-modal__caption span{ display:inline-block; }   /* 3・5の説明文：写真の横の説明文の改行位置でだけ折り返す */
+.photo-modal__close{
+  position:absolute; top:1.5rem; right:1.5rem;
+  width:3.6rem; height:3.6rem;
+  padding:0; border:0; border-radius:50%;
+  background:var(--c-white);
+  cursor:pointer;
+}
+.photo-modal__close::before,
+.photo-modal__close::after{
+  content:"";
+  position:absolute; top:50%; left:50%;
+  width:1.7rem; height:.2rem;
+  margin:-.1rem 0 0 -.85rem;
+  background:#2d2020;
+  transform:rotate(45deg);
+}
+.photo-modal__close::after{ transform:rotate(-45deg); }
+
+
+/* =========================================================
+   CTA（7・9・10・11で共通）
+   見出し（.cta-head）＋吹き出し型の下線（.talk-line）＋ボタン（.cta-btn）
+   下線の色は文字色（currentColor）に合わせる
+   ========================================================= */
+.talk-line{
+  display:block;
+  width:100%; height:2rem;
+  margin-top:.1rem;
+}
+.cta-head{
+  font-size:1.58rem; font-weight:500; line-height:1;
+}
+.cta-head + .talk-line{ margin-top:.2rem; }
+
+.cta-btn{
+  display:flex; align-items:center; justify-content:center;
+  width:27.3rem; height:6.1rem;
+  margin:.4rem auto 0;
+  font-size:1.76rem; font-weight:700; line-height:1;
+  color:var(--c-white);
+  transition:filter .3s ease;
+}
+@media (hover:hover){
+  .cta-btn:hover{ filter:brightness(1.08); }
+}
+.cta-btn--blue{ background:var(--c-btn); }
+.cta-btn--orange{ background:var(--c-orange); }
+
+/* 予約ボタンのブロック（「見学・ご相談すべて無料です」＋オレンジのボタン） */
+.reserve-cta{ text-align:center; }
+
+
+/* =========================================================
+   セクション見出し（8〜11で共通）
+   黄色の吹き出しラベル（英字）＋見出し（下線つき）
+   ========================================================= */
+.s-head{ text-align:center; }
+.s-head__label{
+  position:relative;
+  display:inline-block;
+  min-width:12.5rem; height:2.45rem;
+  padding:0 1.5rem;
+  font-size:1.5rem; font-weight:700; line-height:2.45rem; letter-spacing:.08em;
+  color:var(--c-black);
+  background:var(--c-yellow);
+}
+/* 吹き出しのしっぽ */
+.s-head__label::after{
+  /* 三角を1px上に伸ばして四角に重ね、境目に線が出ないようにする（見える形は同じ） */
+  content:"";
+  position:absolute; top:calc(100% - 1px); left:62%;
+  width:1.34rem; height:calc(1rem + 1px);
+  background:inherit;
+  clip-path:polygon(22.5% 0, 100% 0, 100% 1px, 0 100%, 22.5% 1px);
+}
+.s-head__sub{
+  margin-top:1.65rem;
+  font-size:1.5rem; font-weight:500; line-height:1;
+}
+.s-head__title{
+  display:table;   /* 文字幅に合わせて下線を引き、中央に置く */
+  margin:1.65rem auto 0;
+  padding:0 .2rem .55rem;
+  font-size:2.3rem; font-weight:700; line-height:1.2;
+  border-bottom:.1rem solid currentColor;
+}
+.s-head__sub + .s-head__title{ margin-top:.75rem; }
+.s-head__lead{
+  margin-top:1.9rem;
+  font-size:1.4rem; font-weight:500; line-height:2.3rem;
+}
+
+
+/* =========================================================
+   表（8 物件概要・11 会社概要で共通）
+   左に濃いグレーの項目名、右に内容
+   ========================================================= */
+.data-table{
+  width:34.5rem;
+  margin:0 auto;
+  border-top:.1rem solid var(--c-dark);
+  text-align:left;
+}
+.data-table__row{
+  display:grid;
+  grid-template-columns:8.6rem 1fr;
+  border-bottom:.1rem solid #d6d6d6;
+}
+.data-table dt{
+  display:flex; align-items:center;
+  padding:1.2rem 1rem;
+  font-size:1.3rem; font-weight:700; line-height:1.9rem;
+  color:var(--c-white);
+  background:var(--c-dark);
+}
+.data-table__row + .data-table__row dt{ box-shadow:0 -.1rem 0 rgba(255,255,255,.18); }
+.data-table dd{
+  padding:1.2rem 0 1.2rem 1.2rem;
+  font-size:1.35rem; font-weight:400; line-height:2.1rem;
+  color:var(--c-black);
+  overflow-wrap:anywhere;
+}
+.data-table dd small{
+  display:block;
+  margin-top:.3rem;
+  font-size:1.15rem; line-height:1.8rem;
+  color:#555;
+}
+
+
+/* =========================================================
+   ふわふわ浮いている予約ボタン（画面の左下に固定）
+   円の中心が画面の下から15%（PCは20%）のところに来るように置き、上下にゆっくり動かす
+   （2026-10-05：最初の大きさの115%に拡大。数値はすべて最初の値×1.15）
+   ========================================================= */
+.float-cta{
+  position:fixed; z-index:90;
+  left:calc(50% - min(50%, 384px) + 1.45rem);   /* LPの左端から1.45rem（768pxより広い画面ではLPの列に合わせる） */
+  bottom:calc(15% - 5rem);                       /* 5rem＝円の中心から画像の下端まで */
+  width:9.97rem;
+  animation:floatCta 3s ease-in-out infinite;
+  transition:opacity .3s ease, visibility .3s;
+}
+@keyframes floatCta{
+  0%, 100%{ transform:translateY(0); }
+  50%     { transform:translateY(-.8rem); }
+}
+.float-cta__link{
+  display:block;
+  -webkit-tap-highlight-color:transparent;
+}
+.float-cta__link img{ width:100%; }
+
+/* 画像の×の上に重ねる透明のボタン（指で押しやすいよう×より大きめ） */
+.float-cta__close{
+  position:absolute; top:-1.12rem; left:6.73rem;
+  width:3.68rem; height:3.68rem;
+  padding:0; border:0; border-radius:50%;
+  background:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ×を押したあと */
+.float-cta.is-closed{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .float-cta{ animation:none; }
+}
+
+
+/* =========================================================
+   画面下に追従する予約ボタン（画像/追従CTA.png：オレンジの帯に白文字）
+   ふわふわの予約ボタンを×で閉じて、1画面ぶんくらいスクロールすると下から出る（js/common.js）
+   ========================================================= */
+.sticky-cta{
+  position:fixed; left:0; right:0; bottom:0; z-index:90;
+  display:flex; align-items:center; justify-content:center;
+  height:4.9rem;
+  padding-right:2.9rem;    /* カンプ（画像/追従CTA.png）と同じく、文字を中央より少し左に置く */
+  font-size:2rem; font-weight:500; line-height:1; letter-spacing:0;
+  color:var(--c-white);
+  background:var(--c-orange);
+  transform:translateY(100%);
+  visibility:hidden;
+  transition:transform .4s ease, visibility .4s;
+  -webkit-tap-highlight-color:transparent;
+}
+.sticky-cta.is-shown{ transform:none; visibility:visible; }
+body.has-sticky-cta{ padding-bottom:4.9rem; }
+
+@media (prefers-reduced-motion: reduce){
+  .sticky-cta{ transition:none; }
+}
+
+
+/* =========================================================
+   TOPへ戻る（画面の右下。LP量産キットと同じ形：縦の線＋片側の矢じり＋縦書きの「TOP」）
+   1画面ぶんスクロールすると出る（js/common.js）。スマホの数値はキットの375px幅のときの値
+   ========================================================= */
+.back-top{
+  position:fixed; right:.7rem; bottom:12%; z-index:95;
+  display:flex; flex-direction:column; align-items:center;
+  padding:0; border:0;
+  background:none;
+  color:rgba(120,120,120,.85);   /* キットは rgba(190,190,190,.8)。このLPは明るいグレーの背景が多く見えにくいので少し濃く */
+  cursor:pointer;
+  opacity:0; visibility:hidden;
+  transition:opacity .3s, visibility .3s;
+  -webkit-tap-highlight-color:transparent;
+}
+.back-top.is-visible{ opacity:1; visibility:visible; }
+.back-top span{
+  margin-top:7.5rem;
+  writing-mode:vertical-lr;
+  font-size:1.2rem; font-weight:400; letter-spacing:.2em;
+}
+/* 縦の線 */
+.back-top::after{
+  content:"";
+  position:absolute; left:50%; bottom:4rem;
+  width:1px; height:5.5rem;
+  background:currentColor;
+}
+/* 矢じり（線の上の端から左下へ） */
+.back-top::before{
+  content:"";
+  position:absolute; left:50%; top:calc(100% - 9.5rem);
+  width:1px; height:1.6rem;
+  margin-left:-.5px;
+  background:currentColor;
+  transform:translateX(-50%) rotate(30deg);
+  transform-origin:top;
+}
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   スマホは画面幅に合わせて全体を拡大縮小する（1rem＝画面幅÷37.5）。
+   768px以上は 1rem を11pxに固定して文字や部品の大きさを止め、
+   横幅に合わせて並べ方を変える（LP量産キットと同じく、中身は中央の列に収める）
+   各セクションのPC用の指定は、それぞれのCSSの最後にまとめている
+   ========================================================= */
+@media (min-width:768px){
+  :root{
+    --pc-max:1200px;                    /* 中身の最大幅（キットと同じ） */
+    --pc-pad:clamp(20px, 5vw, 60px);    /* 左右の余白（キットと同じ） */
+  }
+  html{ font-size:11px; }
+  .lp{ max-width:none; }
+  .pc-br{ display:inline; }
+  .sp-br{ display:none; }
+
+  /* 中央の列（中身を最大1200pxに収める） */
+  .pc-inner{
+    max-width:calc(var(--pc-max) + var(--pc-pad) * 2);
+    margin-left:auto; margin-right:auto;
+    padding-left:var(--pc-pad); padding-right:var(--pc-pad);
+  }
+
+  /* --- 見出し・ボタンをPCの大きさに --- */
+  .f-head__label{ width:15rem; height:2.9rem; font-size:1.8rem; line-height:2.9rem; }
+  .f-head__label::after{ left:10rem; }
+  .f-head__sub{ font-size:2rem; }
+  .f-head__main{ font-size:3.4rem; padding-bottom:.7rem; }
+  .f-head__lead{ font-size:1.7rem; line-height:3rem; }
+
+  .s-head__label{ height:2.9rem; padding:0 2rem; font-size:1.7rem; line-height:2.9rem; }
+  .s-head__sub{ font-size:1.8rem; }
+  .s-head__title{ font-size:3.2rem; padding-bottom:.8rem; }
+  .s-head__lead{ font-size:1.6rem; line-height:2.8rem; }
+
+  .cta-head{ font-size:1.8rem; }
+  /* 吹き出し型の下線はスマホの幅（37.5rem）で描いているので、文字と同じ割合（1.8÷1.58）で大きくする */
+  .talk-line{ width:42.72rem; height:2.28rem; margin-left:auto; margin-right:auto; }
+  .cta-btn{ width:36rem; height:7rem; font-size:2rem; }
+
+  .data-table{ width:100%; max-width:80rem; }
+  .data-table__row{ grid-template-columns:16rem 1fr; }
+  .data-table dt{ padding:1.6rem 2rem; font-size:1.5rem; }
+  .data-table dd{ padding:1.6rem 2rem; font-size:1.5rem; line-height:2.6rem; }
+
+  /* TOPへ戻る：キットの1024px以下の大きさ（px） */
+  .back-top{ right:7px; }
+  .back-top span{ margin-top:75px; font-size:12px; }
+  .back-top::after{ bottom:40px; height:55px; }
+  .back-top::before{ top:calc(100% - 95px); height:16px; }
+
+  /* ふわふわ予約ボタン：画面の左下（PCは少し大きく） */
+  .float-cta{ left:2.4rem; width:13.8rem; bottom:calc(20% - 6.92rem); }
+  .float-cta__close{ top:-1.55rem; left:9.32rem; width:5.06rem; height:5.06rem; }
+}
+
+/* TOPへ戻る：1025px以上はキットのPCの大きさ（px） */
+@media (min-width:1025px){
+  .back-top{ right:19px; bottom:10%; }
+  .back-top span{ margin-top:110px; font-size:14px; }
+  .back-top::after{ bottom:50px; height:90px; }
+  .back-top::before{ top:calc(100% - 140px); height:24px; }
+}

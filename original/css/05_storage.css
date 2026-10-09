@@ -1,0 +1,205 @@
+@charset "UTF-8";
+
+/* =========================================================
+   5. 物件の特徴（③ その他の特徴：収納・洗面台）
+   ========================================================= */
+
+.storage{
+  padding:2.6rem 0 3.35rem;
+  color:var(--c-black);
+  background:#e2e5e3;
+}
+
+/* --- FEATURE 03 見出し（共通部品を緑で使う：common.css の .f-head--green） --- */
+.storage .f-head__sub{
+  font-size:1.6rem; letter-spacing:.035em;
+}
+.storage .f-head__main{ left:0; }
+
+/* --- 番号つき見出し（中央に置き、丸い番号は左上） --- */
+.storage .b-head{
+  --b-accent:var(--c-green);
+  margin:1.65rem auto 0;
+  padding-top:2.9rem;
+}
+.storage__item--closet .b-head__num{ left:-5.4rem; }
+.storage__item--wash   .b-head__num{ left:-5.5rem; }
+.storage__item--wash .b-head{ margin-top:3.9rem; }
+
+/* --- 本文 --- */
+.storage__text{
+  margin-top:2.36rem;
+  padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
+  text-wrap:pretty;   /* 最後の行が1〜2文字だけにならないように */
+  font-size:1.47rem; font-weight:500; line-height:2.65rem; letter-spacing:.05em;
+  text-align:center;   /* スマホは中央揃え・行間ひろめ（2026-10-08） */
+  text-spacing-trim:space-all;   /* 「、「」などの約物を詰めない（カンプと同じ文字幅にする） */
+}
+
+/* =========================================================
+   写真（大きい写真＋回転しながら登場する小さい写真）
+   ========================================================= */
+.photo-set__large{ object-fit:cover; }
+.photo-set__small{
+  position:relative; z-index:1;
+  margin:0;
+}
+/* 小さい写真の横の説明文（写真が収まると同時に表示：common.css の .pop__note） */
+.photo-set__note{
+  position:absolute;
+  font-weight:500;
+  white-space:nowrap;   /* 改行はカンプどおり <br> で指定 */
+}
+
+/* --- パントリー --- */
+.photo-set--pantry{ margin-top:2rem; }
+.photo-set--pantry .photo-set__large{
+  width:25.8rem;
+  aspect-ratio:516 / 773;
+}
+.photo-set--pantry .photo-set__small{
+  width:17.3rem;
+  margin:-13.3rem 0 0 18.85rem;
+}
+.photo-set--pantry .pop{ aspect-ratio:346 / 359; }
+.photo-set--pantry .photo-set__note{
+  right:calc(100% + .55rem); bottom:.55rem;
+  font-size:1.45rem; line-height:1.5; white-space:nowrap;
+}
+
+/* --- 主寝室のWIC --- */
+.photo-set--wic{ margin-top:3.95rem; }
+.photo-set--wic .photo-set__large{
+  width:33.9rem;
+  aspect-ratio:678 / 650;
+  margin-left:3.6rem;
+}
+.photo-set--wic .photo-set__small{
+  width:16.55rem;
+  margin:-11.95rem 0 0 1.5rem;
+}
+.photo-set--wic .pop{ aspect-ratio:1 / 1; }
+.photo-set--wic .photo-set__note{
+  right:-17.2rem; bottom:0;
+  font-size:1.38rem; line-height:1.95rem; letter-spacing:-.02em;
+  text-align:right;
+}
+
+/* --- シューズインクローゼット --- */
+.photo-set--sic{ margin-top:6.5rem; }
+.photo-set--sic .photo-set__large{
+  width:27.95rem;
+  aspect-ratio:559 / 732;
+}
+.photo-set--sic .photo-set__small{
+  width:19rem;
+  margin:-9.5rem 0 0 17.15rem;
+}
+.photo-set--sic .pop{ aspect-ratio:380 / 442; }
+.photo-set--sic .photo-set__note{
+  right:calc(100% + 1rem); bottom:-.2rem;
+  font-size:1.44rem; line-height:2.25rem;
+}
+
+/* --- 洗面台 --- */
+.photo-set--wash{ margin-top:2.5rem; }
+.photo-set--wash .photo-set__large{
+  width:28.3rem;
+  aspect-ratio:566 / 782;
+}
+.photo-set--wash .photo-set__small{
+  width:15.15rem;
+  margin:-17.35rem 0 0 20.55rem;
+}
+.photo-set--wash .pop{ aspect-ratio:303 / 453; }
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   写真の組み合わせ（大きい写真＋小さい写真＋説明文）はスマホの配置
+   （幅37.5rem）のまま、まとめて拡大する（zoom）
+   タブレット：縦に並べて1.38倍
+   PC（1200px以上）：① 収納は3つを同じ大きさ・同じ配置で等間隔に横に並べる／② 洗面台は文章を左・写真を右
+   ========================================================= */
+@media (min-width:768px){
+  .storage{ padding:6rem var(--pc-pad) 8rem; }
+  .storage .f-head__sub{ font-size:2rem; }
+
+  /* 番号つき見出し：番号の丸と見出しを横に並べる */
+  .storage .b-head{
+    display:grid;
+    grid-template-columns:auto auto;
+    justify-content:center; align-items:center;
+    column-gap:1.4rem;
+    width:auto;
+    margin:6rem 0 0;
+    padding-top:0;
+  }
+  .storage .b-head__num{
+    position:relative; top:0; left:0;
+    grid-row:1 / span 2;
+    width:5.6rem; height:5.6rem;
+    font-size:1.7rem;
+  }
+  .storage .b-head__title{ grid-column:2; font-size:1.9rem; line-height:1.5; }
+  .storage .b-head__title b{ font-size:2.7rem; line-height:1.2; }
+  .storage__item--wash .b-head{ margin-top:9rem; }
+
+  .storage__text{
+    width:fit-content; max-width:64rem;
+    margin:2.6rem auto 0;
+    padding:0;
+    font-size:1.6rem; line-height:2.9rem;
+    text-align:left;
+  }
+
+  .photo-set{ width:37.5rem; margin-left:auto; margin-right:auto; zoom:1.38; }
+}
+
+@media (min-width:1200px){
+  /* ① 収納：3つを同じ大きさ・同じ配置で、等間隔に横に並べる
+     大きい写真（縦長3:4）を左上、小さい写真を右下に重ね、小さい写真は下でそろえる
+     説明文は小さい写真の左（大きい写真の下の余白）に置く */
+  .storage__item--closet .storage__photos{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    column-gap:4.4rem;
+    max-width:1290px;
+    margin:4.4rem auto 0;
+  }
+  .storage__item--closet .photo-set{
+    position:relative;
+    width:auto;
+    margin:0;
+    padding-bottom:8.8rem;   /* 小さい写真が大きい写真の下にはみ出すぶん */
+    zoom:1;
+  }
+  .storage__item--closet .photo-set__large{ width:78%; margin-left:0; aspect-ratio:3 / 4; }
+  .storage__item--closet .photo-set--wic .photo-set__large{ object-position:60% 50%; }   /* 横長の写真はWICの入口が入る位置で切り抜く */
+  .storage__item--closet .photo-set__small{
+    position:absolute; right:0; bottom:0;
+    width:50%;
+    margin:0;
+  }
+  .storage__item--closet .photo-set__note{
+    left:auto; right:calc(100% + 1.2rem); bottom:0;
+    font-size:min(1.3rem, 1.05vw); line-height:1.6; letter-spacing:0;
+    text-align:right;
+  }
+
+  /* ② 洗面台：文章を左、写真を右（写真の列を広めに） */
+  .storage__item--wash{
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    column-gap:6rem;
+    align-items:center;
+    max-width:var(--pc-max);
+    margin:9rem auto 0;
+  }
+  .storage__item--wash .b-head{ justify-content:start; margin:0; }
+  .storage__item--wash .storage__text{ width:auto; margin:2.6rem 0 0; }
+  .storage__item--wash .photo-set{ margin:0 auto; zoom:1.36; }
+}
+@media (min-width:1440px){
+  .storage__item--wash .photo-set{ zoom:1.56; }
+}

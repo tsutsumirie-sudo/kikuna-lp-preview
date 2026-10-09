@@ -1,0 +1,252 @@
+@charset "UTF-8";
+
+/* =========================================================
+   8. 見学会詳細
+   紙・区切り線・文字の大きさは 2. 見学会案内（02_info.css）にそろえる
+   ========================================================= */
+
+.details{
+  padding:0 0 5.7rem;
+  color:var(--c-black);
+  background:var(--c-white);
+}
+:root{
+  --c-details:#4b4b4b;   /* 8 の背景：2 の紙（#3e3e3e）よりワントーン明るいグレー */
+}
+
+/* 見出しの部分から帯の下までを1枚の明るめのグレーにする
+   （2026-10-08 上下の縁をちぎれた紙の形から直線に変更） */
+.details > .s-head{
+  padding:4.2rem 0 3.4rem;
+  color:var(--c-white);
+  background:var(--c-details);
+}
+
+/* =========================================================
+   日時・場所（明るめのグレーの紙）
+   ========================================================= */
+.details__event{
+  position:relative;
+  padding-top:.6rem;   /* 「菊名で開催中」タグが紙の上にはみ出す分 */
+  /* タグがはみ出す余白も同じグレー（見出しの部分とつなげる） */
+  background:linear-gradient(var(--c-details), var(--c-details)) center top / 100% 1rem no-repeat;
+}
+.details__tag{
+  position:absolute; z-index:2;
+  top:.05rem; left:3.6rem;
+  width:7.6rem;
+}
+
+.details__paper{
+  padding:4.3rem 0 3.2rem;
+  color:var(--c-white);
+  line-height:1;
+  text-align:center;
+  background:var(--c-details);   /* 上は見出しの部分とつながる */
+}
+
+/* --- 区切り線 --- */
+.details__head,
+.details__item{ position:relative; }
+.details__head::after,
+.details__item::after{
+  content:"";
+  position:absolute; left:50%; bottom:0;
+  width:26.35rem; height:var(--line-thin);
+  background:var(--c-white);
+  transform:translateX(-50%);
+}
+
+/* --- 見出し --- */
+.details__head{ padding-bottom:1.05rem; }
+.details__sub{
+  padding-left:1.55rem;
+  font-size:1.47rem; font-weight:500;
+}
+.details__title{
+  margin-top:1.19rem;
+  padding-left:.85rem;
+  font-size:2.65rem; font-weight:700; line-height:1;
+  color:var(--c-yellow);
+}
+
+/* --- 各項目 --- */
+.details__item{ padding:2.55rem 0 2.65rem; }
+.details__item dt{
+  font-size:1.5rem; font-weight:500;
+}
+.details__item dd{
+  display:flex; flex-direction:column; align-items:center;
+}
+.details__value{
+  display:block;
+  font-weight:700;
+  color:var(--c-yellow);
+}
+.details__value--day{     margin-top:.83rem; font-size:2rem; }
+.details__value--time{    margin-top:.6rem;  font-size:2.27rem; }
+.details__value--address{ margin-top:.6rem;  font-size:1.88rem; }   /* 1行のまま左右に20px残る大きさ */
+.details__value--access{  margin-top:.65rem; font-size:2.27rem; }
+
+.details__line{
+  display:block;
+  margin-top:.75rem;
+  font-size:1.6rem; font-weight:700;
+}
+
+/* --- 注意書き（その項目の補足） --- */
+.details__notes{
+  display:block;
+  width:33rem;
+  margin-top:1.4rem;
+  font-size:1.2rem; font-weight:400; line-height:1.9rem;
+  text-align:left;
+}
+.details__notes span{
+  display:block;
+  padding-left:1em;
+  text-indent:-1em;
+}
+
+/* --- 地図 --- */
+.details__map{
+  display:block;
+  width:33rem; height:23rem;
+  margin-top:1.6rem;
+  background:#555;
+}
+.details__map iframe{
+  display:block;
+  width:100%; height:100%;
+  border:0;
+}
+.details__map-link{
+  display:inline-flex; align-items:center; gap:.5rem;
+  margin-top:1.2rem;
+  font-size:1.3rem; font-weight:500;
+  text-decoration:underline;
+  text-underline-offset:.3rem;
+}
+.details__map-link::after{
+  content:"";
+  width:.6rem; height:.6rem;
+  border-top:.15rem solid currentColor;
+  border-right:.15rem solid currentColor;
+  transform:rotate(45deg);
+}
+
+/* --- 見学の条件（3つ並び） --- */
+.details__points{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  width:33rem;
+  margin:2.6rem auto 0;
+}
+.details__point{
+  display:flex; flex-direction:column; align-items:center;
+  padding:.2rem 0 .3rem;
+}
+.details__point + .details__point{ border-left:var(--line-thin) solid rgba(255,255,255,.6); }
+.details__point dt{
+  font-size:1.25rem; font-weight:500;
+}
+.details__point dd{
+  display:flex; flex-direction:column; align-items:center;
+  margin-top:.8rem;
+  font-size:2.27rem; font-weight:700;
+  color:var(--c-yellow);
+}
+.details__point dd small{
+  margin-top:.55rem;
+  font-size:1.2rem; font-weight:500;
+  color:var(--c-white);
+}
+.details__points-note{
+  width:33rem;
+  margin:1.8rem auto 0;
+  padding-left:1em;
+  text-indent:-1em;
+  font-size:1.2rem; font-weight:400; line-height:1.9rem;
+  text-align:left;
+}
+
+
+/* =========================================================
+   物件概要
+   ========================================================= */
+.details__spec-head{
+  margin:5.2rem 0 2.2rem;
+  font-size:1.9rem; font-weight:700; line-height:1;
+  text-align:center;
+}
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   タブレット：スマホと同じ縦の並びで、中央の列（704px）に収める
+   PC（1200px以上）：見学可能日・時間・アクセスを左、住所と地図を右に並べる
+   ========================================================= */
+@media (min-width:768px){
+  .details{ padding:0 0 8rem; }
+  .details > .s-head{ padding:6.4rem var(--pc-pad) 4.4rem; }
+
+  .details__event{ padding-top:1rem; background-size:100% 1.6rem; }
+  .details__tag{ top:.2rem; left:calc(50% - 25.2rem); width:9.4rem; }   /* 右端を「現地完成見学会開催」の左端の上に */
+  .details__paper{ padding:5.6rem var(--pc-pad) 4.4rem; }
+  .details__head{ padding-bottom:2.2rem; }
+  .details__sub{ padding-left:0; font-size:1.7rem; }
+  .details__title{ margin-top:1.6rem; padding-left:0; font-size:3.6rem; }
+  .details__head::after,
+  .details__item::after{ width:min(76rem, 100%); }
+
+  .details__list{ max-width:76rem; margin:0 auto; }
+  .details__item{ padding:3.2rem 0 3.4rem; }
+  .details__item dt{ font-size:1.6rem; }
+  .details__value--day{     margin-top:1.1rem; font-size:2.4rem; }
+  .details__value--time{    margin-top:1rem;   font-size:2.6rem; }
+  .details__value--address{ margin-top:1rem;   font-size:2.2rem; }
+  .details__value--access{  margin-top:1rem;   font-size:2.6rem; }
+  .details__line{ margin-top:1rem; font-size:1.8rem; }
+  .details__notes{ width:auto; margin-top:1.8rem; font-size:1.4rem; line-height:2.4rem; }
+
+  .details__map{ width:100%; height:42rem; margin-top:2.2rem; }
+  .details__map-link{ margin-top:1.4rem; font-size:1.5rem; }
+
+  .details__points{ width:100%; max-width:76rem; margin-top:3.4rem; }
+  .details__point dt{ font-size:1.5rem; }
+  .details__point dd{ margin-top:1rem; font-size:2.8rem; }
+  .details__point dd small{ font-size:1.4rem; }
+  .details__points-note{ width:fit-content; max-width:64rem; margin-top:2.4rem; font-size:1.4rem; line-height:2.4rem; }
+
+  .details__spec-head{ margin:7rem 0 2.8rem; font-size:2.6rem; }
+  .details > .data-table{ width:calc(100% - var(--pc-pad) * 2); }
+}
+
+@media (min-width:1200px){
+  .details__list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+      "day  place"
+      "time place"
+      "access place";
+    grid-template-rows:auto auto 1fr;
+    column-gap:6rem;
+    max-width:var(--pc-max);
+  }
+  .details__item:nth-child(1){ grid-area:day; }
+  .details__item:nth-child(2){ grid-area:time; }
+  .details__item--place{ grid-area:place; }
+  .details__item--access{ grid-area:access; }
+  .details__item--access::after{ display:none; }   /* 左の列の最後は線なし */
+  .details__item--place::after{ display:none; }
+  .details__item--place{ padding-bottom:0; }
+  .details__map{ height:46rem; }
+
+  .details__head::after{ width:min(var(--pc-max), 100%); }
+  .details__points{
+    max-width:var(--pc-max);
+    margin-top:4rem; padding-top:3.4rem;
+    border-top:var(--line-thin) solid var(--c-white);
+  }
+}

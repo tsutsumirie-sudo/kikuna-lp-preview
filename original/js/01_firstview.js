@@ -142,7 +142,6 @@
   /* ---------------------------------------------------------
      タップした写真を拡大表示（#photoModal。開く・閉じる・大きさは js/common.js で共通）
      （拡大用の大きい画像は slide_XX_l.jpg。読み込むまでは小さい画像を表示）
-     小さい画像は画面に合わせて slide_XX_360 / _540 / slide_XX（720px）から選ばれる（2026-10-09 表示を速くするため）
      --------------------------------------------------------- */
   var modal = document.getElementById('photoModal');
   if (!modal || !modal.openPhoto) return;
@@ -160,9 +159,7 @@
     holding = true;
     openedHere = true;
     modal.openPhoto(img, {
-      large: img.getAttribute('src').replace(/(_\d+)?\.jpg$/, '_l.jpg'),   // slide_01_540.jpg → slide_01_l.jpg
-      width: +img.getAttribute('width'),                                    // 縦横比は元の写真（720px）の大きさで
-      height: +img.getAttribute('height'),
+      large: img.getAttribute('src').replace(/\.jpg$/, '_l.jpg'),
       alt: text,
       caption: text
     });

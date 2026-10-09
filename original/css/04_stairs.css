@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+/* =========================================================
+   4. 物件の特徴（② 吹き抜け＋鉄骨階段）
+   ========================================================= */
+
+.stairs{
+  padding:4.2rem 0 5.7rem;
+  color:var(--c-black);
+  background:var(--c-white);
+}
+
+/* --- FEATURE 02 見出し（共通部品を紫で使う：common.css の .f-head--purple） --- */
+.stairs .f-head__sub{
+  font-size:1.6rem; letter-spacing:.035em;
+}
+.stairs .f-head__main{
+  left:.1rem;
+  padding:0 0 .65rem;
+}
+.stairs .f-head__lead{
+  margin-top:3.15rem;
+  padding:0 2rem;   /* スマホは文字の左右を20px（2026-10-08） */
+  text-wrap:pretty;
+  letter-spacing:.06em;
+}
+
+/* --- 写真 --- */
+.stairs__main{
+  width:100%;
+  aspect-ratio:750 / 474;
+  margin-top:1.4rem;
+  object-fit:cover;
+}
+.stairs__sub{
+  display:flex; gap:.65rem;
+  margin:.65rem 0 0 2.5rem;
+}
+.stairs__sub img{
+  width:16rem;
+  aspect-ratio:320 / 318;
+  object-fit:cover;
+}
+
+
+/* =========================================================
+   PC・タブレット（768px以上）
+   大きい写真はスマホと同じく画面の端から端まで（PCは横長に切り抜き）
+   小さい写真2枚はその下に横並び（幅836pxの中央の列）
+   ========================================================= */
+@media (min-width:768px){
+  .stairs{ padding:6.4rem var(--pc-pad) 8rem; }
+  .stairs .f-head__sub{ font-size:2rem; }
+  .stairs .f-head__main{ padding-bottom:.8rem; }
+  .stairs .f-head__lead{ max-width:64rem; margin:3.4rem auto 0; padding:0; }
+
+  .stairs__main{
+    width:100vw; max-width:none;
+    margin:4.4rem calc(50% - 50vw) 0;
+    aspect-ratio:2.1 / 1;
+  }
+  .stairs__sub{ gap:1.6rem; max-width:76rem; margin:1.6rem auto 0; }
+  .stairs__sub img{ width:calc(50% - .8rem); }
+}
