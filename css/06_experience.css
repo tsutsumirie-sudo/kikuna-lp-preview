@@ -97,9 +97,10 @@
 }
 .exp-storage__item{ position:relative; }
 .exp-storage__item picture{ display:block; }
+/* 写真の高さは 01 のバルコニーの写真と同じ（バルコニーは 幅:高さ＝750:431、収納は1枚が画面幅の1/3なので 250:431）（2026-10-09） */
 .exp-storage__item img{
   width:100%;
-  aspect-ratio:250 / 300;
+  aspect-ratio:250 / 431;
   object-fit:cover;
 }
 .exp-storage__name{
