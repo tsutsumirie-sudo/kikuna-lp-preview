@@ -56,6 +56,10 @@ h1,h2,h3,p{ margin:0; }
 /* モーダル（ポップアップ）表示中は後ろのページをスクロールさせない */
 html.is-modal-open{ overflow:hidden; }
 
+/* 後から読み込む画像（本番用ページで data-lsrc になっている画像。js/common.js が最初の描画のあとに src に戻す）
+   読み込むまでの間に代わりの文字（alt）が出て箱の高さが変わらないよう、その間だけ文字を隠す */
+img[data-lsrc]{ font-size:0; color:transparent; overflow:hidden; min-height:0; }
+
 .lp{
   max-width:768px;
   margin:0 auto;

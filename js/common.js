@@ -5,6 +5,53 @@
   'use strict';
 
   /* ---------------------------------------------------------
+     表示を速くするための仕組み（LP量産キット 2026-09-25版 F-5-4・F-5-6 と同じ考え方）
+     - afterFirstPaint(fn) … 最初の描画のあとで fn を実行する（起動直後にレイアウトの値を読まない＝強制リフロー回避）
+     - 画像の後読み … 本番用ページでは、最初の画面に入らない画像の src / srcset を data-lsrc / data-lsrcset にしてある
+       （_tools/lazy_images.py）。ページの読み込みと最初の描画のあと、または最初のスクロールで元に戻す
+     --------------------------------------------------------- */
+  function afterFirstPaint(fn) {
+    requestAnimationFrame(function () { setTimeout(fn, 0); });
+  }
+  window.afterFirstPaint = afterFirstPaint;
+
+  function afterLoadAndPaint(cb) {
+    function afterPaint() {
+      var called = false;
+      function once() { if (!called) { called = true; setTimeout(cb, 0); } }
+      try {
+        if (performance.getEntriesByName('first-contentful-paint').length) return once();
+        new PerformanceObserver(function (list, obs) {
+          if (list.getEntriesByName('first-contentful-paint').length) { obs.disconnect(); once(); }
+        }).observe({ type: 'paint', buffered: true });
+      } catch (e) { once(); }
+    }
+    if (document.readyState === 'complete') afterPaint();
+    else window.addEventListener('load', afterPaint, { once: true });
+  }
+  function loadLateImages() {
+    document.querySelectorAll('[data-lsrcset], [data-lsrc]').forEach(function (el) {
+      var set = el.getAttribute('data-lsrcset'), src = el.getAttribute('data-lsrc');
+      if (set) { el.setAttribute('srcset', set); el.removeAttribute('data-lsrcset'); }   // srcset を先に戻す（src の画像を無駄に読まない）
+      if (src) { el.setAttribute('src', src); el.removeAttribute('data-lsrc'); }
+    });
+  }
+  afterLoadAndPaint(loadLateImages);
+  window.addEventListener('scroll', loadLateImages, { once: true, passive: true });
+
+  // スクロールのたびの処理は、1コマ（画面の書き換え1回）に1回までにする
+  function onScrollFrame(fn) {
+    var ticking = false;
+    function handler() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; fn(); });
+    }
+    window.addEventListener('scroll', handler, { passive: true });
+    return handler;
+  }
+
+  /* ---------------------------------------------------------
      1. 手動スライダー（写真を横にスワイプ／左右ボタンで切り替え）
      - [data-slider]       … 全体（data-start で最初に表示する枚目を指定）
      - [data-slider-track] … 横スクロールする部分（CSS の scroll-snap）
@@ -24,8 +71,8 @@
     }
     slider.sliderGoTo = goTo;
 
-    // 最初の表示位置（アニメーションなしで移動）
-    goTo(index, false);
+    // 最初の表示位置（アニメーションなしで移動）。幅を読むので最初の描画のあとで
+    afterFirstPaint(function () { goTo(index, false); });
 
     track.addEventListener('scroll', function () {
       if (track.clientWidth) index = Math.round(track.scrollLeft / track.clientWidth);
@@ -60,15 +107,14 @@
   function armStickyCta() {
     if (!stickyCta) return;
     var startY = window.scrollY;
-    function check() {
+    var handler = onScrollFrame(function () {
       if (Math.abs(window.scrollY - startY) < window.innerHeight) return;
       stickyCta.classList.add('is-shown');
       stickyCta.removeAttribute('aria-hidden');
       stickyCta.removeAttribute('tabindex');
       document.body.classList.add('has-sticky-cta');   // いちばん下のフッターが隠れないよう、ボタンの高さぶん余白を足す
-      window.removeEventListener('scroll', check);
-    }
-    window.addEventListener('scroll', check, { passive: true });
+      window.removeEventListener('scroll', handler);
+    });
   }
 
   /* ---------------------------------------------------------
@@ -79,8 +125,8 @@
     var toggleBackTop = function () {
       backTop.classList.toggle('is-visible', window.scrollY > window.innerHeight);
     };
-    window.addEventListener('scroll', toggleBackTop, { passive: true });
-    toggleBackTop();
+    onScrollFrame(toggleBackTop);
+    afterFirstPaint(toggleBackTop);   // 最初の判定も、最初の描画のあとで
     backTop.addEventListener('click', function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });

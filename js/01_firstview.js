@@ -60,9 +60,12 @@
     requestAnimationFrame(tick);
   }
 
-  measure();
-  render();
-  requestAnimationFrame(tick);
+  // 写真の位置を測るのは最初の描画のあと（起動直後にレイアウトの値を読まない。それまでは帯は最初の位置のまま）
+  (window.afterFirstPaint || function (fn) { requestAnimationFrame(function () { setTimeout(fn, 0); }); })(function () {
+    measure();
+    render();
+    requestAnimationFrame(tick);
+  });
   window.addEventListener('resize', function () { measure(); render(); });
 
   if ('IntersectionObserver' in window) {
@@ -160,7 +163,7 @@
     holding = true;
     openedHere = true;
     modal.openPhoto(img, {
-      large: img.getAttribute('src').replace(/(_\d+)?\.jpg$/, '_l.jpg'),   // slide_01_540.jpg → slide_01_l.jpg
+      large: (img.getAttribute('src') || img.getAttribute('data-lsrc')).replace(/(_\d+)?\.jpg$/, '_l.jpg'),   // slide_01_540.jpg → slide_01_l.jpg
       width: +img.getAttribute('width'),                                    // 縦横比は元の写真（720px）の大きさで
       height: +img.getAttribute('height'),
       alt: text,
