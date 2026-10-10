@@ -12,12 +12,37 @@
 <!-- 確認用ページ：アクセス解析のタグは入れない／予約フォームは送信しない -->
 <script>window.LP_PREVIEW = true;</script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<!-- 明朝（Noto Serif JP）は 7 の施工事例の名前だけに使う（ページの下の方）ので、最初の表示を待たせない読み込み方にしている -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600&amp;display=swap" rel="stylesheet"></noscript>
+<!-- 最初の操作（タップ・キー・ホイール）か、ページの読み込み完了から8秒後の早い方で、登録した処理を実行する（本番の計測タグと同じ仕組み）。
+     確認用は計測タグを外しているので、この仕組みだけ入れている -->
+<script>
+  (function () {
+    var q = [], done = false;
+    var evs = ['pointerdown', 'keydown', 'touchstart', 'wheel'];
+    var opts = { passive: true, capture: true };
+    window.__lazyTag = function (fn) { if (done) { fn(); } else { q.push(fn); } };
+    function run() {
+      if (done) return; done = true;
+      evs.forEach(function (t) { removeEventListener(t, run, opts); });
+      q.forEach(function (fn) { try { fn(); } catch (e) {} }); q = [];
+    }
+    evs.forEach(function (t) { addEventListener(t, run, opts); });
+    if (document.readyState === 'complete') setTimeout(run, 8000);
+    else addEventListener('load', function () { setTimeout(run, 8000); }, { once: true });
+  })();
+</script>
+
+<!-- Webフォント（Noto Sans JP・明朝の Noto Serif JP）は、最初の操作（画面に触れる・スクロール・キー）か、
+     ページの読み込み完了から8秒後に読み込む（LP量産キット F-5-5）。それまでは端末の標準の書体（iPhone・Mac はヒラギノ角ゴ）で表示される。
+     日本語フォントは小さなファイルが約150個あり、最初の表示の前に読むとスマホの表示が遅くなるため -->
+<script>
+  window.__lazyTag(function () {
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600&display=swap';
+    document.head.appendChild(l);
+  });
+</script>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@600&amp;display=swap" rel="stylesheet"></noscript>
 
 <link rel="preload" as="image" fetchpriority="high" media="(max-width: 767px)"
       href="img/fv/fv_main_750.jpg"
