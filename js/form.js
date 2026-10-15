@@ -345,12 +345,19 @@
 
         // タップ・クリックでは開閉、キーボード（Tab）で入ったときは開く
         // （タップすると focus → click の順に起きるので、focus で開いた直後に click で閉じないようにする）
-        var byPointer = false;
+        // 見出し（「第一希望日」などの label）のクリック・読み上げソフト・自動操作では、欄の pointerdown が無いまま
+        // focus → click が続けて起きる。focus で開いてから0.3秒以内の click では閉じない（2026-10-15）
+        var byPointer = false, focusOpenedAt = 0;
         input.addEventListener('pointerdown', function () { byPointer = true; });
-        input.addEventListener('focus', function () { if (!byPointer) open(); });
+        input.addEventListener('focus', function () {
+          if (byPointer) return;
+          open();
+          focusOpenedAt = Date.now();
+        });
         input.addEventListener('click', function (e) {
           e.preventDefault();
           byPointer = false;
+          if (Date.now() - focusOpenedAt < 300) { open(); return; }
           panel.hidden ? open() : close();
         });
         input.addEventListener('keydown', function (e) { if (e.key !== 'Tab') e.preventDefault(); });
