@@ -134,6 +134,7 @@
   cursor:pointer;
 }
 .form-select:invalid{ color:#aaa; }   /* 「時間を選択」のときは薄い文字 */
+.form-select:has(option[value=""]:checked){ color:#aaa; }   /* 任意の欄（第二希望時間）も同じ（2026-10-16） */
 .form-textarea{
   height:auto; min-height:12rem;
   padding:1rem 1.2rem;
@@ -326,6 +327,20 @@
   color:#666;
 }
 .dp-note b{ color:var(--c-black); }
+/* 第二希望日（任意）のカレンダーだけ：選んだ日付を取り消す（2026-10-16） */
+.dp-clear{
+  display:block;
+  margin:.8rem 0 0 auto;
+  padding:.4rem 0;
+  border:0;
+  font:inherit;
+  font-size:1.25rem; font-weight:500;
+  color:#555;
+  text-decoration:underline;
+  background:none;
+  cursor:pointer;
+}
+.dp-clear[hidden]{ display:none; }
 
 
 /* =========================================================

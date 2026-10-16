@@ -50,12 +50,16 @@
      --------------------------------------------------------- */
   function attr(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
 
-  function datePicker(n, label) {
+  // 第一希望は必須、第二希望は任意（optional）（2026-10-16）
+  function badge(optional) {
+    return optional ? '<span class="form-optional">任意</span>' : '<span class="form-required">必須</span>';
+  }
+  function datePicker(n, label, optional) {
     return '' +
       '<div class="form-group">' +
-        '<label class="form-label" for="f-date' + n + '">' + label + '日 <span class="form-required">必須</span></label>' +
+        '<label class="form-label" for="f-date' + n + '">' + label + '日 ' + badge(optional) + '</label>' +
         '<div class="dp" data-input="f-date' + n + '">' +
-          '<input type="text" id="f-date' + n + '" name="date' + n + '" class="form-input dp-input" readonly placeholder="日付を選択" autocomplete="off" required>' +
+          '<input type="text" id="f-date' + n + '" name="date' + n + '" class="form-input dp-input" readonly placeholder="日付を選択" autocomplete="off"' + (optional ? '' : ' required') + '>' +
           '<div class="dp-panel" hidden>' +
             '<div class="dp-head">' +
               '<button type="button" class="dp-nav dp-prev" aria-label="前の月">&#8249;</button>' +
@@ -65,16 +69,18 @@
             '<div class="dp-week"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>' +
             '<div class="dp-grid"></div>' +
             '<p class="dp-note"><span class="dp-note-closed"></span><span class="dp-note-period" hidden></span></p>' +
+            (optional ? '<button type="button" class="dp-clear" hidden>日付の選択を解除</button>' : '') +
           '</div>' +
         '</div>' +
       '</div>';
   }
-  function timeSelect(n, label) {
+  function timeSelect(n, label, optional) {
     return '' +
       '<div class="form-group">' +
-        '<label class="form-label" for="f-time' + n + '">' + label + '時間 <span class="form-required">必須</span></label>' +
-        '<select id="f-time' + n + '" name="time' + n + '" class="form-select" required>' +
-          '<option value="" disabled selected>時間を選択</option>' +
+        '<label class="form-label" for="f-time' + n + '">' + label + '時間 ' + badge(optional) + '</label>' +
+        '<select id="f-time' + n + '" name="time' + n + '" class="form-select"' + (optional ? '' : ' required') + '>' +
+          // 任意の欄は「時間を選択」に戻せるようにする（選んだあとで取り消せる）
+          '<option value=""' + (optional ? '' : ' disabled') + ' selected>時間を選択</option>' +
           TIMES.map(function (t) { return '<option value="' + t + '">' + t + '</option>'; }).join('') +
         '</select>' +
       '</div>';
@@ -104,7 +110,7 @@
             '<hr class="form-divider">' +
             '<p class="form-heading">ご希望の見学日時</p>' +
             '<div class="form-row">' + datePicker(1, '第一希望') + timeSelect(1, '第一希望') + '</div>' +
-            '<div class="form-row">' + datePicker(2, '第二希望') + timeSelect(2, '第二希望') + '</div>' +
+            '<div class="form-row">' + datePicker(2, '第二希望', true) + timeSelect(2, '第二希望', true) + '</div>' +
             '<div class="form-notice">' +
               '<p>※翌日以降の日付をご指定ください<br>※当日のご予約は、お電話にてお申込み下さい<br><a href="tel:0120021541">0120-021-541</a></p>' +
               '<p class="form-notice__closed">※毎週' + SETTINGS.CLOSED_DAYS.map(function (n) { return DAY_LABEL[n]; }).join('・') + '曜日定休</p>' +
@@ -297,6 +303,7 @@
         var title = dp.querySelector('.dp-title');
         var prev = dp.querySelector('.dp-prev');
         var next = dp.querySelector('.dp-next');
+        var clearBtn = dp.querySelector('.dp-clear');   // 任意の欄（第二希望日）だけ
         if (!input || !panel) return;
 
         var view = new Date(MIN.getFullYear(), MIN.getMonth(), 1);
@@ -340,6 +347,7 @@
           }
           popup.querySelectorAll('.dp-panel').forEach(function (p) { if (p !== panel) p.hidden = true; });
           render();
+          if (clearBtn) clearBtn.hidden = !input.value;   // 日付を選んでいるときだけ「解除」を出す
           panel.hidden = false;
         }
         function close() { panel.hidden = true; }
@@ -372,6 +380,12 @@
           input.dispatchEvent(new Event('change', { bubbles: true }));
           close();
         });
+        if (clearBtn) clearBtn.addEventListener('click', function () {
+          input.value = '';
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+          close();
+        });
         document.addEventListener('click', function (e) { if (!dp.contains(e.target)) close(); });
       });
     })();
@@ -394,22 +408,26 @@
        「確認画面へ進む」ボタン：必須項目と同意チェックがそろうと押せる
        --------------------------------------------------------- */
     var submitBtn = document.getElementById('f-submit');
-    var requiredIds = ['f-date1', 'f-time1', 'f-date2', 'f-time2', 'f-lastname', 'f-firstname', 'f-tel', 'f-email', 'f-email2'];
-    var agreeChk = document.getElementById('f-agree');
+    // 確認する欄（画面の上から順）。第二希望（日・時間）は任意（2026-10-16）
+    var checkIds = ['f-date1', 'f-time1', 'f-date2', 'f-time2', 'f-lastname', 'f-firstname', 'f-tel', 'f-email', 'f-email2', 'f-agree'];
+    // 第二希望は、日付と時間の両方を入れるか、両方とも空にする（片方だけのときは、もう片方を入れてもらう）
+    var PAIR = { 'f-date2': 'f-time2', 'f-time2': 'f-date2' };
 
-    function updateBtn() {
-      var filled = requiredIds.every(function (id) {
-        var el = document.getElementById(id);
-        return el && el.value.trim() !== '';
-      });
-      submitBtn.classList.toggle('is-ready', filled && agreeChk.checked);
+    function isEmpty(el) { return el.type === 'checkbox' ? !el.checked : el.value.trim() === ''; }
+    function isMissing(el) {
+      if (!isEmpty(el)) return false;
+      var partner = PAIR[el.id];
+      return partner ? !isEmpty(document.getElementById(partner)) : true;
     }
-    requiredIds.forEach(function (id) {
+    function updateBtn() {
+      var ok = checkIds.every(function (id) { return !isMissing(document.getElementById(id)); });
+      submitBtn.classList.toggle('is-ready', ok);
+    }
+    checkIds.forEach(function (id) {
       var el = document.getElementById(id);
       el.addEventListener('input', updateBtn);
       el.addEventListener('change', updateBtn);
     });
-    agreeChk.addEventListener('change', updateBtn);
     updateBtn();
 
     /* ---------------------------------------------------------
@@ -452,21 +470,25 @@
         el.removeAttribute('aria-describedby');
       }
     }
-    function isEmpty(el) { return el.type === 'checkbox' ? !el.checked : el.value.trim() === ''; }
-    // 入力したら、その欄の赤枠とメッセージを消す
-    requiredIds.concat('f-agree').forEach(function (id) {
+    // 入力したら、足りている欄の赤枠とメッセージを消す（第二希望は、片方を空に戻したときにもう片方も消える）
+    function refreshErrors() {
+      checkIds.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el.classList.contains('is-error') && !isMissing(el)) setError(el, false);
+      });
+    }
+    checkIds.forEach(function (id) {
       var el = document.getElementById(id);
-      function check() { if (el.classList.contains('is-error') && !isEmpty(el)) setError(el, false); }
-      el.addEventListener('input', check);
-      el.addEventListener('change', check);
+      el.addEventListener('input', refreshErrors);
+      el.addEventListener('change', refreshErrors);
     });
     function checkRequired() {
       var first = null;
-      requiredIds.concat('f-agree').forEach(function (id) {
+      checkIds.forEach(function (id) {
         var el = document.getElementById(id);
-        var empty = isEmpty(el);
-        setError(el, empty);
-        if (empty && !first) first = el;
+        var missing = isMissing(el);
+        setError(el, missing);
+        if (missing && !first) first = el;
       });
       if (!first) return true;
       first.scrollIntoView({ block: 'center', behavior: 'smooth' });
@@ -474,7 +496,7 @@
       return false;
     }
     function clearErrors() {
-      requiredIds.concat('f-agree').forEach(function (id) { setError(document.getElementById(id), false); });
+      checkIds.forEach(function (id) { setError(document.getElementById(id), false); });
     }
 
     /* ---------------------------------------------------------
