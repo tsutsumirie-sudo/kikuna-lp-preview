@@ -193,11 +193,26 @@
   cursor:pointer;
   transition:background-color .3s, filter .3s;
 }
+/* 必須の欄がそろうまではグレー。グレーのときも押せる（押すと未入力の欄まで移動して赤枠とメッセージで知らせる。js/form.js）
+   （以前は pointer-events:none で押しても何も起きず、どこが足りないか分からなかった。2026-10-16） */
 .form-btn:not(.is-ready){
   color:var(--c-white);
   background:#cfc9bd;
-  pointer-events:none;
-  cursor:not-allowed;
+}
+@media (hover:hover){
+  .form-btn:not(.is-ready):hover{ filter:none; }
+}
+/* 未入力のまま「確認画面へ進む」を押したとき */
+.form-input.is-error,
+.form-select.is-error{
+  border-color:#c0392b;
+  box-shadow:0 0 0 .3rem rgba(192,57,43,.15);
+}
+.form-check.is-error{ outline:.2rem solid #c0392b; outline-offset:.2rem; }
+.form-error{
+  margin-top:.6rem;
+  font-size:1.25rem; font-weight:700; line-height:1.5;
+  color:#c0392b;
 }
 .form-submit-note{
   margin-top:1.2rem;

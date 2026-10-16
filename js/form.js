@@ -237,6 +237,7 @@
       root.classList.remove('is-modal-open');
       form.reset();
       updateBtn();
+      clearErrors();
       window.scrollTo(0, 0);
     });
 
@@ -412,6 +413,71 @@
     updateBtn();
 
     /* ---------------------------------------------------------
+       未入力の欄を知らせる（ボタンがグレーのまま押したとき）
+       未入力の欄をすべて赤枠にして下にメッセージを出し、いちばん上の欄まで移動する。
+       日付欄は直接入力できない（readonly）ため、ブラウザの「入力してください」の確認が働かない。
+       空白だけの名前もブラウザは入力済みとみなすので、ここで確認する（2026-10-16）
+       --------------------------------------------------------- */
+    // 欄の真上に見出しがあるので短く（スマホの半分幅の欄でも1行に収まるように）
+    var ERROR_TEXT = {
+      'f-date1': '選択してください', 'f-time1': '選択してください',
+      'f-date2': '選択してください', 'f-time2': '選択してください',
+      'f-lastname': '入力してください', 'f-firstname': '入力してください',
+      'f-tel': '入力してください', 'f-email': '入力してください', 'f-email2': '入力してください',
+      'f-agree': 'チェックを入れてください'
+    };
+    function errorBox(el) {
+      var group = el.closest('.form-group, .form-agree');
+      var msg = group.querySelector('.form-error');
+      if (!msg) {
+        msg = document.createElement('p');
+        msg.className = 'form-error';
+        msg.id = el.id + '-error';
+        group.appendChild(msg);
+      }
+      return msg;
+    }
+    function setError(el, on) {
+      el.classList.toggle('is-error', on);
+      var msg = el.closest('.form-group, .form-agree').querySelector('.form-error');
+      if (on) {
+        msg = errorBox(el);
+        msg.textContent = ERROR_TEXT[el.id];
+        msg.hidden = false;
+        el.setAttribute('aria-invalid', 'true');
+        el.setAttribute('aria-describedby', msg.id);
+      } else {
+        if (msg) msg.hidden = true;
+        el.removeAttribute('aria-invalid');
+        el.removeAttribute('aria-describedby');
+      }
+    }
+    function isEmpty(el) { return el.type === 'checkbox' ? !el.checked : el.value.trim() === ''; }
+    // 入力したら、その欄の赤枠とメッセージを消す
+    requiredIds.concat('f-agree').forEach(function (id) {
+      var el = document.getElementById(id);
+      function check() { if (el.classList.contains('is-error') && !isEmpty(el)) setError(el, false); }
+      el.addEventListener('input', check);
+      el.addEventListener('change', check);
+    });
+    function checkRequired() {
+      var first = null;
+      requiredIds.concat('f-agree').forEach(function (id) {
+        var el = document.getElementById(id);
+        var empty = isEmpty(el);
+        setError(el, empty);
+        if (empty && !first) first = el;
+      });
+      if (!first) return true;
+      first.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      first.focus({ preventScroll: true });   // 日付欄はカレンダーが開く
+      return false;
+    }
+    function clearErrors() {
+      requiredIds.concat('f-agree').forEach(function (id) { setError(document.getElementById(id), false); });
+    }
+
+    /* ---------------------------------------------------------
        入力 → 確認画面
        --------------------------------------------------------- */
     var confirmTable = document.getElementById('popupConfirmTable');
@@ -419,6 +485,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
+      if (!checkRequired()) return;
       if (isClosedDay(d1.value)) {
         alert('第一希望日が定休日です。別の日付をお選びください。');
         d1.value = '';
