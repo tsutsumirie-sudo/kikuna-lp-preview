@@ -57,7 +57,8 @@
 /* --- メイン写真 --- */
 .fv__hero{
   position:relative;
-  aspect-ratio:750 / 1014;
+  /* 2026-10-16 ヘッダーと「3」のすき間を倍に：キャッチコピーと写真を0.73rem下げ、写真の上に同じだけ空を足して枠も下へ伸ばした（玄関までの見え方は同じ） */
+  aspect-ratio:1608 / 2205;
   overflow:hidden;
 }
 .fv__hero picture{ display:block; height:100%; }
@@ -70,7 +71,7 @@
 /* 2026-10-08 画像/copy_3.png に差し替え（「3」が大きくなった版）。文字の大きさ・位置は前の画像と同じになるように置く */
 .fv__copy{
   position:absolute;
-  top:.73rem; left:3rem;
+  top:1.46rem; left:3rem;   /* 2026-10-16 .73rem → 1.46rem（ヘッダーとのすき間を倍に。写真も同じだけ下げた） */
   width:30.36rem;
 }
 
@@ -201,9 +202,10 @@
 
   /* メイン写真：上と左右はPCカンプと同じ範囲。下は玄関が見えるところまで伸ばす（2026-10-09）
      写真の縦横比のまま表示して、どの画面幅でも上の空（キャッチコピー）から玄関まで切れないようにする */
-  .fv__hero{ aspect-ratio:1706 / 2105; }
+  /* 2026-10-16 ヘッダーと「3」のすき間を倍に：キャッチコピーと写真を1.71vw下げ、写真の上に同じだけ空を足して枠も下へ伸ばした */
+  .fv__hero{ aspect-ratio:1706 / 2134; }
   .fv__copy{
-    top:min(1.71vw, 24.6px); left:50%;
+    top:calc(min(1.71vw, 24.6px) + 1.71vw); left:50%;
     width:min(70.84vw, 1020px);
     transform:translateX(-50%);
   }
