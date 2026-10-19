@@ -88,33 +88,22 @@
   });
 
   /* ---------------------------------------------------------
-     ふわふわ浮いている予約ボタン：×を押すと消える
-     --------------------------------------------------------- */
-  document.querySelectorAll('[data-float-cta]').forEach(function (box) {
-    var close = box.querySelector('[data-float-cta-close]');
-    if (close) close.addEventListener('click', function () {
-      box.classList.add('is-closed');
-      armStickyCta();
-    });
-  });
-
-  /* ---------------------------------------------------------
-     画面下に追従する予約ボタン：ふわふわボタンを×で閉じたあと、
-     そこから1画面ぶんくらいスクロールすると下から出てくる（出たあとはずっと表示）
+     画面下に追従する予約ボタン（基本の予約ボタン）：最初の表示では出さず、
+     ページの上から1画面ぶんくらいスクロールすると下から出てくる（出たあとはずっと表示）
+     （2026-10-19 ふわふわの予約ボタンをやめて、最初からこの形に）
      --------------------------------------------------------- */
   var stickyCta = document.querySelector('[data-sticky-cta]');
-
-  function armStickyCta() {
-    if (!stickyCta) return;
-    var startY = window.scrollY;
-    var handler = onScrollFrame(function () {
-      if (Math.abs(window.scrollY - startY) < window.innerHeight) return;
+  if (stickyCta) {
+    var showStickyCta = function () {
+      if (window.scrollY < window.innerHeight) return;
       stickyCta.classList.add('is-shown');
       stickyCta.removeAttribute('aria-hidden');
       stickyCta.removeAttribute('tabindex');
       document.body.classList.add('has-sticky-cta');   // いちばん下のフッターが隠れないよう、ボタンの高さぶん余白を足す
-      window.removeEventListener('scroll', handler);
-    });
+      window.removeEventListener('scroll', stickyHandler);
+    };
+    var stickyHandler = onScrollFrame(showStickyCta);
+    afterFirstPaint(showStickyCta);   // 途中の位置で開いた（再読み込みなど）ときは、すぐ出す
   }
 
   /* ---------------------------------------------------------

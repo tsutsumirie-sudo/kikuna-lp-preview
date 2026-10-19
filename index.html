@@ -55,7 +55,7 @@
 
 <!-- CSS：セクションごとのCSS（css/common.css〜form.css の13ファイル）を、表示を速くするため1つにまとめたもの。
      CSSを直したら _tools/build_css.py を実行して作り直す（作業用のセクション別HTMLは今までどおり分かれたCSSを読む） -->
-<link rel="stylesheet" href="css/kikuna.min.css?v=06198d60">
+<link rel="stylesheet" href="css/kikuna.min.css?v=e1b42670">
 </head>
 <body>
 <!--
@@ -1149,19 +1149,9 @@
   </footer>
 
   <!-- =========================================================
-       ふわふわ浮いている予約ボタン（画面の左下に固定。×で閉じる）
-       ×は画像に含まれているので、その上に透明の閉じるボタンを重ねる
-       ========================================================= -->
-  <div class="float-cta" data-float-cta>
-    <a class="float-cta__link" href="#form">
-      <img src="img/float_reserve.png" width="402" height="426" alt="菊名 完成見学会 予約">
-    </a>
-    <button class="float-cta__close" type="button" data-float-cta-close aria-label="予約ボタンを閉じる"></button>
-  </div>
-
-  <!-- =========================================================
        画面下に追従する予約ボタン
-       ふわふわの予約ボタンを×で閉じたあと、1画面ぶんくらいスクロールすると下から出てくる（js/common.js）
+       最初の表示では出さず、1画面ぶんくらいスクロールすると下から出てくる（出たあとはずっと表示。js/common.js）
+       2026-10-19 ふわふわの予約ボタンをやめて、これを基本の予約ボタンにした
        ========================================================= -->
   <a class="sticky-cta" href="#form" data-sticky-cta aria-hidden="true" tabindex="-1">【菊名】完成見学会予約</a>
 
@@ -1178,7 +1168,7 @@
   </dialog>
 
 </div>
-<script src="js/common.js?v=3da38cf0"></script>
+<script src="js/common.js?v=3eadef5e"></script>
 <script src="js/01_firstview.js?v=b5136d08"></script>
 <script src="js/03_feature.js?v=4f6212d1"></script>
 <script src="js/07_company.js?v=1f8e28ed"></script>
