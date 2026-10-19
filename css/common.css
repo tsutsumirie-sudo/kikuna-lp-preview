@@ -366,12 +366,18 @@ img[data-lsrc]{ font-size:0; color:transparent; overflow:hidden; min-height:0; }
    画面下に追従する予約ボタン（画像/追従CTA.png：オレンジの帯に白文字）
    最初の表示では出さず、1画面ぶんくらいスクロールすると下から出る（js/common.js）。2026-10-19〜基本の予約ボタン
    ========================================================= */
+:root{
+  /* バーの高さは px で固定（画面幅で変わらない）。2026-10-19 スマホ 約50〜55px → 65px、iPad 53.9px → 70px。PC は今まで（53.9px）のまま */
+  --sticky-cta-h:65px;
+}
+@media (min-width:768px) and (max-width:1024px){ :root{ --sticky-cta-h:70px; } }   /* iPad */
+@media (min-width:1025px){ :root{ --sticky-cta-h:4.9rem; } }                        /* PC */
 .sticky-cta{
   position:fixed; left:0; right:0; bottom:0; z-index:90;
   display:flex; align-items:center; justify-content:center;
-  height:4.9rem;
+  height:var(--sticky-cta-h);
   padding-right:2.9rem;    /* カンプ（画像/追従CTA.png）と同じく、文字を中央より少し左に置く */
-  font-size:2rem; font-weight:500; line-height:1; letter-spacing:0;
+  font-size:min(2rem, 23px); font-weight:500; line-height:1; letter-spacing:0;   /* 高さを固定したので、横向きのスマホなどで文字だけ大きくならないよう23pxまで */
   color:var(--c-white);
   background:var(--c-orange);
   transform:translateY(100%);
@@ -380,7 +386,7 @@ img[data-lsrc]{ font-size:0; color:transparent; overflow:hidden; min-height:0; }
   -webkit-tap-highlight-color:transparent;
 }
 .sticky-cta.is-shown{ transform:none; visibility:visible; }
-body.has-sticky-cta{ padding-bottom:4.9rem; }
+body.has-sticky-cta{ padding-bottom:var(--sticky-cta-h); }
 
 @media (prefers-reduced-motion: reduce){
   .sticky-cta{ transition:none; }
