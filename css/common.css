@@ -379,11 +379,19 @@ img[data-lsrc]{ font-size:0; color:transparent; overflow:hidden; min-height:0; }
   padding-right:2.9rem;    /* カンプ（画像/追従CTA.png）と同じく、文字を中央より少し左に置く */
   font-size:min(2rem, 23px); font-weight:500; line-height:1; letter-spacing:0;   /* 高さを固定したので、横向きのスマホなどで文字だけ大きくならないよう23pxまで */
   color:var(--c-white);
-  background:var(--c-orange);
+  /* オレンジは下の ::before に塗る（バー自体は透明）。iPhone の Safari（iOS 26〜）は、画面の下に固定した要素の背景色で
+     Safari のツールバーの後ろまで塗るため、上にスクロールしてツールバーが出るとバーが太く見えていた。
+     Safari は内側の飾り（::before など）の色は使わないので、ツールバーの後ろはページの背景色になる（2026-10-19） */
+  background:transparent;
   transform:translateY(100%);
   visibility:hidden;
   transition:transform .4s ease, visibility .4s;
   -webkit-tap-highlight-color:transparent;
+}
+.sticky-cta::before{
+  content:"";
+  position:absolute; inset:0; z-index:-1;
+  background:var(--c-orange);
 }
 .sticky-cta.is-shown{ transform:none; visibility:visible; }
 body.has-sticky-cta{ padding-bottom:var(--sticky-cta-h); }
