@@ -142,6 +142,8 @@
   object-fit:cover;
   border-radius:.6rem;
 }
+/* シューズインクローゼット：床ばかりにならないよう、上寄り（上から20%）で切り取る（拡大表示はそのまま。2026-10-23 確認用） */
+.fv__track img.fv__img--upper{ object-position:50% 20%; }
 /* 2周分並べているので、ちょうど半分動いたら先頭に戻すと切れ目なくつながる */
 @keyframes fvMarquee{
   from{ transform:translateX(0); }
