@@ -8,7 +8,7 @@
      自動スクロール写真
      - いつもはゆっくり左へ流れる（1周の時間は CSS の --marquee-duration）
      - 指（PCはマウス）で左右に動かせる。離すと少し惰性で進み、少し待ってから自動で流れはじめる
-     - タップした写真は拡大表示（#fvPhotoModal）
+     - タップした写真は拡大表示（横にスワイプして次の写真も見られる。下のギャラリー）
      JS が動かない環境では、CSS のアニメーションだけで流れる
      --------------------------------------------------------- */
   var slider = document.querySelector('.fv__slider');
@@ -143,35 +143,148 @@
 
 
   /* ---------------------------------------------------------
-     タップした写真を拡大表示（#photoModal。開く・閉じる・大きさは js/common.js で共通）
-     （拡大用の大きい画像は slide_XX_l.jpg。読み込むまでは小さい画像を表示）
-     小さい画像は画面に合わせて slide_XX_360 / _540 / slide_XX（720px）から選ばれる（2026-10-09 表示を速くするため）
+     タップした写真を拡大表示（ギャラリー）（2026-10-23 確認用：1枚ずつの拡大から変更）
+     - 自動スクロールの写真（1周分）を横に並べたポップアップ。指で横にスワイプ／左右の矢印／キーボードの←→で次の写真へ
+     - 写真の下に説明文、いちばん下に「3 / 11」のような番号。端の写真では、その先の矢印は出さない
+     - 拡大用の大きい画像は slide_XX_l.jpg（表示している写真と両隣だけ読み込む。読み込むまでは小さい画像）
+     - 写真以外（背景・×）をタップすると閉じる。Escキーでも閉じる
+     - 見た目（暗い背景・×・説明文）は 3・5 の写真の拡大（#photoModal、js/common.js）と同じ
      --------------------------------------------------------- */
-  var modal = document.getElementById('photoModal');
-  if (!modal || !modal.openPhoto) return;
-  var openedHere = false;   // この写真から開いたとき（閉じたら自動スクロールを再開）
+  if (typeof window.HTMLDialogElement !== 'function') return;
+
+  var photos = [];
+  for (var p = 0; p < half; p++) {
+    var im = items[p].querySelector('img');
+    var small = im.getAttribute('data-lsrc') || im.getAttribute('src');   // 最初の描画のあとに読む写真は data-lsrc
+    photos.push({
+      small: small,
+      large: small.replace(/(_\d+)?\.jpg$/, '_l.jpg'),                   // slide_01_540.jpg → slide_01_l.jpg
+      w: +im.getAttribute('width'), h: +im.getAttribute('height'),       // 縦横比は元の写真（720px）の大きさで
+      alt: im.alt
+    });
+  }
+
+  var gal = document.createElement('dialog');
+  gal.className = 'photo-modal fv-gallery';
+  gal.setAttribute('aria-label', '写真の拡大表示');
+  gal.innerHTML =
+    '<div class="fv-gallery__track" tabindex="-1"></div>' +
+    '<button class="fv-gallery__nav fv-gallery__nav--prev" type="button" aria-label="前の写真"></button>' +
+    '<button class="fv-gallery__nav fv-gallery__nav--next" type="button" aria-label="次の写真"></button>' +
+    '<p class="fv-gallery__count" aria-live="polite"></p>' +
+    '<button class="photo-modal__close" type="button" aria-label="閉じる"></button>';
+  var gTrack = gal.querySelector('.fv-gallery__track');
+  var gPrev = gal.querySelector('.fv-gallery__nav--prev');
+  var gNext = gal.querySelector('.fv-gallery__nav--next');
+  var gCount = gal.querySelector('.fv-gallery__count');
+  var gImgs = photos.map(function (ph) {
+    var fig = document.createElement('figure');
+    fig.className = 'fv-gallery__slide';
+    var img = document.createElement('img');
+    img.className = 'fv-gallery__img';
+    img.alt = ph.alt;
+    img.width = ph.w;
+    img.height = ph.h;
+    img.decoding = 'async';
+    img.draggable = false;
+    var cap = document.createElement('figcaption');
+    cap.className = 'photo-modal__caption';
+    cap.textContent = ph.alt;
+    fig.appendChild(img);
+    fig.appendChild(cap);
+    gTrack.appendChild(fig);
+    return img;
+  });
+  document.body.appendChild(gal);
+
+  var gIndex = 0;
+
+  // それぞれの写真を、画面に収まるいちばん大きいサイズにする（小さい画像→大きい画像に替わっても大きさが変わらない）
+  function fitAll() {
+    gImgs.forEach(function (img, n) {
+      var fig = img.parentNode, cap = img.nextSibling;
+      var cs = getComputedStyle(fig);
+      var w = fig.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var h = fig.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
+            - cap.offsetHeight - parseFloat(getComputedStyle(cap).marginTop);
+      var scale = Math.min(w / photos[n].w, h / photos[n].h);
+      img.style.width = Math.floor(photos[n].w * scale) + 'px';
+      img.style.height = Math.floor(photos[n].h * scale) + 'px';
+    });
+  }
+
+  function loadLarge(n) {
+    var img = gImgs[n];
+    if (!img || img.dataset.large) return;
+    img.dataset.large = '1';
+    var big = new Image();
+    big.onload = function () { img.src = photos[n].large; };
+    big.src = photos[n].large;
+  }
+
+  function update(n) {
+    gIndex = Math.max(0, Math.min(photos.length - 1, n));
+    gCount.textContent = (gIndex + 1) + ' / ' + photos.length;
+    gPrev.classList.toggle('is-hidden', gIndex === 0);
+    gNext.classList.toggle('is-hidden', gIndex === photos.length - 1);
+    loadLarge(gIndex); loadLarge(gIndex - 1); loadLarge(gIndex + 1);
+  }
+
+  function goTo(n, smooth) {
+    n = Math.max(0, Math.min(photos.length - 1, n));
+    gTrack.scrollTo({ left: n * gTrack.clientWidth, behavior: smooth ? 'smooth' : 'auto' });
+    update(n);
+  }
+
+  var gTicking = false;
+  gTrack.addEventListener('scroll', function () {
+    if (gTicking) return;
+    gTicking = true;
+    requestAnimationFrame(function () {
+      gTicking = false;
+      if (gTrack.clientWidth) update(Math.round(gTrack.scrollLeft / gTrack.clientWidth));
+    });
+  }, { passive: true });
+
+  gPrev.addEventListener('click', function () { goTo(gIndex - 1, true); });
+  gNext.addEventListener('click', function () { goTo(gIndex + 1, true); });
+  gal.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(gIndex - 1, true); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(gIndex + 1, true); }
+  });
+  gal.addEventListener('click', function (e) {
+    if (e.target.closest('.fv-gallery__img, .fv-gallery__nav')) return;
+    gal.close();
+  });
+  window.addEventListener('resize', function () {
+    if (!gal.open) return;
+    fitAll();
+    goTo(gIndex, false);
+  });
+
+  function openGallery(n) {
+    gImgs.forEach(function (img, k) { if (!img.getAttribute('src')) img.src = photos[k].small; });
+    gal.showModal();
+    document.documentElement.classList.add('is-modal-open');
+    fitAll();
+    goTo(n, false);
+    gTrack.focus({ preventScroll: true });
+  }
+
+  var openedHere = false;   // 自動スクロールの写真から開いたとき（閉じたら自動スクロールを再開）
 
   track.addEventListener('click', function (e) {
     if (suppressClick) { e.preventDefault(); e.stopPropagation(); return; }
     var btn = e.target.closest('.fv__thumb');
     if (!btn) return;
-    var li = btn.parentElement;
-    var index = Array.prototype.indexOf.call(items, li) % half;   // 2周目の写真も1周目と同じ説明文
-    var img = btn.querySelector('img');
-    var text = items[index].querySelector('img').alt;
-
+    var index = Array.prototype.indexOf.call(items, btn.parentElement) % half;   // 2周目の写真は1周目と同じ写真
     holding = true;
     openedHere = true;
-    modal.openPhoto(img, {
-      large: (img.getAttribute('src') || img.getAttribute('data-lsrc')).replace(/(_\d+)?\.jpg$/, '_l.jpg'),   // slide_01_540.jpg → slide_01_l.jpg
-      width: +img.getAttribute('width'),                                    // 縦横比は元の写真（720px）の大きさで
-      height: +img.getAttribute('height'),
-      alt: text,
-      caption: text
-    });
+    openGallery(index);
   });
 
-  modal.addEventListener('close', function () {
+  gal.addEventListener('close', function () {
+    document.documentElement.classList.remove('is-modal-open');
     if (!openedHere) return;
     openedHere = false;
     holding = false;

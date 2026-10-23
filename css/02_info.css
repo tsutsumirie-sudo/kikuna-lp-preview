@@ -2,52 +2,47 @@
 
 /* =========================================================
    2. 見学会案内
+   2026-10-23 確認用：指示画像（8月_菊名LP/指示画像/2_見学会情報_20261023.png）の内容・間隔に変更
+   （注意書きを見学可能日の下へ／場所に「MAP」／8の交通アクセス・費用などをここにも／「菊名で開催中」のタグは外した）
    ========================================================= */
 
 .info{
   position:relative;
-  padding-top:.6rem;   /* 「菊名で開催中」タグが紙の上にはみ出す分 */
+  padding-top:.6rem;
 }
 
-/* 全セクションをつなげたページ（index.html）では、1 の石目の背景の上に
-   「菊名で開催中」のタグと紙のちぎれた縁を重ねる（白い隙間を作らない）。
-   重ねたぶん 1 の下の余白を広げるので、紙の位置は変わらない
-   （.83rem＝タグがはみ出す .6rem＋ちぎれた縁 .23rem） */
+/* 全セクションをつなげたページ（index.html）では、1 の石目の背景の上に紙の上の縁を少し重ねる
+   （重ねたぶん 1 の下の余白を広げるので、紙の位置は変わらない） */
 .fv:has(+ .info) .fv__lower{ padding-bottom:calc(4.6rem + .83rem); }
 .fv + .info{ margin-top:-.83rem; }
 
-/* --- 「菊名で開催中」タグ --- */
-.info__tag{
-  position:absolute; z-index:2;
-  top:.05rem; left:3.6rem;
-  width:7.6rem;
-}
-
-/* --- 濃いグレーの帯（2026-10-08 上下の縁をちぎれた紙の形から直線に変更） --- */
+/* --- 濃いグレーの帯（背景はすべてこの色） --- */
 .info__paper{
-  padding:4.3rem 0 2.7rem;
+  padding:3.3rem 0 3rem;
   color:var(--c-white);
   line-height:1;
   text-align:center;
   background:var(--c-dark);
 }
 
-/* --- 区切り線 --- */
+/* --- 区切り線（見出しの下・注意書きの下・時間の下・場所の下・交通アクセスの下） --- */
 .info__head,
-.info__item{ position:relative; }
+.info__item,
+.info__notes{ position:relative; }
 .info__head::after,
-.info__item::after{
+.info__item::after,
+.info__notes::after{
   content:"";
   position:absolute; left:50%; bottom:0;
   width:26.35rem; height:var(--line-thin);
   background:var(--c-white);
   transform:translateX(-50%);
 }
+.info__item--day::after{ display:none; }   /* 見学可能日の下の線は、注意書きの下に引く */
 
 /* --- 見出し --- */
 .info__head{ padding-bottom:1.05rem; }
 .info__sub{
-  padding-left:1.55rem;
   font-size:1.47rem; font-weight:500;
 }
 .info__title{
@@ -66,55 +61,135 @@
   color:var(--c-yellow);
 }
 
-.info__item--day{ padding:2.54rem 0 2.64rem; }
+.info__item--day{ padding:2.25rem 0 0; }
 .info__day{
   margin-top:.83rem;
   font-size:2rem;
 }
 
-.info__item--time{ padding:2.37rem 0 2.69rem; }
+/* 見学可能日の注意書き */
+.info__notes{
+  padding:1.4rem 0 1.55rem 2.85rem;
+  font-size:1.2rem; font-weight:400; line-height:2.1rem;
+  text-align:left;
+}
+
+.info__item--time{ padding:1.2rem 0 1.45rem; }
 .info__time{
   margin-top:.6rem;
   font-size:2.27rem;
 }
 
-.info__item--place{ padding:2.94rem 0 2.77rem; }
-.info__address{
-  display:block;
+.info__item--place{ padding:1.1rem 0 2.65rem; }
+.info__item--place dd{
+  display:flex; align-items:center; justify-content:center; gap:.6rem;
   margin-top:.6rem;
-  font-size:1.88rem;   /* 1行のまま左右に20pxの余白が残る大きさ */
 }
-.info__walk{
-  display:block;
-  margin-top:.79rem;
-  font-size:1.75rem;
+.info__address{
+  font-size:1.7rem; font-weight:500;   /* MAP と1行に並ぶ大きさ（指示画像に合わせる） */
+}
+/* 「MAP」：押すと Googleマップ（別のタブ） */
+.info__map{
+  flex:none;
+  padding:.3rem .35rem;
+  border:.1rem solid var(--c-white);
+  border-radius:.3rem;
+  font-size:1.35rem; font-weight:500; line-height:1; letter-spacing:.02em;
+  color:var(--c-white);
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .2s, color .2s;
+}
+@media (hover:hover){
+  .info__map:hover{ color:var(--c-dark); background:var(--c-white); }
+}
+.info__map:focus-visible{ outline:.2rem solid var(--c-yellow); outline-offset:.2rem; }
+
+/* --- 交通アクセス（8 と同じ内容） --- */
+.info__item--access{ padding:1.5rem 0 2.55rem; }
+.info__item--access dd{
+  display:flex; flex-direction:column; align-items:center;
   color:var(--c-white);
 }
-
-/* --- 注意書き --- */
-.info__notes{
-  padding:2.31rem 0 0 2.85rem;
-  font-size:1.2rem; font-weight:400; line-height:2.1rem;
+.info__line{
+  margin-top:.75rem;
+  font-size:1.6rem; font-weight:700;
+}
+.info__access{
+  margin-top:.65rem;
+  font-size:2.27rem; font-weight:700;
+  color:var(--c-yellow);
+}
+.info__access-notes{
+  display:block;
+  width:33rem;
+  margin-top:1.4rem;
+  font-size:1.2rem; font-weight:400; line-height:1.8rem;
   text-align:left;
+}
+.info__access-notes span{
+  display:block;
+  padding-left:1em;
+  text-indent:-1em;
+}
+
+/* --- 来場・見学費用／駐車場／土地探し相談（3つ並び。8 と同じ） --- */
+.info__points{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  width:33rem;
+  margin:2.6rem auto 0;
+}
+.info__point{
+  display:flex; flex-direction:column; align-items:center;
+  padding:.2rem 0 .3rem;
+}
+.info__point + .info__point{ border-left:var(--line-thin) solid rgba(255,255,255,.6); }
+.info__point dt{
+  font-size:1.25rem; font-weight:500;
+}
+.info__point dd{
+  display:flex; flex-direction:column; align-items:center;
+  margin-top:.8rem;
+  font-size:2.27rem; font-weight:700;
+  color:var(--c-yellow);
+}
+.info__point dd small{
+  margin-top:.55rem;
+  font-size:1.2rem; font-weight:500;
+  color:var(--c-white);
+}
+.info__points-note,
+.info__kids{
+  width:33rem;
+  margin:1.8rem auto 0;
+  padding-left:1em;
+  text-indent:-1em;
+  font-size:1.2rem; font-weight:400; line-height:1.9rem;
+  text-align:left;
+}
+.info__kids{
+  margin-top:.4rem;
+  font-size:1.35rem; font-weight:700;
+  color:var(--c-yellow);
 }
 
 
 /* =========================================================
    PC・タブレット（768px以上）
-   タブレット：見学可能日と時間を横に2つ、場所はその下に1行で
+   タブレット：見学可能日と時間を横に2つ、場所はその下に1行で、注意書きはその下
    PC（1200px以上）：日・時間・場所を横に3つ並べる（区切りは縦線）
+   その下に交通アクセス、来場・見学費用などの3つ並び
    ========================================================= */
 @media (min-width:768px){
   .info{ padding-top:1rem; }
   .fv:has(+ .info) .fv__lower{ padding-bottom:calc(7.4rem + 1.4rem); }   /* 重なるぶん（1.4rem）を足す */
   .fv + .info{ margin-top:-1.4rem; }
-  .info__tag{ top:.2rem; left:calc(50% - 25.2rem); width:9.4rem; }   /* 右端を「現地完成見学会開催」の左端の上に */
 
   .info__paper{ padding:5.6rem 0 4.4rem; }
   .info__head{ padding-bottom:2.2rem; }
   .info__head::after{ width:min(64rem, 90%); }
-  .info__sub{ padding-left:0; font-size:1.7rem; }
   .info__title{ margin-top:1.6rem; padding-left:0; font-size:3.6rem; }
+  .info__sub{ font-size:1.7rem; }
 
   .info__list{
     display:grid;
@@ -123,8 +198,14 @@
     margin:0 auto;
     border-bottom:var(--line-thin) solid var(--c-white);
   }
-  .info__item{ padding:3.4rem 1.6rem 3.6rem; }
-  .info__item::after{ display:none; }
+  .info__item--day{ order:1; }
+  .info__item--time{ order:2; }
+  .info__item--place{ order:3; }
+  .info__notes{ order:4; }
+
+  .info__list .info__item{ padding:3.4rem 1.6rem 3.6rem; }
+  .info__list .info__item::after,
+  .info__notes::after{ display:none; }
   .info__item--time::before,
   .info__item--place::before{
     content:"";
@@ -137,17 +218,38 @@
   .info__item dt{ font-size:1.6rem; }
   .info__day{ margin-top:1.2rem; font-size:2.2rem; }
   .info__time{ margin-top:1.1rem; font-size:2.6rem; }
-  .info__address{ margin-top:1.1rem; font-size:2rem; }
-  .info__walk{ margin-top:.9rem; font-size:1.8rem; }
+  .info__item--place dd{ margin-top:1.1rem; gap:1rem; }
+  .info__address{ font-size:2rem; }
+  .info__map{ padding:.4rem .6rem; font-size:1.4rem; }
 
   .info__notes{
-    padding:2.6rem 0 0;
+    grid-column:1 / -1;
+    padding:0 0 3rem;
     font-size:1.4rem; line-height:2.4rem;
     text-align:center;
   }
+
+  .info__item--access{
+    width:min(var(--pc-max), calc(100% - var(--pc-pad) * 2));
+    margin:0 auto;
+    padding:3.2rem 0 3.4rem;
+  }
+  .info__item--access::after{ width:100%; }
+  .info__line{ margin-top:1rem; font-size:1.8rem; }
+  .info__access{ margin-top:1rem; font-size:2.6rem; }
+  .info__access-notes{ width:auto; margin-top:1.8rem; font-size:1.4rem; line-height:2.4rem; }
+
+  .info__points{ width:calc(100% - var(--pc-pad) * 2); max-width:76rem; margin-top:3.4rem; }
+  .info__point dt{ font-size:1.5rem; }
+  .info__point dd{ margin-top:1rem; font-size:2.8rem; }
+  .info__point dd small{ font-size:1.4rem; }
+  .info__points-note,
+  .info__kids{ width:fit-content; max-width:64rem; margin-top:2.4rem; font-size:1.4rem; line-height:2.4rem; }
+  .info__kids{ margin-top:.4rem; font-size:1.6rem; }
 }
 @media (min-width:1200px){
   .info__list{ grid-template-columns:1.15fr .75fr 1.3fr; }
   .info__item--place{ grid-column:auto; border-top:0; }
   .info__item--place::before{ display:block; }
+  .info__notes{ padding-top:.4rem; }
 }

@@ -134,7 +134,7 @@
 }
 .fv__track li{
   flex:none;
-  width:16.9rem; height:11.9rem;
+  width:20.28rem; height:14.28rem;   /* 2026-10-23 確認用：16.9×11.9rem の120%。写真どうしの間（1rem）はそのまま */
   margin-right:1rem;
 }
 .fv__track img{
@@ -161,6 +161,7 @@
 .fv__slider.is-dragging,
 .fv__slider.is-dragging .fv__thumb{ cursor:grabbing; }
 .fv__thumb{
+  position:relative;
   display:block;
   width:100%; height:100%;
   padding:0; border:0;
@@ -174,8 +175,80 @@
   -webkit-touch-callout:none;
 }
 .fv__thumb:focus-visible{ outline:.2rem solid var(--c-blue); outline-offset:-.2rem; border-radius:.6rem; }
+/* タップすると拡大できる目印：写真の右下に小さな虫めがね（2026-10-23 確認用） */
+.fv__thumb::after{
+  content:"";
+  position:absolute; right:.6rem; bottom:.6rem;
+  width:2.4rem; height:2.4rem;
+  border-radius:50%;
+  background:rgba(0,0,0,.35) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5 20 20M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center / 1.4rem no-repeat;
+  pointer-events:none;
+}
 
-/* 写真の拡大表示（.photo-modal）は 3・5 の小さい写真と共通なので common.css */
+/* --- 写真の拡大（ギャラリー）：横にスワイプして次の写真へ（js/01_firstview.js。2026-10-23 確認用）
+       暗い背景・×・説明文は 3・5 の写真の拡大（.photo-modal、common.css）と共通 --- */
+.fv-gallery__track{
+  display:flex;
+  height:100%;
+  overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+  outline:none;
+}
+.fv-gallery__track::-webkit-scrollbar{ display:none; }
+.fv-gallery__slide{
+  flex:0 0 100%;
+  min-width:0;                  /* 写真のもとの幅（720px）につられて広がらないように */
+  overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  margin:0;
+  padding:6rem 1.5rem 6.4rem;   /* 下は「3 / 11」の番号のぶん */
+  scroll-snap-align:center; scroll-snap-stop:always;
+}
+.fv-gallery__img{
+  max-width:none;               /* 大きさは JS で画面に合わせる */
+  border-radius:.4rem;
+  object-fit:cover;
+  background:#222;
+  -webkit-user-select:none; user-select:none;
+  -webkit-user-drag:none;
+}
+/* 左右の矢印：横に動かせることが分かるよう、半透明の小さな丸でさりげなく（端の写真では、その先の矢印は消す） */
+.fv-gallery__nav{
+  position:absolute; top:50%; z-index:1;
+  width:3.6rem; height:3.6rem;
+  margin-top:-1.8rem;
+  padding:0; border:0; border-radius:50%;
+  background:rgba(255,255,255,.16);
+  cursor:pointer;
+  transition:opacity .2s, background-color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.fv-gallery__nav::before{
+  content:"";
+  position:absolute; top:50%; left:50%;
+  width:1rem; height:1rem;
+  border-top:.2rem solid rgba(255,255,255,.9);
+  border-left:.2rem solid rgba(255,255,255,.9);
+}
+.fv-gallery__nav--prev{ left:.6rem; }
+.fv-gallery__nav--prev::before{ transform:translate(-30%, -50%) rotate(-45deg); }
+.fv-gallery__nav--next{ right:.6rem; }
+.fv-gallery__nav--next::before{ transform:translate(-70%, -50%) rotate(135deg); }
+.fv-gallery__nav.is-hidden{ opacity:0; pointer-events:none; }
+@media (hover:hover){
+  .fv-gallery__nav:hover{ background:rgba(255,255,255,.3); }
+}
+.fv-gallery__nav:focus-visible{ outline:.2rem solid var(--c-white); outline-offset:.2rem; }
+/* 何枚目か（3 / 11） */
+.fv-gallery__count{
+  position:absolute; left:0; right:0; bottom:2.4rem;
+  font-size:1.3rem; font-weight:500; line-height:1; letter-spacing:.12em;
+  text-align:center;
+  color:rgba(255,255,255,.75);
+  pointer-events:none;
+}
 
 /* --- リード文 --- */
 .fv__lead{
@@ -225,6 +298,13 @@
   .fv__lower{ padding:4.6rem 0 7.4rem; }
   .fv__scroll{ font-size:1.5rem; }
   .fv__slider{ margin-top:2.8rem; }
-  .fv__track li{ width:36rem; height:25.2rem; margin-right:1.8rem; }
+  .fv__track li{ width:43.2rem; height:30.24rem; margin-right:1.8rem; }   /* 2026-10-23 確認用：36×25.2rem の120%。間はそのまま */
+  .fv__thumb::after{ right:1rem; bottom:1rem; width:3.2rem; height:3.2rem; background-size:1.8rem; }
+  .fv-gallery__slide{ padding:7rem 9rem 7.4rem; }
+  .fv-gallery__nav{ width:4.8rem; height:4.8rem; margin-top:-2.4rem; }
+  .fv-gallery__nav::before{ width:1.3rem; height:1.3rem; }
+  .fv-gallery__nav--prev{ left:2.4rem; }
+  .fv-gallery__nav--next{ right:2.4rem; }
+  .fv-gallery__count{ bottom:3rem; font-size:1.4rem; }
   .fv__lead{ margin-top:5.6rem; font-size:2rem; line-height:3.8rem; }
 }

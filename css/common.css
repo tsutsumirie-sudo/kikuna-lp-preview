@@ -394,6 +394,16 @@ img[data-lsrc]{ font-size:0; color:transparent; overflow:hidden; min-height:0; }
   background:var(--c-orange);
 }
 .sticky-cta.is-shown{ transform:none; visibility:visible; }
+/* 「無料」の目印（オレンジの文字の白い小さな札。2026-10-23 確認用） */
+.sticky-cta__free{
+  flex:none;
+  margin-right:.7rem;
+  padding:.38em .5em .32em;
+  border-radius:.3rem;
+  font-size:.68em; font-weight:700; line-height:1; letter-spacing:.06em;
+  color:var(--c-orange);
+  background:var(--c-white);
+}
 body.has-sticky-cta{ padding-bottom:var(--sticky-cta-h); }
 
 @media (prefers-reduced-motion: reduce){
