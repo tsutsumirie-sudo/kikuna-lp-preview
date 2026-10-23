@@ -19,13 +19,13 @@
 /* --- 「菊名で開催中」タグ --- */
 .info__tag{
   position:absolute; z-index:2;
-  top:.05rem; left:3.6rem;
+  top:-.95rem; left:3.6rem;   /* 2026-10-23 1rem 上げて 1 に少し食い込ませる（紙の上の余白を指示画像と同じにしたぶん） */
   width:7.6rem;
 }
 
 /* --- 濃いグレーの帯（背景はすべてこの色） --- */
 .info__paper{
-  padding:4.3rem 0 3rem;   /* 上はタグと見出しが重ならない元の余白 */
+  padding:3.3rem 0 3rem;   /* 上は指示画像と同じ余白（タグは上へずらして見出しに重ならないようにした） */
   color:var(--c-white);
   line-height:1;
   text-align:center;
@@ -166,18 +166,10 @@
   font-size:1.2rem; font-weight:500;
   color:var(--c-white);
 }
-.info__points-note,
 .info__kids{
-  width:33rem;
-  margin:1.8rem auto 0;
-  padding-left:1em;
-  text-indent:-1em;
-  font-size:1.2rem; font-weight:400; line-height:1.9rem;
-  text-align:left;
-}
-.info__kids{
-  margin-top:.4rem;
-  font-size:1.35rem; font-weight:700;
+  margin-top:1.8rem;
+  font-size:1.35rem; font-weight:700; line-height:1.9rem;
+  text-align:center;   /* 2026-10-23 中央そろえ（その上の「土地探し相談」の注意書きは削除） */
   color:var(--c-yellow);
 }
 
@@ -252,9 +244,7 @@
   .info__point dt{ font-size:1.5rem; }
   .info__point dd{ margin-top:1rem; font-size:2.8rem; }
   .info__point dd small{ font-size:1.4rem; }
-  .info__points-note,
-  .info__kids{ width:fit-content; max-width:64rem; margin-top:2.4rem; font-size:1.4rem; line-height:2.4rem; }
-  .info__kids{ margin-top:.4rem; font-size:1.6rem; }
+  .info__kids{ margin-top:2.4rem; font-size:1.6rem; line-height:2.4rem; }
 }
 @media (min-width:1200px){
   .info__list{ grid-template-columns:1.15fr .75fr 1.3fr; }
