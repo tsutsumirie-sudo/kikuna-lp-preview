@@ -3,22 +3,29 @@
 /* =========================================================
    2. 見学会案内
    2026-10-23 確認用：指示画像（8月_菊名LP/指示画像/2_見学会情報_20261023.png）の内容・間隔に変更
-   （注意書きを見学可能日の下へ／場所に「MAP」／8の交通アクセス・費用などをここにも／「菊名で開催中」のタグは外した）
+   （注意書きを見学可能日の下へ／場所に「MAP」／8の交通アクセス・費用などをここにも。「菊名で開催中」のタグは残す）
    ========================================================= */
 
 .info{
   position:relative;
-  padding-top:.6rem;
+  padding-top:.6rem;   /* 「菊名で開催中」タグが紙の上にはみ出す分 */
 }
 
-/* 全セクションをつなげたページ（index.html）では、1 の石目の背景の上に紙の上の縁を少し重ねる
-   （重ねたぶん 1 の下の余白を広げるので、紙の位置は変わらない） */
+/* 全セクションをつなげたページ（index.html）では、1 の石目の背景の上に
+   「菊名で開催中」のタグと紙の上の縁を重ねる（重ねたぶん 1 の下の余白を広げるので、紙の位置は変わらない） */
 .fv:has(+ .info) .fv__lower{ padding-bottom:calc(4.6rem + .83rem); }
 .fv + .info{ margin-top:-.83rem; }
 
+/* --- 「菊名で開催中」タグ --- */
+.info__tag{
+  position:absolute; z-index:2;
+  top:.05rem; left:3.6rem;
+  width:7.6rem;
+}
+
 /* --- 濃いグレーの帯（背景はすべてこの色） --- */
 .info__paper{
-  padding:3.3rem 0 3rem;
+  padding:4.3rem 0 3rem;   /* 上はタグと見出しが重ならない元の余白 */
   color:var(--c-white);
   line-height:1;
   text-align:center;
@@ -43,6 +50,7 @@
 /* --- 見出し --- */
 .info__head{ padding-bottom:1.05rem; }
 .info__sub{
+  padding-left:1.55rem;   /* タグにかからないよう少し右へ（元のまま） */
   font-size:1.47rem; font-weight:500;
 }
 .info__title{
@@ -184,12 +192,13 @@
   .info{ padding-top:1rem; }
   .fv:has(+ .info) .fv__lower{ padding-bottom:calc(7.4rem + 1.4rem); }   /* 重なるぶん（1.4rem）を足す */
   .fv + .info{ margin-top:-1.4rem; }
+  .info__tag{ top:.2rem; left:calc(50% - 25.2rem); width:9.4rem; }   /* 右端を「現地完成見学会開催」の左端の上に */
 
   .info__paper{ padding:5.6rem 0 4.4rem; }
   .info__head{ padding-bottom:2.2rem; }
   .info__head::after{ width:min(64rem, 90%); }
   .info__title{ margin-top:1.6rem; padding-left:0; font-size:3.6rem; }
-  .info__sub{ font-size:1.7rem; }
+  .info__sub{ padding-left:0; font-size:1.7rem; }
 
   .info__list{
     display:grid;

@@ -55,7 +55,7 @@
 
 <!-- CSS：セクションごとのCSS（css/common.css〜form.css の13ファイル）を、表示を速くするため1つにまとめたもの。
      CSSを直したら _tools/build_css.py を実行して作り直す（作業用のセクション別HTMLは今までどおり分かれたCSSを読む） -->
-<link rel="stylesheet" href="css/kikuna.min.css?v=096cc5e0">
+<link rel="stylesheet" href="css/kikuna.min.css?v=da4c8e16">
 </head>
 <body>
 <!--
@@ -168,7 +168,9 @@
     <section class="info" id="info" aria-labelledby="info-title">
       <!-- 2026-10-23 確認用：指示画像（8月_菊名LP/指示画像/2_見学会情報_20261023.png）の内容に変更。
            注意書きを見学可能日の下へ、場所の「（菊名駅から徒歩6分）」を「MAP」（Googleマップ）に、8の交通アクセス・費用などをここにも。
-           「菊名で開催中」のタグは指示画像に無いので外した -->
+           「菊名で開催中」のタグは残す（ユーザー指示） -->
+      <img decoding="async" loading="lazy" class="info__tag" data-lsrc="img/info/tag_kaisai.png" alt="菊名で開催中" width="210" height="175">
+
       <div class="info__paper">
         <div class="info__head">
           <p class="info__sub">【期間限定･完全予約制】</p>
