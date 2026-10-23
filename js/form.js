@@ -601,6 +601,18 @@
       thanks.classList.add('is-active');
       root.classList.add('is-modal-open');
       thanks.scrollTop = 0;
+
+      // 送信が終わったら（送信用 iframe の読み込み完了＝予約システムが受け付けた）、サンクスページ thanks/ へ移動する。
+      // 広告・GA4・Meta のコンバージョンを「URLに thanks を含む」ページの表示で数えるため（/kikuna/thanks/）。
+      // ★送信直後に移動しないこと。送信は見えない iframe で進行中のため、すぐ移動すると送信が中断して予約が届かない。
+      //   移動するまでは、このサンクス画面（thanks/ と同じ見た目）を表示しておく。確認用ページ（LP_PREVIEW）では移動しない
+      if (!window.LP_PREVIEW) {
+        var frame = document.getElementById('formSubmitFrame');
+        var moved = false;
+        var goThanks = function () { if (moved) return; moved = true; location.href = 'thanks/'; };
+        if (frame) frame.addEventListener('load', goThanks, { once: true });
+        setTimeout(goThanks, 20000);  // 応答が極端に遅いときの保険（20秒で移動）
+      }
     });
 
     /* ---------------------------------------------------------
