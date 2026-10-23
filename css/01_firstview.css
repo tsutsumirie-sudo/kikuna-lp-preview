@@ -208,6 +208,24 @@
   padding:6rem 1.5rem 6.4rem;   /* 下は「3 / 11」の番号のぶん */
   scroll-snap-align:center; scroll-snap-stop:always;
 }
+/* 写真と、写真に重ねる注記をまとめる枠（写真と同じ大きさ） */
+.fv-gallery__photo{
+  position:relative;
+  display:block;
+  line-height:0;
+}
+/* 写真の下部に重ねる注記（外観：「現在外構工事中です。写真はイメージ画像です」2026-10-23 確認用） */
+.fv-gallery__note{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:1.6rem 1rem .9rem;
+  border-radius:0 0 .4rem .4rem;
+  font-size:1.2rem; font-weight:500; line-height:1.5; letter-spacing:.03em;
+  text-align:center;
+  color:var(--c-white);
+  background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.55));
+  text-shadow:0 0 .4rem rgba(0,0,0,.4);
+  pointer-events:none;
+}
 .fv-gallery__img{
   max-width:none;               /* 大きさは JS で画面に合わせる */
   border-radius:.4rem;
@@ -308,5 +326,6 @@
   .fv-gallery__nav--prev{ left:2.4rem; }
   .fv-gallery__nav--next{ right:2.4rem; }
   .fv-gallery__count{ bottom:3rem; font-size:1.4rem; }
+  .fv-gallery__note{ padding:2.4rem 1.4rem 1.2rem; font-size:1.4rem; }
   .fv__lead{ margin-top:5.6rem; font-size:2rem; line-height:3.8rem; }
 }

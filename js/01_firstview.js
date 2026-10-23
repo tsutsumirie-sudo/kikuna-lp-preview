@@ -148,6 +148,7 @@
      - 写真の下に説明文、いちばん下に「3 / 11」のような番号。端の写真では、その先の矢印は出さない
      - 拡大用の大きい画像は slide_XX_l.jpg（表示している写真と両隣だけ読み込む。読み込むまでは小さい画像）
      - 写真以外（背景・×）をタップすると閉じる。Escキーでも閉じる
+     - 写真の img に data-note があれば、拡大したときに写真の下部に重ねて表示する（外観：「現在外構工事中です。…」2026-10-23）
      - 見た目（暗い背景・×・説明文）は 3・5 の写真の拡大（#photoModal、js/common.js）と同じ
      --------------------------------------------------------- */
   if (typeof window.HTMLDialogElement !== 'function') return;
@@ -160,7 +161,8 @@
       small: small,
       large: small.replace(/(_\d+)?\.jpg$/, '_l.jpg'),                   // slide_01_540.jpg → slide_01_l.jpg
       w: +im.getAttribute('width'), h: +im.getAttribute('height'),       // 縦横比は元の写真（720px）の大きさで
-      alt: im.alt
+      alt: im.alt,
+      note: im.getAttribute('data-note') || ''
     });
   }
 
@@ -187,10 +189,19 @@
     img.height = ph.h;
     img.decoding = 'async';
     img.draggable = false;
+    var box = document.createElement('span');   // 写真と、写真に重ねる注記をまとめる枠（写真と同じ大きさ）
+    box.className = 'fv-gallery__photo';
+    box.appendChild(img);
+    if (ph.note) {
+      var note = document.createElement('span');
+      note.className = 'fv-gallery__note';
+      note.textContent = ph.note;
+      box.appendChild(note);
+    }
     var cap = document.createElement('figcaption');
     cap.className = 'photo-modal__caption';
     cap.textContent = ph.alt;
-    fig.appendChild(img);
+    fig.appendChild(box);
     fig.appendChild(cap);
     gTrack.appendChild(fig);
     return img;
@@ -202,7 +213,7 @@
   // それぞれの写真を、画面に収まるいちばん大きいサイズにする（小さい画像→大きい画像に替わっても大きさが変わらない）
   function fitAll() {
     gImgs.forEach(function (img, n) {
-      var fig = img.parentNode, cap = img.nextSibling;
+      var fig = img.closest('.fv-gallery__slide'), cap = fig.querySelector('figcaption');
       var cs = getComputedStyle(fig);
       var w = fig.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       var h = fig.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
@@ -253,7 +264,7 @@
     if (e.key === 'ArrowRight') { e.preventDefault(); goTo(gIndex + 1, true); }
   });
   gal.addEventListener('click', function (e) {
-    if (e.target.closest('.fv-gallery__img, .fv-gallery__nav')) return;
+    if (e.target.closest('.fv-gallery__photo, .fv-gallery__nav')) return;
     gal.close();
   });
   window.addEventListener('resize', function () {
