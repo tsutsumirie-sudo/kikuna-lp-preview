@@ -177,13 +177,13 @@
   -webkit-touch-callout:none;
 }
 .fv__thumb:focus-visible{ outline:.2rem solid var(--c-blue); outline-offset:-.2rem; border-radius:.6rem; }
-/* タップすると拡大できる目印：写真の右下に小さな虫めがね（2026-10-23 確認用） */
+/* タップすると拡大できる目印：写真の右下に小さな虫めがね（2026-10-23。丸のグレーは最初の0.35の70%＝0.245） */
 .fv__thumb::after{
   content:"";
   position:absolute; right:.6rem; bottom:.6rem;
   width:2.4rem; height:2.4rem;
   border-radius:50%;
-  background:rgba(0,0,0,.35) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5 20 20M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center / 1.4rem no-repeat;
+  background:rgba(0,0,0,.245) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5 20 20M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center / 1.4rem no-repeat;
   pointer-events:none;
 }
 
