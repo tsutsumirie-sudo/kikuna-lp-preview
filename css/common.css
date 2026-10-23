@@ -394,16 +394,21 @@ img[data-lsrc]{ font-size:0; color:transparent; overflow:hidden; min-height:0; }
   background:var(--c-orange);
 }
 .sticky-cta.is-shown{ transform:none; visibility:visible; }
-/* 「無料」の目印（オレンジの文字の白い小さな札。2026-10-23 確認用） */
+/* 「無料」の目印（オレンジの文字の白い小さな札。2026-10-23）
+   札の大きさは最初のまま、文字だけ108%にして札の真ん中に置く（字間 .06em のぶん右に寄って見えないよう、左に同じだけ足す） */
 .sticky-cta__free{
   flex:none;
-  margin-right:.7rem;
-  padding:.38em .5em .32em;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:2.88em; height:1.57em;
+  margin-right:.42rem;   /* 札と【のすき間を前の60%に（.7rem → .42rem と、下の【の詰め） */
+  padding:0 0 .09em .06em;   /* 下の .09em：字形が少し下寄りなので、上下の真ん中に見えるよう少し上げる */
   border-radius:.3rem;
-  font-size:.68em; font-weight:700; line-height:1; letter-spacing:.06em;
+  font-size:.734em; font-weight:700; line-height:1; letter-spacing:.06em;
   color:var(--c-orange);
   background:var(--c-white);
 }
+/* 【菊名】：かっこの外側の空きを詰めて、札と【・】と「完成」のすき間を前の60%に（2026-10-23） */
+.sticky-cta__area{ margin:0 -.28em 0 -.28em; }
 body.has-sticky-cta{ padding-bottom:var(--sticky-cta-h); }
 
 @media (prefers-reduced-motion: reduce){
