@@ -1,0 +1,390 @@
+@charset "UTF-8";
+/* =========================================================
+   菊名 完成見学会LP（ラグジュアリー版）
+   ・色：濃い黒（--c-ink）＋金（--c-gold）＋白。動画広告と同じ
+   ・書体：和文は明朝（Noto Serif JP）、英字は Cinzel（Trajan に近い書体）、フォームだけゴシック
+   ・大きさ：スマホ（〜767px）は 1rem＝画面幅÷37.5（375px幅で10px）。768px以上は 11px（フォームのCSSと同じ決まり）
+   ========================================================= */
+
+:root{
+  --c-ink:    #0e0f12;   /* いちばん濃い黒 */
+  --c-night:  #15171b;   /* セクションの背景 */
+  --c-gold:   #cdb585;   /* 金（動画広告と同じ） */
+  --c-gold-l: #e3cf9f;
+  --c-gold-d: #b39462;
+  --c-text:   #ece7dd;   /* 濃い背景の上の本文 */
+  --c-white:  #ffffff;
+
+  /* フォーム（form.css）で使う色 */
+  --c-black:  #111111;
+  --c-dark:   #3e3e3e;
+  --c-bg:     #f4efe6;
+  --c-orange: #b39462;   /* フォームの「必須」・選んだ日・ボタン → 金の濃いめ */
+  --c-yellow: #cdb585;
+  --c-blue:   #005595;
+  --pc-pad:   4rem;
+
+  --line-thin: .7px;     /* iPhone（3倍の画面）でも見える細い線 */
+
+  --f-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --f-en:    "Cinzel", "Times New Roman", serif;
+  --f-sans:  "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* ---------- リセット ---------- */
+*,*::before,*::after{ box-sizing:border-box; }
+html{
+  font-size:calc(min(100vw, 768px) / 37.5);
+  -webkit-text-size-adjust:100%;
+}
+body{
+  margin:0;
+  font-family:var(--f-serif);
+  font-size:1.5rem;
+  line-height:1.8;
+  color:var(--c-text);
+  background:var(--c-ink);
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"palt" 0;
+}
+h1,h2,h3,p,figure{ margin:0; }
+img{ display:block; max-width:100%; height:auto; }
+a{ color:inherit; text-decoration:none; }
+.form-popup{ font-family:var(--f-sans); }   /* フォームは読みやすいゴシック */
+
+/* =========================================================
+   ヘッダー（写真の上に重ねる）
+   ========================================================= */
+.hd{
+  position:absolute; top:0; left:0; right:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between;
+  height:5.6rem;
+  padding:0 2rem;
+}
+.hd__logo img{ width:auto; height:1.4rem; }
+.hd__tel{
+  display:flex; align-items:center; gap:.5rem;
+  color:var(--c-white);
+  -webkit-tap-highlight-color:transparent;
+}
+.hd__tel-icon{ width:1.3rem; height:1.3rem; fill:var(--c-gold); flex:none; }
+.hd__tel-num{ font-family:var(--f-en); font-size:1.4rem; letter-spacing:.06em; line-height:1; }
+.hd__tel-time{ display:none; }
+
+/* =========================================================
+   1. ファーストビュー
+   ========================================================= */
+.fv{
+  position:relative;
+  height:100vh; height:100svh;
+  min-height:58rem;
+  overflow:hidden;
+  color:var(--c-white);
+  background:var(--c-ink);
+}
+
+/* --- 写真のスライドショー（4枚 × 6秒 ＝ 24秒で1周。切り替えは1.6秒かけて重ねる） ---
+   1枚目は最初から表示（-1.6秒から始めて、ちょうど表示し終わったところから） */
+.fv__slides{ position:absolute; inset:0; }
+.fv__slide{
+  position:absolute; inset:0;
+  opacity:0;
+  animation:fvSlide 24s linear infinite both;
+  animation-delay:calc(var(--i) * 6s - 1.6s);
+}
+.fv__slide img{
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:brightness(var(--b, 1));   /* 白い部屋の写真は少し暗くして、文字を読みやすく */
+  animation:fvZoom 24s linear infinite both;
+  animation-delay:calc(var(--i) * 6s - 1.6s);
+  will-change:transform;
+}
+@keyframes fvSlide{
+  0%      { opacity:0; animation-timing-function:ease-in-out; }
+  6.667%  { opacity:1; }                                           /* 1.6秒で表示 */
+  25%     { opacity:1; animation-timing-function:ease-in-out; }    /* 6秒まで表示 */
+  31.667% { opacity:0; }                                           /* 次の写真と重ねながら消える */
+  100%    { opacity:0; }
+}
+@keyframes fvZoom{                                                 /* 表示中ゆっくり寄る（動画広告と同じ） */
+  0%      { transform:scale(1); }
+  31.667% { transform:scale(1.08); }
+  100%    { transform:scale(1.08); }
+}
+
+/* 文字が読めるように、上（ヘッダー）・コピーのまわり・下を少し暗く */
+.fv__shade{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg,
+      rgba(8,9,12,.55) 0%, rgba(8,9,12,.22) 12%,
+      rgba(8,9,12,.40) 22%, rgba(8,9,12,.52) 36%, rgba(8,9,12,.44) 50%,
+      rgba(8,9,12,.18) 64%, rgba(8,9,12,.6) 86%, rgba(8,9,12,.8) 100%);
+}
+
+/* --- コピー（動画広告と同じ：英字は和文の左端にそろえ、まとまりは中央） --- */
+.fv__copy{
+  position:absolute; left:0; right:0; top:25%;
+  display:flex; justify-content:center;
+  padding:0 2rem;
+}
+.fv__en{
+  margin-bottom:1.6rem;
+  font-family:var(--f-en); font-size:1.2rem; font-weight:500;
+  letter-spacing:.32em; line-height:1;
+  color:var(--c-gold);
+  text-shadow:0 0 1.2rem rgba(0,0,0,.7);
+  opacity:0;
+  animation:fvFade 1.2s var(--ease-out) .2s both;
+}
+.fv__title{
+  font-size:4.1rem; font-weight:400; line-height:1.5; letter-spacing:.08em;
+  text-shadow:0 0 2rem rgba(0,0,0,.55), 0 0 .6rem rgba(0,0,0,.25);
+}
+/* 1行ずつ、左からやわらかく現れる（動画広告と同じ動き） */
+.fv__line{
+  display:block;
+  -webkit-mask-image:linear-gradient(90deg, #000 45%, transparent 55%);
+          mask-image:linear-gradient(90deg, #000 45%, transparent 55%);
+  -webkit-mask-size:220% 100%;
+          mask-size:220% 100%;
+  animation:fvLine 1.7s var(--ease-out) var(--d) both;
+}
+@keyframes fvLine{
+  from{ opacity:0; transform:translateX(-1.8rem); -webkit-mask-position:100% 0; mask-position:100% 0; }
+  30% { opacity:1; }
+  to  { opacity:1; transform:none; -webkit-mask-position:0 0; mask-position:0 0; }
+}
+@keyframes fvFade{ from{ opacity:0; transform:translateY(.6rem); } to{ opacity:1; transform:none; } }
+
+/* --- 下：いまの写真の説明（左）と「完成見学会 開催中」の枠（右） --- */
+.fv__foot{
+  position:absolute; left:2rem; right:2rem; bottom:2.6rem;
+  display:flex; align-items:flex-end; justify-content:space-between; gap:1.2rem;
+  animation:fvFade 1.2s var(--ease-out) 2.4s both;
+}
+.fv__now{ flex:1; min-width:0; }
+.fv__bars{ display:flex; gap:.6rem; margin-bottom:1.2rem; }
+.fv__bar{
+  position:relative;
+  width:2.4rem; height:1px;
+  overflow:hidden;
+  background:rgba(255,255,255,.35);
+}
+.fv__bar::after{
+  content:""; position:absolute; inset:0;
+  background:var(--c-gold);
+  transform-origin:left center;
+  transform:scaleX(0);
+  animation:fvBar 24s linear infinite both;
+  animation-delay:calc(var(--i) * 6s - 1.6s);
+}
+@keyframes fvBar{
+  0%      { transform:scaleX(0); opacity:1; }
+  6.667%  { transform:scaleX(0); }
+  31.667% { transform:scaleX(1); opacity:1; }
+  33.5%   { opacity:0; }
+  100%    { transform:scaleX(1); opacity:0; }
+}
+.fv__caps{ position:relative; height:3.9rem; }
+.fv__cap{
+  position:absolute; left:0; bottom:0;
+  display:flex; flex-direction:column; gap:.7rem;
+  white-space:nowrap;
+  opacity:0;
+  animation:fvCap 24s linear infinite both;
+  animation-delay:calc(var(--i) * 6s - 1.6s);
+}
+@keyframes fvCap{
+  0%      { opacity:0; transform:translateY(.5rem); animation-timing-function:var(--ease-out); }
+  8%      { opacity:1; transform:none; }
+  24%     { opacity:1; }
+  27%     { opacity:0; }
+  100%    { opacity:0; }
+}
+.fv__cap-en{
+  font-family:var(--f-en); font-size:1.05rem; font-weight:500;
+  letter-spacing:.22em; line-height:1;
+  color:var(--c-gold);
+}
+.fv__cap-jp{ font-size:1.3rem; letter-spacing:.08em; line-height:1; }
+.fv__cap-en,
+.fv__cap-jp{ text-shadow:0 0 1rem rgba(0,0,0,.7); }
+
+/* 「横浜市菊名／完成見学会 開催中」の金の枠（動画広告と同じ。枠の中の上下の空きは同じ） */
+.fv__badge{
+  flex:none;
+  display:flex; flex-direction:column; align-items:center; gap:.85rem;
+  padding:1.2rem 1.3rem;
+  line-height:1;
+  border:1px solid var(--c-gold);
+  background:rgba(10,12,18,.45);
+}
+.fv__badge-place{ font-size:1.15rem; letter-spacing:.18em; padding-left:.18em; }
+.fv__badge-main{ font-size:1.6rem; letter-spacing:.08em; padding-left:.08em; color:var(--c-gold); }
+
+/* =========================================================
+   2. 短いコピー
+   ========================================================= */
+.intro{
+  padding:7.2rem 2rem 4.4rem;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(205,181,133,.10), rgba(205,181,133,0) 60%),
+    var(--c-night);
+}
+/* 英字と和文のセット：まとまりは中央、英字は和文の左端にそろえる（動画広告と同じ決まり） */
+.intro__in{ display:grid; justify-content:center; justify-items:start; }
+.intro__en{
+  margin-bottom:2rem;
+  font-family:var(--f-en); font-size:1.15rem; font-weight:500;
+  letter-spacing:.3em; line-height:1;
+  color:var(--c-gold);
+}
+.intro__text{
+  font-size:1.75rem; font-weight:400; line-height:2.15; letter-spacing:.07em;
+  color:var(--c-text);
+}
+.intro__gold{ color:var(--c-gold); }
+
+/* =========================================================
+   3. 予約ボタン
+   ========================================================= */
+.cta{
+  padding:1.6rem 2rem 8rem;
+  text-align:center;
+  background:var(--c-night);
+}
+.cta__note{
+  margin-bottom:1.3rem;
+  font-size:1.2rem; letter-spacing:.06em; line-height:1.5;
+  color:#cfc8b8;
+}
+.cta__btn{
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  width:31.5rem; max-width:100%; height:6.4rem;
+  margin:0 auto;
+  overflow:hidden;
+  font-size:1.8rem; font-weight:500; letter-spacing:.14em; line-height:1;
+  color:#16171b;
+  background:linear-gradient(100deg, var(--c-gold-l) 0%, var(--c-gold) 48%, var(--c-gold-d) 100%);
+  box-shadow:0 1rem 2.6rem rgba(0,0,0,.4);
+  -webkit-tap-highlight-color:transparent;
+  transition:filter .3s;
+}
+.cta__btn-label{ position:relative; padding-right:2.6rem; }
+.cta__btn-label::after{                 /* 細い矢印 */
+  content:"";
+  position:absolute; right:0; top:50%;
+  width:1.6rem; height:.7rem;
+  border-bottom:1px solid currentColor; border-right:1px solid currentColor;
+  transform:translateY(-75%) skewX(45deg);
+  transform-origin:right bottom;
+}
+.cta__btn::before{                      /* ゆっくり光が流れる */
+  content:"";
+  position:absolute; top:0; bottom:0; left:-40%;
+  width:30%;
+  background:linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));
+  transform:skewX(-20deg);
+  animation:ctaShine 5s ease-in-out 2s infinite;
+}
+@keyframes ctaShine{
+  0%   { left:-40%; }
+  30%  { left:120%; }
+  100% { left:120%; }
+}
+@media (hover:hover){
+  .cta__btn:hover{ filter:brightness(1.06); }
+}
+.cta__btn:focus-visible{ outline:2px solid var(--c-gold-l); outline-offset:4px; }
+
+.cta__tel{
+  display:inline-flex; flex-direction:column; align-items:center; gap:.7rem;
+  margin-top:3.2rem;
+  line-height:1;
+  color:var(--c-text);
+}
+.cta__tel-label{ font-size:1.2rem; letter-spacing:.1em; color:#cfc8b8; }
+.cta__tel-num{
+  display:flex; align-items:center; gap:.6rem;
+  font-family:var(--f-en); font-size:2.2rem; letter-spacing:.06em;
+  color:var(--c-white);
+}
+.cta__tel-num svg{ width:1.8rem; height:1.8rem; fill:var(--c-gold); }
+.cta__tel-time{ font-size:1.1rem; letter-spacing:.06em; color:#a9a397; }
+
+/* =========================================================
+   動きを減らす設定の人には、寄り・光・文字の動きを止める（写真の切り替えだけ残す）
+   ========================================================= */
+@media (prefers-reduced-motion: reduce){
+  .fv__slide img,
+  .cta__btn::before{ animation:none; }
+  .fv__line,
+  .fv__en,
+  .fv__foot{ animation-duration:.01s; animation-delay:0s; }
+}
+
+/* =========================================================
+   タブレット・PC（768px以上）
+   ========================================================= */
+@media (min-width:768px){
+  html{ font-size:11px; }
+
+  .hd{ height:84px; padding:0 40px; }
+  .hd__logo img{ height:20px; }
+  .hd__tel{ display:grid; grid-template-columns:auto auto; align-items:center; column-gap:10px; row-gap:6px; }
+  .hd__tel-icon{ width:18px; height:18px; grid-row:1; }
+  .hd__tel-num{ font-size:22px; grid-row:1; }
+  .hd__tel-time{ display:block; grid-column:1 / -1; font-family:var(--f-sans); font-size:11px; letter-spacing:.06em; line-height:1; text-align:right; color:rgba(255,255,255,.8); }
+
+  .fv{ min-height:640px; }
+  .fv__shade{
+    background:
+      linear-gradient(90deg, rgba(8,9,12,.62) 0%, rgba(8,9,12,.30) 38%, rgba(8,9,12,0) 62%),
+      linear-gradient(180deg, rgba(8,9,12,.55) 0%, rgba(8,9,12,0) 18%, rgba(8,9,12,0) 70%, rgba(8,9,12,.7) 100%);
+  }
+  .fv__copy{
+    top:50%; left:0; right:auto;
+    justify-content:flex-start;
+    padding:0 0 0 8vw;
+    transform:translateY(-50%);
+  }
+  .fv__en{ margin-bottom:24px; font-size:clamp(13px, 1.1vw, 17px); }
+  .fv__title{ font-size:clamp(46px, 4.4vw, 78px); }
+  .fv__line{ animation-name:fvLinePc; }
+  @keyframes fvLinePc{
+    from{ opacity:0; transform:translateX(-28px); -webkit-mask-position:100% 0; mask-position:100% 0; }
+    30% { opacity:1; }
+    to  { opacity:1; transform:none; -webkit-mask-position:0 0; mask-position:0 0; }
+  }
+
+  .fv__foot{ left:8vw; right:40px; bottom:44px; }
+  .fv__bars{ gap:8px; margin-bottom:16px; }
+  .fv__bar{ width:40px; }
+  .fv__caps{ height:46px; }
+  .fv__cap{ gap:10px; }
+  .fv__cap-en{ font-size:12px; }
+  .fv__cap-jp{ font-size:16px; }
+  .fv__badge{ gap:12px; padding:18px 26px; }
+  .fv__badge-place{ font-size:15px; }
+  .fv__badge-main{ font-size:24px; }
+
+  .intro{ padding:130px 40px 64px; }
+  .intro__en{ margin-bottom:30px; font-size:14px; }
+  .intro__text{ font-size:26px; line-height:2.1; }
+
+  .cta{ padding:16px 40px 120px; }
+  .cta__note{ margin-bottom:18px; font-size:15px; }
+  .cta__btn{ width:440px; height:80px; font-size:22px; }
+  .cta__btn-label{ padding-right:36px; }
+  .cta__btn-label::after{ width:22px; height:9px; }
+  .cta__tel{ margin-top:44px; gap:10px; }
+  .cta__tel-label{ font-size:14px; }
+  .cta__tel-num{ font-size:30px; gap:10px; }
+  .cta__tel-num svg{ width:24px; height:24px; }
+  .cta__tel-time{ font-size:13px; }
+}
