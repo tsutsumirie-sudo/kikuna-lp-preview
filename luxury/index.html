@@ -31,7 +31,7 @@
   菊名 完成見学会LP（ラグジュアリー版）
   ・動画広告（菊名動画広告_ラグジュアリー）と同じ雰囲気：濃い色の背景・金色（#cdb585）・明朝体
   ・構成は美しが丘LPの上部を踏襲（FV → 短いコピー → 予約ボタン → 間取り → ギャラリー → 見所 → 特長 → 見学会情報 …）
-  ・作成中：1〜3（FV・短いコピー・予約ボタン）まで
+  ・作成中：1〜5（FV・短いコピー・予約ボタン・間取り・ギャラリー）まで
 -->
 
 <header class="hd">
@@ -81,7 +81,6 @@
 
     <div class="fv__copy">
       <div class="fv__copy-in">
-        <p class="fv__en" lang="en">KIKUNA, YOKOHAMA</p>
         <h1 class="fv__title">
           <span class="fv__line" style="--d:.5s">都心なのに、</span>
           <span class="fv__line" style="--d:1.2s">この広さ。</span>
@@ -133,7 +132,109 @@
     </a>
   </section>
 
+  <!-- =========================================================
+       4. 間取り（3枚とも同じ縮尺。タップで拡大）
+       ========================================================= -->
+  <section class="plan" id="plan">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">FLOOR PLAN</p>
+      <h2 class="sec-head__jp">ゆとりを生む、間取り</h2>
+    </div>
+    <p class="plan__spec">木造2階建て＋PH階　3LDK＋ルーフバルコニー<br>延床面積 143.77㎡（約43.48坪）</p>
+    <ul class="plan__list">
+      <li class="plan__item" style="--w:917">
+        <button class="plan__zoom" type="button" data-zoom="img/plan/plan_1f.png" data-zoom-w="917" data-zoom-h="1092" aria-label="1階の間取り図を拡大">
+          <span class="plan__floor" lang="en">1F</span>
+          <img src="img/plan/plan_1f.png" width="917" height="1092" alt="1階の間取り図（主寝室10.0帖、寝室6.2帖・6.0帖、WIC3.4帖、SIC1.7帖、吹抜け）" loading="lazy" decoding="async">
+        </button>
+        <p class="plan__note">主寝室 10.0帖／WIC 3.4帖／SIC 1.7帖<br>寝室 6.2帖・6.0帖</p>
+      </li>
+      <li class="plan__item" style="--w:856">
+        <button class="plan__zoom" type="button" data-zoom="img/plan/plan_2f.png" data-zoom-w="856" data-zoom-h="1092" aria-label="2階の間取り図を拡大">
+          <span class="plan__floor" lang="en">2F</span>
+          <img src="img/plan/plan_2f.png" width="856" height="1092" alt="2階の間取り図（リビングダイニング28.59帖、パントリー3.0帖、バルコニー2か所）" loading="lazy" decoding="async">
+        </button>
+        <p class="plan__note">LDK 28.59帖／パントリー 3.0帖</p>
+      </li>
+      <li class="plan__item" style="--w:584">
+        <button class="plan__zoom" type="button" data-zoom="img/plan/plan_ph.png" data-zoom-w="584" data-zoom-h="1011" aria-label="屋上（PH階）の間取り図を拡大">
+          <span class="plan__floor" lang="en">PH</span>
+          <img src="img/plan/plan_ph.png" width="584" height="1011" alt="屋上（PH階）の間取り図（ルーフバルコニー）" loading="lazy" decoding="async">
+        </button>
+        <p class="plan__note">ルーフバルコニー 約22帖</p>
+      </li>
+    </ul>
+    <p class="plan__hint">※図面をタップすると拡大します</p>
+  </section>
+
+  <!-- =========================================================
+       5. ギャラリー（自動で横に流れる。指でも動かせる・左右の矢印・点）
+       ========================================================= -->
+  <section class="gal" id="gallery">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">GALLERY</p>
+      <h2 class="sec-head__jp">写真でめぐる、菊名の家</h2>
+    </div>
+    <p class="gal__lead">外観から、LDK、鉄骨階段、収納、屋上まで。<br>完成した家の雰囲気を、写真でご覧ください。</p>
+    <div class="gal__slider" data-gallery>
+      <div class="gal__track">
+          <figure class="gal__slide">
+            <img src="img/gallery/g_01_800.jpg" srcset="img/gallery/g_01_800.jpg 800w, img/gallery/g_01_1200.jpg 1200w, img/gallery/g_01_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="外観" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">EXTERIOR</span><span class="gal__cap-jp">外観<small>（外構は工事中です）</small></span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_02_800.jpg" srcset="img/gallery/g_02_800.jpg 800w, img/gallery/g_02_1200.jpg 1200w, img/gallery/g_02_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="キッチンから見たLDK" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">LIVING &amp; DINING</span><span class="gal__cap-jp">キッチンから見たLDK</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_03_800.jpg" srcset="img/gallery/g_03_800.jpg 800w, img/gallery/g_03_1200.jpg 1200w, img/gallery/g_03_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="LDKと吹き抜けの鉄骨階段" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">LIVING &amp; STAIRCASE</span><span class="gal__cap-jp">LDKと鉄骨階段</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_04_800.jpg" srcset="img/gallery/g_04_800.jpg 800w, img/gallery/g_04_1200.jpg 1200w, img/gallery/g_04_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="アイランドキッチン" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">KITCHEN</span><span class="gal__cap-jp">キッチン</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_05_800.jpg" srcset="img/gallery/g_05_800.jpg 800w, img/gallery/g_05_1200.jpg 1200w, img/gallery/g_05_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="吹き抜けの鉄骨階段" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">STAIRCASE</span><span class="gal__cap-jp">吹き抜けの鉄骨階段</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_06_800.jpg" srcset="img/gallery/g_06_800.jpg 800w, img/gallery/g_06_1200.jpg 1200w, img/gallery/g_06_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="3帖のパントリー" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">PANTRY</span><span class="gal__cap-jp">3帖のパントリー</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_07_800.jpg" srcset="img/gallery/g_07_800.jpg 800w, img/gallery/g_07_1200.jpg 1200w, img/gallery/g_07_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="洗面室" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">WASHROOM</span><span class="gal__cap-jp">洗面室</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_08_800.jpg" srcset="img/gallery/g_08_800.jpg 800w, img/gallery/g_08_1200.jpg 1200w, img/gallery/g_08_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="主寝室" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">MASTER BEDROOM</span><span class="gal__cap-jp">主寝室</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_09_800.jpg" srcset="img/gallery/g_09_800.jpg 800w, img/gallery/g_09_1200.jpg 1200w, img/gallery/g_09_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="主寝室のウォークインクローゼット" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">WALK-IN CLOSET</span><span class="gal__cap-jp">ウォークインクローゼット</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_10_800.jpg" srcset="img/gallery/g_10_800.jpg 800w, img/gallery/g_10_1200.jpg 1200w, img/gallery/g_10_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="玄関のシューズインクローゼット" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">SHOES-IN CLOSET</span><span class="gal__cap-jp">シューズインクローゼット</span></figcaption>
+          </figure>
+          <figure class="gal__slide">
+            <img src="img/gallery/g_11_800.jpg" srcset="img/gallery/g_11_800.jpg 800w, img/gallery/g_11_1200.jpg 1200w, img/gallery/g_11_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="屋上のルーフバルコニー" loading="lazy" decoding="async">
+            <figcaption class="gal__cap"><span class="gal__cap-en" lang="en">ROOF BALCONY</span><span class="gal__cap-jp">ルーフバルコニー</span></figcaption>
+          </figure>
+      </div>
+      <button class="gal__arrow gal__arrow--prev" type="button" aria-label="前の写真へ"></button>
+      <button class="gal__arrow gal__arrow--next" type="button" aria-label="次の写真へ"></button>
+    </div>
+  </section>
+
 </main>
+
+<!-- 間取り図の拡大 -->
+<dialog class="zoom" id="zoom" aria-label="間取り図の拡大">
+  <button class="zoom__close" type="button" aria-label="閉じる"></button>
+  <img class="zoom__img" src="" alt="" width="917" height="1092">
+</dialog>
 
 <script src="js/main.js" defer></script>
 <script src="js/form.js" defer></script>

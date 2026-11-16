@@ -13,6 +13,7 @@
   --c-gold-l: #e3cf9f;
   --c-gold-d: #b39462;
   --c-text:   #ece7dd;   /* 濃い背景の上の本文 */
+  --c-ivory:  #f4efe6;   /* 明るいセクションの背景 */
   --c-white:  #ffffff;
 
   /* フォーム（form.css）で使う色 */
@@ -120,25 +121,17 @@ a{ color:inherit; text-decoration:none; }
   position:absolute; inset:0;
   background:
     linear-gradient(180deg,
-      rgba(8,9,12,.55) 0%, rgba(8,9,12,.22) 12%,
-      rgba(8,9,12,.40) 22%, rgba(8,9,12,.52) 36%, rgba(8,9,12,.44) 50%,
-      rgba(8,9,12,.18) 64%, rgba(8,9,12,.6) 86%, rgba(8,9,12,.8) 100%);
+      rgba(8,9,12,.55) 0%, rgba(8,9,12,.2) 14%,
+      rgba(8,9,12,.3) 30%, rgba(8,9,12,.5) 40%, rgba(8,9,12,.52) 50%, rgba(8,9,12,.48) 60%,
+      rgba(8,9,12,.2) 72%, rgba(8,9,12,.6) 88%, rgba(8,9,12,.8) 100%);   /* コピー（画面のまん中）のまわりを少し暗く */
 }
 
-/* --- コピー（動画広告と同じ：英字は和文の左端にそろえ、まとまりは中央） --- */
+/* --- コピー：左そろえのまとまりを、画面のまん中（上下・左右とも）に --- */
 .fv__copy{
-  position:absolute; left:0; right:0; top:25%;
+  position:absolute; left:0; right:0; top:50%;
   display:flex; justify-content:center;
   padding:0 2rem;
-}
-.fv__en{
-  margin-bottom:1.6rem;
-  font-family:var(--f-en); font-size:1.2rem; font-weight:500;
-  letter-spacing:.32em; line-height:1;
-  color:var(--c-gold);
-  text-shadow:0 0 1.2rem rgba(0,0,0,.7);
-  opacity:0;
-  animation:fvFade 1.2s var(--ease-out) .2s both;
+  transform:translateY(-50%);
 }
 .fv__title{
   font-size:4.1rem; font-weight:400; line-height:1.5; letter-spacing:.08em;
@@ -317,6 +310,185 @@ a{ color:inherit; text-decoration:none; }
 .cta__tel-num svg{ width:1.8rem; height:1.8rem; fill:var(--c-gold); }
 .cta__tel-time{ font-size:1.1rem; letter-spacing:.06em; color:#a9a397; }
 
+
+/* =========================================================
+   見出し（英字＋和文のセット：まとまりは中央、英字は和文の左端にそろえる）
+   ========================================================= */
+.sec-head{ display:grid; justify-content:center; justify-items:start; }
+.sec-head__en{
+  margin-bottom:1.4rem;
+  font-family:var(--f-en); font-size:1.15rem; font-weight:500;
+  letter-spacing:.3em; line-height:1;
+  color:var(--c-gold-d);
+}
+.sec-head__jp{
+  font-size:2.5rem; font-weight:400; line-height:1.5; letter-spacing:.08em;
+  color:var(--c-ink);
+}
+
+/* 4・5 は明るいアイボリーの背景（濃い色のFV〜予約ボタンとの切り替え） */
+.plan,
+.gal{ color:#2b2722; background:var(--c-ivory); }
+.plan + .gal{ margin-top:-1px; border-top:1px solid var(--c-ivory); }   /* 境目が小数の位置になっても下地の黒い線が出ないように */
+
+/* =========================================================
+   4. 間取り（3枚とも同じ縮尺：画像の幅＝元の幅 × 共通の倍率）
+   ========================================================= */
+.plan{
+  --k:calc(29.5rem / 917);          /* スマホ：いちばん幅の広い1Fがカードの中いっぱい（29.5rem）になる倍率 */
+  padding:7.2rem 2rem 6rem;
+}
+.plan__spec{
+  margin-top:2rem;
+  font-size:1.3rem; line-height:1.9; letter-spacing:.06em;
+  text-align:center;
+  color:#5a544b;
+}
+.plan__list{
+  display:flex; flex-direction:column; gap:2rem;
+  margin:3.2rem 0 0; padding:0;
+  list-style:none;
+}
+.plan__zoom{
+  position:relative;
+  display:flex; justify-content:center; align-items:flex-end;
+  width:100%;
+  height:calc(1092 * var(--k) + 6.4rem);   /* カードの高さは3枚同じ（いちばん高い1F・2Fの図面＋上下の余白）。図面は下にそろえる */
+  padding:4.4rem 2rem 2rem;
+  border:1px solid rgba(179,148,98,.45);
+  background:#fbf9f4;
+  cursor:zoom-in;
+  -webkit-tap-highlight-color:transparent;
+  transition:border-color .3s;
+}
+@media (hover:hover){ .plan__zoom:hover{ border-color:var(--c-gold-d); } }
+.plan__zoom:focus-visible{ outline:2px solid var(--c-gold-d); outline-offset:3px; }
+.plan__zoom img{ width:calc(var(--w) * var(--k)); max-width:100%; height:auto; }
+.plan__floor{
+  position:absolute; top:1.4rem; left:1.6rem;
+  font-family:var(--f-en); font-size:1.6rem; font-weight:500; letter-spacing:.12em; line-height:1;
+  color:var(--c-gold-d);
+}
+.plan__zoom::after{                 /* 右上の小さな虫めがね */
+  content:"";
+  position:absolute; top:1.3rem; right:1.4rem;
+  width:1.8rem; height:1.8rem;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b39462' stroke-width='1.6'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.3 15.3 21 21M10.5 7.5v6M7.5 10.5h6'/%3E%3C/svg%3E");
+}
+.plan__note{
+  margin-top:1rem;
+  font-size:1.25rem; line-height:1.8; letter-spacing:.06em;
+  text-align:center;
+  color:#4a453d;
+}
+.plan__hint{
+  margin-top:1.8rem;
+  font-family:var(--f-sans); font-size:1.1rem; letter-spacing:.04em;
+  text-align:center;
+  color:#8a8378;
+}
+
+/* 拡大表示 */
+.zoom{
+  width:100vw; max-width:none; height:100dvh; max-height:none;
+  margin:0; padding:5.6rem 1.6rem 2.4rem;
+  border:0;
+  background:rgba(14,15,18,.92);
+}
+.zoom[open]{ display:flex; align-items:center; justify-content:center; }
+.zoom::backdrop{ background:transparent; }
+.zoom__img{
+  width:auto; height:auto;
+  max-width:100%; max-height:100%;
+  padding:2rem;
+  background:#fbf9f4;
+}
+.zoom__close{
+  position:absolute; top:1.2rem; right:1.2rem;
+  width:4rem; height:4rem;
+  padding:0; border:1px solid var(--c-gold); border-radius:50%;
+  background:transparent;
+  cursor:pointer;
+}
+.zoom__close::before,
+.zoom__close::after{
+  content:""; position:absolute; top:50%; left:50%;
+  width:1.8rem; height:1px; margin-left:-.9rem;
+  background:var(--c-gold);
+  transform:rotate(45deg);
+}
+.zoom__close::after{ transform:rotate(-45deg); }
+
+/* =========================================================
+   5. ギャラリー（美しが丘LPと同じ大きさ：1枚が画面幅の84%・3:2、となりの写真が少し見える）
+   ========================================================= */
+.gal{ padding:2.4rem 0 7.2rem; }
+.gal .sec-head{ padding:0 2rem; }
+.gal__lead{
+  margin-top:2rem; padding:0 2rem;
+  font-size:1.35rem; line-height:2; letter-spacing:.05em;
+  text-align:center;
+  color:#4a453d;
+}
+.gal__slider{ position:relative; margin-top:3.2rem; }
+.gal__track{
+  display:flex; gap:1.2rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.gal__track::-webkit-scrollbar{ display:none; }
+.gal__slide{
+  position:relative;
+  flex:0 0 84%;
+  aspect-ratio:3 / 2;
+  overflow:hidden;
+  scroll-snap-align:center;
+  background:#e6e0d4;
+}
+.gal__slide img{ width:100%; height:100%; object-fit:cover; }
+.gal__cap{
+  position:absolute; left:0; right:0; bottom:0;
+  display:flex; flex-direction:column; gap:.5rem;
+  padding:3.2rem 1.4rem 1.2rem;
+  line-height:1;
+  color:var(--c-white);
+  background:linear-gradient(180deg, rgba(10,11,14,0), rgba(10,11,14,.6));
+}
+.gal__cap-en{ font-family:var(--f-en); font-size:.95rem; font-weight:500; letter-spacing:.2em; color:var(--c-gold-l); }
+.gal__cap-jp{ font-size:1.3rem; letter-spacing:.08em; }
+.gal__cap-jp small{ font-size:1rem; letter-spacing:.02em; }
+.gal__arrow{
+  position:absolute; top:50%; z-index:2;
+  width:3.6rem; height:3.6rem;
+  margin-top:-1.8rem;
+  padding:0; border:1px solid rgba(255,255,255,.8); border-radius:50%;
+  background:rgba(14,15,18,.35);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .2s;
+}
+.gal__arrow::before{
+  content:""; position:absolute; top:50%; left:50%;
+  width:.8rem; height:.8rem;
+  border-top:1px solid #fff; border-right:1px solid #fff;
+}
+.gal__arrow--prev{ left:3%; }
+.gal__arrow--next{ right:3%; }
+.gal__arrow--prev::before{ transform:translate(-30%, -50%) rotate(-135deg); }
+.gal__arrow--next::before{ transform:translate(-70%, -50%) rotate(45deg); }
+@media (hover:hover){ .gal__arrow:hover{ background:rgba(14,15,18,.6); } }
+.gal__dots{ display:flex; justify-content:center; gap:.8rem; margin-top:1.8rem; }
+.gal__dot{
+  width:.7rem; height:.7rem;
+  padding:0; border:0; border-radius:50%;
+  background:#cfc6b5;
+  cursor:pointer;
+  transition:background .3s, transform .3s;
+}
+.gal__dot.is-active{ background:var(--c-gold-d); transform:scale(1.3); }
+
 /* =========================================================
    動きを減らす設定の人には、寄り・光・文字の動きを止める（写真の切り替えだけ残す）
    ========================================================= */
@@ -324,7 +496,6 @@ a{ color:inherit; text-decoration:none; }
   .fv__slide img,
   .cta__btn::before{ animation:none; }
   .fv__line,
-  .fv__en,
   .fv__foot{ animation-duration:.01s; animation-delay:0s; }
 }
 
@@ -348,12 +519,10 @@ a{ color:inherit; text-decoration:none; }
       linear-gradient(180deg, rgba(8,9,12,.55) 0%, rgba(8,9,12,0) 18%, rgba(8,9,12,0) 70%, rgba(8,9,12,.7) 100%);
   }
   .fv__copy{
-    top:50%; left:0; right:auto;
+    left:0; right:auto;
     justify-content:flex-start;
     padding:0 0 0 8vw;
-    transform:translateY(-50%);
   }
-  .fv__en{ margin-bottom:24px; font-size:clamp(13px, 1.1vw, 17px); }
   .fv__title{ font-size:clamp(46px, 4.4vw, 78px); }
   .fv__line{ animation-name:fvLinePc; }
   @keyframes fvLinePc{
@@ -378,6 +547,39 @@ a{ color:inherit; text-decoration:none; }
   .intro__text{ font-size:26px; line-height:2.1; }
 
   .cta{ padding:16px 40px 120px; }
+
+  .sec-head__en{ margin-bottom:20px; font-size:14px; }
+  .sec-head__jp{ font-size:34px; }
+
+  /* 間取り：3枚を横に並べる（同じ縮尺）。倍率は 1100px の列に収まる値、狭い画面は画面幅に合わせる */
+  .plan{ --k:min(.385px, (100vw - 272px) / 2357); padding:120px 40px 90px; }
+  .plan__spec{ margin-top:26px; font-size:15px; }
+  .plan__list{ flex-direction:row; justify-content:center; align-items:flex-start; gap:24px; margin-top:48px; }
+  .plan__item{ flex:none; }
+  .plan__zoom{ width:auto; height:calc(1092 * var(--k) + 80px); padding:56px 24px 24px; }
+  .plan__zoom img{ max-width:none; }
+  .plan__floor{ top:20px; left:22px; font-size:20px; }
+  .plan__zoom::after{ top:18px; right:20px; width:22px; height:22px; }
+  .plan__note{ margin-top:14px; font-size:14px; }
+  .plan__hint{ margin-top:26px; font-size:12px; }
+  .zoom{ padding:72px 40px 40px; }
+  .zoom__img{ padding:28px; }
+  .zoom__close{ top:20px; right:24px; width:48px; height:48px; }
+  .zoom__close::before, .zoom__close::after{ width:22px; margin-left:-11px; }
+
+  /* ギャラリー：美しが丘LPと同じく最大1200pxの列の84%（1008px） */
+  .gal{ padding:30px 0 120px; }
+  .gal__lead{ margin-top:26px; font-size:16px; }
+  .gal__slider{ max-width:1200px; margin:48px auto 0; }
+  .gal__track{ gap:16px; }
+  .gal__cap{ gap:8px; padding:48px 24px 20px; }
+  .gal__cap-en{ font-size:12px; }
+  .gal__cap-jp{ font-size:17px; }
+  .gal__cap-jp small{ font-size:13px; }
+  .gal__arrow{ width:52px; height:52px; margin-top:-26px; }
+  .gal__arrow::before{ width:12px; height:12px; }
+  .gal__dots{ gap:12px; margin-top:26px; }
+  .gal__dot{ width:8px; height:8px; }
   .cta__note{ margin-bottom:18px; font-size:15px; }
   .cta__btn{ width:440px; height:80px; font-size:22px; }
   .cta__btn-label{ padding-right:36px; }
