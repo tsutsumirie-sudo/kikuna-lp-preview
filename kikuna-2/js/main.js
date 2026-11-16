@@ -29,18 +29,24 @@
       img.style.width = w + 'px'; img.style.height = h + 'px';
       var ex = w - cw, ey = h - ch;
       var g = function (k, d) { var v = parseFloat(slide.getAttribute(k)); return isNaN(v) ? d : v; };
-      slide._m = { x0: -ex * g('data-fx', .5), x1: -ex * g('data-tx', .5), y0: -ey * g('data-fy', .5), y1: -ey * g('data-ty', .5) };
+      slide._m = { x0: -ex * g('data-fx', .5), x1: -ex * g('data-tx', .5), y0: -ey * g('data-fy', .5), y1: -ey * g('data-ty', .5),
+                   s0: g('data-s0', 1), s1: g('data-s1', 1), cx: cw / 2, cy: ch / 2 };
       slide.classList.add('is-ready');
       return true;
     }
     function play(slide) {
       var m = slide._m, img = slide.querySelector('img');
       if (!m) return;
-      var at = function (x, y) { return 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)'; };
+      // 位置（x, y）と拡大率 k。拡大は画面の中心を軸にする
+      var at = function (x, y, k) {
+        k = k || 1;
+        var tx = m.cx * (1 - k) + k * x, ty = m.cy * (1 - k) + k * y;
+        return 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + k.toFixed(4) + ')';
+      };
       if (slide._anim) { slide._anim.cancel(); slide._anim = null; }
-      if (reduceMotion || !img.animate) { img.style.transform = at((m.x0 + m.x1) / 2, (m.y0 + m.y1) / 2); return; }
-      img.style.transform = at(m.x0, m.y0);
-      slide._anim = img.animate([{ transform: at(m.x0, m.y0) }, { transform: at(m.x1, m.y1) }],
+      if (reduceMotion || !img.animate) { img.style.transform = at((m.x0 + m.x1) / 2, (m.y0 + m.y1) / 2, (m.s0 + m.s1) / 2); return; }
+      img.style.transform = at(m.x0, m.y0, m.s0);
+      slide._anim = img.animate([{ transform: at(m.x0, m.y0, m.s0) }, { transform: at(m.x1, m.y1, m.s1) }],
                                 { duration: SHOW + FADE, easing: 'linear', fill: 'forwards' });
     }
     function ready(slide, fn) {
