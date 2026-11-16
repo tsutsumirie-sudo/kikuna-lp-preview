@@ -5,16 +5,90 @@
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------------------------------------------------------
-     1. FV：写真は表示される前（透明のあいだ）にブラウザが展開を後回しにすることがあり、
-        切り替わりの瞬間に一瞬暗くなるのを防ぐため、読み込み後に4枚とも先に展開しておく
+     1. FV：写真のスライドショー（4枚 × 8秒。1.6秒かけて重ねて切り替える）
+        写真は画面より大きく置き、横や縦へゆっくり動かす（ズームだけでなく、横にスライドする視点で広さを見せる）。
+        動きは index.html の data-over / data-fx→data-tx / data-fy→data-ty で指定（0＝左端・上端、1＝右端・下端）
+        ※CSSアニメだけで切り替えていたとき、ブラウザによっては全部透明のままになることがあったため、JSで切り替える。
+          JSが動かなくても、1枚目は最初から表示（is-on）してある
      --------------------------------------------------------- */
-  function decodeSlides() {
-    document.querySelectorAll('.fv__slide img').forEach(function (img) {
-      if (img.decode) img.decode().catch(function () {});
+  var fv = document.querySelector('.fv__slides');
+  if (fv) {
+    var slides = Array.prototype.slice.call(fv.querySelectorAll('.fv__slide'));
+    var bars = Array.prototype.slice.call(document.querySelectorAll('.fv__bar'));
+    var SHOW = 8000, FADE = 1600, idx = 0, zTop = 1, fvTimer;
+    var isWide = function () { return window.matchMedia('(min-width: 768px)').matches; };
+
+    // 写真の大きさ・動く位置を決める（写真が読み込まれていないときは false）
+    function layout(slide) {
+      var img = slide.querySelector('img');
+      if (!img || !img.naturalWidth) return false;
+      var cw = fv.clientWidth, ch = fv.clientHeight;
+      var r = img.naturalWidth / img.naturalHeight;
+      var over = parseFloat((isWide() && slide.getAttribute('data-over-pc')) || slide.getAttribute('data-over') || '1');
+      var w = Math.max(cw * over, ch * r), h = w / r;
+      img.style.width = w + 'px'; img.style.height = h + 'px';
+      var ex = w - cw, ey = h - ch;
+      var g = function (k, d) { var v = parseFloat(slide.getAttribute(k)); return isNaN(v) ? d : v; };
+      slide._m = { x0: -ex * g('data-fx', .5), x1: -ex * g('data-tx', .5), y0: -ey * g('data-fy', .5), y1: -ey * g('data-ty', .5) };
+      slide.classList.add('is-ready');
+      return true;
+    }
+    function play(slide) {
+      var m = slide._m, img = slide.querySelector('img');
+      if (!m) return;
+      var at = function (x, y) { return 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)'; };
+      if (slide._anim) { slide._anim.cancel(); slide._anim = null; }
+      if (reduceMotion || !img.animate) { img.style.transform = at((m.x0 + m.x1) / 2, (m.y0 + m.y1) / 2); return; }
+      img.style.transform = at(m.x0, m.y0);
+      slide._anim = img.animate([{ transform: at(m.x0, m.y0) }, { transform: at(m.x1, m.y1) }],
+                                { duration: SHOW + FADE, easing: 'linear', fill: 'forwards' });
+    }
+    function ready(slide, fn) {
+      var img = slide.querySelector('img');
+      if (img.complete && img.naturalWidth) fn();
+      else {
+        img.addEventListener('load', fn, { once: true });
+        img.addEventListener('error', function () { clearTimeout(fvTimer); fvTimer = setTimeout(tick, 0); }, { once: true });
+      }
+    }
+    function show(i) {
+      var s = slides[i];
+      layout(s); play(s);
+      if (i !== 0 || s._shown) s.style.zIndex = ++zTop;     // あとの写真は、いまの写真の上に重ねてあらわす
+      s._shown = true;
+      s.classList.add('is-on');
+      bars.forEach(function (b) { b.classList.remove('is-on'); });
+      if (bars[i]) { void bars[i].offsetWidth; bars[i].classList.add('is-on'); }
+      setTimeout(function () {                                 // 重なり終えたら、前の写真を消す
+        slides.forEach(function (o) { if (o !== s) o.classList.remove('is-on'); });
+      }, FADE + 100);
+    }
+    function tick() {
+      idx = (idx + 1) % slides.length;
+      ready(slides[idx], function () {
+        show(idx);
+        clearTimeout(fvTimer); fvTimer = setTimeout(tick, SHOW);
+      });
+    }
+    ready(slides[0], function () {
+      show(0);
+      fvTimer = setTimeout(tick, SHOW);
+    });
+    // 切り替わる瞬間に暗くならないよう、2枚目以降も先に展開しておく
+    window.addEventListener('load', function () {
+      slides.forEach(function (sl) { var im = sl.querySelector('img'); if (im.decode) im.decode().catch(function () {}); });
+    });
+    // 画面の幅が変わったら大きさを計算し直す（高さだけの変化＝スマホのバーの出入りでは動かさない）
+    var lastW = fv.clientWidth, rt;
+    window.addEventListener('resize', function () {
+      clearTimeout(rt);
+      rt = setTimeout(function () {
+        if (fv.clientWidth === lastW) return;
+        lastW = fv.clientWidth;
+        slides.forEach(function (sl) { if (sl._m) { layout(sl); if (sl.classList.contains('is-on')) play(sl); } });
+      }, 200);
     });
   }
-  if (document.readyState === 'complete') decodeSlides();
-  else window.addEventListener('load', decodeSlides);
 
   /* ---------------------------------------------------------
      4. 間取り図の拡大（<dialog>。×・背景のタップ・Escで閉じる）
@@ -55,6 +129,7 @@
       });
       track.insertBefore(headClone, real[0]);
       track.appendChild(tailClone);
+      [headClone, tailClone].forEach(function (c) { c.setAttribute('tabindex', '-1'); });
       var all = Array.prototype.slice.call(track.children);
       var current = 1;
 
@@ -113,6 +188,49 @@
       slider.querySelector('.gal__arrow--prev').addEventListener('click', function () { touched(); goTo(current - 1); });
       slider.querySelector('.gal__arrow--next').addEventListener('click', function () { touched(); goTo(current + 1); });
 
+      // タップで拡大（説明は拡大したときに出す）
+      var gview = document.getElementById('gview');
+      if (gview && gview.showModal) {
+        var gimg = gview.querySelector('.gview__img'), gen = gview.querySelector('.gview__en'),
+            gjp = gview.querySelector('.gview__jp'), gcount = gview.querySelector('.gview__count');
+        var gcur = 0;
+        var openAt = function (i) {
+          gcur = ((i % n) + n) % n;
+          var f = real[gcur], im = f.querySelector('img');
+          gimg.src = im.getAttribute('src').replace('_800.', '_1600.');
+          gimg.alt = im.alt;
+          gen.textContent = f.getAttribute('data-en');
+          gjp.textContent = f.getAttribute('data-jp');
+          var note = f.getAttribute('data-note');
+          if (note) { var sm = document.createElement('small'); sm.textContent = note; gjp.appendChild(sm); }
+          gcount.textContent = (gcur + 1) + ' / ' + n;
+          if (!gview.open) gview.showModal();
+          // 次の写真を先に読み込んでおく
+          [gcur + 1, gcur - 1].forEach(function (k) {
+            var pi = new Image(); pi.src = real[((k % n) + n) % n].querySelector('img').getAttribute('src').replace('_800.', '_1600.');
+          });
+        };
+        track.addEventListener('click', function (e) {
+          var f = e.target.closest('.gal__slide');
+          if (!f || f.getAttribute('aria-hidden')) { if (f) openAt(+f.getAttribute('data-i')); return; }
+          openAt(+f.getAttribute('data-i'));
+        });
+        track.addEventListener('keydown', function (e) {
+          var f = e.target.closest('.gal__slide');
+          if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openAt(+f.getAttribute('data-i')); }
+        });
+        gview.querySelector('.gview__close').addEventListener('click', function () { gview.close(); });
+        gview.querySelector('.gview__nav--prev').addEventListener('click', function () { openAt(gcur - 1); });
+        gview.querySelector('.gview__nav--next').addEventListener('click', function () { openAt(gcur + 1); });
+        gview.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowLeft') openAt(gcur - 1);
+          if (e.key === 'ArrowRight') openAt(gcur + 1);
+        });
+        gview.addEventListener('click', function (e) { if (e.target === gview) gview.close(); });
+        // 拡大中はうしろの自動送りを止める／閉じたら、その写真の位置に戻す
+        gview.addEventListener('close', function () { touched(); goTo(gcur + 1, true); });
+      }
+
       // 自動送り（動きを減らす設定の人には自動では動かさない）
       var visible = false;
       if ('IntersectionObserver' in window) {
@@ -120,7 +238,7 @@
       }
       if (!reduceMotion) {
         setInterval(function () {
-          if (!visible || document.hidden || Date.now() - lastTouch < 6000) return;
+          if (!visible || document.hidden || Date.now() - lastTouch < 6000 || (gview && gview.open)) return;
           goTo(current + 1);
         }, 4000);
       }

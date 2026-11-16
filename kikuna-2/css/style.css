@@ -86,35 +86,26 @@ a{ color:inherit; text-decoration:none; }
   background:var(--c-ink);
 }
 
-/* --- 写真のスライドショー（4枚 × 6秒 ＝ 24秒で1周。切り替えは1.6秒かけて重ねる） ---
-   1枚目は最初から表示（-1.6秒から始めて、ちょうど表示し終わったところから） */
-.fv__slides{ position:absolute; inset:0; }
+/* --- 写真のスライドショー（js/main.js が切り替える。4枚 × 8秒、重ねて切り替える）---
+   ・写真は画面より大きく置いて、横や縦へゆっくり動かす（ズームだけでなく、横にスライドする視点にして広さを見せる）
+   ・JSが動かなくても1枚目は見えるように、1枚目は最初から表示（is-on）にしてある */
+.fv__slides{ position:absolute; inset:0; z-index:0; overflow:hidden; isolation:isolate; }   /* 写真の重ね順（JSが z-index を増やす）が、コピー・枠より上に出ないように */
 .fv__slide{
   position:absolute; inset:0;
+  overflow:hidden;
   opacity:0;
-  animation:fvSlide 24s linear infinite both;
-  animation-delay:calc(var(--i) * 6s - 1.6s);
+  transition:opacity 1.6s ease-in-out;
 }
+.fv__slide.is-on{ opacity:1; }
 .fv__slide img{
-  width:100%; height:100%;
+  position:absolute; left:0; top:0;
+  width:100%; height:100%;                /* JSが動くまでの仮の大きさ（JSが写真の大きさを決める） */
+  max-width:none;
   object-fit:cover;
-  filter:brightness(var(--b, 1));   /* 白い部屋の写真は少し暗くして、文字を読みやすく */
-  animation:fvZoom 24s linear infinite both;
-  animation-delay:calc(var(--i) * 6s - 1.6s);
+  transform-origin:0 0;
   will-change:transform;
 }
-@keyframes fvSlide{
-  0%      { opacity:0; animation-timing-function:ease-in-out; }
-  6.667%  { opacity:1; }                                           /* 1.6秒で表示 */
-  25%     { opacity:1; animation-timing-function:ease-in-out; }    /* 6秒まで表示 */
-  31.667% { opacity:0; }                                           /* 次の写真と重ねながら消える */
-  100%    { opacity:0; }
-}
-@keyframes fvZoom{                                                 /* 表示中ゆっくり寄る（動画広告と同じ） */
-  0%      { transform:scale(1); }
-  31.667% { transform:scale(1.08); }
-  100%    { transform:scale(1.08); }
-}
+.fv__slide.is-ready img{ object-fit:fill; }
 
 /* 文字が読めるように、上（ヘッダー）・コピーのまわり・下を少し暗く */
 .fv__shade{
@@ -159,8 +150,7 @@ a{ color:inherit; text-decoration:none; }
   display:flex; align-items:flex-end; justify-content:space-between; gap:1.2rem;
   animation:fvFade 1.2s var(--ease-out) 2.4s both;
 }
-.fv__now{ flex:1; min-width:0; }
-.fv__bars{ display:flex; gap:.6rem; margin-bottom:1.2rem; }
+.fv__bars{ display:flex; gap:.6rem; }
 .fv__bar{
   position:relative;
   width:2.4rem; height:1px;
@@ -172,40 +162,9 @@ a{ color:inherit; text-decoration:none; }
   background:var(--c-gold);
   transform-origin:left center;
   transform:scaleX(0);
-  animation:fvBar 24s linear infinite both;
-  animation-delay:calc(var(--i) * 6s - 1.6s);
 }
-@keyframes fvBar{
-  0%      { transform:scaleX(0); opacity:1; }
-  6.667%  { transform:scaleX(0); }
-  31.667% { transform:scaleX(1); opacity:1; }
-  33.5%   { opacity:0; }
-  100%    { transform:scaleX(1); opacity:0; }
-}
-.fv__caps{ position:relative; height:3.9rem; }
-.fv__cap{
-  position:absolute; left:0; bottom:0;
-  display:flex; flex-direction:column; gap:.7rem;
-  white-space:nowrap;
-  opacity:0;
-  animation:fvCap 24s linear infinite both;
-  animation-delay:calc(var(--i) * 6s - 1.6s);
-}
-@keyframes fvCap{
-  0%      { opacity:0; transform:translateY(.5rem); animation-timing-function:var(--ease-out); }
-  8%      { opacity:1; transform:none; }
-  24%     { opacity:1; }
-  27%     { opacity:0; }
-  100%    { opacity:0; }
-}
-.fv__cap-en{
-  font-family:var(--f-en); font-size:1.05rem; font-weight:500;
-  letter-spacing:.22em; line-height:1;
-  color:var(--c-gold);
-}
-.fv__cap-jp{ font-size:1.3rem; letter-spacing:.08em; line-height:1; }
-.fv__cap-en,
-.fv__cap-jp{ text-shadow:0 0 1rem rgba(0,0,0,.7); }
+.fv__bar.is-on::after{ animation:fvBar 8s linear forwards; }
+@keyframes fvBar{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
 
 /* 「横浜市菊名／完成見学会 開催中」の金の枠（動画広告と同じ。枠の中の上下の空きは同じ） */
 .fv__badge{
@@ -430,6 +389,7 @@ a{ color:inherit; text-decoration:none; }
   text-align:center;
   color:#4a453d;
 }
+.gal__lead-sub{ display:block; margin-top:.8rem; font-family:var(--f-sans); font-size:1.1rem; letter-spacing:.04em; color:#8a8378; }
 .gal__slider{ position:relative; margin-top:3.2rem; }
 .gal__track{
   display:flex; gap:1.2rem;
@@ -447,18 +407,9 @@ a{ color:inherit; text-decoration:none; }
   scroll-snap-align:center;
   background:#e6e0d4;
 }
+.gal__slide{ cursor:zoom-in; -webkit-tap-highlight-color:transparent; }
+.gal__slide:focus-visible{ outline:2px solid var(--c-gold-d); outline-offset:-4px; }
 .gal__slide img{ width:100%; height:100%; object-fit:cover; }
-.gal__cap{
-  position:absolute; left:0; right:0; bottom:0;
-  display:flex; flex-direction:column; gap:.5rem;
-  padding:3.2rem 1.4rem 1.2rem;
-  line-height:1;
-  color:var(--c-white);
-  background:linear-gradient(180deg, rgba(10,11,14,0), rgba(10,11,14,.6));
-}
-.gal__cap-en{ font-family:var(--f-en); font-size:.95rem; font-weight:500; letter-spacing:.2em; color:var(--c-gold-l); }
-.gal__cap-jp{ font-size:1.3rem; letter-spacing:.08em; }
-.gal__cap-jp small{ font-size:1rem; letter-spacing:.02em; }
 .gal__arrow{
   position:absolute; top:50%; z-index:2;
   width:3.6rem; height:3.6rem;
@@ -489,12 +440,61 @@ a{ color:inherit; text-decoration:none; }
 }
 .gal__dot.is-active{ background:var(--c-gold-d); transform:scale(1.3); }
 
+
+/* ギャラリーの写真の拡大（説明は、ここで表示する） */
+.gview{
+  width:100vw; max-width:none; height:100dvh; max-height:none;
+  margin:0; padding:0;
+  border:0;
+  color:var(--c-white);
+  background:#0a0b0e;
+}
+.gview[open]{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.gview::backdrop{ background:transparent; }
+.gview__fig{ display:flex; flex-direction:column; align-items:center; width:100%; padding:5.6rem 0 2.4rem; }
+.gview__img{
+  width:100%; height:auto;
+  max-height:calc(100dvh - 17rem);
+  object-fit:contain;
+}
+.gview__cap{ display:flex; flex-direction:column; align-items:center; gap:.9rem; margin-top:2rem; padding:0 2rem; line-height:1.4; text-align:center; }
+.gview__en{ font-family:var(--f-en); font-size:1.1rem; font-weight:500; letter-spacing:.24em; color:var(--c-gold); }
+.gview__jp{ font-size:1.7rem; letter-spacing:.08em; }
+.gview__jp small{ display:block; margin-top:.5rem; font-size:1.15rem; letter-spacing:.04em; color:#bdb6a8; }
+.gview__count{ position:absolute; top:2.2rem; left:2rem; font-family:var(--f-en); font-size:1.2rem; letter-spacing:.2em; color:#bdb6a8; }
+.gview__close{
+  position:absolute; top:1.2rem; right:1.2rem; z-index:3;
+  width:4rem; height:4rem;
+  padding:0; border:1px solid var(--c-gold); border-radius:50%;
+  background:transparent; cursor:pointer;
+}
+.gview__close::before, .gview__close::after{
+  content:""; position:absolute; top:50%; left:50%;
+  width:1.8rem; height:1px; margin-left:-.9rem;
+  background:var(--c-gold); transform:rotate(45deg);
+}
+.gview__close::after{ transform:rotate(-45deg); }
+.gview__nav{
+  position:absolute; top:50%; z-index:2;
+  width:3.8rem; height:3.8rem; margin-top:-5rem;
+  padding:0; border:1px solid rgba(255,255,255,.7); border-radius:50%;
+  background:rgba(10,11,14,.4); cursor:pointer;
+}
+.gview__nav::before{
+  content:""; position:absolute; top:50%; left:50%;
+  width:.8rem; height:.8rem;
+  border-top:1px solid #fff; border-right:1px solid #fff;
+}
+.gview__nav--prev{ left:1rem; } .gview__nav--next{ right:1rem; }
+.gview__nav--prev::before{ transform:translate(-30%,-50%) rotate(-135deg); }
+.gview__nav--next::before{ transform:translate(-70%,-50%) rotate(45deg); }
+
 /* =========================================================
    動きを減らす設定の人には、寄り・光・文字の動きを止める（写真の切り替えだけ残す）
    ========================================================= */
 @media (prefers-reduced-motion: reduce){
-  .fv__slide img,
   .cta__btn::before{ animation:none; }
+  .fv__bar.is-on::after{ animation:none; transform:scaleX(1); }
   .fv__line,
   .fv__foot{ animation-duration:.01s; animation-delay:0s; }
 }
@@ -532,12 +532,8 @@ a{ color:inherit; text-decoration:none; }
   }
 
   .fv__foot{ left:8vw; right:40px; bottom:44px; }
-  .fv__bars{ gap:8px; margin-bottom:16px; }
+  .fv__bars{ gap:8px; }
   .fv__bar{ width:40px; }
-  .fv__caps{ height:46px; }
-  .fv__cap{ gap:10px; }
-  .fv__cap-en{ font-size:12px; }
-  .fv__cap-jp{ font-size:16px; }
   .fv__badge{ gap:12px; padding:18px 26px; }
   .fv__badge-place{ font-size:15px; }
   .fv__badge-main{ font-size:24px; }
@@ -570,15 +566,24 @@ a{ color:inherit; text-decoration:none; }
   /* ギャラリー：美しが丘LPと同じく最大1200pxの列の84%（1008px） */
   .gal{ padding:30px 0 120px; }
   .gal__lead{ margin-top:26px; font-size:16px; }
+  .gal__lead-sub{ margin-top:10px; font-size:12px; }
   .gal__slider{ max-width:1200px; margin:48px auto 0; }
   .gal__track{ gap:16px; }
-  .gal__cap{ gap:8px; padding:48px 24px 20px; }
-  .gal__cap-en{ font-size:12px; }
-  .gal__cap-jp{ font-size:17px; }
-  .gal__cap-jp small{ font-size:13px; }
   .gal__arrow{ width:52px; height:52px; margin-top:-26px; }
   .gal__arrow::before{ width:12px; height:12px; }
   .gal__dots{ gap:12px; margin-top:26px; }
+  .gview__fig{ padding:80px 0 32px; }
+  .gview__img{ width:auto; max-width:min(1200px, calc(100vw - 200px)); max-height:calc(100dvh - 220px); }
+  .gview__cap{ gap:12px; margin-top:26px; }
+  .gview__en{ font-size:13px; }
+  .gview__jp{ font-size:22px; }
+  .gview__jp small{ font-size:14px; }
+  .gview__count{ top:30px; left:40px; font-size:14px; }
+  .gview__close{ top:20px; right:24px; width:48px; height:48px; }
+  .gview__close::before, .gview__close::after{ width:22px; margin-left:-11px; }
+  .gview__nav{ width:52px; height:52px; margin-top:-70px; }
+  .gview__nav::before{ width:12px; height:12px; }
+  .gview__nav--prev{ left:32px; } .gview__nav--next{ right:32px; }
   .gal__dot{ width:8px; height:8px; }
   .cta__note{ margin-bottom:18px; font-size:15px; }
   .cta__btn{ width:440px; height:80px; font-size:22px; }
