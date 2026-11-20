@@ -314,13 +314,11 @@ a{ color:inherit; text-decoration:none; }
   width:100%;
   height:calc(1092 * var(--k) + 6.4rem);   /* カードの高さは3枚同じ（いちばん高い1F・2Fの図面＋上下の余白）。図面は下にそろえる */
   padding:4.4rem 2rem 2rem;
-  border:1px solid rgba(179,148,98,.45);
-  background:#fbf9f4;
+  border:0;
+  background:#fff;
   cursor:zoom-in;
   -webkit-tap-highlight-color:transparent;
-  transition:border-color .3s;
 }
-@media (hover:hover){ .plan__zoom:hover{ border-color:var(--c-gold-d); } }
 .plan__zoom:focus-visible{ outline:2px solid var(--c-gold-d); outline-offset:3px; }
 .plan__zoom img{ width:calc(var(--w) * var(--k)); max-width:100%; height:auto; }
 .plan__floor{
@@ -414,7 +412,7 @@ a{ color:inherit; text-decoration:none; }
   position:absolute; top:50%; z-index:2;
   width:3.6rem; height:3.6rem;
   margin-top:-1.8rem;
-  padding:0; border:1px solid rgba(255,255,255,.8); border-radius:50%;
+  padding:0; border:0; border-radius:50%;
   background:rgba(14,15,18,.35);
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
@@ -477,7 +475,7 @@ a{ color:inherit; text-decoration:none; }
 .gview__nav{
   position:absolute; top:50%; z-index:2;
   width:3.8rem; height:3.8rem; margin-top:-5rem;
-  padding:0; border:1px solid rgba(255,255,255,.7); border-radius:50%;
+  padding:0; border:0; border-radius:50%;
   background:rgba(10,11,14,.4); cursor:pointer;
 }
 .gview__nav::before{
