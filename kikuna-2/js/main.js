@@ -272,16 +272,17 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-gallery]'), initGallery);
 
   /* ---------------------------------------------------------
-     追従フッター（電話番号＋予約ボタン）と「先頭へ戻る」
-     最初の画面を少し過ぎたら出して、いちばん下まで出たままにする
+     追従するヘッダー・予約ボタンと「先頭へ戻る」
+     ヘッダーは少しでもスクロールしたら黒い背景。予約ボタンは最初の画面を少し過ぎたら出して、いちばん下まで出たままにする
      --------------------------------------------------------- */
-  var bar = document.querySelector('[data-stick]'), totop = document.querySelector('[data-totop]');
+  var bar = document.querySelector('[data-stick]'), totop = document.querySelector('[data-totop]'), header = document.querySelector('[data-header]');
   if (bar && totop) {
     var ticking = false;
     var update = function () {
       ticking = false;
       var h = window.innerHeight, y = window.pageYOffset;
       bar.classList.toggle('is-show', y > h * .6);
+      if (header) header.classList.toggle('is-solid', y > 10);
       var up = y > h * 2;
       totop.classList.toggle('is-show', up);
       totop.tabIndex = up ? 0 : -1;

@@ -56,14 +56,17 @@ a{ color:inherit; text-decoration:none; }
 .form-popup{ font-family:var(--f-sans); }   /* フォームは読みやすいゴシック */
 
 /* =========================================================
-   ヘッダー（写真の上に重ねる）
+   ヘッダー（写真の上に重ねる。スクロールしても上に追従し、写真を過ぎたら黒い背景がつく）
    ========================================================= */
 .hd{
-  position:absolute; top:0; left:0; right:0; z-index:20;
+  position:fixed; top:0; left:0; right:0; z-index:20;
   display:flex; align-items:center; justify-content:space-between;
-  height:5.6rem;
-  padding:0 2rem;
+  height:calc(5.6rem + env(safe-area-inset-top));
+  padding:env(safe-area-inset-top) 2rem 0;
+  border-bottom:1px solid transparent;
+  transition:background .3s, border-color .3s, height .3s;
 }
+.hd.is-solid{ background:rgba(14,15,18,.95); border-bottom-color:rgba(205,181,133,.4); }
 .hd__logo img{ width:auto; height:1.4rem; }
 .hd__tel{
   display:flex; align-items:center; gap:.5rem;
@@ -525,6 +528,7 @@ a{ color:inherit; text-decoration:none; }
   html{ font-size:11px; }
 
   .hd{ height:84px; padding:0 40px; }
+  .hd.is-solid{ height:72px; }
   .hd__logo img{ height:20px; }
   .hd__tel{ display:grid; grid-template-columns:auto auto; align-items:center; column-gap:10px; row-gap:6px; }
   .hd__tel-icon{ width:21.6px; height:21.6px; grid-row:1; }
