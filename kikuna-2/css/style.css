@@ -304,9 +304,21 @@ a{ color:inherit; text-decoration:none; }
   color:#5a544b;
 }
 .plan__list{
-  display:flex; flex-direction:column; gap:2rem;
-  margin:3.2rem 0 0; padding:0;
+  display:flex; flex-direction:column; gap:4.8rem;
+  margin:4rem 0 0; padding:0;
   list-style:none;
+}
+.plan__title span{ display:block; }   /* スマホは3行に積む */
+.plan__lead{
+  font-size:1.9rem; font-weight:500; line-height:1.6; letter-spacing:.08em;
+  text-align:center;
+  color:var(--c-ink);
+}
+.plan__text{
+  margin:.6rem 0 1.4rem;
+  font-size:1.25rem; line-height:1.9; letter-spacing:.05em;
+  text-align:center;
+  color:#5a544b;
 }
 .plan__zoom{
   position:relative;
@@ -548,9 +560,13 @@ a{ color:inherit; text-decoration:none; }
   /* 間取り：3枚を横に並べる（同じ縮尺）。倍率は 1100px の列に収まる値、狭い画面は画面幅に合わせる */
   .plan{ --k:min(.385px, (100vw - 272px) / 2357); padding:120px 40px 90px; }
   .plan__spec{ margin-top:26px; font-size:15px; }
-  .plan__list{ flex-direction:row; justify-content:center; align-items:flex-start; gap:24px; margin-top:48px; }
-  .plan__item{ flex:none; }
-  .plan__zoom{ width:auto; height:calc(1092 * var(--k) + 80px); padding:56px 24px 24px; }
+  .plan__title span{ display:inline-block; }
+  /* 見出し・説明・図面・帖数の高さを3列でそろえる */
+  .plan__list{ display:grid; grid-template-columns:repeat(3, auto); grid-template-rows:repeat(4, auto); justify-content:center; column-gap:24px; row-gap:0; margin-top:56px; }
+  .plan__item{ display:grid; grid-row:span 4; grid-template-rows:subgrid; row-gap:0; width:calc(var(--w) * var(--k) + 48px); }
+  .plan__lead{ align-self:end; font-size:clamp(14px, 1.7vw, 21px); letter-spacing:.06em; }
+  .plan__text{ margin:8px 0 18px; font-size:clamp(11px, 1.2vw, 14px); letter-spacing:0; }
+  .plan__zoom{ width:100%; height:calc(1092 * var(--k) + 80px); padding:56px 24px 24px; }
   .plan__zoom img{ max-width:none; }
   .plan__floor{ top:20px; left:22px; font-size:20px; }
   .plan__zoom::after{ top:18px; right:20px; width:22px; height:22px; }
