@@ -117,11 +117,49 @@
   }
 
   /* ---------------------------------------------------------
+     写真の拡大（どのギャラリーでも共通。開いたギャラリーの写真を順に見られる）
+     --------------------------------------------------------- */
+  var gview = document.getElementById('gview');
+  var viewer = null;
+  if (gview && gview.showModal) {
+    var gimg = gview.querySelector('.gview__img'), gen = gview.querySelector('.gview__en'),
+        gjp = gview.querySelector('.gview__jp'), gcount = gview.querySelector('.gview__count');
+    var vlist = [], gcur = 0, vclose = null;
+    var fullSrc = function (f) {
+      return f.getAttribute('data-full') || f.querySelector('img').getAttribute('src').replace('_800.', '_1600.');
+    };
+    var openAt = function (i) {
+      var m = vlist.length;
+      gcur = ((i % m) + m) % m;
+      var f = vlist[gcur];
+      gimg.src = fullSrc(f);
+      gimg.alt = f.querySelector('img').alt;
+      gen.textContent = f.getAttribute('data-en');
+      gjp.textContent = f.getAttribute('data-jp');
+      var note = f.getAttribute('data-note');
+      if (note) { var sm = document.createElement('small'); sm.textContent = note; gjp.appendChild(sm); }
+      gcount.textContent = (gcur + 1) + ' / ' + m;
+      if (!gview.open) gview.showModal();
+      // 次の写真を先に読み込んでおく
+      [gcur + 1, gcur - 1].forEach(function (k) { var pi = new Image(); pi.src = fullSrc(vlist[((k % m) + m) % m]); });
+    };
+    viewer = { open: function (list, i, onClose) { vlist = list; vclose = onClose; openAt(i); } };
+    gview.querySelector('.gview__close').addEventListener('click', function () { gview.close(); });
+    gview.querySelector('.gview__nav--prev').addEventListener('click', function () { openAt(gcur - 1); });
+    gview.querySelector('.gview__nav--next').addEventListener('click', function () { openAt(gcur + 1); });
+    gview.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') openAt(gcur - 1);
+      if (e.key === 'ArrowRight') openAt(gcur + 1);
+    });
+    gview.addEventListener('click', function (e) { if (e.target === gview) gview.close(); });
+    gview.addEventListener('close', function () { if (vclose) vclose(gcur); });
+  }
+
+  /* ---------------------------------------------------------
      5. ギャラリー（美しが丘LPと同じ形：1枚が84%・となりが少し見える・点と矢印・端から端へ切れ目なく続く）
         ＋ 4秒ごとに自動で次へ。画面に見えている間だけ動き、指・矢印で操作したら6秒は止める
      --------------------------------------------------------- */
-  var slider = document.querySelector('[data-gallery]');
-  if (slider) {
+  function initGallery(slider) {
     var track = slider.querySelector('.gal__track');
     var real = Array.prototype.slice.call(track.children);
     var n = real.length;
@@ -194,47 +232,19 @@
       slider.querySelector('.gal__arrow--prev').addEventListener('click', function () { touched(); goTo(current - 1); });
       slider.querySelector('.gal__arrow--next').addEventListener('click', function () { touched(); goTo(current + 1); });
 
-      // タップで拡大（説明は拡大したときに出す）
-      var gview = document.getElementById('gview');
-      if (gview && gview.showModal) {
-        var gimg = gview.querySelector('.gview__img'), gen = gview.querySelector('.gview__en'),
-            gjp = gview.querySelector('.gview__jp'), gcount = gview.querySelector('.gview__count');
-        var gcur = 0;
-        var openAt = function (i) {
-          gcur = ((i % n) + n) % n;
-          var f = real[gcur], im = f.querySelector('img');
-          gimg.src = im.getAttribute('src').replace('_800.', '_1600.');
-          gimg.alt = im.alt;
-          gen.textContent = f.getAttribute('data-en');
-          gjp.textContent = f.getAttribute('data-jp');
-          var note = f.getAttribute('data-note');
-          if (note) { var sm = document.createElement('small'); sm.textContent = note; gjp.appendChild(sm); }
-          gcount.textContent = (gcur + 1) + ' / ' + n;
-          if (!gview.open) gview.showModal();
-          // 次の写真を先に読み込んでおく
-          [gcur + 1, gcur - 1].forEach(function (k) {
-            var pi = new Image(); pi.src = real[((k % n) + n) % n].querySelector('img').getAttribute('src').replace('_800.', '_1600.');
-          });
+      // タップで拡大（説明は拡大したときに出す）。閉じたら、見ていた写真の位置に戻す
+      if (viewer) {
+        var show = function (f) {
+          viewer.open(real, +f.getAttribute('data-i'), function (i) { touched(); goTo(i + 1, true); });
         };
         track.addEventListener('click', function (e) {
           var f = e.target.closest('.gal__slide');
-          if (!f || f.getAttribute('aria-hidden')) { if (f) openAt(+f.getAttribute('data-i')); return; }
-          openAt(+f.getAttribute('data-i'));
+          if (f) show(f);
         });
         track.addEventListener('keydown', function (e) {
           var f = e.target.closest('.gal__slide');
-          if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openAt(+f.getAttribute('data-i')); }
+          if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); show(f); }
         });
-        gview.querySelector('.gview__close').addEventListener('click', function () { gview.close(); });
-        gview.querySelector('.gview__nav--prev').addEventListener('click', function () { openAt(gcur - 1); });
-        gview.querySelector('.gview__nav--next').addEventListener('click', function () { openAt(gcur + 1); });
-        gview.addEventListener('keydown', function (e) {
-          if (e.key === 'ArrowLeft') openAt(gcur - 1);
-          if (e.key === 'ArrowRight') openAt(gcur + 1);
-        });
-        gview.addEventListener('click', function (e) { if (e.target === gview) gview.close(); });
-        // 拡大中はうしろの自動送りを止める／閉じたら、その写真の位置に戻す
-        gview.addEventListener('close', function () { touched(); goTo(gcur + 1, true); });
       }
 
       // 自動送り（動きを減らす設定の人には自動では動かさない）
@@ -259,6 +269,7 @@
       goTo(1, true);
     }
   }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-gallery]'), initGallery);
 
   /* ---------------------------------------------------------
      画面の下の予約ボタンと「先頭へ戻る」
