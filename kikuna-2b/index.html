@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ★作成中（ラグジュアリー版）：公開するまでは検索に出さない・予約フォームは送信しない -->
+<meta name="robots" content="noindex, nofollow">
+<title>【改善案】菊名 完成見学会｜都心なのに、この広さ。このゆとり。｜プリンシパルホーム</title>
+<meta name="description" content="横浜市港北区菊名（菊名駅徒歩6分）で完成見学会を開催中。28.59帖のLDK、3帖のパントリー、吹き抜けに映える鉄骨階段のある家。完全予約制・見学無料。">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0e0f12">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- 1枚目の写真は先に読み込む -->
+<link rel="preload" as="image" fetchpriority="high"
+      href="img/fv/fv_living_1400.jpg"
+      imagesrcset="img/fv/fv_living_1400.jpg 1400w, img/fv/fv_living_2400.jpg 2400w" imagesizes="170vw">
+
+<link rel="stylesheet" href="css/style.css?v=20261126kz">
+<link rel="stylesheet" href="css/lower.css?v=20261126kz">
+<link rel="stylesheet" href="css/form.css">
+<script>window.LP_PREVIEW = true;</script>
+</head>
+<body>
+<!-- 改善案（kikuna-2b）：ビジュアルリズム分析の改善案1〜5を反映。元の kikuna-2 は変更していない -->
+<!--
+  菊名 完成見学会LP（ラグジュアリー版）
+  ・動画広告（菊名動画広告_ラグジュアリー）と同じ雰囲気：濃い色の背景・金色（#cdb585）・明朝体
+  ・構成は美しが丘LPの上部を踏襲（FV → 短いコピー → 予約ボタン → 間取り → ギャラリー → 見所 → 特長 → 見学会情報 …）
+  ・6以降：見どころ → 特長（LDK／鉄骨階段と屋上／収納）→ こんな暮らし → 見学会情報 → 広さのひみつ → 体験 → 一日の過ごし方 → 予約 → 詳細 → 流れ → FAQ → 会社概要 → 締め
+-->
+
+<header class="hd" data-header>
+  <p class="hd__logo">
+    <a href="https://pr-h.net/" target="_blank" rel="noopener"><img src="img/logo_white.png" alt="PRINCIPAL HOME（プリンシパルホーム）" width="720" height="68"></a>
+  </p>
+  <a class="hd__tel" href="tel:0120021541" aria-label="電話をかける 0120-021-541">
+    <svg class="hd__tel-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+    <span class="hd__tel-num">0120-021-541</span>
+    <span class="hd__tel-time">受付 9:30-18:00（火・水定休）</span>
+  </a>
+</header>
+
+<main>
+
+  <!-- =========================================================
+       1. ファーストビュー：リビング → キッチン → 鉄骨階段 → パントリー（6秒ごとに切り替わる）
+       ========================================================= -->
+  <section class="fv" id="top">
+    <!-- 写真は js/main.js が切り替える（最初の1枚は最初から表示）。動きは data- で指定：
+         data-over（PCは data-over-pc）＝写真を画面の幅の何倍以上の大きさで見せるか／data-fx→data-tx＝横の動き（0＝左端 1＝右端）／data-fy→data-ty＝縦の動き（0＝上 1＝下）／data-s0→data-s1＝ズーム（画面の中心を軸に拡大） -->
+    <div class="fv__slides">
+      <figure class="fv__slide is-on" data-over="1" data-fx=".36" data-tx=".36" data-fy=".42" data-ty=".42" data-s0="1" data-s1="1.14">
+        <img src="img/fv/fv_living_1400.jpg" srcset="img/fv/fv_living_1400.jpg 1400w, img/fv/fv_living_2400.jpg 2400w" sizes="170vw" width="2400" height="1600" alt="LDKとバルコニーが見えるリビング" fetchpriority="high" decoding="async">
+      </figure>
+      <figure class="fv__slide" data-over="1.45" data-fx=".12" data-tx=".72" data-fy=".5" data-ty=".45">
+        <img src="img/fv/fv_kitchen_1400.jpg" srcset="img/fv/fv_kitchen_1400.jpg 1400w, img/fv/fv_kitchen_2400.jpg 2400w" sizes="170vw" width="2400" height="1600" alt="LDKを見渡す対面キッチン" decoding="async">
+      </figure>
+      <figure class="fv__slide" data-over="1.45" data-fx=".8" data-tx=".22" data-fy=".5" data-ty=".5">
+        <img src="img/fv/fv_stairs_1400.jpg" srcset="img/fv/fv_stairs_1400.jpg 1400w, img/fv/fv_stairs_2400.jpg 2400w" sizes="170vw" width="2400" height="1600" alt="吹き抜けに映える鉄骨階段（横から）" decoding="async">
+      </figure>
+      <figure class="fv__slide" data-over="1.9" data-over-pc="1.3" data-fx="0" data-tx="1" data-fy=".4" data-ty=".55">
+        <picture>
+          <source media="(min-width: 768px)" srcset="img/fv/fv_pantry_pc_1600.jpg 1600w, img/fv/fv_pantry_pc_2400.jpg 2400w" sizes="170vw">
+          <img src="img/fv/fv_pantry_sp_1000.jpg" srcset="img/fv/fv_pantry_sp_1000.jpg 1000w, img/fv/fv_pantry_sp_1500.jpg 1500w, img/fv/fv_pantry_sp_2200.jpg 2200w" sizes="170vw" width="2752" height="4128" alt="3帖の大容量パントリー" decoding="async">
+        </picture>
+      </figure>
+    </div>
+    <div class="fv__shade" aria-hidden="true"></div>
+
+    <p class="fv__badge"><span class="fv__badge-place">横浜市菊名</span><span class="fv__badge-main">完成見学会 開催中</span></p>
+
+    <div class="fv__copy">
+      <div class="fv__copy-in">
+        <h1 class="fv__title">
+          <span class="fv__line" style="--d:.5s">都心なのに、</span>
+          <span class="fv__line" style="--d:1.2s">この広さ。</span>
+          <span class="fv__line" style="--d:1.9s">このゆとり。</span>
+        </h1>
+        <ul class="fv__points">
+          <li><span>3LDK＋バルコニー</span></li>
+          <li><span>延べ床面積 143.77㎡<small>（約43.48坪）</small></span></li>
+          <li><span>大きな収納</span><span class="fv__points-sub">パントリー3帖・WIC 3.4帖・SIC 1.7帖</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fv__foot">
+      <div class="fv__bars" aria-hidden="true">
+        <span class="fv__bar"></span><span class="fv__bar"></span><span class="fv__bar"></span><span class="fv__bar"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       2. 短いコピー
+       ========================================================= -->
+  <section class="intro">
+    <div class="intro__in">
+      <p class="intro__en" lang="en">KIKUNA MODEL HOUSE</p>
+      <p class="intro__text">
+        <span class="intro__gold">横浜市港北区・菊名</span>に誕生した、<br>
+        駅徒歩6分の便利さと、<br>
+        広さのゆとりを両立する家。
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       3. 予約ボタン
+       ========================================================= -->
+  <section class="cta" aria-label="完成見学会のご予約">
+    <p class="cta__note">※見学・ご相談はすべて無料です</p>
+    <a class="cta__btn" href="#form"><span class="cta__btn-label">完成見学会を予約する</span></a>
+    <a class="cta__tel" href="tel:0120021541">
+      <span class="cta__tel-label">お電話でのご予約</span>
+      <span class="cta__tel-num"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>0120-021-541</span>
+      <span class="cta__tel-time">受付 9:30-18:00（火・水定休）</span>
+    </a>
+  </section>
+
+  <!-- =========================================================
+       4. 間取り（3枚とも同じ縮尺。タップで拡大）
+       ========================================================= -->
+  <section class="plan" id="plan">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">FLOOR PLAN</p>
+      <h2 class="sec-head__jp plan__title" aria-label="休む1階。動く2階。遊ぶ屋上。"><span class="plan__row" aria-hidden="true"><i>休</i><i>む</i><i>1</i><i>階</i><i class="plan__dot">。</i></span><span class="plan__row" aria-hidden="true"><i>動</i><i>く</i><i>2</i><i>階</i><i class="plan__dot">。</i></span><span class="plan__row" aria-hidden="true"><i>遊</i><i>ぶ</i><i>屋</i><i>上</i><i class="plan__dot">。</i></span></h2>
+    </div>
+    <p class="plan__spec">木造2階建て＋PH階　3LDK＋ルーフバルコニー<br>延床面積 143.77㎡（約43.48坪）</p>
+    <ul class="plan__list">
+      <li class="plan__item" style="--w:917">
+        <div class="plan__card">
+          <span class="plan__floor" lang="en">1F</span>
+          <h3 class="plan__lead">心と体を、休める。</h3>
+          <p class="plan__text"><span>主寝室と2つの寝室を</span><span>まとめた、</span><br><span>静かな</span><span>プライベートフロア。</span></p>
+          <button class="plan__zoom" type="button" data-zoom="img/plan/plan_1f.png?v=2" data-zoom-w="917" data-zoom-h="1092" aria-label="1階の間取り図を拡大">
+            <img src="img/plan/plan_1f.png?v=2" width="917" height="1092" alt="1階の間取り図（主寝室10.0帖、寝室6.2帖・6.0帖、WIC3.4帖、SIC1.7帖、吹抜け）" loading="lazy" decoding="async">
+          </button>
+        </div>
+        <p class="plan__note">主寝室 10.0帖／WIC 3.4帖／SIC 1.7帖<br>寝室 6.2帖・6.0帖</p>
+      </li>
+      <li class="plan__item" style="--w:856">
+        <div class="plan__card">
+          <span class="plan__floor" lang="en">2F</span>
+          <h3 class="plan__lead">起きて、集って、暮らす。</h3>
+          <p class="plan__text"><span>28.59帖のLDKを</span><span>中心にした、</span><br><span>一日の</span><span>メインステージ。</span></p>
+          <button class="plan__zoom" type="button" data-zoom="img/plan/plan_2f.png?v=2" data-zoom-w="856" data-zoom-h="1092" aria-label="2階の間取り図を拡大">
+            <img src="img/plan/plan_2f.png?v=2" width="856" height="1092" alt="2階の間取り図（リビングダイニング28.59帖、パントリー3.0帖、バルコニー2か所）" loading="lazy" decoding="async">
+          </button>
+        </div>
+        <p class="plan__note">LDK 28.59帖／パントリー 3.0帖</p>
+      </li>
+      <li class="plan__item" style="--w:584">
+        <div class="plan__card">
+          <span class="plan__floor" lang="en">PH</span>
+          <h3 class="plan__lead">遊びも、くつろぎも。</h3>
+          <p class="plan__text"><span>約22帖の</span><span>ルーフバルコニーは、</span><br><span>楽しみ方いろいろ。</span></p>
+          <button class="plan__zoom" type="button" data-zoom="img/plan/plan_ph.png?v=2" data-zoom-w="584" data-zoom-h="1011" aria-label="屋上（PH階）の間取り図を拡大">
+            <img src="img/plan/plan_ph.png?v=2" width="584" height="1011" alt="屋上（PH階）の間取り図（ルーフバルコニー）" loading="lazy" decoding="async">
+          </button>
+        </div>
+        <p class="plan__note">ルーフバルコニー 約22帖</p>
+      </li>
+    </ul>
+    <p class="plan__hint">※図面をタップすると拡大します</p>
+  </section>
+
+  <!-- =========================================================
+       5. ギャラリー（自動で横に流れる。指でも動かせる・左右の矢印・点）
+       ========================================================= -->
+  <section class="gal" id="gallery">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">GALLERY</p>
+      <h2 class="sec-head__jp">写真でめぐる、菊名の家</h2>
+    </div>
+    <p class="gal__lead">外観から、LDK、鉄骨階段、収納、屋上まで。<br>完成した家の雰囲気を、写真でご覧ください。<br><span class="gal__lead-sub">※写真をタップすると、大きく表示します</span></p>
+    <div class="gal__slider" data-gallery>
+      <div class="gal__track">
+          <figure class="gal__slide" data-i="0" data-en="EXTERIOR" data-jp="外観" data-note="" tabindex="0" role="button" aria-label="外観の写真を拡大">
+            <img src="img/gallery/g_01_800.jpg?v=2" srcset="img/gallery/g_01_800.jpg?v=2 800w, img/gallery/g_01_1200.jpg?v=2 1200w, img/gallery/g_01_1600.jpg?v=2 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="外観" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="1" data-en="LIVING &amp; DINING" data-jp="キッチンから見たLDK" data-note="" tabindex="0" role="button" aria-label="キッチンから見たLDKの写真を拡大">
+            <img src="img/gallery/g_02_800.jpg" srcset="img/gallery/g_02_800.jpg 800w, img/gallery/g_02_1200.jpg 1200w, img/gallery/g_02_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="キッチンから見たLDK" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="2" data-en="LIVING &amp; STAIRCASE" data-jp="LDKと鉄骨階段" data-note="" tabindex="0" role="button" aria-label="LDKと鉄骨階段の写真を拡大">
+            <img src="img/gallery/g_03_800.jpg" srcset="img/gallery/g_03_800.jpg 800w, img/gallery/g_03_1200.jpg 1200w, img/gallery/g_03_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="LDKと吹き抜けの鉄骨階段" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="3" data-en="KITCHEN" data-jp="キッチン" data-note="" tabindex="0" role="button" aria-label="キッチンの写真を拡大">
+            <img src="img/gallery/g_04_800.jpg" srcset="img/gallery/g_04_800.jpg 800w, img/gallery/g_04_1200.jpg 1200w, img/gallery/g_04_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="対面キッチン" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="4" data-en="STAIRCASE" data-jp="吹き抜けの鉄骨階段" data-note="" tabindex="0" role="button" aria-label="吹き抜けの鉄骨階段の写真を拡大">
+            <img src="img/gallery/g_05_800.jpg" srcset="img/gallery/g_05_800.jpg 800w, img/gallery/g_05_1200.jpg 1200w, img/gallery/g_05_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="吹き抜けの鉄骨階段" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="5" data-en="PANTRY" data-jp="3帖のパントリー" data-note="" tabindex="0" role="button" aria-label="3帖のパントリーの写真を拡大">
+            <img src="img/gallery/g_06_800.jpg" srcset="img/gallery/g_06_800.jpg 800w, img/gallery/g_06_1200.jpg 1200w, img/gallery/g_06_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="3帖のパントリー" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="6" data-en="WASHROOM" data-jp="洗面室" data-note="" tabindex="0" role="button" aria-label="洗面室の写真を拡大">
+            <img src="img/gallery/g_07_800.jpg" srcset="img/gallery/g_07_800.jpg 800w, img/gallery/g_07_1200.jpg 1200w, img/gallery/g_07_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="洗面室" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="7" data-en="MASTER BEDROOM" data-jp="主寝室" data-note="" tabindex="0" role="button" aria-label="主寝室の写真を拡大">
+            <img src="img/gallery/g_08_800.jpg" srcset="img/gallery/g_08_800.jpg 800w, img/gallery/g_08_1200.jpg 1200w, img/gallery/g_08_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="主寝室" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="8" data-en="WALK-IN CLOSET" data-jp="ウォークインクローゼット" data-note="" tabindex="0" role="button" aria-label="ウォークインクローゼットの写真を拡大">
+            <img src="img/gallery/g_09_800.jpg" srcset="img/gallery/g_09_800.jpg 800w, img/gallery/g_09_1200.jpg 1200w, img/gallery/g_09_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="主寝室のウォークインクローゼット" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="9" data-en="SHOES-IN CLOSET" data-jp="シューズインクローゼット" data-note="" tabindex="0" role="button" aria-label="シューズインクローゼットの写真を拡大">
+            <img src="img/gallery/g_10_800.jpg" srcset="img/gallery/g_10_800.jpg 800w, img/gallery/g_10_1200.jpg 1200w, img/gallery/g_10_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="玄関のシューズインクローゼット" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="10" data-en="ROOF BALCONY" data-jp="ルーフバルコニー" data-note="" tabindex="0" role="button" aria-label="ルーフバルコニーの写真を拡大">
+            <img src="img/gallery/g_11_800.jpg" srcset="img/gallery/g_11_800.jpg 800w, img/gallery/g_11_1200.jpg 1200w, img/gallery/g_11_1600.jpg 1600w" sizes="(min-width: 1200px) 1008px, 84vw" width="1600" height="1067" alt="屋上のルーフバルコニー" loading="lazy" decoding="async"></figure>
+      </div>
+      <button class="gal__arrow gal__arrow--prev" type="button" aria-label="前の写真へ"></button>
+      <button class="gal__arrow gal__arrow--next" type="button" aria-label="次の写真へ"></button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       6. 物件の見どころ（3つ。押すと下の説明へ）
+       ========================================================= -->
+  <section class="hl" id="highlights">
+    <div class="sec-head sec-head--light">
+      <p class="sec-head__en" lang="en">HIGHLIGHTS</p>
+      <h2 class="sec-head__jp">この家の、3つの見どころ</h2>
+    </div>
+    <p class="hl__lead">利便性の高い東急東横線・横浜線 菊名駅から<br>徒歩6分という好立地にありながら、<br>プライベートな屋上と光あふれる吹き抜けが、<br>都心にはない上質な暮らしを叶えます。</p>
+    <ol class="hl__list"><li><a class="hl__card" href="#feature-ldk">
+          <span class="hl__photo"><img src="img/equip/kitchen_view_800.jpg" srcset="img/equip/kitchen_view_800.jpg 800w, img/equip/kitchen_view_1600.jpg 1600w" sizes="(min-width: 768px) 340px, 92vw" width="1600" height="1067" alt="キッチンから見たダイニング、リビングと鉄骨階段" loading="lazy" decoding="async"></span>
+          <span class="hl__body"><span class="hl__no" lang="en">01</span><span class="hl__title">28.59帖の、<br>ひろがるLDK</span><span class="hl__sub">リビング・キッチンと<br>パントリー・ダイニングとバルコニー</span></span>
+        </a></li><li><a class="hl__card" href="#feature-stairs">
+          <span class="hl__photo"><img src="img/stairs/stairs_main_1125.jpg" srcset="img/stairs/stairs_main_1125.jpg 1125w, img/stairs/stairs_main_1537.jpg 1537w" sizes="(min-width: 768px) 340px, 92vw" width="1537" height="971" alt="吹き抜けに映える鉄骨階段" loading="lazy" decoding="async"></span>
+          <span class="hl__body"><span class="hl__no" lang="en">02</span><span class="hl__title">鉄骨階段と、<br>約22帖の屋上</span><span class="hl__sub">吹き抜けの光と、<br>空を広く感じる場所</span></span>
+        </a></li><li><a class="hl__card" href="#feature-storage">
+          <span class="hl__photo"><img src="img/storage/sic_large_838.jpg" srcset="img/storage/sic_large_838.jpg 838w, img/storage/sic_large_1132.jpg 1132w" sizes="(min-width: 768px) 340px, 92vw" width="1132" height="1483" alt="棚が並ぶシューズインクローゼット" loading="lazy" decoding="async"></span>
+          <span class="hl__body"><span class="hl__no" lang="en">03</span><span class="hl__title">暮らしが整う、<br>大きな収納</span><span class="hl__sub">主寝室のWIC 3.4帖と<br>家族の玄関収納SIC 1.7帖</span></span>
+        </a></li></ol>
+  </section>
+
+  <!-- =========================================================
+       7. 各特長の説明（7-1 LDK ／ 7-2 鉄骨階段と屋上 ／ 7-3 収納）
+       ========================================================= -->
+  <section class="feat feat--light">
+    <header class="feat__head" id="feature-ldk">
+      <p class="feat__no" lang="en">FEATURE <b>01</b></p>
+      <h3 class="feat__title">家族が集う、<br class="sp">28.59帖のLDK</h3>
+      <p class="feat__en" lang="en">LIVING DINING KITCHEN</p>
+    </header>
+      <article class="room">
+        <div class="room__main"><figure class="ph__fig"><img src="img/feature/inner_large_1044.jpg" srcset="img/feature/inner_large_1044.jpg 1044w, img/feature/inner_large_1221.jpg 1221w" sizes="(min-width: 768px) 540px, 92vw" width="1221" height="814" alt="バルコニーへ視線が抜けるL字のリビング" loading="lazy" decoding="async"></figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">LIVING</p>
+          <h4 class="room__title">視線が抜ける、<br class="sp">L字のリビング</h4>
+          <p class="room__text">L字リビングからバルコニーへ視線が抜け、面積以上の開放感を演出する設計です。折り上げ天井が、くつろぎの空間の<span class="nw">アクセントに。</span></p>
+          
+        </div>
+      </article>
+      <article class="room">
+        <div class="room__main"><figure class="ph__fig"><img src="img/gallery/g_04_800.jpg" srcset="img/gallery/g_04_800.jpg 800w, img/gallery/g_04_1200.jpg 1200w, img/gallery/g_04_1600.jpg 1600w" sizes="(min-width: 768px) 540px, 92vw" width="1600" height="1067" alt="LDKを見渡す対面キッチン" loading="lazy" decoding="async"></figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">KITCHEN &amp; PANTRY</p>
+          <h4 class="room__title">LDKを見渡すキッチンと、<br>3帖のパントリー</h4>
+          <p class="room__text">料理をしながらLDKを見渡せる対面キッチン。3帖のパントリーがあるので、食材や日用品のストックもすっきり片付きます。</p>
+          <div class="room__subs room__subs--2"><figure class="ph__fig"><img src="img/storage/pantry_large_774.jpg" srcset="img/storage/pantry_large_774.jpg 774w, img/storage/pantry_large_1058.jpg 1058w" sizes="(min-width: 768px) 260px, 44vw" width="1058" height="1585" alt="壁一面に可動棚が並ぶ3帖のパントリー" loading="lazy" decoding="async"></figure><figure class="ph__fig"><img src="img/storage/pantry_small_519.jpg" srcset="img/storage/pantry_small_519.jpg 519w, img/storage/pantry_small_709.jpg 709w" sizes="(min-width: 768px) 260px, 44vw" width="709" height="735" alt="食材のストックがすっきり収まったパントリー" loading="lazy" decoding="async"><figcaption class="ph__img-note">画像はイメージです</figcaption></figure></div>
+          <div class="room__note">
+          <div class="room__note-photo"><img src="img/feature/multi_large_564.jpg" srcset="img/feature/multi_large_564.jpg 564w, img/feature/multi_large_771.jpg 771w" sizes="(min-width: 768px) 180px, 32vw" width="771" height="982" alt="キッチンやパントリーから出られる多目的バルコニー" loading="lazy" decoding="async"></div>
+          <p><b>多目的バルコニーも便利</b>キッチンやパントリーから直結。生ゴミなど匂うゴミの一時保管に。家庭菜園で収穫した<span class="nw">ハーブ</span>も、<span class="nw">すぐ調理に活かせます。</span></p>
+        </div>
+        </div>
+      </article>
+      <div class="kspec">
+        <div class="kspec__head">
+          <p class="room__en" lang="en">KITCHEN</p>
+          <h4 class="kspec__title">タカラスタンダード<br class="sp">「オフェリア」</h4>
+          <p class="kspec__lead">間口2,590mm×奥行1,050mmの、<br class="sp">フルフラット対面キッチン。<br>ワークトップは、アクリル人造大理石です。</p>
+        </div>
+        <ul class="kspec__list"><li class="kspec__item">
+              <img src="img/equip/faucet_480.jpg" srcset="img/equip/faucet_480.jpg 480w, img/equip/faucet_800.jpg 800w" sizes="(min-width: 768px) 260px, 44vw" width="800" height="600" alt="浄水器付きタッチレス水栓のキッチン水栓" loading="lazy" decoding="async">
+              <h5 class="kspec__name">浄水器付き<br>タッチレス水栓</h5>
+              <p class="kspec__text">センサーに手を近づけて、水を出し止め。手が汚れていても、レバーに触れずに使えます。浄水器は<span class="nw">蛇口と一体です。</span></p>
+            </li><li class="kspec__item">
+              <img src="img/equip/ih_480.jpg" srcset="img/equip/ih_480.jpg 480w, img/equip/ih_800.jpg 800w" sizes="(min-width: 768px) 260px, 44vw" width="800" height="600" alt="フラットなIHクッキングヒーターとオイルガード" loading="lazy" decoding="async">
+              <h5 class="kspec__name">IHクッキング<br>ヒーター</h5>
+              <p class="kspec__text">凹凸の少ないガラス天板は、さっと拭けてお手入れが簡単。油はねを防ぐ<span class="nw">クリア</span>の<span class="nw">オイルガード付きです。</span></p>
+            </li><li class="kspec__item">
+              <img src="img/equip/dishwasher_480.jpg" srcset="img/equip/dishwasher_480.jpg 480w, img/equip/dishwasher_800.jpg 800w" sizes="(min-width: 768px) 260px, 44vw" width="800" height="600" alt="キャビネットに組み込まれた食洗機" loading="lazy" decoding="async">
+              <h5 class="kspec__name">ビルトイン<br>食洗機</h5>
+              <p class="kspec__text">浅型のパネルタイプを組み込み。後片付けの手間を減らして、<span class="nw">食後の時間にゆとりを。</span></p>
+            </li><li class="kspec__item">
+              <img src="img/equip/cupboard_520.jpg" srcset="img/equip/cupboard_520.jpg 520w" sizes="(min-width: 768px) 260px, 44vw" width="520" height="390" alt="キッチン背面の吊戸付きカップボード" loading="lazy" decoding="async">
+              <h5 class="kspec__name">背面の<br>カップボード</h5>
+              <p class="kspec__text">幅900mmを3列、吊戸付き。食器も家電も背面にまとめて、<span class="nw">すっきり使えます。</span></p>
+            </li></ul>
+        <p class="kspec__note">引き出しは足元までのスライド収納で、<br class="sp">ソフトクローズ付きです。</p>
+      </div>
+      <article class="room">
+        <div class="room__main"><figure class="ph__fig"><img src="img/feature/dining_balcony_800.jpg" srcset="img/feature/dining_balcony_800.jpg 800w, img/feature/dining_balcony_1200.jpg 1200w" sizes="(min-width: 768px) 540px, 92vw" width="1200" height="799" alt="屋根付きの4.5帖インナーバルコニー" loading="lazy" decoding="async"></figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">DINING &amp; BALCONY</p>
+          <h4 class="room__title">食卓が外へ広がる、<br>4.5帖のインナーバルコニー</h4>
+          <p class="room__text">キッチンから近い、屋根付きのセカンドリビング。光や緑を感じられる室内空間に加え、雨の日も快適に外の時間を楽しめます。</p>
+          </div>
+      </article>
+      <div class="kgal">
+        <div class="kgal__head">
+          <p class="room__en" lang="en">KITCHEN &amp; DINING GALLERY</p>
+          <h4 class="kspec__title">つくる時間も、<br class="sp">囲む時間も。</h4>
+        </div>
+        <div class="gal__slider gal__slider--sub" data-gallery>
+          <div class="gal__track">
+          <figure class="gal__slide" data-i="0" data-en="KITCHEN" data-jp="キッチン正面と背面収納" data-note="" data-full="img/equip/kitchen_front_720.jpg" tabindex="0" role="button" aria-label="キッチン正面と背面収納の写真を拡大">
+            <img src="img/equip/kitchen_front_720.jpg" srcset="img/equip/kitchen_front_720.jpg 720w" sizes="(min-width: 768px) 700px, 84vw" width="720" height="480" alt="キッチン正面と背面のカップボード" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="1" data-en="KITCHEN VIEW" data-jp="キッチンからの眺め" data-note="" data-full="img/equip/kitchen_view_1600.jpg" tabindex="0" role="button" aria-label="キッチンからの眺めの写真を拡大">
+            <img src="img/equip/kitchen_view_800.jpg" srcset="img/equip/kitchen_view_800.jpg 800w, img/equip/kitchen_view_1600.jpg 1600w" sizes="(min-width: 768px) 700px, 84vw" width="1600" height="1067" alt="キッチンから見たダイニング、リビングと鉄骨階段" loading="lazy" decoding="async"></figure>
+          <figure class="gal__slide" data-i="2" data-en="DINING IMAGE" data-jp="ダイニングのイメージ" data-note="（画像はイメージです。家具・照明・小物は演出です）" data-full="img/equip/dining_kitchen_image_1536.jpg" tabindex="0" role="button" aria-label="ダイニングのイメージの写真を拡大">
+            <img src="img/equip/dining_kitchen_image_800.jpg" srcset="img/equip/dining_kitchen_image_800.jpg 800w, img/equip/dining_kitchen_image_1536.jpg 1536w" sizes="(min-width: 768px) 700px, 84vw" width="1536" height="1024" alt="キッチンから見た、ダイニングテーブルとソファを置いたLDKのイメージ" loading="lazy" decoding="async"><figcaption class="ph__img-note">画像はイメージです</figcaption></figure>
+          <figure class="gal__slide" data-i="3" data-en="BALCONY LUNCH" data-jp="バルコニーランチのイメージ" data-note="（画像はイメージです。家具や小物は演出です）" data-full="img/feature/inner_small_814.jpg" tabindex="0" role="button" aria-label="バルコニーランチのイメージの写真を拡大">
+            <img src="img/feature/inner_small_596.jpg" srcset="img/feature/inner_small_596.jpg 596w, img/feature/inner_small_814.jpg 814w" sizes="(min-width: 768px) 700px, 84vw" width="814" height="592" alt="インナーバルコニーで家族そろってランチ" loading="lazy" decoding="async"><figcaption class="ph__img-note">画像はイメージです</figcaption></figure>
+          </div>
+          <button class="gal__arrow gal__arrow--prev" type="button" aria-label="前の写真へ"></button>
+          <button class="gal__arrow gal__arrow--next" type="button" aria-label="次の写真へ"></button>
+        </div>
+      </div>
+
+  </section>
+
+  <section class="feat feat--dark">
+    <header class="feat__head" id="feature-stairs">
+      <p class="feat__no" lang="en">FEATURE <b>02</b></p>
+      <h3 class="feat__title">全ての階をつなぐ、<br class="sp">鉄骨階段と屋上</h3>
+      <p class="feat__en" lang="en">STAIRCASE &amp; ROOF</p>
+    </header>
+    <figure class="feat__hero">
+      <img src="img/stairs/stairs_main_1125.jpg" srcset="img/stairs/stairs_main_1125.jpg 1125w, img/stairs/stairs_main_1537.jpg 1537w" sizes="100vw" width="1537" height="971" alt="LDKから見た吹き抜けの鉄骨階段" loading="lazy" decoding="async">
+      <figcaption class="feat__hero-copy">1階から屋上へ、<br>光と視線がつながる。</figcaption>
+    </figure>
+      <article class="room room--tall">
+        <div class="room__main"><figure class="ph__fig"><img src="img/stairs/stairs_below_480.jpg" srcset="img/stairs/stairs_below_480.jpg 480w, img/stairs/stairs_below_656.jpg 656w" sizes="(min-width: 768px) 540px, 92vw" width="656" height="652" alt="下から見上げた鉄骨階段と光の入る吹き抜け" loading="lazy" decoding="async"></figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">STEEL STAIRCASE</p>
+          <h4 class="room__title">家のシンボル、鉄骨階段</h4>
+          <p class="room__text">1階から最上階を貫く鉄骨階段。吹き抜けの光が家中に広がり、開放的な一体感を生み出します。床暖房も備え、デザイン性と機能性を兼ね備えた<span class="nw">家のシンボルです。</span></p>
+          <div class="room__subs room__subs--1"><figure class="ph__fig"><img src="img/stairs/stairs_side_480.jpg" srcset="img/stairs/stairs_side_480.jpg 480w, img/stairs/stairs_side_656.jpg 656w" sizes="(min-width: 768px) 540px, 92vw" width="656" height="652" alt="手すりのついた鉄骨階段" loading="lazy" decoding="async"></figure></div>
+        </div>
+      </article>
+      <article class="room room--rev">
+        <div class="room__main"><figure class="ph__fig"><img src="img/feature/roof_1125.jpg" srcset="img/feature/roof_1125.jpg 1125w, img/feature/roof_1537.jpg 1537w" sizes="(min-width: 768px) 540px, 92vw" width="1537" height="883" alt="人工芝が敷かれた約22帖のルーフバルコニー" loading="lazy" decoding="async"></figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">ROOF BALCONY</p>
+          <h4 class="room__title">目線が気にならない、<br>約22帖のルーフバルコニー</h4>
+          <p class="room__text">22帖もの広さがある特別な外空間。ガーデンファニチャーやBBQ用品、大型プールを並べるゆとりがあり、都会にいながら日常的にお子様が<span class="nw">アウトドア</span>体験を楽しめます。道具の清掃や水入れに便利な水栓も完備しています。</p>
+          <dl class="room__spec">
+            <div><dt>屋上の広さ</dt><dd>約<b>22</b>帖</dd></div>
+            <div><dt>乗用車の駐車スペース換算</dt><dd>約<b>3</b>台分</dd></div>
+          </dl>
+        </div>
+      </article>
+  </section>
+
+  <section class="feat feat--light">
+    <header class="feat__head" id="feature-storage">
+      <p class="feat__no" lang="en">FEATURE <b>03</b></p>
+      <h3 class="feat__title">毎日が整う、<br class="sp">大きな収納</h3>
+      <p class="feat__en" lang="en">STORAGE</p>
+    </header>
+      <article class="room room--square">
+        <div class="room__main"><figure class="ph__fig"><img src="img/storage/bedroom_large_1017.jpg" srcset="img/storage/bedroom_large_1017.jpg 1017w, img/storage/bedroom_large_1390.jpg 1390w" sizes="(min-width: 768px) 540px, 92vw" width="1390" height="1333" alt="主寝室とウォークインクローゼットの入口" loading="lazy" decoding="async"></figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">MASTER BEDROOM &amp; WIC</p>
+          <h4 class="room__title">主寝室と、<br class="sp">3.4帖の<br class="sp">ウォークインクローゼット</h4>
+          <p class="room__text">10.0帖の主寝室につながる、3.4帖のウォークインクローゼット。衣類やバッグをまとめてしまえるので、寝室をすっきりと使えます。</p>
+          <div class="room__subs room__subs--2"><figure class="ph__fig"><img src="img/gallery/g_09_800.jpg" srcset="img/gallery/g_09_800.jpg 800w, img/gallery/g_09_1200.jpg 1200w, img/gallery/g_09_1600.jpg 1600w" sizes="(min-width: 768px) 260px, 44vw" width="1600" height="1067" alt="主寝室のウォークインクローゼット" loading="lazy" decoding="async"></figure><figure class="ph__fig"><img src="img/storage/wic_small_496.jpg" srcset="img/storage/wic_small_496.jpg 496w, img/storage/wic_small_679.jpg 679w" sizes="(min-width: 768px) 260px, 44vw" width="679" height="679" alt="洋服やバッグが並ぶウォークインクローゼット" loading="lazy" decoding="async"><figcaption class="ph__img-note">画像はイメージです</figcaption></figure></div>
+        </div>
+      </article>
+      <article class="room room--rev room--tall">
+        <div class="room__main"><figure class="ph__fig"><img src="img/storage/sic_large_838.jpg" srcset="img/storage/sic_large_838.jpg 838w, img/storage/sic_large_1132.jpg 1132w" sizes="(min-width: 768px) 540px, 92vw" width="1132" height="1483" alt="棚が並ぶシューズインクローゼット" loading="lazy" decoding="async"></figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">SHOES-IN CLOSET</p>
+          <h4 class="room__title">家族が靴を脱げる、<br class="sp">1.7帖の<br class="sp">シューズインクローゼット</h4>
+          <p class="room__text">家族専用の玄関ホールがある<span class="nw">シューズインクローゼット</span>。靴や外で使う物をまとめてしまえるので、来客時も玄関が<span class="nw">すっきり片付きます。</span></p>
+          <div class="room__subs room__subs--1"><figure class="ph__fig"><img src="img/storage/sic_small_570.jpg" srcset="img/storage/sic_small_570.jpg 570w, img/storage/sic_small_779.jpg 779w" sizes="(min-width: 768px) 540px, 92vw" width="779" height="908" alt="シューズインクローゼットから帰ってきた女の子" loading="lazy" decoding="async"><figcaption class="ph__img-note">画像はイメージです</figcaption></figure></div>
+        </div>
+      </article>
+  </section>
+
+  <section class="wish">
+    <div class="sec-head sec-head--light">
+      <p class="sec-head__en" lang="en">FOR YOU</p>
+      <h2 class="sec-head__jp">こんな暮らしをしたい方へ</h2>
+    </div>
+    <ul class="wish__list"><li>都心でも、広いLDKでのびのび暮らしたい</li><li>大人も子どもも、それぞれの寝室がほしい</li><li>食材や服、靴をすっきり片付けたい</li><li>屋上でBBQやプール遊びを楽しみたい</li><li>忙しい朝の身支度を、<span class="nw">もっとゆったりしたい</span></li><li>駅の近さも、家の広さも、<span class="nw">どちらも大切にしたい</span></li></ul>
+  </section>
+
+  <!-- =========================================================
+       8. 見学会情報
+       ========================================================= -->
+  <section class="open" id="info">
+    <div class="open__card">
+      <p class="open__sub">【期間限定･完全予約制】</p>
+      <h2 class="open__title">現地完成見学会開催</h2>
+      <dl class="open__list">
+        <div><dt>見学可能日(完全予約制)</dt><dd><b>火曜･水曜を除く全ての曜日</b><small>※見学会は期間限定のため<span class="nw">予告なく終了する場合があります</span><br>※ご希望の方はお早めにご予約ください</small></dd></div>
+        <div><dt>見学可能時間</dt><dd><b class="is-en">10:00~18:00</b></dd></div>
+        <div><dt>場所</dt><dd><b>神奈川県横浜市港北区<br class="sp">菊名5丁目14付近</b><a class="open__map" href="https://maps.app.goo.gl/ZSSNmkpkZXsV1C736" target="_blank" rel="noopener" aria-label="MAP（Googleマップで場所を見る・別のタブで開きます）">MAP</a></dd></div>
+        <div><dt>交通アクセス</dt><dd>東急東横線・JR横浜線<b>「菊名」駅 徒歩6分</b><small>※最寄り駅でのお待ち合わせ等に<span class="nw">つきましてもご相談下さい</span><br>※メールフォームからのご予約の確認ができ次第、担当者より詳細なご連絡を致します</small></dd></div>
+      </dl>
+      <dl class="open__points">
+        <div><dt>来場・見学費用</dt><dd>無料</dd></div>
+        <div><dt>駐車場</dt><dd>有り<small>2台駐車可</small></dd></div>
+        <div><dt>土地探し相談</dt><dd>可能</dd></div>
+      </dl>
+      <p class="open__kids">※お子さま連れの見学も大歓迎です。</p>
+    </div>
+    <div class="reserve">
+      <p class="cta__note">※見学・ご相談はすべて無料です</p>
+      <a class="cta__btn" href="#form"><span class="cta__btn-label">完成見学会を予約する</span></a>
+    </div>
+  </section>
+
+  <section class="planning">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">PLANNING</p>
+      <h2 class="sec-head__jp">ゆとりを生む、<br class="sp">広さのひみつ</h2>
+    </div>
+    <dl class="nums"><div class="num"><dt>敷地面積</dt><dd><b>155.11</b><small>㎡</small></dd></div><div class="num"><dt>延べ床面積</dt><dd><b>143.77</b><small>㎡</small><span class="num__sub">約43.48坪</span></dd></div><div class="num"><dt>＋PH階</dt><dd><b>37.63</b><small>㎡</small></dd></div><div class="num"><dt>LDK</dt><dd><b>28.59</b><small>帖</small></dd></div><div class="num"><dt>ルーフバルコニー</dt><dd><small>約</small><b>22</b><small>帖</small></dd></div><div class="num"><dt>洗面台の幅</dt><dd><b>1500</b><small>mm</small></dd></div></dl>
+  </section>
+
+  <!-- =========================================================
+       快適設備：ガス衣類乾燥機「乾太くん」・LDKの床暖房
+       ========================================================= -->
+  <section class="equip" id="equipment">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">EQUIPMENT</p>
+      <h2 class="sec-head__jp">毎日を快適にする設備</h2>
+    </div>
+      <article class="room room--tall">
+        <div class="room__main"><figure class="ph__fig"><img src="img/storage/wash_large_849.jpg" srcset="img/storage/wash_large_849.jpg 849w, img/storage/wash_large_1160.jpg 1160w" sizes="(min-width: 768px) 540px, 92vw" width="1160" height="1596" alt="幅1500mmの洗面台と、ガス衣類乾燥機「乾太くん」のある洗面脱衣室" loading="lazy" decoding="async"></figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">POWDER ROOM &amp; DRYER</p>
+          <h4 class="room__title">1500mmの広い洗面台と、<br>ガス衣類乾燥機「乾太くん」</h4>
+          <p class="room__text">一般的な洗面台の2倍の広さの1500mm、3面鏡＋1面鏡でホテルライクな大型仕様。朝の忙しい時間帯でも、大人2人が余裕で<span class="nw">並んで使えます。</span></p>
+          <p class="room__text">同じ2階の洗面脱衣室に、リンナイの「乾太くん」を設置しています。ガスの温風で衣類を回しながら乾かすので、タオルもふんわり。雨の日や花粉の季節も、干す手間と天気の<span class="nw">心配を減らせます。</span></p>
+          <dl class="equip__spec">
+            <div><dt>洗面台の幅</dt><dd><b>1500</b>mm</dd></div>
+            <div><dt>乾燥容量</dt><dd><b>9</b>kg<small>RDT-93</small></dd></div>
+            <div><dt>乾燥時間の目安</dt><dd>約<b>90</b>分<small>9kgの場合</small></dd></div>
+          </dl>
+          <p class="equip__note">※乾燥時間はリンナイが公表している目安です。衣類の量や素材、ガスの種類、設置の条件などで変わります。</p>
+          <div class="room__subs room__subs--1"><figure class="ph__fig"><img src="img/storage/wash_small_454.jpg" srcset="img/storage/wash_small_454.jpg 454w, img/storage/wash_small_621.jpg 621w" sizes="(min-width: 768px) 540px, 92vw" width="621" height="932" alt="広い洗面台で並んで歯みがきをする父と娘" loading="lazy" decoding="async"><figcaption class="ph__img-note">画像はイメージです</figcaption></figure></div>
+        </div>
+      </article>
+      <article class="room room--rev room--heat">
+        <div class="room__main"><figure class="heat">
+            <svg class="heat__svg" viewBox="0 0 856 1092" role="img" aria-label="2階の間取り図。リビング、ダイニング、キッチンの足元の3か所に床暖房があります">
+              <image href="img/plan/plan_2f.png?v=2" x="0" y="0" width="856" height="1092"/>
+              <rect class="heat__mat" x="377" y="123" width="268" height="211" rx="6"/><rect class="heat__mat" x="127" y="423" width="242" height="210" rx="6"/><rect class="heat__mat" x="92" y="778" width="215" height="52" rx="6"/><g class="heat__tag"><rect x="436.0" y="276" width="150" height="44" rx="22"/><text x="511" y="308">リビング</text></g><g class="heat__tag"><rect x="160.0" y="437" width="176" height="44" rx="22"/><text x="248" y="469">ダイニング</text></g><g class="heat__tag"><rect x="102.0" y="782" width="196" height="44" rx="22"/><text x="200" y="814">キッチン足元</text></g>
+            </svg>
+            <figcaption class="heat__legend"><span class="heat__chip" aria-hidden="true"></span>床暖房の範囲（3か所）<small>※確定図をもとにした目安の位置です。<br class="sp">LDKの全面ではありません。</small></figcaption>
+          </figure></div>
+        <div class="room__body">
+          <p class="room__en" lang="en">FLOOR HEATING</p>
+          <h4 class="room__title">足元から、じんわり。<br>LDKのガス温水式床暖房</h4>
+          <p class="room__text">28.59帖のLDKには、ノーリツのガス温水式床暖房を設置しています。くつろぐリビング、食事をするダイニングに加えて、キッチンに立つ足元にも。寒い朝の家事や、冬の団らんを心地よくします。</p>
+          <ul class="equip__points"><li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 34h36" /><path d="M14 28c-3-4 3-6 0-11M24 28c-3-4 3-6 0-11M34 28c-3-4 3-6 0-11"/><path d="M10 40h28"/></svg><span>足元から<br>やさしく暖かい</span></li><li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 18h22a5 5 0 1 0-5-5"/><path d="M8 26h28a5 5 0 1 1-5 5"/><path d="M10 38L40 8"/></svg><span>温風が直接<br>体に当たらない</span></li><li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 7s12 13 12 21a12 12 0 0 1-24 0c0-8 12-21 12-21z"/><path d="M18 29a6 6 0 0 0 5 6"/></svg><span>のどや肌の<br>乾燥を抑える</span></li></ul>
+        </div>
+      </article>
+  </section>
+
+  <section class="exp">
+    <div class="sec-head sec-head--light">
+      <p class="sec-head__en" lang="en">EXPERIENCE</p>
+      <h2 class="sec-head__jp">広さを体験する、見学会</h2>
+    </div>
+    <p class="exp__lead">実際に立って、広さを体感してみてください。<br>現地だからこそ、具体的なイメージが湧いてきます。</p>
+    <div class="exp__item">
+      <h3 class="exp__h"><span lang="en">01</span>屋上の広さ</h3>
+      <img class="exp__wide" src="img/experience/roof2_1125.jpg" srcset="img/experience/roof2_1125.jpg 1125w, img/experience/roof2_1537.jpg 1537w" sizes="(min-width: 768px) 960px, 100vw" width="1537" height="883" alt="人工芝が敷かれたルーフバルコニー" loading="lazy" decoding="async">
+      <p class="exp__text">ぜひ屋上の広さを体感してみてください。<br>どんな使い方ができるか<br class="sp">現地でイメージしてください。</p>
+    </div>
+    <div class="exp__item">
+      <h3 class="exp__h"><span lang="en">02</span>3つの収納の広さ</h3>
+      <ul class="exp__names"><li>パントリー<small>3帖</small></li><li>ウォークイン<br>クローゼット<small>3.4帖</small></li><li>シューズイン<br>クローゼット<small>1.7帖</small></li></ul>
+      <p class="exp__text">住まい全体にゆとりをもたらす、<br class="sp">頼もしい収納空間です。</p>
+    </div>
+    <!-- お子さま来場者特典（美しが丘LPと同じ位置：見学会の体験の下）。画像はクリスマス版：時期が過ぎたら差し替える -->
+    <div class="osanpo">
+      <picture>
+        <source media="(max-width:767px)" srcset="img/experience/osanpo_cris_sp.png" width="1089" height="907">
+        <img src="img/experience/osanpo_cris_pc.png" alt="お子さま来場者特典 週末のおでかけは家族みんなでモデルハウス探検！ かんたんペーパークラフト「おさんぽカメラカード」プレゼント" width="1805" height="676" loading="lazy" decoding="async">
+      </picture>
+    </div>
+    <div class="reserve exp__reserve">
+      <p class="exp__reserve-lead">写真では伝わらない<br class="sp">「広さ」と「心地よさ」を<br>実際の家で体感してみませんか？</p>
+      <a class="cta__btn" href="#form"><span class="cta__btn-label">完成見学会を予約する</span></a>
+      <p class="cta__note exp__reserve-note">※見学・ご相談はすべて無料です</p>
+    </div>
+  </section>
+
+  <section class="day">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">A DAY IN KIKUNA</p>
+      <h2 class="sec-head__jp">好きな場所で、<br class="sp">好きなことをして過ごす</h2>
+    </div>
+    <ol class="day__list"><li class="day__item">
+        <p class="day__time"><b lang="en">07:00</b><span>1階：主寝室</span></p>
+        <figure class="ph__fig"><img src="img/day/day_0700_800.jpg" srcset="img/day/day_0700_800.jpg 800w, img/day/day_0700_1200.jpg 1200w, img/day/day_0700_1536.jpg 1536w" sizes="(min-width: 768px) 540px, 92vw" width="1536" height="1024" alt="ベッドを置いた主寝室と、洋服が入ったウォークインクローゼットのイメージ" loading="lazy" decoding="async"></figure>
+        <h3 class="day__title">静かな寝室で、一日が始まる</h3>
+        <p class="day__text">寝室を1階にまとめた、落ち着いた<span class="nw">プライベートフロア。</span>ウォークインクローゼットで、<span class="nw">朝の支度もスムーズに。</span></p>
+      </li><li class="day__item">
+        <p class="day__time"><b lang="en">08:00</b><span>屋上：朝の時間</span></p>
+        <figure class="ph__fig"><img src="img/feature/slide_s1_654.jpg" srcset="img/feature/slide_s1_654.jpg 654w, img/feature/slide_s1_981.jpg 981w, img/feature/slide_s1_1341.jpg 1341w" sizes="(min-width: 768px) 540px, 92vw" width="1341" height="986" alt="ルーフバルコニーでヨガをする女性" loading="lazy" decoding="async"></figure>
+        <h3 class="day__title">朝の空の下で、ヨガ</h3>
+        <p class="day__text">朝のわずかな時間、屋上にマットを広げるだけで<span class="nw">ヨガを楽しめます。</span></p>
+      </li><li class="day__item">
+        <p class="day__time"><b lang="en">12:00</b><span>2階：インナーバルコニー</span></p>
+        <figure class="ph__fig"><img src="img/feature/inner_small_596.jpg" srcset="img/feature/inner_small_596.jpg 596w, img/feature/inner_small_814.jpg 814w" sizes="(min-width: 768px) 540px, 92vw" width="814" height="592" alt="インナーバルコニーで家族そろってランチ" loading="lazy" decoding="async"></figure>
+        <h3 class="day__title">休日は、バルコニーランチ</h3>
+        <p class="day__text">休日の昼下がり、家族みんなでバルコニーランチ。屋根があるので、天気を気にしすぎず楽しめます。</p>
+      </li><li class="day__item">
+        <p class="day__time"><b lang="en">18:00</b><span>2階：リビング・ダイニング</span></p>
+        <figure class="ph__fig"><img src="img/day/day_1800_800.jpg" srcset="img/day/day_1800_800.jpg 800w, img/day/day_1800_1200.jpg 1200w, img/day/day_1800_1536.jpg 1536w" sizes="(min-width: 768px) 540px, 92vw" width="1536" height="1024" alt="リビングで絵本を読むパパと女の子、食事の支度をするママのイメージ" loading="lazy" decoding="async"></figure>
+        <h3 class="day__title">絵本を読んで、夕食を待つ</h3>
+        <p class="day__text">リビングでは、パパと女の子が絵本の時間。ママはキッチンで食事の支度を。対面キッチンだから、手を動かしながら家族の様子が見渡せます。</p>
+      </li><li class="day__item">
+        <p class="day__time"><b lang="en">21:00</b><span>屋上：夜</span></p>
+        <figure class="ph__fig"><img src="img/feature/slide_s4_654.jpg" srcset="img/feature/slide_s4_654.jpg 654w, img/feature/slide_s4_981.jpg 981w, img/feature/slide_s4_1341.jpg 1341w" sizes="(min-width: 768px) 540px, 92vw" width="1341" height="986" alt="夜のルーフバルコニーで家族と天体観測" loading="lazy" decoding="async"></figure>
+        <h3 class="day__title">家族で見上げる、星空</h3>
+        <p class="day__text">澄んだ夜空の下、家族で天体観測。ママがつくったホットドリンクで温まろう。</p>
+      </li></ol>
+    <p class="day__note">※写真はイメージです。実際の仕様とは異なる場合があります。</p>
+  </section>
+
+  <section class="midcta">
+    <h2 class="midcta__title">この広さと、このゆとりを、<br>現地で体感してみませんか？</h2>
+    <div class="reserve">
+      <p class="cta__note">※見学・ご相談はすべて無料です</p>
+      <a class="cta__btn" href="#form"><span class="cta__btn-label">完成見学会を予約する</span></a>
+    </div>
+  </section>
+
+  <!-- 詳細情報（現行LPと同じ内容） -->
+  <section class="info2" id="details">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">DETAILS</p>
+      <h2 class="sec-head__jp">会場の地図と物件概要</h2>
+    </div>
+    <p class="info2__lead">見学可能日・時間・交通アクセスは、<br class="sp"><a href="#info">見学会情報</a>をご覧ください。</p>
+    <dl class="tbl">
+      <div><dt>住所</dt><dd>神奈川県横浜市港北区菊名5丁目14付近<span class="tbl__map"><iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4200!2d139.635113!3d35.512092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDMwJzQzLjUiTiAxMznCsDM4JzA2LjQiRQ!5e0!3m2!1sja!2sjp!4v1790928066817!5m2!1sja!2sjp"
+                          title="見学会会場の地図（神奈川県横浜市港北区菊名5丁目14付近）"
+                          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></span><a class="tbl__link" href="https://maps.app.goo.gl/ZSSNmkpkZXsV1C736" target="_blank" rel="noopener">Googleマップで開く</a></dd></div>
+      <div><dt>土地探し相談</dt><dd>可能<small>※土地探し相談：ご予約時にご希望をお聞かせ頂ければ未公開土地情報の提供も可能です</small></dd></div>
+    </dl>
+    <h3 class="info2__sub">物件概要</h3>
+    <dl class="tbl">
+        <div>
+          <dt>工法</dt>
+          <dd>木造2階建て＋PH階<br>木造軸組工法（モノコック工法）</dd>
+        </div>
+        <div>
+          <dt>間取り</dt>
+          <dd>3LDK＋ルーフバルコニー</dd>
+        </div>
+        <div>
+          <dt>延べ床面積</dt>
+          <dd>143.77㎡（約43.48坪／約89.36帖）</dd>
+        </div>
+        <div>
+          <dt>敷地面積</dt>
+          <dd>155.11㎡（約46.92坪／約95.74帖）</dd>
+        </div>
+        <div>
+          <dt>備考</dt>
+          <dd>3種類のルーフバルコニー、鉄骨階段、3帖の<span class="nw">パントリー</span>、WIC、広い洗面台、デザイン、質感、さまざまな角度からじっくりご覧ください。注文住宅や間取りの参考になる完成住宅です。</dd>
+        </div>
+      </dl>
+  </section>
+
+  <section class="steps" id="flow">
+    <div class="sec-head sec-head--light">
+      <p class="sec-head__en" lang="en">FLOW</p>
+      <h2 class="sec-head__jp">予約から見学までの流れ</h2>
+    </div>
+    <p class="steps__lead">＼初めての方でも安心／<br>ご予約から当日までは、シンプルな3ステップです。</p>
+    <ol class="steps__list"><li class="step">
+        <h3 class="step__head"><span class="step__no" lang="en">STEP 01</span>WEBから予約申込み</h3>
+        <img src="img/flow/step1_480.jpg" srcset="img/flow/step1_480.jpg 480w, img/flow/step1_660.jpg 660w" sizes="(min-width: 768px) 320px, 86vw" width="660" height="440" alt="スマートフォンで見学会を予約する夫婦" loading="lazy" decoding="async">
+        <p class="step__text">本ページの「見学予約ボタン」から、ご希望の日時を選択して送信してください。24時間いつでも受け付けております。</p>
+        
+      </li><li class="step">
+        <h3 class="step__head"><span class="step__no" lang="en">STEP 02</span>スタッフより確認のご連絡</h3>
+        <img src="img/flow/step2_480.jpg" srcset="img/flow/step2_480.jpg 480w, img/flow/step2_660.jpg 660w" sizes="(min-width: 768px) 320px, 86vw" width="660" height="440" alt="電話で連絡をするスタッフ" loading="lazy" decoding="async">
+        <p class="step__text">お申込み内容を確認後、3営業日以内に担当<span class="nw">スタッフ</span>よりお電話またはメールにてご連絡を差し上げます。この際、当日の詳細な集合場所や、お車でお越しの方には駐車スペースのご案内も併せて行います。これにて予約完了です！</p>
+        <p class="step__note">※火曜・水曜は定休日となります。</p>
+      </li><li class="step">
+        <h3 class="step__head"><span class="step__no" lang="en">STEP 03</span>現地にて見学</h3>
+        <img src="img/flow/step3_480.jpg" srcset="img/flow/step3_480.jpg 480w, img/flow/step3_660.jpg 660w" sizes="(min-width: 768px) 320px, 86vw" width="660" height="440" alt="スタッフの案内で住まいを見学する夫婦" loading="lazy" decoding="async">
+        <p class="step__time">所要時間：約60～90分</p><p class="step__text">当日は現地（菊名）へ直接お越しください。<span class="nw">スタッフ</span>が同行し物件をご案内します。疑問点や家づくりのご相談など、何でもお気軽に<span class="nw">お話しください。</span></p>
+        
+      </li></ol>
+  </section>
+
+  <section class="qa" id="faq">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">Q&amp;A</p>
+      <h2 class="sec-head__jp">よくあるご質問</h2>
+    </div>
+    <p class="qa__lead">「気になるけれど、まだ予約は早いかな？」と<br class="sp">迷われている方へ。<br>皆さまからよくいただくご質問にお答えします。</p>
+    <div class="qa__list">
+      <details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>見学会に参加するのに<br class="sp-br">費用はかかりますか？</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>いいえ、見学・ご相談はすべて無料です。現地でのご案内はもちろん、家づくりのご相談についても一切費用はかかりません。「まずは実物を見てみたい」という気軽な気持ちで、安心してお越しください。</p></div>
+        </details>
+<details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>予約なしで当日行っても<br class="sp-br">見られますか？</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>本見学会は完全予約制となっております。<span class="nw">プロ</span>のスタッフが丁寧にご案内できるよう、枠数を絞って開催しております。事前のご予約をお願いいたします。</p></div>
+        </details>
+<details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>見学会の予約は<br class="sp-br">いつまでにすればよいですか？</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>前日まで、WEBサイトより受け付けております。枠が埋まり次第終了となりますので、特に連休中のご見学をご希望の場合は、お早めの確保をおすすめいたします。当日の場合は<a class="faq-item__tel" href="tel:0120021541">0120-021-541</a>までご連絡下さい。</p></div>
+        </details>
+<details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>見学にはどれくらい<br class="sp-br">時間がかかりますか？</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>おおよそ60分～90分ほどです。「サッと見たい」「設備について詳しく聞きたい」など、お客様のご都合に合わせて調整可能ですので、当日スタッフに<span class="nw">お気軽にお申し付けください。</span></p></div>
+        </details>
+<details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>子供と一緒に見学しても<br class="sp-br">大丈夫ですか？</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>もちろんです！ぜひご家族でお越しください。スタッフもしっかりサポートいたしますので、安心してお連れください。</p></div>
+        </details>
+<details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>駐車場はありますか？</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>はい、お車でお越しいただけます。現地に駐車スペースをご用意しております。</p></div>
+        </details>
+<details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>「菊名駅」から<br class="sp-br">本当に歩いて行けますか？</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>はい、およそ徒歩6分です。駅近ならではの<span class="nw">アクセス</span>の良さを、ぜひ歩いて<span class="nw">確かめてみてください。</span></p></div>
+        </details>
+<details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>まだ検討し始めたばかりですが、<br class="sp-br">見学だけでも良いですか？</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>もちろんです！大歓迎でございます。具体的なプランがなくても、インスピレーションを膨らませる場として<span class="nw">ご活用ください。</span></p></div>
+        </details>
+<details class="faq-item">
+          <summary class="faq-item__q"><span class="faq-item__mark" aria-hidden="true">Q</span><span>営業がしつこくないか心配です…</span></summary>
+          <div class="faq-item__a"><span class="faq-item__mark" aria-hidden="true">A</span><p>ご安心ください。強引な勧誘やしつこいお電話は一切いたしません。あくまでお客様の<span class="nw">ペース</span>で、楽しみながらご覧いただくことを大切にしています。</p></div>
+        </details>
+    </div>
+    <div class="reserve">
+      <p class="cta__note">※見学・ご相談はすべて無料です</p>
+      <a class="cta__btn" href="#form"><span class="cta__btn-label">完成見学会を予約する</span></a>
+    </div>
+  </section>
+
+  <section class="corp" id="about">
+    <div class="sec-head">
+      <p class="sec-head__en" lang="en">ABOUT US</p>
+      <h2 class="sec-head__jp">プリンシパルホーム</h2>
+    </div>
+    <p class="corp__lead">東京・神奈川エリアで22年以上、<br>累計2,000棟を超える実績。<br>狭い土地に広い家を実現する<br>「弊社独自の体積設計」で、<br>数多くのご家族の夢を形にしてきました。</p>
+    <img class="corp__photo" src="img/about/about_us_520.jpg" srcset="img/about/about_us_520.jpg 520w, img/about/about_us_720.jpg 720w" sizes="(min-width: 768px) 720px, 90vw" width="720" height="480" alt="プリンシパルホームの建物外観" loading="lazy" decoding="async">
+    <h3 class="corp__sub">暮らしやすさを軸とした住宅で、<br>世界的なデザイン賞を多数受賞</h3>
+    <ul class="corp__awards"><li><img src="img/company/award_german.png" width="184" height="477" alt="German Design Award Winner 2025" loading="lazy" decoding="async"></li><li><img src="img/company/award_kids.jpg" width="364" height="477" alt="キッズデザイン賞 2024" loading="lazy" decoding="async"></li><li><img src="img/company/award_good.png" width="268" height="486" alt="グッドデザイン賞" loading="lazy" decoding="async"></li><li><img src="img/company/award_licc.png" width="384" height="432" alt="LICC London International Creative Competition" loading="lazy" decoding="async"></li><li><img src="img/company/award_london.jpg" width="300" height="390" alt="London Design Awards 2024 Gold Winner" loading="lazy" decoding="async"></li></ul>
+    <p class="corp__text">グッドデザイン賞（2024年）／<br class="sp">キッズデザイン賞（2024年）／<br class="sp">ジャーマンデザインアワード（2025年）など、<br>国内外の権威あるデザイン賞を多数受賞しています。</p>
+    <h3 class="corp__sub">プリンシパルホームの設計コンセプト</h3>
+    <p class="corp__text">広さや便利さは、偶然生まれるものではありません。日々の暮らしの中にある小さな不便に気づき、突き詰めることで、暮らしに&quot;心のゆとり&quot;を生み出す。それが、<span class="nw">プリンシパルホーム</span>の設計力です。</p>
+    <details class="corp__more">
+      <summary>企業情報を見る</summary>
+      <dl class="tbl tbl--company">
+        <div>
+          <dt>会社名</dt>
+          <dd>株式会社 プリンシパルホーム</dd>
+        </div>
+        <div>
+          <dt>所在地</dt>
+          <dd>
+            <span class="about__office"><b>【本社】</b>〒194-0012<br><a href="https://maps.app.goo.gl/MEjYuYZ5FmELgLDJ6" target="_blank" rel="noopener" aria-label="本社の地図（Googleマップ・別のタブで開きます）" class="about__link">東京都町田市金森3丁目23-11</a><br>TEL：042-706-8386（代表）<br>FAX：042-706-8387</span>
+            <span class="about__office"><b>【横浜支店】</b>〒231-0011<br>横浜市中区太田町4丁目48番地<br>川島ビル5階<br>TEL：045-227-7557（代表）<br>FAX：045-227-7558</span>
+            <span class="about__office"><b>【シカゴ支社】</b>Principal Home U.S.A. Inc.,<br>6127 South University Avenue Ste 110B<br>Chicago, IL 60637<br>TEL：312-593-8591</span>
+            <span class="about__office"><b>【京都事業推進室】</b>〒612-8445<br>京都府京都市伏見区竹田浄菩提院町195<br><a class="about__link" href="https://re-kyu.jp/" target="_blank" rel="noopener">https://re-kyu.jp/</a></span>
+          </dd>
+        </div>
+        <div>
+          <dt>設立</dt>
+          <dd>平成16年12月1日</dd>
+        </div>
+        <div>
+          <dt>資本金</dt>
+          <dd>9,500万円</dd>
+        </div>
+        <div>
+          <dt>代表者</dt>
+          <dd>代表取締役 玉井 圭</dd>
+        </div>
+        <div>
+          <dt>事業内容</dt>
+          <dd>土木及び建築工事の施工/設計・監理及び請負<br>住宅の増改築/建替え及び住宅リフォーム<br>不動産の売買/仲介/賃貸/管理及び<br>鑑定評価に関する事業<br>不動産の有効利用に関するコンサルタント業務<br>損害保険代理業</dd>
+        </div>
+        <div>
+          <dt>免許番号</dt>
+          <dd>【建設業許可】<br>東京都知事（特-8）第162397号<br>【宅建業免許】<br>国土交通大臣（3）第8714号<br>【一級建築士事務所登録】<br>東京都知事登録第67412号</dd>
+        </div>
+        <div>
+          <dt>加盟団体</dt>
+          <dd>公益社団法人全国宅地建物取引業協会会員<br>公益社団法人東京都宅地建物取引業協会会員<br>公益社団法人首都圏不動産公正取引協議会加盟<br>住宅保証機構株式会社<br>財団法人神奈川県建築安全協会</dd>
+        </div>
+        <div>
+          <dt>委託研究</dt>
+          <dd>研究題目「換気量と結露についての分析」<br>より快適な住まいづくりを目指し平成26年5月21日より学校法人神奈川大学様に上記研究を<span class="nw">委託しております。</span></dd>
+        </div>
+      </dl>
+    </details>
+    <p class="corp__ask">注文住宅に関するお問い合わせはこちら</p>
+    <p class="corp__links"><a href="https://pr-h.net/contact/" target="_blank" rel="noopener">お問合せ</a><a href="https://pr-h.net/catalog/" target="_blank" rel="noopener">資料請求</a></p>
+  </section>
+
+  <section class="final">
+    <img class="final__bg" src="img/fv/fv_living_1400.jpg" srcset="img/fv/fv_living_1400.jpg 1400w, img/fv/fv_living_2400.jpg 2400w" sizes="(min-width: 768px) 100vw, 200vw" width="2400" height="1600" alt="" loading="lazy" decoding="async">
+    <div class="final__in">
+      <h2 class="final__title">この広さと、ゆとりを。<br>ここから。</h2>
+      <p class="final__lead">まずは現地で、1階・2階・屋上へと続く<br class="sp">ゆとりを歩いて確かめてください。</p>
+      <p class="cta__note">※見学・ご相談はすべて無料です</p>
+      <a class="cta__btn" href="#form"><span class="cta__btn-label">完成見学会を予約する</span></a>
+      <a class="cta__tel" href="tel:0120021541">
+        <span class="cta__tel-label">お電話でのお問い合わせ</span>
+        <span class="cta__tel-num">0120-021-541</span>
+        <span class="cta__tel-time">受付 9:30-18:00（火・水定休）</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ft">
+  <a href="https://pr-h.net/" target="_blank" rel="noopener"><img src="img/logo_white.png" alt="PRINCIPAL HOME（プリンシパルホーム）" width="720" height="68" loading="lazy"></a>
+  <p><small>&copy; Principal Home Inc. All Rights Reserved.</small></p>
+</footer>
+
+<!-- 追従する予約ボタンと、先頭へ戻るボタン。最初の画面を少し過ぎたら出て、最後まで出たまま（電話番号は上のヘッダーが追従する） -->
+<div class="bar" data-stick>
+  <a class="bar__btn" href="#form"><span class="bar__free">無料</span>完成見学会を予約する</a>
+</div>
+<button class="totop" type="button" data-totop aria-label="ページの先頭へ戻る" tabindex="-1">TOP</button>
+
+<!-- ギャラリーの写真の拡大（説明は、ここで表示する） -->
+<dialog class="gview" id="gview" aria-label="写真の拡大">
+  <button class="gview__close" type="button" aria-label="閉じる"></button>
+  <figure class="gview__fig">
+    <img class="gview__img" src="" alt="" width="1600" height="1067">
+    <figcaption class="gview__cap"><span class="gview__en" lang="en"></span><span class="gview__jp"></span></figcaption>
+  </figure>
+  <button class="gview__nav gview__nav--prev" type="button" aria-label="前の写真へ"></button>
+  <button class="gview__nav gview__nav--next" type="button" aria-label="次の写真へ"></button>
+  <p class="gview__count" aria-hidden="true"></p>
+</dialog>
+
+<!-- 間取り図の拡大 -->
+<dialog class="zoom" id="zoom" aria-label="間取り図の拡大">
+  <button class="zoom__close" type="button" aria-label="閉じる"></button>
+  <img class="zoom__img" src="" alt="" width="917" height="1092">
+</dialog>
+
+<script src="js/main.js?v=20261126kz" defer></script>
+<script src="js/form.js" defer></script>
+</body>
+</html>
