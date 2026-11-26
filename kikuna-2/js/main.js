@@ -272,25 +272,17 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-gallery]'), initGallery);
 
   /* ---------------------------------------------------------
-     画面の下の予約ボタンと「先頭へ戻る」
-     FVを過ぎたら出す。予約ボタン・締め・フッターが画面にある間は隠す
+     追従フッター（電話番号＋予約ボタン）と「先頭へ戻る」
+     最初の画面を少し過ぎたら出して、いちばん下まで出たままにする
      --------------------------------------------------------- */
-  var stick = document.querySelector('[data-stick]'), totop = document.querySelector('[data-totop]');
-  if (stick && totop) {
-    var blockers = Array.prototype.slice.call(document.querySelectorAll('.cta__btn, .final, .ft'));
+  var bar = document.querySelector('[data-stick]'), totop = document.querySelector('[data-totop]');
+  if (bar && totop) {
     var ticking = false;
     var update = function () {
       ticking = false;
       var h = window.innerHeight, y = window.pageYOffset;
-      var blocked = blockers.some(function (el) {
-        var r = el.getBoundingClientRect();
-        return r.top < h && r.bottom > 0;
-      });
-      var on = y > h * .8 && !blocked;
-      stick.classList.toggle('is-show', on);
-      stick.setAttribute('aria-hidden', on ? 'false' : 'true');
-      stick.tabIndex = on ? 0 : -1;
-      var up = y > h * 2 && !blocked;
+      bar.classList.toggle('is-show', y > h * .6);
+      var up = y > h * 2;
       totop.classList.toggle('is-show', up);
       totop.tabIndex = up ? 0 : -1;
     };
