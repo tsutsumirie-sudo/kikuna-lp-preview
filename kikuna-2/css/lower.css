@@ -164,6 +164,7 @@ br.sp, br.sp-br{ display:inline; }
 .day .ph__fig img{ aspect-ratio:3 / 2; object-fit:cover; }
 .day__title{ margin:1.4rem 0 0; font-size:1.8rem; font-weight:500; line-height:1.6; letter-spacing:.05em; color:var(--c-ink); }
 .day__text{ margin-top:.8rem; font-size:1.3rem; line-height:1.95; color:#4a453d; }
+.day__note{ margin:2.8rem 0 0; font-size:1.1rem; line-height:1.8; text-align:right; color:#6f685d; }
 
 /* =========================================================
    中間の予約
@@ -378,6 +379,7 @@ br.sp, br.sp-br{ display:inline; }
   .day__time span{ font-size:15px; }
   .day__title{ grid-column:2; margin-top:8px; font-size:22px; }
   .day__text{ grid-column:2; margin-top:12px; font-size:15px; }
+  .day__note{ max-width:960px; margin:32px auto 0; font-size:12px; }
 
   .midcta{ padding:100px 40px; }
   .midcta__title{ font-size:30px; }
