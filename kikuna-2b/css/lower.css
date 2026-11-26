@@ -623,9 +623,10 @@ br.sp, br.sp-br{ display:inline; }
   display:flex; align-items:center; gap:.5rem;
   padding:.5rem .9rem .5rem .6rem;
   font-size:1.2rem; font-weight:500; line-height:1; letter-spacing:.04em;
-  color:var(--c-white); background:rgba(14,15,18,.78); border:1px solid var(--c-gold);
+  color:var(--c-ink); background:#fff;
+  box-shadow:0 .2rem .8rem rgba(0,0,0,.12);
 }
-.ph__tag b{ font-family:var(--f-en); font-weight:500; color:var(--c-gold-l); }
+.ph__tag b{ font-family:var(--f-en); font-weight:500; color:var(--c-gold-d); }
 .ph__tag--wash{ left:6%; bottom:10%; }
 .ph__tag--dryer{ right:6%; top:8%; }
 .pair{ display:grid; gap:1.6rem; margin-top:2rem; }
@@ -657,4 +658,19 @@ br.sp, br.sp-br{ display:inline; }
   .pair__spec dd{ font-size:14px; }
   .pair__spec b{ font-size:30px; }
   .pair__spec small{ font-size:11px; }
+}
+
+/* 床暖房：図面はコピーの下に（PCは図面の右にポイントを縦に並べる） */
+.room--heat2 .heat2{ margin-top:2.4rem; }
+.room--heat2 .heat2 .equip__points{ margin:1.6rem 2rem 0; }
+@media (min-width:768px){
+  .room.room--heat2{ display:block; }
+  .room--heat2 .room__text{ max-width:760px; }
+  .room--heat2 .heat2{ display:grid; grid-template-columns:minmax(0, 460px) minmax(0, 1fr); gap:40px; align-items:center; margin-top:32px; }
+  .room--heat2 .heat{ margin:0; }
+  .room--heat2 .heat2 .equip__points{ grid-template-columns:1fr; gap:12px; margin:0; max-width:340px; }
+  .room--heat2 .equip__points li{ display:flex; align-items:center; gap:16px; padding:16px 20px; text-align:left; }
+  .room--heat2 .equip__points svg{ flex:none; margin:0; }
+  .room--heat2 .equip__points span{ margin:0; font-size:15px; }
+  .room--heat2 .equip__points span br{ display:none; }
 }

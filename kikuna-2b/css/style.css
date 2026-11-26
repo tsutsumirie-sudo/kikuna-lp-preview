@@ -155,7 +155,7 @@ a{ color:inherit; text-decoration:none; }
   margin:2rem 0 0; padding:1.6rem 0 0;
   list-style:none;
   position:relative;
-  filter:drop-shadow(0 0 .7rem rgba(0,0,0,.9)) drop-shadow(0 .1rem .2rem rgba(0,0,0,.7));   /* 明るい写真の上でも読めるように */
+  filter:drop-shadow(0 0 .22rem rgba(0,0,0,.5)) drop-shadow(0 0 .06rem rgba(0,0,0,.45));   /* 文字1つずつの縁に、目立たない黒のぼかし */
   animation:fvFade 1.2s var(--ease-out) 2.8s both;
 }
 .fv__points::before{ content:""; position:absolute; left:0; top:0; width:4.8rem; height:1px; background:var(--c-gold); }
@@ -170,14 +170,6 @@ a{ color:inherit; text-decoration:none; }
 }
 .fv__points small{ font-size:1.2rem; letter-spacing:.04em; }
 .fv__points .fv__points-sub{ margin-top:.3rem; font-size:1.25rem; font-weight:500; letter-spacing:.04em; }
-/* 金色の文字のうしろだけ、ふんわり暗くする */
-.fv__copy-in{ position:relative; isolation:isolate; }
-.fv__copy-in::before{
-  content:""; position:absolute; z-index:-1; pointer-events:none;
-  left:-9rem; right:-9rem; top:52%; bottom:-6rem;
-  background:radial-gradient(closest-side, rgba(8,9,12,.72), rgba(8,9,12,.55) 55%, rgba(8,9,12,0));
-  animation:fvFade 1.2s var(--ease-out) 2.6s both;
-}
 
 /* --- 下：いまの写真の位置を示す線 --- */
 .fv__foot{
@@ -562,7 +554,6 @@ a{ color:inherit; text-decoration:none; }
   .fv__line,
   .fv__badge,
   .fv__points,
-  .fv__copy-in::before,
   .fv__foot{ animation-duration:.01s; animation-delay:0s; }
 }
 
@@ -593,7 +584,6 @@ a{ color:inherit; text-decoration:none; }
   }
   .fv__title{ font-size:clamp(42px, min(4.4vw, 7.2vh), 78px); }
   .fv__points{ margin-top:30px; padding-top:24px; }
-  .fv__copy-in::before{ left:-140px; right:-140px; bottom:-80px; }
   .fv__points::before{ width:72px; }
   .fv__points li{ font-size:clamp(19px, 1.65vw, 26px); }
   .fv__points li + li{ margin-top:8px; }
