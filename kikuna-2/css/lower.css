@@ -149,6 +149,11 @@ br.sp, br.sp-br{ display:inline; }
 .exp__three{ display:grid; grid-template-columns:repeat(3, 1fr); gap:.6rem; margin:0; padding:0 1.2rem; list-style:none; }
 .exp__three img{ width:100%; aspect-ratio:4 / 7; object-fit:cover; }
 .exp__three span{ display:block; margin-top:.8rem; font-size:1.15rem; line-height:1.5; text-align:center; }
+.osanpo{ width:calc(100% - 4rem); max-width:765px; margin:4.8rem auto 0; padding:1rem; background:#fff; border-radius:.8rem; }   /* 画像の背景が透明なので、白い台紙に置く */
+.osanpo img{ width:100%; height:auto; }
+.exp__reserve{ margin-top:3.6rem; padding:0 2rem; }
+.exp__reserve-lead{ margin-bottom:2rem; font-size:1.45rem; line-height:2; letter-spacing:.05em; color:var(--c-text); }
+.exp__reserve-note{ margin:1.3rem 0 0; }
 
 /* =========================================================
    一日の過ごし方
@@ -367,6 +372,10 @@ br.sp, br.sp-br{ display:inline; }
   .exp__three img{ aspect-ratio:3 / 4; }
   .exp__three span{ margin-top:12px; font-size:15px; }
   .exp__three span br{ display:none; }
+  .osanpo{ width:85%; margin-top:56px; padding:16px; border-radius:10px; }
+  .exp__reserve{ margin-top:48px; padding:0; }
+  .exp__reserve-lead{ margin-bottom:26px; font-size:18px; }
+  .exp__reserve-note{ margin-top:18px; }
 
   .day{ padding:120px 40px; }
   .day__list{ max-width:960px; margin:64px auto 0; padding-left:36px; }
