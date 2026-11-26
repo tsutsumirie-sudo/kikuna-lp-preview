@@ -7,6 +7,7 @@
 @media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
 
 br.sp, br.sp-br{ display:inline; }
+.nw{ display:inline-block; }   /* 言葉の途中で改行されないように、ひとまとまりで折り返す */
 
 .hl, .wish, .open, .exp, .midcta, .steps, .feat--dark{ color:var(--c-text); background:var(--c-night); }
 .feat--light, .planning, .day, .info2, .qa, .corp{ color:#2b2722; background:var(--c-ivory); }
