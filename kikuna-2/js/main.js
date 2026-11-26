@@ -259,4 +259,34 @@
       goTo(1, true);
     }
   }
+
+  /* ---------------------------------------------------------
+     画面の下の予約ボタンと「先頭へ戻る」
+     FVを過ぎたら出す。予約ボタン・締め・フッターが画面にある間は隠す
+     --------------------------------------------------------- */
+  var stick = document.querySelector('[data-stick]'), totop = document.querySelector('[data-totop]');
+  if (stick && totop) {
+    var blockers = Array.prototype.slice.call(document.querySelectorAll('.cta__btn, .final, .ft'));
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var h = window.innerHeight, y = window.pageYOffset;
+      var blocked = blockers.some(function (el) {
+        var r = el.getBoundingClientRect();
+        return r.top < h && r.bottom > 0;
+      });
+      var on = y > h * .8 && !blocked;
+      stick.classList.toggle('is-show', on);
+      stick.setAttribute('aria-hidden', on ? 'false' : 'true');
+      stick.tabIndex = on ? 0 : -1;
+      var up = y > h * 2 && !blocked;
+      totop.classList.toggle('is-show', up);
+      totop.tabIndex = up ? 0 : -1;
+    };
+    var request = function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
+    update();
+  }
 })();
