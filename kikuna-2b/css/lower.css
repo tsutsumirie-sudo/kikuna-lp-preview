@@ -615,3 +615,46 @@ br.sp, br.sp-br{ display:inline; }
   .corp__more summary{ padding:22px 48px 22px 12px; font-size:17px; }
   .planning{ padding-bottom:120px; }
 }
+
+/* 設備：洗面台と乾太くんを、写真の①②と2つの短い項目で分けて見せる */
+.ph__fig--tags{ position:relative; }
+.ph__tag{
+  position:absolute; z-index:1;
+  display:flex; align-items:center; gap:.5rem;
+  padding:.5rem .9rem .5rem .6rem;
+  font-size:1.2rem; font-weight:500; line-height:1; letter-spacing:.04em;
+  color:var(--c-white); background:rgba(14,15,18,.78); border:1px solid var(--c-gold);
+}
+.ph__tag b{ font-family:var(--f-en); font-weight:500; color:var(--c-gold-l); }
+.ph__tag--wash{ left:6%; bottom:10%; }
+.ph__tag--dryer{ right:6%; top:8%; }
+.pair{ display:grid; gap:1.6rem; margin-top:2rem; }
+.pair__item{ padding:1.8rem 1.6rem 1.6rem; background:#fff; border-top:2px solid var(--c-gold-d); }
+.pair__name{ display:flex; align-items:baseline; gap:.8rem; margin:0; font-size:1.65rem; font-weight:500; line-height:1.5; letter-spacing:.04em; color:var(--c-ink); }
+.pair__name b{ font-family:var(--f-en); font-size:1.8rem; font-weight:500; color:var(--c-gold-d); }
+.pair__row{ display:grid; grid-template-columns:minmax(0,1fr) 8.4rem; gap:1.2rem; align-items:start; }
+.pair__text{ margin-top:1rem; font-size:1.3rem; line-height:1.9; color:#4a453d; }
+.pair__thumb{ position:relative; margin-top:1rem; }
+.pair__thumb img{ width:100%; aspect-ratio:3 / 4; object-fit:cover; }
+.pair__thumb figcaption{ margin-top:.3rem; font-family:var(--f-sans); font-size:max(.9rem, 9px); line-height:1.3; color:#6f685d; }
+.pair__spec{ display:flex; gap:2.4rem; margin:1.2rem 0 0; padding-top:1rem; border-top:1px solid rgba(179,148,98,.4); }
+.pair__spec dt{ font-size:1.05rem; color:#6f685d; }
+.pair__spec dd{ margin:.2rem 0 0; font-size:1.25rem; line-height:1.3; color:var(--c-ink); }
+.pair__spec b{ margin:0 .2rem; font-family:var(--f-en); font-size:2.6rem; font-weight:500; color:var(--c-gold-d); }
+.pair__spec small{ margin-left:.4rem; font-size:1rem; color:#6f685d; }
+.pair__item .equip__note{ margin-top:.8rem; }
+@media (min-width:768px){
+  .ph__tag{ padding:7px 14px 7px 10px; gap:8px; font-size:14px; }
+  .pair{ gap:16px; margin-top:24px; }
+  .pair__item{ padding:22px 24px 20px; }
+  .pair__name{ gap:10px; font-size:18px; }
+  .pair__name b{ font-size:20px; }
+  .pair__row{ grid-template-columns:minmax(0,1fr) 96px; gap:16px; }
+  .pair__text{ margin-top:10px; font-size:14px; }
+  .pair__thumb figcaption{ font-size:10px; }
+  .pair__spec{ gap:32px; margin-top:14px; padding-top:12px; }
+  .pair__spec dt{ font-size:12px; }
+  .pair__spec dd{ font-size:14px; }
+  .pair__spec b{ font-size:30px; }
+  .pair__spec small{ font-size:11px; }
+}
