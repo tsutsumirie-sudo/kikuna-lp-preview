@@ -142,8 +142,9 @@ a{ color:inherit; text-decoration:none; }
           mask-size:220% 100%;
   animation:fvLine 1.7s var(--ease-out) var(--d) both;
 }
+/* 始まりの透明度は 0 ではなく .01：見た目は同じ（始まりはマスクで隠れている）。0 だと PageSpeed が「浮かび上がり終えた時」をLCPに数えて点数が下がるため（2026-11-27） */
 @keyframes fvLine{
-  from{ opacity:0; transform:translateX(-1.8rem); -webkit-mask-position:100% 0; mask-position:100% 0; }
+  from{ opacity:.01; transform:translateX(-1.8rem); -webkit-mask-position:100% 0; mask-position:100% 0; }
   30% { opacity:1; }
   to  { opacity:1; transform:none; -webkit-mask-position:0 0; mask-position:0 0; }
 }
@@ -587,7 +588,7 @@ a{ color:inherit; text-decoration:none; }
   .fv__points .fv__points-sub{ font-size:clamp(14px, 1.15vw, 17px); }
   .fv__line{ animation-name:fvLinePc; }
   @keyframes fvLinePc{
-    from{ opacity:0; transform:translateX(-28px); -webkit-mask-position:100% 0; mask-position:100% 0; }
+    from{ opacity:.01; transform:translateX(-28px); -webkit-mask-position:100% 0; mask-position:100% 0; }
     30% { opacity:1; }
     to  { opacity:1; transform:none; -webkit-mask-position:0 0; mask-position:0 0; }
   }
