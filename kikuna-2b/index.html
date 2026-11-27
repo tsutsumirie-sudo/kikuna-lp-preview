@@ -23,9 +23,9 @@
       href="img/fv/fv_living_1400.jpg"
       imagesrcset="img/fv/fv_living_1400.jpg 1400w, img/fv/fv_living_2400.jpg 2400w" imagesizes="170vw">
 
-<link rel="stylesheet" href="css/style.css?v=20261127v">
-<link rel="stylesheet" href="css/lower.css?v=20261127v">
-<link rel="stylesheet" href="css/form.css?v=20261127v">
+<link rel="stylesheet" href="css/style.css?v=20261127w">
+<link rel="stylesheet" href="css/lower.css?v=20261127w">
+<link rel="stylesheet" href="css/form.css?v=20261127w">
 <script>window.LP_PREVIEW = true;</script>
 </head>
 <body>
@@ -171,6 +171,11 @@
       </li>
     </ul>
     <p class="plan__hint">※図面をタップすると拡大します</p>
+    <!-- 図面の下の予約ボタン（2026-11-27 追加） -->
+    <div class="reserve plan__reserve">
+      <p class="cta__note">※見学・ご相談はすべて無料です</p>
+      <a class="cta__btn" href="#form"><span class="cta__btn-label">完成見学会を予約する</span></a>
+    </div>
   </section>
 
   <!-- =========================================================
@@ -432,8 +437,9 @@
             </li></ul>
         <p class="kspec__note">引き出しは足元までのスライド収納で、<br class="sp">ソフトクローズ付きです。</p>
       </div>
-      <article class="room room--tall room--pair">
-        <div class="room__main"><figure class="ph__fig ph__fig--tags"><img src="img/storage/wash_large_849.jpg" srcset="img/storage/wash_large_849.jpg 849w, img/storage/wash_large_1160.jpg 1160w" sizes="(min-width: 768px) 540px, 92vw" width="1160" height="1596" alt="幅1500mmの洗面台と、ガス衣類乾燥機「乾太くん」のある洗面脱衣室" loading="lazy" decoding="async"><span class="ph__tag ph__tag--wash" aria-hidden="true"><b>01</b>洗面台</span><span class="ph__tag ph__tag--dryer" aria-hidden="true"><b>02</b>乾太くん</span></figure></div>
+      <!-- 洗面脱衣室（2026-11-27：大きい写真と、2人並んだイメージ写真を外し、洗面台・乾太くんそれぞれを切り出した写真を説明の横に置いた。
+           写真は img/storage/wash_large_1160.jpg から切り出し：wash_basin_*.jpg ／ wash_dryer_*.jpg） -->
+      <article class="room room--pair room--solo">
         <div class="room__body">
           <p class="room__en" lang="en">POWDER ROOM</p>
           <h4 class="room__title">2階の洗面脱衣室に、<br>うれしい設備がふたつ。</h4>
@@ -441,15 +447,22 @@
             <div class="pair__item">
               <h5 class="pair__name"><b lang="en">01</b>1500mmの広い洗面台</h5>
               <div class="pair__row">
-                <p class="pair__text">一般的な洗面台の約2倍の幅で、3面鏡＋1面鏡。朝の忙しい時間も、大人2人が<span class="nw">並んで使えます。</span></p>
-                <figure class="pair__thumb"><img src="img/storage/wash_small_454.jpg" srcset="img/storage/wash_small_454.jpg 454w, img/storage/wash_small_621.jpg 621w" sizes="(min-width: 768px) 120px, 26vw" width="621" height="932" alt="広い洗面台で並んで歯みがきをする父と娘" loading="lazy" decoding="async"><figcaption>画像は<span class="nw">イメージです</span></figcaption></figure>
+                <div class="pair__main">
+                  <p class="pair__text">一般的な洗面台の約2倍の幅で、3面鏡＋1面鏡。朝の忙しい時間も、大人2人が<span class="nw">並んで使えます。</span></p>
+                  <dl class="pair__spec"><div><dt>洗面台の幅</dt><dd><b>1500</b>mm</dd></div></dl>
+                </div>
+                <figure class="pair__thumb"><img src="img/storage/wash_basin_360.jpg" srcset="img/storage/wash_basin_360.jpg 360w, img/storage/wash_basin_520.jpg 520w" sizes="(min-width: 768px) 200px, 36vw" width="520" height="693" alt="3面鏡と1面鏡の付いた、幅1500mmの洗面台" loading="lazy" decoding="async"></figure>
               </div>
-              <dl class="pair__spec"><div><dt>洗面台の幅</dt><dd><b>1500</b>mm</dd></div></dl>
             </div>
             <div class="pair__item">
               <h5 class="pair__name"><b lang="en">02</b>ガス衣類乾燥機「乾太くん」</h5>
-              <p class="pair__text">リンナイのデラックスタイプ（RDT-93）。ガスの温風でふんわり乾かすので、雨や花粉の日も、干す手間を<span class="nw">減らせます。</span></p>
-              <dl class="pair__spec"><div><dt>乾燥容量</dt><dd><b>9</b>kg</dd></div><div><dt>乾燥時間の目安</dt><dd>約<b>90</b>分<small>9kgの場合</small></dd></div></dl>
+              <div class="pair__row">
+                <div class="pair__main">
+                  <p class="pair__text">リンナイのデラックスタイプ<span class="nw">（RDT-93）</span>。ガスの温風でふんわり乾かすので、雨や花粉の日も、干す手間を<span class="nw">減らせます。</span></p>
+                  <dl class="pair__spec"><div><dt>乾燥容量</dt><dd><b>9</b>kg</dd></div><div><dt>乾燥時間の目安</dt><dd>約<b>90</b>分<small>9kgの場合</small></dd></div></dl>
+                </div>
+                <figure class="pair__thumb"><img src="img/storage/wash_dryer_360.jpg" srcset="img/storage/wash_dryer_360.jpg 360w, img/storage/wash_dryer_520.jpg 520w" sizes="(min-width: 768px) 200px, 36vw" width="520" height="693" alt="洗面脱衣室に設置したリンナイのガス衣類乾燥機「乾太くん」" loading="lazy" decoding="async"></figure>
+              </div>
               <p class="equip__note">※乾燥時間はリンナイが公表している目安です。衣類の量や素材、ガスの種類、設置の条件などで変わります。</p>
             </div>
           </div>
@@ -775,7 +788,7 @@
   <button type="button" class="map-back__btn">見学予約はこちら</button>
 </div>
 
-<script src="js/main.js?v=20261127v" defer></script>
-<script src="js/form.js?v=20261127v" defer></script>
+<script src="js/main.js?v=20261127w" defer></script>
+<script src="js/form.js?v=20261127w" defer></script>
 </body>
 </html>
