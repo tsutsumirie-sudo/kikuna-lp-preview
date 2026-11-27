@@ -693,17 +693,17 @@ br.sp, br.sp-br{ display:inline; }
 .corp__awards{ flex-wrap:nowrap; justify-content:center; gap:1.35rem; padding:2.2rem 1.2rem; }   /* ロゴの間は前の1.5倍（2026-11-27） */
 .corp__awards li{ flex:0 0 auto; }
 .corp__awards img{ width:100%; max-height:none; }
-.corp__awards li:nth-child(1){ width:3.1rem; }   /* German Design Award */
-.corp__awards li:nth-child(2){ width:6.1rem; }   /* キッズデザイン賞 */
-.corp__awards li:nth-child(3){ width:4.5rem; }   /* グッドデザイン賞 */
-.corp__awards li:nth-child(4){ width:6.5rem; }   /* LICC */
-.corp__awards li:nth-child(5){ width:5.1rem; }   /* London Design Awards */
+.corp__awards li:nth-child(1){ width:2.8rem; }   /* German Design Award */
+.corp__awards li:nth-child(2){ width:5.5rem; margin:0 1.35rem; }   /* キッズデザイン賞だけ左右のアキを倍（2026-11-27） */   /* キッズデザイン賞 */
+.corp__awards li:nth-child(3){ width:4rem; }   /* グッドデザイン賞 */
+.corp__awards li:nth-child(4){ width:5.8rem; }   /* LICC */
+.corp__awards li:nth-child(5){ width:4.6rem; }   /* London Design Awards */
 @media (min-width:768px){
-  .corp__awards{ gap:54px; padding:32px 28px; }
-  .corp__awards li:nth-child(1){ width:62px; }
-  .corp__awards li:nth-child(2){ width:124px; }
-  .corp__awards li:nth-child(3){ width:90px; }
-  .corp__awards li:nth-child(4){ width:132px; }
-  .corp__awards li:nth-child(5){ width:104px; }
+  .corp__awards{ gap:54px; padding:32px 24px; }
+  .corp__awards li:nth-child(1){ width:58px; }
+  .corp__awards li:nth-child(2){ width:115px; margin:0 54px; }
+  .corp__awards li:nth-child(3){ width:84px; }
+  .corp__awards li:nth-child(4){ width:123px; }
+  .corp__awards li:nth-child(5){ width:97px; }
   .corp__awards{ margin-left:max(0px, calc((100% - 1100px) / 2)); }   /* 白い枠の左端を見出しと同じ線に */
 }
