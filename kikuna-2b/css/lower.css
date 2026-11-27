@@ -687,3 +687,23 @@ br.sp, br.sp-br{ display:inline; }
   .room--roof .room__text{ order:3; margin-top:2.4rem; padding:0 2rem; }
   .room--roof .room__spec{ order:3; margin:2.4rem 2rem 0; }
 }
+
+/* デザイン賞のロゴ：PC・スマホとも横一列（2026-11-27）。
+   ロゴごとに縦横の比率が違うので、幅を1つずつ決めて見た目の大きさをそろえる（現行の菊名LPと同じ比率） */
+.corp__awards{ flex-wrap:nowrap; justify-content:center; gap:.9rem; padding:2.2rem 1.2rem; }
+.corp__awards li{ flex:0 0 auto; }
+.corp__awards img{ width:100%; max-height:none; }
+.corp__awards li:nth-child(1){ width:3.3rem; }   /* German Design Award */
+.corp__awards li:nth-child(2){ width:6.6rem; }   /* キッズデザイン賞 */
+.corp__awards li:nth-child(3){ width:4.8rem; }   /* グッドデザイン賞 */
+.corp__awards li:nth-child(4){ width:7rem; }     /* LICC */
+.corp__awards li:nth-child(5){ width:5.5rem; }   /* London Design Awards */
+@media (min-width:768px){
+  .corp__awards{ gap:36px; padding:32px 28px; }
+  .corp__awards li:nth-child(1){ width:62px; }
+  .corp__awards li:nth-child(2){ width:124px; }
+  .corp__awards li:nth-child(3){ width:90px; }
+  .corp__awards li:nth-child(4){ width:132px; }
+  .corp__awards li:nth-child(5){ width:104px; }
+  .corp__awards{ margin-left:max(0px, calc((100% - 1100px) / 2)); }   /* 白い枠の左端を見出しと同じ線に */
+}
