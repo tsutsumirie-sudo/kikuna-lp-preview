@@ -30,13 +30,18 @@
     property: '菊名',
     event: '横浜市港北区菊名【期間限定】',
     from: 'instagram_kikuna',
-    // アクセス解析（Googleタグマネージャー）用のLP名
-    lpName: 'kikuna',
+    // アクセス解析（Googleタグマネージャー）用のLP名（現行の菊名LP /kikuna/ は 'kikuna'。こちらは別URLのラグジュアリー版 /kikuna-2/）
+    lpName: 'kikuna-2',
     // 見学会の最終日。決まっていなければ null（明日から12か月先まで選べる）
     // 例）EVENT_END: '2026-12-27'  → その日までしか選べず、注意書きも自動で出る
     EVENT_END: null,
     // 定休日（0=日 1=月 2=火 3=水 4=木 5=金 6=土）
     CLOSED_DAYS: [2, 3],
+    // ご予約を受け付けない日（臨時休業・イベントなど）。'YYYY-MM-DD' で並べると、定休日と同じくカレンダーで選べなくなる。
+    // 過ぎた日付は自動で関係なくなる（注意書きにも出ない）。例）CLOSED_DATES: ['2026-12-29', '2026-12-30']
+    CLOSED_DATES: [],
+    // ご予約を受け付けない理由（注意書き「※11/21(土)…は〇〇ご予約いただけません」の〇〇）。空 '' なら理由なし
+    CLOSED_DATES_NOTE: '',
     // 受付時間（サンクス画面に表示）
     hours: '9:30-18:00'
   };
@@ -252,6 +257,8 @@
        --------------------------------------------------------- */
     var EVENT_END = SETTINGS.EVENT_END;
     var CLOSED_DAYS = SETTINGS.CLOSED_DAYS;
+    var CLOSED_DATES = SETTINGS.CLOSED_DATES || [];
+    var CLOSED_DATES_NOTE = SETTINGS.CLOSED_DATES_NOTE || '';
 
     function fmt(d) {
       return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
@@ -271,7 +278,7 @@
     function isClosedDay(dateStr) {
       if (!dateStr) return false;
       var d = new Date(dateStr + 'T12:00:00');
-      return CLOSED_DAYS.indexOf(d.getDay()) >= 0;
+      return CLOSED_DAYS.indexOf(d.getDay()) >= 0 || CLOSED_DATES.indexOf(dateStr) >= 0;
     }
     function closedDaysLabel() {
       return CLOSED_DAYS.map(function (n) { return DAY_LABEL[n] + '曜'; }).join('・');
@@ -281,11 +288,16 @@
     (function () {
       function parse(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
       var MIN = parse(minDate), MAX = parse(maxDate);
-      function isClosed(dt) { return CLOSED_DAYS.indexOf(dt.getDay()) >= 0; }
+      function isClosed(dt) { return CLOSED_DAYS.indexOf(dt.getDay()) >= 0 || CLOSED_DATES.indexOf(fmt(dt)) >= 0; }
       function selectable(dt) { return dt >= MIN && dt <= MAX && !isClosed(dt); }
 
       // カレンダー下の注意書き（定休日／受付期間）を自動で作る
       var closedText = '※<b>' + closedDaysLabel() + 'は定休日</b>のためご予約いただけません';
+      // ご予約を受け付けない日（CLOSED_DATES）のうち、これから先の日付だけを注意書きに足す
+      var closedDatesAhead = CLOSED_DATES.filter(function(s){ return s >= minDate && s <= maxDate; }).sort();
+      if(closedDatesAhead.length){
+        closedText += '<br>※<b>' + closedDatesAhead.map(function(s){ var t = parse(s); return (t.getMonth()+1) + '/' + t.getDate() + '(' + DAY_LABEL[t.getDay()] + ')'; }).join('・') + '</b>は' + CLOSED_DATES_NOTE + 'ご予約いただけません';
+      }
       var periodText = '';
       if (EVENT_END) {
         var e = parse(EVENT_END);
@@ -330,7 +342,7 @@
               btn.disabled = true;
               btn.classList.add('is-off');
               btn.setAttribute('aria-disabled', 'true');
-              btn.title = isClosed(dt) ? ('定休日（' + closedDaysLabel() + '）') : '受付期間外';
+              btn.title = CLOSED_DATES.indexOf(val) >= 0 ? (CLOSED_DATES_NOTE + 'ご予約いただけません') : isClosed(dt) ? ('定休日（' + closedDaysLabel() + '）') : '受付期間外';
             } else {
               btn.setAttribute('data-date', val);
               if (input.value === val) btn.classList.add('is-selected');

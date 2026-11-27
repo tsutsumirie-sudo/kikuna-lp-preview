@@ -476,3 +476,9 @@
   .form-popup .cta-btn.form-btn{ max-width:360px; min-height:60px; font-size:18px; }
   .form-popup .popup-back-btn{ font-size:13px; padding:7px 18px; }
 }
+
+/* 予約完了の画面（送信直後）：本文がページ全体の明るい文字色を受け継いで、明るい背景の上でほぼ見えなかった（2026-11-27） */
+.thankyou-page{ color:#2b2722; }
+.thankyou-title{ font-weight:500; letter-spacing:.06em; }
+.thankyou-note{ color:#6f685d; }
+.thankyou-back{ color:#16171b; background:linear-gradient(100deg, #e3cf9f 0%, #cdb585 48%, #b39462 100%); }
