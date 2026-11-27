@@ -160,12 +160,9 @@ a{ color:inherit; text-decoration:none; }
 .fv__points::before{ content:""; position:absolute; left:0; top:0; width:4.8rem; height:1px; background:var(--c-gold); }
 .fv__points li{ font-size:1.65rem; font-weight:500; line-height:1.5; letter-spacing:.08em; }
 .fv__points li + li{ margin-top:.5rem; }
-.fv__points span{                       /* 金属の金のような濃淡 */
+.fv__points span{                       /* 明るめの金の一色（濃淡のグラデーションは小さい文字が読みにくいのでやめた 2026-11-27） */
   display:table;
-  color:var(--c-gold-l);
-  background:linear-gradient(175deg, #fffbe8 8%, #fbeab9 38%, #e0c286 58%, #fff1c9 82%, #e8cd92 100%);
-  -webkit-background-clip:text; background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:#ecd9a8;
 }
 .fv__points small{ font-size:1.2rem; letter-spacing:.04em; }
 .fv__points .fv__points-sub{ margin-top:.3rem; font-size:1.25rem; font-weight:500; letter-spacing:.04em; }
