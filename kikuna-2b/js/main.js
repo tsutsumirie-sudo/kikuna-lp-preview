@@ -81,8 +81,9 @@
       show(0);
       fvTimer = setTimeout(tick, SHOW);
     });
-    // 2〜4枚目は、ページの読み込みが終わってから読み込む（最初に4枚を同時に読むと1枚目の表示が遅れるため。
-    // index.html では data-src / data-srcset にしてある）。切り替わる瞬間に暗くならないよう、読み込んだら先に展開しておく
+    // 2〜4枚目は、ページの読み込みが終わって約3秒後に読み込む（最初に4枚を同時に読むと1枚目の表示が遅れるため。
+    // コピーが出終わる約3秒より後にして、PageSpeed の LCP（＝コピーが出る時間）の見積もりに写真が入らないようにする。最初の切り替えは8秒後なので間に合う）。
+    // index.html では data-src / data-srcset にしてある。切り替わる瞬間に暗くならないよう、読み込んだら先に展開しておく
     var restLoaded = false;
     function loadRest() {
       if (restLoaded) return;
@@ -95,8 +96,9 @@
         if (im.decode) im.decode().catch(function () {});
       });
     }
-    if (document.readyState === 'complete') loadRest();
-    else window.addEventListener('load', loadRest);
+    var REST_DELAY = 3000;
+    if (document.readyState === 'complete') setTimeout(loadRest, REST_DELAY);
+    else window.addEventListener('load', function () { setTimeout(loadRest, REST_DELAY); });
     // 画面の幅が変わったら大きさを計算し直す（高さだけの変化＝スマホのバーの出入りでは動かさない）
     var lastW = fv.clientWidth, rt;
     window.addEventListener('resize', function () {
