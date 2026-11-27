@@ -450,3 +450,29 @@
   .thankyou-tel a{ font-size:3rem; }
   .thankyou-back{ font-size:1.6rem; }
 }
+
+/* ---------- 改善案（kikuna-2b）：フォームのボタン ----------
+   「確認画面へ進む」「予約を申し込む」は元のLPの .cta-btn の見た目が前提だったため、このLPでは小さく表示されていた。
+   金の大きなボタンにし、「入力画面に戻る」は小さな控えめのボタンにする */
+.form-popup .cta-btn.form-btn{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; max-width:32rem; min-height:5.6rem;
+  padding:0 2rem;
+  font-size:1.7rem; font-weight:700; letter-spacing:.1em; line-height:1.3;
+  color:#16171b;
+  background:linear-gradient(100deg, #e3cf9f 0%, #cdb585 48%, #b39462 100%);
+  box-shadow:0 .6rem 1.6rem rgba(60,48,24,.25);
+}
+@media (hover:hover){ .form-popup .cta-btn.form-btn.is-ready:hover{ filter:brightness(1.06); } }
+.form-popup .cta-btn.form-btn:not(.is-ready){ color:var(--c-white); background:#cfc9bd; box-shadow:none; }
+.form-popup .popup-back-btn{
+  margin-top:1.4rem;
+  padding:.6rem 1.6rem;
+  border:.1rem solid #ccc; border-radius:.3rem;
+  font-size:1.2rem; font-weight:500;
+  color:#666;
+}
+@media (min-width:768px){
+  .form-popup .cta-btn.form-btn{ max-width:360px; min-height:60px; font-size:18px; }
+  .form-popup .popup-back-btn{ font-size:13px; padding:7px 18px; }
+}
