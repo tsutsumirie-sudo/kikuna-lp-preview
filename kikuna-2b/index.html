@@ -12,16 +12,20 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- 書体：最初の画面で使う Cinzel（英字）と明朝（Noto Serif JP 400・500）だけ先に読む（使っていない細字 300 は外した）。
+     ゴシック（Noto Sans JP）は予約フォームと小さな注記だけなので、表示を止めないように後から読む（読み終わるまでは端末のゴシック） -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
 
 <!-- 1枚目の写真は先に読み込む -->
 <link rel="preload" as="image" fetchpriority="high"
       href="img/fv/fv_living_1400.jpg"
       imagesrcset="img/fv/fv_living_1400.jpg 1400w, img/fv/fv_living_2400.jpg 2400w" imagesizes="170vw">
 
-<link rel="stylesheet" href="css/style.css?v=20261127n">
-<link rel="stylesheet" href="css/lower.css?v=20261127n">
-<link rel="stylesheet" href="css/form.css?v=20261127n">
+<link rel="stylesheet" href="css/style.css?v=20261127p">
+<link rel="stylesheet" href="css/lower.css?v=20261127p">
+<link rel="stylesheet" href="css/form.css?v=20261127p">
 <script>window.LP_PREVIEW = true;</script>
 </head>
 <body>
@@ -759,7 +763,7 @@
   <img class="zoom__img" src="" alt="" width="917" height="1092">
 </dialog>
 
-<script src="js/main.js?v=20261127n" defer></script>
-<script src="js/form.js?v=20261127n" defer></script>
+<script src="js/main.js?v=20261127p" defer></script>
+<script src="js/form.js?v=20261127p" defer></script>
 </body>
 </html>
