@@ -770,3 +770,5 @@ br.sp, br.sp-br{ display:inline; }
   .room--solo .pair{ grid-template-columns:1fr 1fr; gap:24px; margin-top:32px; }
   .room--pair .pair__row{ grid-template-columns:minmax(0,1fr) 200px; gap:22px; }
 }
+/* 見学会で体験すること（見出し〜収納）を非表示にしたので、お子さま特典が先頭になる：上のあきを詰める（2026-11-27） */
+.exp > .osanpo:first-child{ margin-top:0; }
