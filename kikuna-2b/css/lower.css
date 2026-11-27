@@ -689,21 +689,25 @@ br.sp, br.sp-br{ display:inline; }
 }
 
 /* デザイン賞のロゴ：PC・スマホとも横一列（2026-11-27）。
-   ロゴごとに縦横の比率が違うので、幅を1つずつ決めて見た目の大きさをそろえる（現行の菊名LPと同じ比率） */
-.corp__awards{ flex-wrap:nowrap; justify-content:center; gap:1.35rem; padding:2.2rem 1.2rem; }   /* ロゴの間は前の1.5倍（2026-11-27） */
-.corp__awards li{ flex:0 0 auto; }
+   ・マークどうしのアキ（G）は全部同じに見えるように：前のキッズデザイン賞の左右のアキの80%
+   ・左右の端（白い枠〜German Design Award、London Design Awards〜白い枠）は G の60%
+   ・LICC の画像は左右に白い余白（各20.3%）があるので、余白を枠の外に出して「見えているマーク」の幅で並べる
+   ・幅は見えているマークの幅。ロゴの大きさは1つずつ決めて見た目をそろえる。画面が狭いときは同じ比率で縮む（アキは変わらない） */
+.corp__awards{ flex-wrap:nowrap; justify-content:flex-start; gap:2.16rem; padding:2.2rem 1.3rem; }
+.corp__awards li{ flex:0 1 auto; min-width:0; }
 .corp__awards img{ width:100%; max-height:none; }
-.corp__awards li:nth-child(1){ width:2.8rem; }   /* German Design Award */
-.corp__awards li:nth-child(2){ width:5.5rem; margin:0 1.35rem; }   /* キッズデザイン賞だけ左右のアキを倍（2026-11-27） */   /* キッズデザイン賞 */
-.corp__awards li:nth-child(3){ width:4rem; }   /* グッドデザイン賞 */
-.corp__awards li:nth-child(4){ width:5.8rem; }   /* LICC */
-.corp__awards li:nth-child(5){ width:4.6rem; }   /* London Design Awards */
+.corp__awards li:nth-child(4) img{ width:168.4%; max-width:none; margin:0 -34.2%; }   /* LICC：画像の左右の白い余白（各20.3%）を外に出す */
+.corp__awards li:nth-child(1){ width:3.06rem; }   /* German Design Award */
+.corp__awards li:nth-child(2){ width:6.02rem; }   /* キッズデザイン賞 */
+.corp__awards li:nth-child(3){ width:4.38rem; }   /* グッドデザイン賞 */
+.corp__awards li:nth-child(4){ width:3.77rem; }   /* LICC（見えているマークの幅） */
+.corp__awards li:nth-child(5){ width:5.03rem; }   /* London Design Awards */
 @media (min-width:768px){
-  .corp__awards{ gap:54px; padding:32px 24px; }
-  .corp__awards li:nth-child(1){ width:58px; }
-  .corp__awards li:nth-child(2){ width:115px; margin:0 54px; }
-  .corp__awards li:nth-child(3){ width:84px; }
-  .corp__awards li:nth-child(4){ width:123px; }
-  .corp__awards li:nth-child(5){ width:97px; }
+  .corp__awards{ gap:86px; padding:32px 52px; }
+  .corp__awards li:nth-child(1){ width:56px; }
+  .corp__awards li:nth-child(2){ width:111px; }
+  .corp__awards li:nth-child(3){ width:81px; }
+  .corp__awards li:nth-child(4){ width:70px; }
+  .corp__awards li:nth-child(5){ width:94px; }
   .corp__awards{ margin-left:max(0px, calc((100% - 1100px) / 2)); }   /* 白い枠の左端を見出しと同じ線に */
 }
