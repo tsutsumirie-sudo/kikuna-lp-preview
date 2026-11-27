@@ -19,9 +19,9 @@
       href="img/fv/fv_living_1400.jpg"
       imagesrcset="img/fv/fv_living_1400.jpg 1400w, img/fv/fv_living_2400.jpg 2400w" imagesizes="170vw">
 
-<link rel="stylesheet" href="css/style.css?v=20261127m">
-<link rel="stylesheet" href="css/lower.css?v=20261127m">
-<link rel="stylesheet" href="css/form.css?v=20261127m">
+<link rel="stylesheet" href="css/style.css?v=20261127n">
+<link rel="stylesheet" href="css/lower.css?v=20261127n">
+<link rel="stylesheet" href="css/form.css?v=20261127n">
 <script>window.LP_PREVIEW = true;</script>
 </head>
 <body>
@@ -50,22 +50,22 @@
        1. ファーストビュー：リビング → キッチン → 鉄骨階段 → パントリー（6秒ごとに切り替わる）
        ========================================================= -->
   <section class="fv" id="top">
-    <!-- 写真は js/main.js が切り替える（最初の1枚は最初から表示）。動きは data- で指定：
+    <!-- 写真は js/main.js が切り替える（最初の1枚は最初から表示）。2〜4枚目は data-src / data-srcset にしてあり、ページの読み込みが終わってから js/main.js が読み込む（1枚目の表示を速くするため）。動きは data- で指定：
          data-over（PCは data-over-pc）＝写真を画面の幅の何倍以上の大きさで見せるか／data-fx→data-tx＝横の動き（0＝左端 1＝右端）／data-fy→data-ty＝縦の動き（0＝上 1＝下）／data-s0→data-s1＝ズーム（画面の中心を軸に拡大） -->
     <div class="fv__slides">
       <figure class="fv__slide is-on" data-over="1" data-fx=".36" data-tx=".36" data-fy=".42" data-ty=".42" data-s0="1" data-s1="1.14">
         <img src="img/fv/fv_living_1400.jpg" srcset="img/fv/fv_living_1400.jpg 1400w, img/fv/fv_living_2400.jpg 2400w" sizes="170vw" width="2400" height="1600" alt="LDKとバルコニーが見えるリビング" fetchpriority="high" decoding="async">
       </figure>
       <figure class="fv__slide" data-over="1.45" data-fx=".12" data-tx=".72" data-fy=".5" data-ty=".45">
-        <img src="img/fv/fv_kitchen_1400.jpg" srcset="img/fv/fv_kitchen_1400.jpg 1400w, img/fv/fv_kitchen_2400.jpg 2400w" sizes="170vw" width="2400" height="1600" alt="LDKを見渡す対面キッチン" decoding="async">
+        <img data-src="img/fv/fv_kitchen_1400.jpg" data-srcset="img/fv/fv_kitchen_1400.jpg 1400w, img/fv/fv_kitchen_2400.jpg 2400w" sizes="170vw" width="2400" height="1600" alt="LDKを見渡す対面キッチン" decoding="async">
       </figure>
       <figure class="fv__slide" data-over="1.45" data-fx=".8" data-tx=".22" data-fy=".5" data-ty=".5">
-        <img src="img/fv/fv_stairs_1400.jpg" srcset="img/fv/fv_stairs_1400.jpg 1400w, img/fv/fv_stairs_2400.jpg 2400w" sizes="170vw" width="2400" height="1600" alt="吹き抜けに映える鉄骨階段（横から）" decoding="async">
+        <img data-src="img/fv/fv_stairs_1400.jpg" data-srcset="img/fv/fv_stairs_1400.jpg 1400w, img/fv/fv_stairs_2400.jpg 2400w" sizes="170vw" width="2400" height="1600" alt="吹き抜けに映える鉄骨階段（横から）" decoding="async">
       </figure>
       <figure class="fv__slide" data-over="1.9" data-over-pc="1.3" data-fx="0" data-tx="1" data-fy=".4" data-ty=".55">
         <picture>
-          <source media="(min-width: 768px)" srcset="img/fv/fv_pantry_pc_1600.jpg 1600w, img/fv/fv_pantry_pc_2400.jpg 2400w" sizes="170vw">
-          <img src="img/fv/fv_pantry_sp_1000.jpg" srcset="img/fv/fv_pantry_sp_1000.jpg 1000w, img/fv/fv_pantry_sp_1500.jpg 1500w, img/fv/fv_pantry_sp_2200.jpg 2200w" sizes="170vw" width="2752" height="4128" alt="3帖の大容量パントリー" decoding="async">
+          <source media="(min-width: 768px)" data-srcset="img/fv/fv_pantry_pc_1600.jpg 1600w, img/fv/fv_pantry_pc_2400.jpg 2400w" sizes="170vw">
+          <img data-src="img/fv/fv_pantry_sp_1000.jpg" data-srcset="img/fv/fv_pantry_sp_1000.jpg 1000w, img/fv/fv_pantry_sp_1500.jpg 1500w, img/fv/fv_pantry_sp_2200.jpg 2200w" sizes="170vw" width="2752" height="4128" alt="3帖の大容量パントリー" decoding="async">
         </picture>
       </figure>
     </div>
@@ -759,7 +759,7 @@
   <img class="zoom__img" src="" alt="" width="917" height="1092">
 </dialog>
 
-<script src="js/main.js?v=20261127m" defer></script>
-<script src="js/form.js?v=20261127m" defer></script>
+<script src="js/main.js?v=20261127n" defer></script>
+<script src="js/form.js?v=20261127n" defer></script>
 </body>
 </html>

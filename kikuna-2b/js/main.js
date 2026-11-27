@@ -70,6 +70,7 @@
       }, FADE + 100);
     }
     function tick() {
+      loadRest();                                              // 読み込み完了より先に切り替えの時間が来たとき
       idx = (idx + 1) % slides.length;
       ready(slides[idx], function () {
         show(idx);
@@ -80,10 +81,22 @@
       show(0);
       fvTimer = setTimeout(tick, SHOW);
     });
-    // 切り替わる瞬間に暗くならないよう、2枚目以降も先に展開しておく
-    window.addEventListener('load', function () {
-      slides.forEach(function (sl) { var im = sl.querySelector('img'); if (im.decode) im.decode().catch(function () {}); });
-    });
+    // 2〜4枚目は、ページの読み込みが終わってから読み込む（最初に4枚を同時に読むと1枚目の表示が遅れるため。
+    // index.html では data-src / data-srcset にしてある）。切り替わる瞬間に暗くならないよう、読み込んだら先に展開しておく
+    var restLoaded = false;
+    function loadRest() {
+      if (restLoaded) return;
+      restLoaded = true;
+      slides.forEach(function (sl) {
+        sl.querySelectorAll('source[data-srcset]').forEach(function (so) { so.srcset = so.getAttribute('data-srcset'); so.removeAttribute('data-srcset'); });
+        var im = sl.querySelector('img');
+        if (im.hasAttribute('data-srcset')) { im.srcset = im.getAttribute('data-srcset'); im.removeAttribute('data-srcset'); }
+        if (im.hasAttribute('data-src')) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); }
+        if (im.decode) im.decode().catch(function () {});
+      });
+    }
+    if (document.readyState === 'complete') loadRest();
+    else window.addEventListener('load', loadRest);
     // 画面の幅が変わったら大きさを計算し直す（高さだけの変化＝スマホのバーの出入りでは動かさない）
     var lastW = fv.clientWidth, rt;
     window.addEventListener('resize', function () {
