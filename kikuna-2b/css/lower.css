@@ -135,15 +135,17 @@ br.sp, br.sp-br{ display:inline; }
 }
 .num{
   display:flex; flex-direction:column; justify-content:center;
-  padding:1.6rem .8rem;
+  padding:2.2rem .8rem;            /* 「約43.48坪」が下に飛び出す分の余白を全マス共通で確保 */
   text-align:center;
   border-right:1px solid rgba(179,148,98,.65); border-bottom:1px solid rgba(179,148,98,.65);
 }
 .num dt{ font-size:1.3rem; font-weight:500; line-height:1.5; letter-spacing:.04em; color:#2b2722; }
-.num dd{ margin:.5rem 0 0; line-height:1.2; color:var(--c-gold-d); }
+.num dd{ position:relative; margin:.5rem 0 0; line-height:1.2; color:var(--c-gold-d); }
 .num b{ font-family:var(--f-en); font-size:2.9rem; font-weight:500; letter-spacing:.02em; }
 .num small{ margin:0 .2rem; font-size:1.3rem; }
-.num__sub{ display:block; margin-top:.4rem; font-size:1.1rem; line-height:1.3; color:#6f685d; }
+.num__sub{                          /* 坪数だけ数字の下に飛び出させ、項目名と金色の数字は全マスで横一列に揃える */
+  position:absolute; top:100%; left:0; right:0;
+  margin-top:.3rem; font-size:1.1rem; line-height:1.3; color:#6f685d; }
 
 /* =========================================================
    体験
@@ -373,13 +375,13 @@ br.sp, br.sp-br{ display:inline; }
 
   /* PC：上の段は4項目、下の段は2項目を横長に（美しが丘と同じ並び） */
   .nums{ grid-template-columns:repeat(4, 1fr); max-width:860px; margin:56px auto 0; }
-  .num{ padding:24px 12px; }
+  .num{ padding:30px 12px; }
   .num:nth-child(5), .num:nth-child(6){ grid-column:span 2; }
   .num dt{ font-size:15px; }
   .num dd{ margin-top:8px; }
   .num b{ font-size:clamp(28px, 3vw, 36px); }
   .num small{ font-size:15px; }
-  .num__sub{ margin-top:6px; font-size:13px; }
+  .num__sub{ margin-top:4px; font-size:13px; }
 
   .exp{ padding:120px 40px; }
   .exp__lead{ margin-top:32px; font-size:16px; }
