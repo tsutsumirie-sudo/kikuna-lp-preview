@@ -125,7 +125,7 @@ a{ color:inherit; text-decoration:none; }
   position:absolute; inset:0;
   display:grid; justify-items:center;
   /* 上下の余白が同じ＝まん中。画面の背が低いときは、左上の枠の下より上には行かない */
-  grid-template-rows:minmax(calc(15rem + env(safe-area-inset-top)), 1fr) auto minmax(5rem, 1fr);
+  grid-template-rows:minmax(calc(13rem + env(safe-area-inset-top)), 1.6fr) auto minmax(5rem, 1fr);   /* コピーは画面のまん中より少し上 */
   grid-template-columns:100%;
   padding:0 2rem;
 }
@@ -195,7 +195,7 @@ a{ color:inherit; text-decoration:none; }
 
 /* 「横浜市菊名／完成見学会 開催中」の金の枠（左上。ロゴの左端にそろえる。枠の中の上下の空きは同じ） */
 .fv__badge{
-  position:absolute; left:2rem; top:calc(6.8rem + env(safe-area-inset-top));
+  position:absolute; left:2rem; top:calc(5.15rem + env(safe-area-inset-top));   /* ロゴとの隙間は以前の半分 */
   animation:fvFade 1.2s var(--ease-out) 2.4s both;
   display:flex; flex-direction:column; align-items:center; gap:.85rem;
   padding:1.2rem 1.3rem;
@@ -579,7 +579,7 @@ a{ color:inherit; text-decoration:none; }
   }
   .fv__copy{
     justify-items:start;
-    grid-template-rows:minmax(220px, 1fr) auto minmax(80px, 1fr);
+    grid-template-rows:minmax(200px, 1.6fr) auto minmax(80px, 1fr);
     padding:0 0 0 8vw;
   }
   .fv__title{ font-size:clamp(42px, min(4.4vw, 7.2vh), 78px); }
@@ -599,7 +599,7 @@ a{ color:inherit; text-decoration:none; }
   .fv__foot{ left:8vw; right:40px; bottom:44px; }
   .fv__bars{ gap:8px; }
   .fv__bar{ width:40px; }
-  .fv__badge{ left:40px; top:108px; gap:12px; padding:18px 26px; }
+  .fv__badge{ left:40px; top:80px; gap:12px; padding:18px 26px; }
   .fv__badge-place{ font-size:15px; }
   .fv__badge-main{ font-size:24px; }
 

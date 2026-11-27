@@ -674,3 +674,9 @@ br.sp, br.sp-br{ display:inline; }
   .room--heat2 .equip__points span{ margin:0; font-size:15px; }
   .room--heat2 .equip__points span br{ display:none; }
 }
+
+/* 屋上：スマホはタイトルと本文を写真の上に（説明→写真の順） */
+@media (max-width:767px){
+  .room--roof{ display:flex; flex-direction:column; }
+  .room--roof .room__main{ order:2; margin-top:2.4rem; }
+}
