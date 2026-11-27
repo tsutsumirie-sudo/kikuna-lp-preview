@@ -276,17 +276,16 @@ br.sp, br.sp-br{ display:inline; }
 .bar{
   position:fixed; left:0; right:0; bottom:0; z-index:30;
   display:flex; justify-content:center;
-  padding:.9rem 1.2rem calc(.9rem + env(safe-area-inset-bottom));
-  background:rgba(14,15,18,.96);
-  border-top:1px solid rgba(205,181,133,.6);
-  box-shadow:0 -.4rem 1.6rem rgba(0,0,0,.3);
+  padding:0 0 env(safe-area-inset-bottom);   /* 帯全体が金のボタン（黒い縁・上の罫線なし） */
+  background:linear-gradient(100deg, var(--c-gold-l) 0%, var(--c-gold) 48%, var(--c-gold-d) 100%);
+  box-shadow:0 -.4rem 1.6rem rgba(0,0,0,.25);
   visibility:hidden; transform:translateY(100%);
   transition:transform .35s, visibility .35s;
 }
 .bar.is-show{ visibility:visible; transform:none; }
 .bar__btn{
   flex:1; display:flex; align-items:center; justify-content:center; gap:.7rem;
-  min-height:5rem;
+  min-height:5.6rem;
   font-size:1.6rem; font-weight:500; letter-spacing:.06em; line-height:1.3; white-space:nowrap;
   color:#16171b;
   background:linear-gradient(100deg, var(--c-gold-l) 0%, var(--c-gold) 48%, var(--c-gold-d) 100%);
@@ -466,8 +465,8 @@ br.sp, br.sp-br{ display:inline; }
   .ft img{ height:22px; }
   .ft p{ margin-top:20px; font-size:12px; }
 
-  .bar{ padding:12px 40px calc(12px + env(safe-area-inset-bottom)); }
-  .bar__btn{ flex:0 0 420px; min-height:56px; gap:12px; font-size:18px; }
+  .bar{ padding:0 0 env(safe-area-inset-bottom); }
+  .bar__btn{ flex:1; min-height:64px; gap:12px; font-size:18px; }
   .bar__free{ padding:5px 8px; font-size:12px; }
   .totop{ right:24px; bottom:100px; width:52px; height:52px; font-size:12px; }
 }
