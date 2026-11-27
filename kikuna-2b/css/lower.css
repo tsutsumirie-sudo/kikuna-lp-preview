@@ -675,8 +675,13 @@ br.sp, br.sp-br{ display:inline; }
   .room--heat2 .equip__points span br{ display:none; }
 }
 
-/* 屋上：スマホはタイトルと本文を写真の上に（説明→写真の順） */
+/* 屋上：スマホはタイトルと本文を写真の上に、広さの数字は写真の下に */
 @media (max-width:767px){
   .room--roof{ display:flex; flex-direction:column; }
+  /* 説明 → 写真 → 屋上の広さ・駐車換算 の順（PCは今までどおり） */
+  .room--roof .room__body{ display:contents; }
+  .room--roof .room__en{ order:1; padding:2.4rem 2rem 0; }
+  .room--roof .room__title, .room--roof .room__text{ order:1; padding:0 2rem; }
   .room--roof .room__main{ order:2; margin-top:2.4rem; }
+  .room--roof .room__spec{ order:3; margin:2.4rem 2rem 0; }
 }
