@@ -308,4 +308,38 @@
     totop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
     update();
   }
+  /* ---------------------------------------------------------
+     地図から戻った人への案内（高田東LPと同じ仕組み）
+     物件の地図リンク（data-map）を押して地図アプリへ行き、2秒以上たって戻ってきたら、
+     「場所は確認できましたか？」と予約の案内を1回だけ出す。Clarity に計測のイベントも送る
+     --------------------------------------------------------- */
+  var mapBack = document.getElementById('mapBack');
+  if (mapBack) {
+    var leftAt = 0, mbShown = false;
+    var ev = function (name) { try { if (window.clarity) window.clarity('event', name); } catch (e) {} };
+    var mbHide = function () { mapBack.classList.remove('is-show'); mapBack.setAttribute('aria-hidden', 'true'); };
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[data-map]');
+      if (!a) return;
+      leftAt = Date.now();
+      ev('map_open_' + a.getAttribute('data-map'));
+    }, true);
+    var onBack = function () {
+      if (!leftAt || document.visibilityState !== 'visible') return;
+      if (Date.now() - leftAt < 2000) { leftAt = 0; return; }
+      leftAt = 0; ev('map_return');
+      if (mbShown) return;
+      if (document.querySelector('.form-popup.is-open, .thankyou-page.is-active, dialog[open]')) return;   // 予約フォームや拡大表示を開いているときは出さない
+      mbShown = true;
+      setTimeout(function () { mapBack.classList.add('is-show'); mapBack.setAttribute('aria-hidden', 'false'); }, 400);
+    };
+    document.addEventListener('visibilitychange', onBack);
+    window.addEventListener('focus', onBack);
+    window.addEventListener('pageshow', onBack);
+    mapBack.querySelector('.map-back__x').addEventListener('click', function () { mbHide(); ev('map_back_close'); });
+    mapBack.querySelector('.map-back__btn').addEventListener('click', function () {
+      mbHide(); ev('map_to_reserve');
+      if (typeof window.openFormPopup === 'function') window.openFormPopup();
+    });
+  }
 })();

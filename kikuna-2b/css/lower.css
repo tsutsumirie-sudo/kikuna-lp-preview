@@ -711,3 +711,43 @@ br.sp, br.sp-br{ display:inline; }
   .corp__awards li:nth-child(5){ width:94px; }
   .corp__awards{ margin-left:max(0px, calc((100% - 1100px) / 2)); }   /* 白い枠の左端を見出しと同じ線に */
 }
+
+/* =========================================================
+   地図から戻った人への予約案内（高田東LPと同じ仕組み。見た目はこのLPに合わせて黒地・金）2026-11-27
+   ========================================================= */
+.map-back{
+  position:fixed; left:50%; bottom:calc(7.4rem + env(safe-area-inset-bottom)); z-index:40;
+  width:min(calc(100% - 4rem), 46rem);
+  padding:1.6rem 4rem 1.6rem 1.8rem;
+  color:var(--c-white); text-align:left;
+  background:rgba(14,15,18,.96); border:1px solid var(--c-gold);
+  box-shadow:0 .8rem 2.4rem rgba(0,0,0,.45);
+  opacity:0; visibility:hidden; transform:translate(-50%, 1.6rem);
+  transition:opacity .3s, transform .3s, visibility .3s;
+}
+.map-back.is-show{ opacity:1; visibility:visible; transform:translate(-50%, 0); }
+.map-back__ttl{ margin:0 0 .4rem; font-size:1.6rem; font-weight:500; line-height:1.5; letter-spacing:.06em; color:var(--c-gold-l); }
+.map-back__sub{ margin:0 0 1.2rem; font-size:1.3rem; line-height:1.7; letter-spacing:.04em; color:rgba(255,255,255,.85); }
+.map-back__btn{
+  display:flex; align-items:center; justify-content:center; width:100%;
+  min-height:4.6rem; padding:0 1.4rem; border:0; cursor:pointer;
+  font-family:inherit; font-size:1.5rem; font-weight:500; letter-spacing:.08em; color:#16171b;
+  background:linear-gradient(100deg, var(--c-gold-l) 0%, var(--c-gold) 48%, var(--c-gold-d) 100%);
+}
+.map-back__x{
+  position:absolute; top:.4rem; right:.4rem; width:3.6rem; height:3.6rem; padding:0; border:0; cursor:pointer;
+  background:none;
+}
+.map-back__x::before, .map-back__x::after{
+  content:""; position:absolute; left:50%; top:50%; width:1.6rem; height:1px; background:var(--c-gold-l);
+  transform:translate(-50%,-50%) rotate(45deg);
+}
+.map-back__x::after{ transform:translate(-50%,-50%) rotate(-45deg); }
+@media (min-width:768px){
+  .map-back{ bottom:88px; width:min(calc(100% - 80px), 460px); padding:20px 52px 20px 24px; }
+  .map-back__ttl{ font-size:18px; }
+  .map-back__sub{ margin-bottom:16px; font-size:14px; }
+  .map-back__btn{ min-height:52px; font-size:16px; }
+  .map-back__x{ top:6px; right:6px; width:40px; height:40px; }
+  .map-back__x::before, .map-back__x::after{ width:18px; }
+}

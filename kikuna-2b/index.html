@@ -23,9 +23,9 @@
       href="img/fv/fv_living_1400.jpg"
       imagesrcset="img/fv/fv_living_1400.jpg 1400w, img/fv/fv_living_2400.jpg 2400w" imagesizes="170vw">
 
-<link rel="stylesheet" href="css/style.css?v=20261127s">
-<link rel="stylesheet" href="css/lower.css?v=20261127s">
-<link rel="stylesheet" href="css/form.css?v=20261127s">
+<link rel="stylesheet" href="css/style.css?v=20261127t">
+<link rel="stylesheet" href="css/lower.css?v=20261127t">
+<link rel="stylesheet" href="css/form.css?v=20261127t">
 <script>window.LP_PREVIEW = true;</script>
 </head>
 <body>
@@ -215,6 +215,7 @@
   <!-- =========================================================
        6. 物件の見どころ（3つ。押すと下の説明へ）
        ========================================================= -->
+  <!-- ★非表示（2026-11-27 ご指示）：見どころ3つ（HIGHLIGHTS）。表示に戻すときは、この行と下の「★ここまで非表示」の行を消す
   <section class="hl" id="highlights">
     <div class="sec-head sec-head--light">
       <p class="sec-head__en" lang="en">HIGHLIGHTS</p>
@@ -232,6 +233,7 @@
           <span class="hl__body"><span class="hl__no" lang="en">03</span><span class="hl__title">暮らしが整う、<br>大きな収納</span><span class="hl__sub">主寝室のWIC 3.4帖と<br>家族の玄関収納SIC 1.7帖</span></span>
         </a></li></ol>
   </section>
+  ★ここまで非表示 -->
 
   <!-- =========================================================
        7. 各特長の説明（7-1 LDK ／ 7-2 鉄骨階段と屋上 ／ 7-3 収納）
@@ -397,7 +399,7 @@
       <dl class="open__list">
         <div><dt>見学可能日(完全予約制)</dt><dd><b>火曜･水曜を除く全ての曜日</b><small>※見学会は期間限定のため<span class="nw">予告なく終了する場合があります</span><br>※ご希望の方はお早めにご予約ください</small></dd></div>
         <div><dt>見学可能時間</dt><dd><b class="is-en">10:00~18:00</b></dd></div>
-        <div><dt>場所</dt><dd><b>神奈川県横浜市港北区<br class="sp">菊名5丁目14付近</b><a class="open__map" href="https://maps.app.goo.gl/ZSSNmkpkZXsV1C736" target="_blank" rel="noopener" aria-label="MAP（Googleマップで場所を見る・別のタブで開きます）">MAP</a></dd></div>
+        <div><dt>場所</dt><dd><b>神奈川県横浜市港北区<br class="sp">菊名5丁目14付近</b><a class="open__map" data-map="open" href="https://maps.app.goo.gl/ZSSNmkpkZXsV1C736" target="_blank" rel="noopener" aria-label="MAP（Googleマップで場所を見る・別のタブで開きます）">MAP</a></dd></div>
         <div><dt>交通アクセス</dt><dd>東急東横線・JR横浜線<b>「菊名」駅 徒歩6分</b><small>※最寄り駅でのお待ち合わせ等に<span class="nw">つきましてもご相談下さい</span><br>※メールフォームからのご予約の確認ができ次第、担当者より詳細なご連絡を致します</small></dd></div>
       </dl>
       <dl class="open__points">
@@ -553,7 +555,7 @@
     <dl class="tbl">
       <div><dt>住所</dt><dd>神奈川県横浜市港北区菊名5丁目14付近<span class="tbl__map"><iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4200!2d139.635113!3d35.512092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDMwJzQzLjUiTiAxMznCsDM4JzA2LjQiRQ!5e0!3m2!1sja!2sjp!4v1790928066817!5m2!1sja!2sjp"
                           title="見学会会場の地図（神奈川県横浜市港北区菊名5丁目14付近）"
-                          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></span><a class="tbl__link" href="https://maps.app.goo.gl/ZSSNmkpkZXsV1C736" target="_blank" rel="noopener">Googleマップで開く</a></dd></div>
+                          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></span><a class="tbl__link" data-map="detail" href="https://maps.app.goo.gl/ZSSNmkpkZXsV1C736" target="_blank" rel="noopener">Googleマップで開く</a></dd></div>
       <div><dt>土地探し相談</dt><dd>可能<small>※土地探し相談：ご予約時にご希望をお聞かせ頂ければ未公開土地情報の提供も可能です</small></dd></div>
     </dl>
     <h3 class="info2__sub">物件概要</h3>
@@ -763,7 +765,16 @@
   <img class="zoom__img" src="" alt="" width="917" height="1092">
 </dialog>
 
-<script src="js/main.js?v=20261127s" defer></script>
-<script src="js/form.js?v=20261127s" defer></script>
+<!-- 地図から戻った人への予約案内（物件の地図リンク［data-map］を押して、地図アプリから戻ってきた人にだけ1回表示）＋Clarityの計測。
+     高田東LPと同じ仕組み（2026-11-27）。動きは js/main.js の「地図から戻った人への案内」 -->
+<div class="map-back" id="mapBack" role="dialog" aria-label="見学予約のご案内" aria-hidden="true">
+  <button type="button" class="map-back__x" aria-label="閉じる"></button>
+  <p class="map-back__ttl">場所は確認できましたか？</p>
+  <p class="map-back__sub">「菊名」駅から徒歩6分<br>見学は無料・完全予約制です</p>
+  <button type="button" class="map-back__btn">見学予約はこちら</button>
+</div>
+
+<script src="js/main.js?v=20261127t" defer></script>
+<script src="js/form.js?v=20261127t" defer></script>
 </body>
 </html>
